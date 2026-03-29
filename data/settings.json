@@ -1,0 +1,220 @@
+{
+  "brand": {
+    "name": "The Data Pilot",
+    "tagline": "Logic-First. AI-Fast.",
+    "version": "2.0.18"
+  },
+  "contact": {
+    "infoEmail": "info@thedatapilot.in",
+    "admissionsEmail": "admissions@thedatapilot.in",
+    "supportEmail": "support@thedatapilot.in",
+    "phone": "+91-XXXXXXXXXX",
+    "addressLines": [
+      "Registered Office:",
+      "Flat No. 101, 1st Floor, Garv Homes,",
+      "Cheshire Home Road, Bariatu,",
+      "Ranchi, Jharkhand - 834009"
+    ],
+    "mapUrl": "https://maps.google.com/?q=The+Data+Pilot+Ranchi"
+  },
+  "labels": {
+    "email": "Email:",
+    "phone": "Phone:",
+    "address": "Office:",
+    "applyButton": "Apply for Admission",
+    "brochureButton": "Download Brochure"
+  },
+  "ui": {
+    "modalTitle": "Begin Your Journey",
+    "modalSubText": "Please provide your details for a professional consultation.",
+    "footerDescription": "Modern training for the 2026 Augmented Data Analyst. Logic first, AI fast.",
+    "emergencyMessage": "Your browser is struggling to load the latest logic engine. This is usually caused by network latency or aggressive server caching."
+  },
+  "social": {
+    "linkedin": "https://linkedin.com/company/thedatapilot",
+    "instagram": "https://instagram.com/thedatapilot",
+    "youtube": "https://youtube.com/@thedatapilot",
+    "facebook": "https://facebook.com/thedatapilot",
+    "twitter": "https://x.com/thedatapilot",
+    "whatsapp": "https://wa.me/91XXXXXXXXXX"
+  },
+  "seo": {
+    "metaTitle": "The Data Pilot | Best Augmented Data Analytics Course in India",
+    "metaDescription": "Master Data Warehousing, SQL, and Python with an AI-Ready approach. Live Instructor-Led training from industry veterans.",
+    "ogTitle": "The Data Pilot | Best Augmented Data Analytics Course in India",
+    "ogDescription": "Logic-First. AI-Fast. Master modern data analytics with industry veterans.",
+    "ogImage": "https://thedatapilot.in/assets/social-preview.jpg",
+    "ogType": "website",
+    "twitterCard": "summary_large_image"
+  },
+  "aboutUs": {
+    "header": {
+      "title": "About The Data Pilot",
+      "subtitle": "Empowering the next generation of analysts",
+      "intro": "The Data Pilot is a specialized education hub designed to train the next generation of Augmented Data Analysts. We move beyond traditional tool-based learning to focus on logic architecture and AI-driven efficiency."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To bridge the gap between academic theory and the high-speed reality of modern data departments. We empower students to master the 'human engine' of logic first, so they can effectively command the 'AI co-pilot' for world-class delivery."
+    },
+    "methodology": {
+      "title": "The Pilot Methodology",
+      "points": [
+        {
+          "title": "Logic Architecture",
+          "description": "We teach you to think in schemas and relational structures before touching a single line of code."
+        },
+        {
+          "title": "Augmented Intelligence",
+          "description": "Master how to use Generative AI as a force multiplier for cleaning, querying, and auditing data."
+        },
+        {
+          "title": "Highest Delivery Standards",
+          "description": "Our curriculum is built on industry benchmarks used in global IT firms for precision and reliability."
+        }
+      ]
+    },
+    "whoWeAre": {
+      "title": "Who We Are",
+      "description": "Founded by industry veterans with deep expertise in Data Warehousing, SQL Architecture, and Business Intelligence. We believe that certificates don't get jobs—validated skills and real-time project portfolios do. Based in Ranchi, Jharkhand, we are committed to building a talent bench that is globally ready for the 2026 data landscape."
+    },
+    "cta": {
+      "title": "Join the Cohort",
+      "description": "Whether you are a career transitioner or an IT professional seeking to upscale, The Data Pilot provides the roadmap for your evolution.",
+      "buttonText": "Explore Our Curriculum",
+      "buttonLink": "index.html#about"
+    }
+  },
+  "privacyPolicy": {
+    "header": {
+      "title": "Privacy Policy",
+      "subtitle": "How we handle, protect, and use your data to provide world-class educational services at The Data Pilot."
+    },
+    "sections": [
+      {
+        "title": "1. Information We Collect",
+        "content": "We collect information you provide directly to us when you apply for our certification programs, request a brochure, or communicate with us. This includes your full name, email address, phone number, and any educational or professional background details you choose to share."
+      },
+      {
+        "title": "2. How We Use Your Information",
+        "content": "The Data Pilot uses your data strictly to process your enrollment, manage batch scheduling, provide targeted job assistance, and send you critical updates regarding the Augmented Data Analytics Certification. We rely on a 'Logic-First' approach to ensure data is only used when absolutely necessary for your educational success."
+      },
+      {
+        "title": "3. Data Security & Storage",
+        "content": "We implement strict European-standard data security measures to maintain the safety of your personal information. Your data is stored securely and is never sold to third-party marketing agencies."
+      },
+      {
+        "title": "4. Third-Party Services",
+        "content": "We may employ third-party companies and individuals to facilitate our platform (e.g., payment gateways, live classroom hosting). These third parties have access to your Personal Data only to perform these tasks on our behalf."
+      },
+      {
+        "title": "5. Contact Us",
+        "content": "If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact our admissions and legal team at info@thedatapilot.in."
+      }
+    ]
+  },
+  "termsAndConditions": {
+    "header": {
+      "title": "Terms and Conditions",
+      "subtitle": "Effective Date: March 20, 2026"
+    },
+    "intro": "Welcome to The Data Pilot (thedatapilot.in). These Terms and Conditions govern your use of our website and enrollment in our Augmented Data Analytics Certification.",
+    "sections": [
+      {
+        "title": "1. Acceptance of Terms",
+        "content": "By using thedatapilot.in, you confirm that you have read, understood, and agreed to these terms, our Privacy Policy, and our Refund Policy.",
+        "list": []
+      },
+      {
+        "title": "2. Enrollment and Eligibility",
+        "content": "To enroll in the certification program, you must meet the eligibility criteria defined on our platform. You agree to provide accurate, current, and complete information.",
+        "list": [
+          "Admission is subject to verification of background and payment clearance.",
+          "The Data Pilot reserves the right to refuse admission to any candidate without providing a specific reason."
+        ]
+      },
+      {
+        "title": "3. Program Delivery",
+        "content": "The Augmented Data Analytics program is a 16-week live instructor-led course.",
+        "list": [
+          "Access to recorded sessions and datasets is granted for a limited period.",
+          "Job assistance is provided only to students who maintain 90% attendance and complete all project milestones."
+        ]
+      },
+      {
+        "title": "4. Intellectual Property",
+        "content": "All curriculum materials, datasets, logic architectures, and software tools provided during the course are the intellectual property of The Data Pilot.",
+        "list": []
+      },
+      {
+        "title": "5. Code of Conduct",
+        "content": "Students are expected to maintain professional decorum. Any form of harassment will result in immediate termination of access without a refund.",
+        "list": []
+      },
+      {
+        "title": "6. Limitation of Liability",
+        "content": "The Data Pilot provides training and career assistance but does not guarantee employment.",
+        "list": []
+      },
+      {
+        "title": "7. Governing Law",
+        "content": "These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Ranchi, Jharkhand.",
+        "list": []
+      },
+      {
+        "title": "8. Contact Information",
+        "content": "For any clarifications regarding these Terms and Conditions, please contact our legal team:",
+        "list": [
+          "Email: info@thedatapilot.in",
+          "Office: Ranchi, Jharkhand"
+        ]
+      }
+    ]
+  },
+  "refundPolicy": {
+    "header": {
+      "title": "Refund Policy",
+      "subtitle": "Effective Date: March 20, 2026"
+    },
+    "intro": "At The Data Pilot, we strive to provide the highest quality data analytics training. This Refund Policy outlines the conditions for refunds.",
+    "sections": [
+      {
+        "title": "1. Refund Eligibility",
+        "content": "Students are eligible to request a refund under the following circumstances:",
+        "list": [
+          "Requests made within 7 days of the initial enrollment date.",
+          "Requests made at least 48 hours before the official batch start date.",
+          "If a batch is cancelled by The Data Pilot."
+        ],
+        "ordered": false
+      },
+      {
+        "title": "2. Non-Refundable Situations",
+        "content": "No refunds will be granted if:",
+        "list": [
+          "Live instructor-led sessions have commenced.",
+          "The student has accessed more than 10% of the curriculum or proprietary datasets.",
+          "The student violated the Code of Conduct.",
+          "Fees were marked as non-refundable 'seat booking' fees."
+        ],
+        "ordered": false
+      },
+      {
+        "title": "3. Deductions",
+        "content": "All eligible refunds are subject to a 10% administrative deduction.",
+        "list": [],
+        "ordered": false
+      },
+      {
+        "title": "4. Refund Process",
+        "content": "To initiate a refund, follow these steps:",
+        "list": [
+          "Email admissions@thedatapilot.in with 'Refund Request - [Your Name]'.",
+          "Provide enrollment ID and reason for cancellation.",
+          "The team will respond within 3-5 business days."
+        ],
+        "ordered": true
+      }
+    ]
+  }
+}

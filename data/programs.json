@@ -1,0 +1,178 @@
+{
+    "ada": {
+        "id": "ada",
+        "title": "Augmented Data Analyst",
+        "category": "Data Science",
+        "price": 40000,
+        "currency": "₹",
+        "duration": "7 Months",
+        "highlights": [
+            "7-Month Live Interactive Bootcamp",
+            "Placement Mentorship & Counseling",
+            "Lifetime Skill Library Access",
+            "Professional Certification",
+            "Portfolio Building Assistance"
+        ],
+        "syllabus": [
+            {
+                "id": 0,
+                "title": "Data Analytics with Excel",
+                "lectures": 8,
+                "hours": 24,
+                "content": [
+                    "Introduction to Data Analysis with Excel",
+                    "Excel Interface, Data Types & Formatting",
+                    "Excel Functions (Basic to Advanced)",
+                    "Logical Functions (IF, IFS, Nested IF)",
+                    "Lookup Functions (VLOOKUP, HLOOKUP, XLOOKUP)",
+                    "INDEX + MATCH – Overview & Business Use Cases",
+                    "Text & Date Functions for Data Cleaning",
+                    "Conditional Formatting – Advanced Rules",
+                    "Sorting, Filtering & Data Validation",
+                    "Pivot Tables – Overview & Implementation",
+                    "Advanced Pivot Tables (Calculated Fields & Slicers)",
+                    "Power Query – Data Import & Transformation",
+                    "Data Cleaning Techniques (Real Dataset Practice)",
+                    "Charts & Interactive Visualizations",
+                    "Dashboarding – Design Principles & Integration",
+                    "Forecasting Basics using Analysis ToolPak",
+                    "Integrated Lab – Pivot + XLOOKUP + Dashboard Flow",
+                    "Final Project & Review (Sales Performance Dashboard)"
+                ]
+            },
+            {
+                "id": 1,
+                "title": "Data Wrangling with SQL",
+                "lectures": 11,
+                "hours": 33,
+                "content": [
+                    "Introduction to Databases & RDBMS Concepts",
+                    "SQL Environment Setup & Data Import",
+                    "SELECT Statement & Filtering Data",
+                    "WHERE, AND, OR, IN, BETWEEN Operators",
+                    "ORDER BY & LIMIT Clauses",
+                    "Aggregate Functions (SUM, AVG, COUNT, MIN, MAX)",
+                    "GROUP BY & HAVING Clauses",
+                    "Joins – INNER, LEFT, RIGHT, FULL",
+                    "Subqueries & Nested Queries",
+                    "Common Table Expressions (CTEs)",
+                    "Window Functions (RANK, DENSE_RANK, ROW_NUMBER)",
+                    "Views & Query Structuring",
+                    "Data Cleaning using SQL",
+                    "Query Optimization & Performance Basics",
+                    "Exporting SQL Data to Excel / Power BI",
+                    "NL-to-SQL using AI Tools",
+                    "Integrated Lab – Business Case Querying",
+                    "Final Project & Review (SQL Business Insights Case)"
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Python for Data Analytics",
+                "lectures": 12,
+                "hours": 42,
+                "content": [
+                    "Introduction to Python & Environment Setup",
+                    "Variables, Data Types & Operators",
+                    "Conditional Statements & Loops",
+                    "Functions & Modular Coding",
+                    "File Handling & Working with CSV/Excel Files",
+                    "Introduction to NumPy",
+                    "Introduction to Pandas",
+                    "DataFrames – Filtering, Sorting & Aggregation",
+                    "Handling Missing Values & Data Cleaning",
+                    "Merging & Joining Datasets",
+                    "GroupBy & Aggregation Techniques",
+                    "Exploratory Data Analysis (EDA) Concepts",
+                    "Data Visualization with Matplotlib",
+                    "Data Visualization with Seaborn",
+                    "Statistical Analysis using Python",
+                    "AI-Assisted Python Code Generation",
+                    "Integrated Lab – EDA Workflow Implementation",
+                    "Final Project & Review (Python EDA Case Study)"
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Statistics & Data Exploration",
+                "lectures": 11,
+                "hours": 33,
+                "content": [
+                    "Descriptive Statistics – Mean, Median, Mode",
+                    "Variance & Standard Deviation",
+                    "Percentiles & IQR",
+                    "Probability Basics for Data Analytics",
+                    "Sampling Techniques",
+                    "Confidence Intervals",
+                    "Hypothesis Testing – Z-Test & T-Test",
+                    "Correlation & Covariance",
+                    "Regression Basics",
+                    "Interpreting Statistical Results for Business Decisions",
+                    "EDA Strategy & Insight Extraction Framework",
+                    "Integrated Lab – Statistical Analysis Case",
+                    "Final Review & Application Discussion"
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Power BI for Business Intelligence",
+                "lectures": 8,
+                "hours": 24,
+                "content": [
+                    "Introduction to Power BI & BI Concepts",
+                    "Data Connection & Data Transformation",
+                    "Data Modeling & Relationships",
+                    "DAX Basics (Calculated Columns & Measures)",
+                    "Advanced DAX Functions",
+                    "Data Visualization Best Practices",
+                    "Interactive Dashboards & Slicers",
+                    "Time Intelligence Functions",
+                    "Row-Level Security Basics",
+                    "Publishing & Sharing Dashboards",
+                    "Automated Data Refresh Concepts",
+                    "AI-Enhanced Dashboarding Techniques",
+                    "Integrated Lab – Dashboard Building",
+                    "Final Project & Review (Business Intelligence Dashboard)"
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Gen AI for Data Professionals",
+                "lectures": 5,
+                "hours": 15,
+                "content": [
+                    "Introduction to Generative AI in Analytics",
+                    "Prompt Engineering for Data Tasks",
+                    "AI for Excel & Spreadsheet Automation",
+                    "NL-to-SQL with AI",
+                    "AI-Assisted Dashboard Insights",
+                    "AI for Python Debugging & Code Optimization",
+                    "AI-Powered EDA & Statistical Storytelling",
+                    "Resume & Portfolio Optimization using GenAI",
+                    "Workflow Automation using AI Tools",
+                    "Ethical & Responsible AI Usage",
+                    "Integrated Practice Session – AI Workflow",
+                    "Final Review & Industry Use Cases"
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Aptitude and Soft Skills Training",
+                "lectures": 20,
+                "hours": 60,
+                "content": [
+                    "Aptitude Training- Core Quant + Smart Arithmetic",
+                    "Aptitude Training - Visual + Verbal Reasoning Mash-up",
+                    "Aptitude Training - Decision-Making & Probability",
+                    "Grammar and Comprehension",
+                    "Communication Skills",
+                    "Resume Building",
+                    "Linkedin Profile Optimisation",
+                    "Interview Preparation",
+                    "Mock Interviews - HR",
+                    "Mock Interviews - Domain"
+                ]
+            }
+        ]
+    }
+}
