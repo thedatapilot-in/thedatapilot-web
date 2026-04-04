@@ -392,7 +392,8 @@ const App = () => {
                                 <img 
                                     src={tool.img} 
                                     alt={tool.name} 
-                                    className="max-w-full max-h-full object-contain grayscale-[0.3] hover:grayscale-0 transition-all"
+                                    className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all"
+                                    onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
                                 />
                             </div>
                             <span className="font-bold text-slate-700 text-sm">{tool.name}</span>
