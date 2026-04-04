@@ -215,8 +215,8 @@ const App = () => {
                             <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-cyan-500 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-                            <a href="#syllabus" className="bg-slate-900 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-cyan-500 transition-all text-sm uppercase tracking-widest shadow-lg text-center">{settings?.labels?.applyButton || "Join Program"}</a>
-                            <button className="text-slate-900 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center">{settings?.labels?.brochureButton || "Brochure"}</button>
+                            <a href="#syllabus" className="bg-slate-100 text-slate-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-slate-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a>
+                            <button className="text-cyan-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-cyan-700 transition-colors">Download Brochure</button>
                         </div>
                     </div>
                     
