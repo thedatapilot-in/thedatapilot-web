@@ -311,9 +311,9 @@ const App = () => {
                                                     </div>
                                                 ))}
                                             </div>
-                                            <button className="w-full flex items-center justify-center space-x-2 bg-cyan-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md">
+                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center space-x-2 bg-cyan-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer">
                                                 <Icon name="download" size={14} /><span>{settings?.labels?.brochureButton || "Brochure"}</span>
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -333,9 +333,9 @@ const App = () => {
                                                 <span className="text-xs font-bold text-slate-400 uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                             </div>
                                         </div>
-                                        <button className="flex items-center space-x-2 bg-cyan-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-cyan-600 transition-all shadow-md">
+                                        <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-cyan-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-cyan-600 transition-all shadow-md cursor-pointer">
                                             <Icon name="download" size={14} /><span>{settings?.labels?.brochureButton || "Brochure"}</span>
-                                        </button>
+                                        </a>
                                         
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left">
