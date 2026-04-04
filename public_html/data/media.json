@@ -14,7 +14,7 @@
         { "id": 6, "img": "assets/images/project-6.jpg", "title": "Churn Prediction Model" }
     ],
     "downloads": {
-        "brochure": "assets/docs/brochure.pdf",
-        "syllabus": "assets/docs/syllabus.pdf"
+    "brochure": "https://docs.google.com/document/d/11a-7fbi7d_p24wRmlz6S3Gy9RGFdZF9LCkPeAaGRYYM/export?format=pdf",
+    "syllabus": "https://docs.google.com/document/d/11a-7fbi7d_p24wRmlz6S3Gy9RGFdZF9LCkPeAaGRYYM/export?format=pdf"
     }
 }
