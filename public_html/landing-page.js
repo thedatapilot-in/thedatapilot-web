@@ -60,7 +60,8 @@ const EligibilityChecker = () => {
 
     const toolOptions = ['Excel', 'SQL', 'Python', 'Power BI', 'Google Sheets', 'Gemini / LLMs'];
 
-    const handleToolToggle = (tool) => {
+    const handleToolToggle = (e, tool) => {
+        e.preventDefault(); // Prevents page reload
         setFormData(prev => ({
             ...prev,
             tools: prev.tools.includes(tool) 
@@ -69,7 +70,8 @@ const EligibilityChecker = () => {
         }));
     };
 
-    const calculateProfile = () => {
+    const calculateProfile = (e) => {
+        e.preventDefault();
         let type = "Career Accelerator";
         let message = "This program will bridge your current skills with industry-demanded tools, preparing you for a swift pivot into data roles.";
         
@@ -85,11 +87,11 @@ const EligibilityChecker = () => {
     };
 
     const inputClass = "w-full p-4 border border-slate-200 bg-white rounded-lg text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none font-medium transition-all text-slate-700";
-    const btnClass = "bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-md flex items-center gap-2";
+    const btnClass = "bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-md flex items-center justify-center gap-2";
 
     if (profile) {
         return (
-            <div className="bg-slate-900 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl animate-in zoom-in duration-500">
+            <div className="bg-slate-900 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl animate-in zoom-in duration-500 self-center w-full">
                 <div className="w-20 h-20 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <Icon name="award" size={40} className="text-cyan-400" />
                 </div>
@@ -97,7 +99,18 @@ const EligibilityChecker = () => {
                 <h2 className="text-3xl font-extrabold mb-6">{profile.type}</h2>
                 <p className="text-slate-300 leading-relaxed mb-8 max-w-lg mx-auto">{profile.message}</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onClick={() => { setStep(1); setProfile(null); setFormData({education: '', experience: '', analyticalScore: 5, tools: [], note: ''}); }} className="px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest border border-slate-700 text-slate-300 hover:bg-slate-800 transition-all">Retake Assessment</button>
+                    <button 
+                        type="button" 
+                        onClick={(e) => { 
+                            e.preventDefault(); 
+                            setStep(1); 
+                            setProfile(null); 
+                            setFormData({education: '', experience: '', analyticalScore: 5, tools: [], note: ''}); 
+                        }} 
+                        className="px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest border border-slate-700 text-slate-300 hover:bg-slate-800 transition-all"
+                    >
+                        Retake Assessment
+                    </button>
                     <a href="#about" className="bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-lg">Enroll Now</a>
                 </div>
             </div>
@@ -105,7 +118,7 @@ const EligibilityChecker = () => {
     }
 
     return (
-        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden">
+        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden self-center w-full">
             {/* Progress Bar */}
             <div className="absolute top-0 left-0 w-full h-1.5 bg-slate-200">
                 <div className="h-full bg-cyan-500 transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }}></div>
@@ -165,7 +178,8 @@ const EligibilityChecker = () => {
                                 {toolOptions.map(tool => (
                                     <button 
                                         key={tool} 
-                                        onClick={() => handleToolToggle(tool)}
+                                        type="button"
+                                        onClick={(e) => handleToolToggle(e, tool)}
                                         className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-cyan-500 border-cyan-500 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-cyan-300'}`}
                                     >
                                         {tool}
@@ -194,17 +208,17 @@ const EligibilityChecker = () => {
 
             <div className="mt-8 flex justify-between pt-6 border-t border-slate-200">
                 {step > 1 ? (
-                    <button onClick={() => setStep(step - 1)} className="px-5 py-2.5 text-sm font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-2">
+                    <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }} className="px-5 py-2.5 text-sm font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-2">
                         <Icon name="arrow-left" size={16} /> Back
                     </button>
                 ) : <div></div>}
                 
                 {step < 3 ? (
-                    <button onClick={() => setStep(step + 1)} disabled={step === 1 && (!formData.education || !formData.experience)} className={`${btnClass} disabled:opacity-50 disabled:cursor-not-allowed`}>
+                    <button type="button" onClick={(e) => { e.preventDefault(); setStep(step + 1); }} disabled={step === 1 && (!formData.education || !formData.experience)} className={`${btnClass} disabled:opacity-50 disabled:cursor-not-allowed`}>
                         Next Step <Icon name="arrow-right" size={16} />
                     </button>
                 ) : (
-                    <button onClick={calculateProfile} className={btnClass}>
+                    <button type="button" onClick={calculateProfile} className={btnClass}>
                         Generate Profile <Icon name="sparkles" size={16} />
                     </button>
                 )}
@@ -604,20 +618,18 @@ const App = () => {
 
             <section id="eligibility" className={`${sectionClass} bg-white`}>
                 <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
-                    <div className="space-y-6 md:space-y-8">
+                    <div className="space-y-6 md:space-y-8 w-full self-center">
                         <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
                         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Check Your Eligibility Profile</h2>
                         <p className="text-slate-500 font-medium leading-relaxed text-sm md:text-base">
                             Discover how this program aligns with your current skills. Whether you are a fresh graduate or an experienced professional, our AI-powered curriculum adapts to accelerate your career.
                         </p>
-                        
-                        {/* YOUR ORIGINAL CONTENT RESTORED HERE */}
                         <div className="space-y-4 font-bold text-slate-700 mt-8">
                             {[
                                 "Final year students or graduates from any discipline.", 
                                 "Working professionals looking for career acceleration.", 
                                 "A basic understanding of logical reasoning.", 
-                                "Commitment to 10-12 hours of weekly learning."
+                                "Commitment to 15-20 hours of weekly learning."
                             ].map((criteria, i) => (
                                 <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-slate-50 border border-slate-100 shadow-sm">
                                     <div className="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
