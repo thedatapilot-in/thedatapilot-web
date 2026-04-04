@@ -256,8 +256,8 @@ const App = () => {
                             <button type="submit" disabled={isSubmitting} className="w-full bg-cyan-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
                                 {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
                             </button>
-                            <p className="mt-4 text-[10px] text-slate-400 text-center leading-tight uppercase tracking-tighter">
-                                By clicking "Apply", you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-cyan-600 font-medium">Privacy Policy</a>. Data security is our priority.
+                            <p className="mt-3 text-[9px] text-slate-400 text-center leading-tight">
+                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-cyan-600">Privacy Policy</a>. Data is used only for your professional consultation.
                             </p>
                         </form>
                     </div>
