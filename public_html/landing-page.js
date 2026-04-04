@@ -205,7 +205,7 @@ const App = () => {
                     <div className="space-y-6 md:space-y-8 text-left">
                         <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
                         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900 tracking-tight">Certification in <br/><span className="text-cyan-500">{currentProgram.title}</span></h1>
-                        <p className="text-lg text-slate-500 max-w-xl font-medium leading-relaxed">
+                        <p className="text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed mb-6">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
                         <div className="space-y-3 md:space-y-4 text-sm font-semibold text-slate-700 text-left">
