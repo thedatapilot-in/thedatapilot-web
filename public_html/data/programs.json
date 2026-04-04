@@ -1,17 +1,21 @@
 {
     "ada": {
         "id": "ada",
-        "title": "Augmented Data Analyst",
-        "category": "Data Science",
+        "title": "AI-Powered Data Analytics",
+        "category": "Job-Ready Certification",
         "price": 40000,
         "currency": "₹",
-        "duration": "7 Months",
+        "duration": "4 Months",
+        "description": "Stuck in a non-IT role or a fresh graduate struggling to find your first break? The traditional way of learning data is too slow. Companies are no longer looking for 'Data Pullers'—they want Data Pilots. Specifically designed for Career Switchers (MBAs/Non-IT) and Fresh Engineers to bridge the gap to high-paying jobs.",
         "highlights": [
-            "7-Month Live Interactive Bootcamp",
-            "Placement Mentorship & Counseling",
-            "Lifetime Skill Library Access",
-            "Professional Certification",
-            "Portfolio Building Assistance"
+                "4-Month Intensive Zero-to-Job Ready Bootcamp",
+                "Master Python, SQL, Power BI, and Generative AI",
+                "Build a Portfolio with 12+ Industry Projects",
+                "Professional Resume and LinkedIn Optimization",
+                "Role-Specific Mock Interviews and Technical Prep",
+                "Placement Assistance for All Eligible Candidates",
+                "Lifetime Access to the Data Pilot AI Skill Library"
+
         ],
         "syllabus": [
             {

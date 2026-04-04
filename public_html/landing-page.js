@@ -206,7 +206,7 @@ const App = () => {
                         <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
                         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900 tracking-tight">Certification in <br/><span className="text-cyan-500">{currentProgram.title}</span></h1>
                         <p className="text-lg text-slate-500 max-w-xl font-medium leading-relaxed">
-                            {settings?.seo?.metaDescription}
+                            {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
                         <div className="space-y-3 md:space-y-4 text-sm font-semibold text-slate-700">
                             <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-cyan-500 flex-shrink-0" /><span>Live Instructor-Led Virtual Classrooms</span></div>
