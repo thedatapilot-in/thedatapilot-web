@@ -256,6 +256,9 @@ const App = () => {
                             <button type="submit" disabled={isSubmitting} className="w-full bg-cyan-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
                                 {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
                             </button>
+                            <p className="mt-4 text-[10px] text-slate-400 text-center leading-tight uppercase tracking-tighter">
+                                By clicking "Apply", you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-cyan-600 font-medium">Privacy Policy</a>. Data security is our priority.
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -332,9 +335,7 @@ const App = () => {
                                         <button className="flex items-center space-x-2 bg-cyan-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-cyan-600 transition-all shadow-md">
                                             <Icon name="download" size={14} /><span>{settings?.labels?.brochureButton || "Brochure"}</span>
                                         </button>
-                                        <p className="mt-4 text-[10px] text-slate-400 text-center leading-tight">
-                                            By clicking "Apply", you agree to our <a href="/privacy-policy" className="underline hover:text-cyan-600">Privacy Policy</a>. We value your data security and will only contact you regarding your professional consultation.
-                                        </p>
+                                        
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left">
                                         {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
