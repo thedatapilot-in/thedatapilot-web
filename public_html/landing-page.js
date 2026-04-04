@@ -181,14 +181,46 @@ const App = () => {
     const { Navbar, Footer, Icon } = window;
 
     const tools = [
-        { name: 'PostgreSQL', img: 'https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg', color: 'bg-slate-50' },
-        { name: 'Power BI', img: 'https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg', color: 'bg-amber-50' },
-        { name: 'Python', img: 'https://www.vectorlogo.zone/logos/python/python-icon.svg', color: 'bg-yellow-50' },
-        { name: 'Spreadsheets', img: 'https://www.vectorlogo.zone/logos/google_sheets/google_sheets-icon.svg', color: 'bg-green-50' },
-        { name: 'Jupyter', img: 'https://www.vectorlogo.zone/logos/jupyter/jupyter-icon.svg', color: 'bg-orange-50' },
-        { name: 'Warehousing', img: 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png', color: 'bg-cyan-50' },
-        { name: 'Gemini AI', img: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ef62331590f0d.svg', color: 'bg-indigo-50' },
-        { name: 'Soft Skills', img: 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', color: 'bg-rose-50' }
+        { 
+            name: 'PostgreSQL', 
+            img: 'https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg', 
+            color: 'bg-slate-50' 
+        },
+        { 
+            name: 'Power BI', 
+            img: 'https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg', 
+            color: 'bg-amber-50' 
+        },
+        { 
+            name: 'Python', 
+            img: 'https://www.vectorlogo.zone/logos/python/python-icon.svg', 
+            color: 'bg-yellow-50' 
+        },
+        { 
+            name: 'Spreadsheets', 
+            img: 'https://www.vectorlogo.zone/logos/google_sheets/google_sheets-icon.svg', 
+            color: 'bg-green-50' 
+        },
+        { 
+            name: 'Jupyter', 
+            img: 'https://www.vectorlogo.zone/logos/jupyter/jupyter-icon.svg', 
+            color: 'bg-orange-50' 
+        },
+        { 
+            name: 'Data Warehousing', 
+            img: 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png', 
+            color: 'bg-cyan-50' 
+        },
+        { 
+            name: 'Gemini AI', 
+            img: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ef62331590f0d.svg', 
+            color: 'bg-indigo-50' 
+        },
+        { 
+            name: 'Soft Skills', 
+            img: 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', 
+            color: 'bg-rose-50' 
+        }
     ];
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
