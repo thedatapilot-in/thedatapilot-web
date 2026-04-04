@@ -45,6 +45,173 @@ const InternalEmergencyUI = ({ errorMsg }) => (
     </div>
 );
 
+const EligibilityChecker = () => {
+    const { useState } = React;
+    const { Icon } = window;
+    const [step, setStep] = useState(1);
+    const [profile, setProfile] = useState(null);
+    const [formData, setFormData] = useState({
+        education: '',
+        experience: '',
+        analyticalScore: 5,
+        tools: [],
+        note: ''
+    });
+
+    const toolOptions = ['Excel', 'SQL', 'Python', 'Power BI', 'Google Sheets', 'Gemini / LLMs'];
+
+    const handleToolToggle = (tool) => {
+        setFormData(prev => ({
+            ...prev,
+            tools: prev.tools.includes(tool) 
+                ? prev.tools.filter(t => t !== tool) 
+                : [...prev.tools, tool]
+        }));
+    };
+
+    const calculateProfile = () => {
+        let type = "Career Accelerator";
+        let message = "This program will bridge your current skills with industry-demanded tools, preparing you for a swift pivot into data roles.";
+        
+        if (formData.experience === 'Fresher' || formData.experience === '< 1 Year') {
+            type = "Fresh Talent";
+            message = "Perfect timing. We will fast-track your tech foundations (SQL, Python) and build a portfolio to bypass entry-level barriers.";
+        } else if (formData.tools.length >= 3 || formData.analyticalScore >= 7) {
+            type = "Strategic Analyst";
+            message = "You already have a solid foundation! This program will help you master advanced AI workflows (Gemini) and complex data warehousing to secure senior roles.";
+        }
+
+        setProfile({ type, message });
+    };
+
+    const inputClass = "w-full p-4 border border-slate-200 bg-white rounded-lg text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none font-medium transition-all text-slate-700";
+    const btnClass = "bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-md flex items-center gap-2";
+
+    if (profile) {
+        return (
+            <div className="bg-slate-900 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl animate-in zoom-in duration-500">
+                <div className="w-20 h-20 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Icon name="award" size={40} className="text-cyan-400" />
+                </div>
+                <h3 className="text-cyan-400 font-bold uppercase tracking-widest text-xs mb-2">Profile Match</h3>
+                <h2 className="text-3xl font-extrabold mb-6">{profile.type}</h2>
+                <p className="text-slate-300 leading-relaxed mb-8 max-w-lg mx-auto">{profile.message}</p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onClick={() => { setStep(1); setProfile(null); setFormData({education: '', experience: '', analyticalScore: 5, tools: [], note: ''}); }} className="px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest border border-slate-700 text-slate-300 hover:bg-slate-800 transition-all">Retake Assessment</button>
+                    <a href="#about" className="bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-lg">Enroll Now</a>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden">
+            {/* Progress Bar */}
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-slate-200">
+                <div className="h-full bg-cyan-500 transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }}></div>
+            </div>
+
+            <div className="mb-8 mt-2">
+                <span className="text-cyan-600 font-bold uppercase tracking-widest text-[10px]">Step 0{step} of 03</span>
+                <h3 className="text-xl font-bold text-slate-900 mt-1">
+                    {step === 1 && "Education & Experience"}
+                    {step === 2 && "Skills & Tools"}
+                    {step === 3 && "Final Details"}
+                </h3>
+            </div>
+
+            <div className="min-h-[280px]">
+                {step === 1 && (
+                    <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Highest Education</label>
+                            <select value={formData.education} onChange={e => setFormData({...formData, education: e.target.value})} className={inputClass}>
+                                <option value="" disabled>Select your degree...</option>
+                                <option value="High School / Diploma">High School / Diploma</option>
+                                <option value="Bachelor's Degree">Bachelor's Degree</option>
+                                <option value="Master's Degree">Master's Degree</option>
+                                <option value="PhD">PhD</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Work Experience</label>
+                            <select value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} className={inputClass}>
+                                <option value="" disabled>Select experience level...</option>
+                                <option value="Fresher">Fresher (0 Years)</option>
+                                <option value="< 1 Year">Less than 1 Year</option>
+                                <option value="1-3 Years">1 to 3 Years</option>
+                                <option value="3-5 Years">3 to 5 Years</option>
+                                <option value="5+ Years">5+ Years</option>
+                            </select>
+                        </div>
+                    </div>
+                )}
+
+                {step === 2 && (
+                    <div className="space-y-8 animate-in slide-in-from-right-8 duration-300">
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 flex justify-between">
+                                <span>Analytical Skill Rating</span>
+                                <span className="text-cyan-600">{formData.analyticalScore} / 10</span>
+                            </label>
+                            <input type="range" min="1" max="10" value={formData.analyticalScore} onChange={e => setFormData({...formData, analyticalScore: parseInt(e.target.value)})} className="w-full accent-cyan-500 cursor-pointer" />
+                            <div className="flex justify-between text-[10px] text-slate-400 font-bold uppercase mt-2">
+                                <span>Beginner</span><span>Expert</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Tools You've Used</label>
+                            <div className="flex flex-wrap gap-2">
+                                {toolOptions.map(tool => (
+                                    <button 
+                                        key={tool} 
+                                        onClick={() => handleToolToggle(tool)}
+                                        className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-cyan-500 border-cyan-500 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-cyan-300'}`}
+                                    >
+                                        {tool}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {step === 3 && (
+                    <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Career Goal (Optional)</label>
+                            <textarea 
+                                rows="4" 
+                                placeholder="What are you hoping to achieve with this program?" 
+                                value={formData.note} 
+                                onChange={e => setFormData({...formData, note: e.target.value})} 
+                                className={`${inputClass} resize-none`}
+                            ></textarea>
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            <div className="mt-8 flex justify-between pt-6 border-t border-slate-200">
+                {step > 1 ? (
+                    <button onClick={() => setStep(step - 1)} className="px-5 py-2.5 text-sm font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-2">
+                        <Icon name="arrow-left" size={16} /> Back
+                    </button>
+                ) : <div></div>}
+                
+                {step < 3 ? (
+                    <button onClick={() => setStep(step + 1)} disabled={step === 1 && (!formData.education || !formData.experience)} className={`${btnClass} disabled:opacity-50 disabled:cursor-not-allowed`}>
+                        Next Step <Icon name="arrow-right" size={16} />
+                    </button>
+                ) : (
+                    <button onClick={calculateProfile} className={btnClass}>
+                        Generate Profile <Icon name="sparkles" size={16} />
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+};
 const App = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
@@ -436,23 +603,35 @@ const App = () => {
             </section>
 
             <section id="eligibility" className={`${sectionClass} bg-white`}>
-                <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center text-left">
-                    <div className="space-y-8">
-                        <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Check Your Eligibility</h2>
-                        <p className="text-slate-500 font-medium leading-relaxed">This program is designed for ambitious learners ready to pivot into data.</p>
-                        <div className="space-y-4 font-bold text-slate-700">
-                            {["Final year students or graduates from any discipline.", "Working professionals looking for career acceleration.", "A basic understanding of logical reasoning.", "Commitment to 10-12 hours of weekly learning."].map((criteria, i) => (
+                <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
+                    <div className="space-y-6 md:space-y-8">
+                        <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Check Your Eligibility Profile</h2>
+                        <p className="text-slate-500 font-medium leading-relaxed text-sm md:text-base">
+                            Discover how this program aligns with your current skills. Whether you are a fresh graduate or an experienced professional, our AI-powered curriculum adapts to accelerate your career.
+                        </p>
+                        
+                        {/* YOUR ORIGINAL CONTENT RESTORED HERE */}
+                        <div className="space-y-4 font-bold text-slate-700 mt-8">
+                            {[
+                                "Final year students or graduates from any discipline.", 
+                                "Working professionals looking for career acceleration.", 
+                                "A basic understanding of logical reasoning.", 
+                                "Commitment to 10-12 hours of weekly learning."
+                            ].map((criteria, i) => (
                                 <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-slate-50 border border-slate-100 shadow-sm">
-                                    <Icon name="check" size={20} className="text-cyan-500 flex-shrink-0" />
-                                    <span className="font-bold leading-snug">{criteria}</span>
+                                    <div className="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <Icon name="check" size={14} className="text-cyan-600 font-bold" />
+                                    </div>
+                                    <span className="text-sm font-bold text-slate-700 leading-snug">{criteria}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="aspect-square bg-slate-50 border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center text-slate-300">
-                        <Icon name="user-check" size={64} className="opacity-10" />
-                        <span className="text-[10px] font-black uppercase tracking-widest mt-4 text-center">Program Alignment Graphic</span>
-                    </div>
+                    
+                    {/* The Interactive React Component */}
+                    <EligibilityChecker />
+                    
                 </div>
             </section>
 
