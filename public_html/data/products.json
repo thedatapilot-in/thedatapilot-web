@@ -1,0 +1,29 @@
+{
+    "active": true,
+    "items": [
+        {
+            "id": "excel-templates",
+            "title": "Automated Sales Dashboards",
+            "description": "Ready-to-use Excel templates with advanced Power Query logic for retail data.",
+            "price": 499,
+            "currency": "₹",
+            "type": "Digital Download"
+        },
+        {
+            "id": "sql-handbook",
+            "title": "SQL for Analysts: The Quick-Ref",
+            "description": "A comprehensive PDF guide covering CTEs, Window Functions, and Query Optimization.",
+            "price": 199,
+            "currency": "₹",
+            "type": "E-Book"
+        },
+        {
+            "id": "python-scripts",
+            "title": "Data Cleaning Automation Suite",
+            "description": "A collection of Python scripts to automate 80% of your daily data cleaning tasks.",
+            "price": 999,
+            "currency": "₹",
+            "type": "Code Library"
+        }
+    ]
+}
