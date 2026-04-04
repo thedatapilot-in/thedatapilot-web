@@ -216,7 +216,7 @@ const App = () => {
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <a href="#syllabus" className="bg-slate-100 text-slate-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-slate-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a>
-                            <a href="/assets/ai-powered-data-analytics-brochure.pdf" download className="text-cyan-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-cyan-700 transition-colors">Download Brochure</a>                        </div>
+                            <a href="assets/ai-powered-data-analytics-brochure.pdf" download className="text-cyan-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-cyan-700 transition-colors">Download Brochure</a>                        </div>
                     </div>
                     
                     <div className="bg-white p-8 border border-slate-100 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0">
