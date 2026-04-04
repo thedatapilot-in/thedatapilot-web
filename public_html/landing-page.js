@@ -208,7 +208,7 @@ const App = () => {
         },
         { 
             name: 'Data Warehousing', 
-            img: 'https://img.icons8.com/external-flat-icons-inmotus-design/64/external-Data-Warehouse-data-infrastructure-flat-icons-inmotus-design.png', 
+            img: 'https://www.svgrepo.com/show/443093/data-warehouse.svg', 
             color: 'bg-cyan-50' 
         },
         { 
@@ -218,7 +218,7 @@ const App = () => {
         },
         { 
             name: 'Soft Skills', 
-            img: 'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-soft-skills-human-resources-flaticons-lineal-color-flat-icons-2.png', 
+            img: 'https://www.svgrepo.com/show/355037/google-meet.svg', 
             color: 'bg-rose-50' 
         }
     ];
