@@ -183,7 +183,7 @@ const App = () => {
     const tools = [
         { 
             name: 'PostgreSQL', 
-            img: 'https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg', 
+            img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', 
             color: 'bg-slate-50' 
         },
         { 
@@ -193,12 +193,12 @@ const App = () => {
         },
         { 
             name: 'Python', 
-            img: 'https://www.vectorlogo.zone/logos/python/python-icon.svg', 
+            img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', 
             color: 'bg-yellow-50' 
         },
         { 
             name: 'Spreadsheets', 
-            img: 'https://www.vectorlogo.zone/logos/google_sheets/google_sheets-icon.svg', 
+            img: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svgtorlogo.zone/logos/google_sheets/google_sheets-icon.svg', 
             color: 'bg-green-50' 
         },
         { 
