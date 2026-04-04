@@ -181,14 +181,14 @@ const App = () => {
     const { Navbar, Footer, Icon } = window;
 
     const tools = [
-        { name: 'Excel', icon: 'file-spreadsheet', color: 'bg-green-50', iconColor: 'text-green-600' },
-        { name: 'SQL Server', icon: 'database', color: 'bg-cyan-50', iconColor: 'text-cyan-600' },
-        { name: 'Python', icon: 'terminal', color: 'bg-yellow-50', iconColor: 'text-yellow-600' },
-        { name: 'Power BI', icon: 'bar-chart-3', color: 'bg-amber-50', iconColor: 'text-amber-600' },
-        { name: 'Tableau', icon: 'layout', color: 'bg-cyan-50', iconColor: 'text-cyan-600' },
-        { name: 'AI Ready (LLMs)', icon: 'cpu', color: 'bg-indigo-50', iconColor: 'text-indigo-600' },
-        { name: 'Warehousing', icon: 'layers', color: 'bg-slate-50', iconColor: 'text-slate-600' },
-        { name: 'Statistics', icon: 'microscope', color: 'bg-rose-50', iconColor: 'text-rose-600' }
+        { name: 'PostgreSQL', img: 'https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg', color: 'bg-slate-50' },
+        { name: 'Power BI', img: 'https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg', color: 'bg-amber-50' },
+        { name: 'Python', img: 'https://www.vectorlogo.zone/logos/python/python-icon.svg', color: 'bg-yellow-50' },
+        { name: 'Spreadsheets', img: 'https://www.vectorlogo.zone/logos/google_sheets/google_sheets-icon.svg', color: 'bg-green-50' },
+        { name: 'Jupyter', img: 'https://www.vectorlogo.zone/logos/jupyter/jupyter-icon.svg', color: 'bg-orange-50' },
+        { name: 'Warehousing', img: 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png', color: 'bg-cyan-50' },
+        { name: 'Gemini AI', img: 'https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ef62331590f0d.svg', color: 'bg-indigo-50' },
+        { name: 'Soft Skills', img: 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', color: 'bg-rose-50' }
     ];
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
@@ -354,12 +354,18 @@ const App = () => {
                 <div className="w-full max-w-7xl mx-auto text-left">
                     <h2 className="text-3xl font-bold mb-16 text-slate-900 tracking-tight">Modern Industry Tool Stack</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        {tools.map((tool, i) => (
-                            <div key={i} className={`${tool.color} tool-card p-12 flex flex-col items-center justify-center space-y-5 border border-slate-50 shadow-sm rounded-lg transition-transform hover:-translate-y-1`}>
-                                <Icon name={tool.icon} size={56} className={tool.iconColor} />
-                                <span className="font-bold text-slate-700">{tool.name}</span>
+                    {tools.map((tool, i) => (
+                        <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-slate-100 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1`}>
+                            <div className="w-16 h-16 flex items-center justify-center">
+                                <img 
+                                    src={tool.img} 
+                                    alt={tool.name} 
+                                    className="max-w-full max-h-full object-contain grayscale-[0.3] hover:grayscale-0 transition-all"
+                                />
                             </div>
-                        ))}
+                            <span className="font-bold text-slate-700 text-sm">{tool.name}</span>
+                        </div>
+                    ))}
                     </div>
                 </div>
             </section>
