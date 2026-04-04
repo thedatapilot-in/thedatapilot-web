@@ -198,7 +198,7 @@ const App = () => {
         },
         { 
             name: 'Spreadsheets', 
-            img: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svgtorlogo.zone/logos/google_sheets/google_sheets-icon.svg', 
+            img: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg', 
             color: 'bg-green-50' 
         },
         { 
@@ -218,7 +218,7 @@ const App = () => {
         },
         { 
             name: 'Soft Skills', 
-            img: 'https://www.svgrepo.com/show/355037/google-meet.svg', 
+            img: 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', 
             color: 'bg-rose-50' 
         }
     ];
