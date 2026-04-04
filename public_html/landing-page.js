@@ -208,10 +208,11 @@ const App = () => {
                         <p className="text-lg text-slate-500 max-w-xl font-medium leading-relaxed">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
-                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-slate-700">
-                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-cyan-500 flex-shrink-0" /><span>Live Instructor-Led Virtual Classrooms</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-cyan-500 flex-shrink-0" /><span>Job Assistance provided for all eligible candidates</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-cyan-500 flex-shrink-0" /><span>12+ Industry First Projects and Case Studies</span></div>
+                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-slate-700 text-left">
+                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-cyan-500 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-cyan-500 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-cyan-500 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-cyan-500 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <a href="#syllabus" className="bg-slate-900 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-cyan-500 transition-all text-sm uppercase tracking-widest shadow-lg text-center">{settings?.labels?.applyButton || "Join Program"}</a>
