@@ -208,7 +208,7 @@ const App = () => {
         },
         { 
             name: 'Data Warehousing', 
-            img: 'https://www.svgrepo.com/show/443093/data-warehouse.svg', 
+            img: 'https://api.iconify.design/vscode-icons:file-type-sql.svg?width=144&height=144', 
             color: 'bg-cyan-50' 
         },
         { 
