@@ -107,10 +107,37 @@ const App = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
+        
         const data = new FormData();
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // 1. Core Lead Data
         data.append('full_name', formData.full_name);
         data.append('email', formData.email);
         data.append('phone', formData.phone);
+        
+        // 2. Program Context (Auto-detected)
+        data.append('program_id', currentProgram.id);
+        data.append('program_name', currentProgram.title);
+        
+        // 3. Digital Attribution (Where they came from)
+        data.append('source_url', window.location.href);
+        data.append('referrer', document.referrer || 'direct');
+        data.append('landing_page', window.location.pathname);
+        
+        // 4. UTM Marketing Parameters (For Ads Tracking)
+        data.append('utm_source', urlParams.get('utm_source') || 'organic');
+        data.append('utm_medium', urlParams.get('utm_medium') || 'none');
+        data.append('utm_campaign', urlParams.get('utm_campaign') || 'none');
+        data.append('utm_term', urlParams.get('utm_term') || '');
+        data.append('utm_content', urlParams.get('utm_content') || '');
+
+        // 5. Technical & Device Insights
+        data.append('device_type', window.innerWidth < 768 ? 'Mobile' : 'Desktop');
+        data.append('browser', navigator.userAgent);
+        data.append('screen_resolution', `${window.screen.width}x${window.screen.height}`);
+        data.append('submission_time', new Date().toISOString());
+        data.append('timezone', IntP.DateTimeFormat().resolvedOptions().timeZone);
         
         try {
             const res = await fetch('submit.php', { method: 'POST', body: data });
@@ -305,6 +332,9 @@ const App = () => {
                                         <button className="flex items-center space-x-2 bg-cyan-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-cyan-600 transition-all shadow-md">
                                             <Icon name="download" size={14} /><span>{settings?.labels?.brochureButton || "Brochure"}</span>
                                         </button>
+                                        <p className="mt-4 text-[10px] text-slate-400 text-center leading-tight">
+                                            By clicking "Apply", you agree to our <a href="/privacy-policy" className="underline hover:text-cyan-600">Privacy Policy</a>. We value your data security and will only contact you regarding your professional consultation.
+                                        </p>
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left">
                                         {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
