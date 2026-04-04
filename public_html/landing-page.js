@@ -208,7 +208,7 @@ const App = () => {
         },
         { 
             name: 'Data Warehousing', 
-            img: 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png', 
+            img: 'https://img.icons8.com/external-flat-icons-inmotus-design/64/external-Data-Warehouse-data-infrastructure-flat-icons-inmotus-design.png', 
             color: 'bg-cyan-50' 
         },
         { 
@@ -218,7 +218,7 @@ const App = () => {
         },
         { 
             name: 'Soft Skills', 
-            img: 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', 
+            img: 'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-soft-skills-human-resources-flaticons-lineal-color-flat-icons-2.png', 
             color: 'bg-rose-50' 
         }
     ];
