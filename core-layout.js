@@ -105,6 +105,18 @@ window.Icon = ({ name, size = 20, className = "" }) => {
 window.Navbar = ({ activeProgramId, onProgramChange }) => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+    const dropdownRef = React.useRef(null);
+
+    React.useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [modalFormData, setModalFormData] = React.useState({ full_name: '', email: '', phone: '' });
     const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -161,12 +173,15 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     <a href="services.html" className={`hover:text-cyan-500 transition-colors font-bold tracking-tight ${isServicesPage ? 'text-cyan-600' : ''}`}>Services</a>
                     
                     <div 
+                        ref={dropdownRef}
                         className="relative group py-2" 
                         onMouseEnter={() => setIsDropdownOpen(true)} 
-                        onMouseLeave={() => setIsDropdownOpen(false)}
                     >
                         {/* The Trigger Button */}
-                        <button className={`flex items-center space-x-1 hover:text-cyan-500 transition-colors font-bold tracking-tight ${isLandingPage ? 'text-cyan-600' : ''}`}>
+                        <button 
+                            onClick={() => setIsDropdownOpen(p => !p)}
+                            className={`flex items-center space-x-1 hover:text-cyan-500 transition-colors font-bold tracking-tight ${isLandingPage ? 'text-cyan-600' : ''}`}
+                        >
                             <span>All Programs</span>
                             <window.Icon 
                                 name="chevron-down" 
