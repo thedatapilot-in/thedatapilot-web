@@ -166,7 +166,9 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                             <window.Icon name="chevron-down" size={14} className={isDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
                         </button>
                         {isDropdownOpen && programs && (
-                            <div className="absolute top-full left-0 w-64 bg-white border border-slate-100 shadow-xl rounded-lg py-3 mt-1 animate-in slide-in-from-top-2 duration-200">
+                            <div className="absolute top-full left-0 w-64 pt-2 animate-in slide-in-from-top-2 duration-200">
+                                <div className="bg-white border border-slate-100 shadow-xl rounded-lg py-3">
+                                    <div className="px-4">
                                 {Object.entries(programs).map(([progId, prog]) => (
                                     <button 
                                         key={progId} 
@@ -180,6 +182,8 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                         {prog.title}
                                     </button>
                                 ))}
+                                </div>
+                                </div>
                             </div>
                         )}
                     </div>
