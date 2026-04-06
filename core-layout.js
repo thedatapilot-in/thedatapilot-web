@@ -179,7 +179,10 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     >
                         {/* The Trigger Button */}
                         <button 
-                            onClick={() => setIsDropdownOpen(p => !p)}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setIsDropdownOpen(true);
+                            }}
                             className={`flex items-center space-x-1 hover:text-cyan-500 transition-colors font-bold tracking-tight ${isLandingPage ? 'text-cyan-600' : ''}`}
                         >
                             <span>All Programs</span>
