@@ -432,7 +432,7 @@ const App = () => {
             <div className="fixed top-20 w-full z-40 bg-secondary-50 border-b border-secondary-200 hidden md:block text-secondary-500 font-bold">
                 <div className="max-w-5xl mx-auto flex justify-between px-4">
                     {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => (
-                        <a key={tab} href={`#${tab.toLowerCase()}`} className="py-4 text-sm hover:text-brand-500 border-b-2 border-transparent hover:border-brand-500 transition-all font-bold">
+                        <a key={tab} href={`#${tab.toLowerCase()}`} className="py-4 text-[17px] hover:text-brand-500 border-b-2 border-transparent hover:border-brand-500 transition-all font-bold">
                             {tab}
                         </a>
                     ))}
