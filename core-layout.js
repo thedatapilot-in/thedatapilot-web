@@ -105,29 +105,12 @@ window.Icon = ({ name, size = 20, className = "" }) => {
 window.Navbar = ({ activeProgramId, onProgramChange }) => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-    const dropdownTimeoutRef = React.useRef(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [modalFormData, setModalFormData] = React.useState({ full_name: '', email: '', phone: '' });
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     
     const { settings, programs } = window.SITE_DATA;
     const brand = settings?.brand?.name || "The Data Pilot";
-
-    const handleMouseEnterDropdown = () => {
-        if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
-        setIsDropdownOpen(true);
-    };
-
-    const handleMouseLeaveDropdown = () => {
-        dropdownTimeoutRef.current = setTimeout(() => {
-            setIsDropdownOpen(false);
-        }, 300);
-    };
-
-    const handleDropdownClick = () => {
-        if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
-        setIsDropdownOpen(prev => !prev);
-    };
 
     const path = window.location.pathname;
     const isProductsPage = path.endsWith('products.html');
@@ -177,31 +160,39 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     <a href="products.html" className={`hover:text-cyan-500 transition-colors font-bold tracking-tight ${isProductsPage ? 'text-cyan-600' : ''}`}>Products</a>
                     <a href="services.html" className={`hover:text-cyan-500 transition-colors font-bold tracking-tight ${isServicesPage ? 'text-cyan-600' : ''}`}>Services</a>
                     
-                    <div className="relative group py-2" onMouseEnter={handleMouseEnterDropdown} onMouseLeave={handleMouseLeaveDropdown}>
-                        <button onClick={handleDropdownClick} className={`flex items-center space-x-1 hover:text-cyan-500 transition-colors font-bold tracking-tight ${isLandingPage ? 'text-cyan-600' : ''}`}>
+                    <div 
+                        className="relative group h-full flex items-center" 
+                        onMouseEnter={() => setIsDropdownOpen(true)} 
+                        onMouseLeave={() => setIsDropdownOpen(false)}
+                    >
+                        {/* The Trigger Button */}
+                        <button className={`flex items-center space-x-1 hover:text-cyan-500 transition-colors font-bold tracking-tight ${isLandingPage ? 'text-cyan-600' : ''}`}>
                             <span>All Programs</span>
-                            <window.Icon name="chevron-down" size={14} className={isDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
+                            <window.Icon 
+                                name="chevron-down" 
+                                size={14} 
+                                className={isDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} 
+                            />
                         </button>
+                        
                         {isDropdownOpen && programs && (
-                            <div className="absolute top-full left-0 w-64 pt-2 animate-in slide-in-from-top-2 duration-200 z-50">
-                                {/* Hover Safe Wrapper: Extends hover hit-area physically to prevent vanishing */}
-                                <div className="absolute -inset-x-12 -inset-y-6 bg-transparent z-[-1]" />
-                                <div className="bg-white border border-slate-100 shadow-xl rounded-lg py-3 relative z-10">
-                                    <div className="px-4">
-                                {Object.entries(programs).map(([progId, prog]) => (
-                                    <button 
-                                        key={progId} 
-                                        onClick={() => { 
-                                            if(onProgramChange) onProgramChange(progId); 
-                                            else window.location.href=`index.html#about`; 
-                                            setIsDropdownOpen(false); 
-                                        }} 
-                                        className={`w-full text-left px-4 py-2 hover:bg-slate-50 font-bold text-xs tracking-tight ${progId === activeProgramId ? 'text-cyan-600' : 'text-slate-600'}`}
-                                    >
-                                        {prog.title}
-                                    </button>
-                                ))}
-                                </div>
+                            <div className="absolute top-full left-0 w-64 pt-3 animate-in slide-in-from-top-2 duration-200">
+                                {/* The Invisible Bridge: Use 'top-full' and 'pt-3' to ensure there is 0px gap */}
+                                {/* The Visual Menu Card */}
+                                <div className="bg-white border border-slate-100 shadow-xl rounded-lg py-3 overflow-hidden">
+                                    {Object.entries(programs).map(([progId, prog]) => (
+                                        <button 
+                                            key={progId} 
+                                            onClick={() => { 
+                                                if(onProgramChange) onProgramChange(progId); 
+                                                else window.location.href=`index.html#about`; 
+                                                setIsDropdownOpen(false); 
+                                            }} 
+                                            className={`w-full text-left px-4 py-2 hover:bg-slate-50 font-bold text-xs tracking-tight transition-colors ${progId === activeProgramId ? 'text-cyan-600' : 'text-slate-600'}`}
+                                        >
+                                            {prog.title}
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                         )}
