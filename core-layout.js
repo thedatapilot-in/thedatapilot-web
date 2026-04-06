@@ -161,7 +161,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     <a href="services.html" className={`hover:text-cyan-500 transition-colors font-bold tracking-tight ${isServicesPage ? 'text-cyan-600' : ''}`}>Services</a>
                     
                     <div 
-                        className="relative group h-full flex items-center" 
+                        className="relative group py-2" 
                         onMouseEnter={() => setIsDropdownOpen(true)} 
                         onMouseLeave={() => setIsDropdownOpen(false)}
                     >
@@ -176,10 +176,9 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         </button>
                         
                         {isDropdownOpen && programs && (
-                            <div className="absolute top-full left-0 w-64 pt-3 animate-in slide-in-from-top-2 duration-200">
-                                {/* The Invisible Bridge: Use 'top-full' and 'pt-3' to ensure there is 0px gap */}
-                                {/* The Visual Menu Card */}
-                                <div className="bg-white border border-slate-100 shadow-xl rounded-lg py-3 overflow-hidden">
+                            <div className="absolute top-full left-0 w-64 z-50 animate-in fade-in duration-200">
+                                {/* The Visual Menu Card connected directly with 0 gaps */}
+                                <div className="bg-white border border-slate-100 shadow-xl rounded-xl py-2 overflow-hidden">
                                     {Object.entries(programs).map(([progId, prog]) => (
                                         <button 
                                             key={progId} 
