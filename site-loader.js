@@ -9,7 +9,7 @@
  */
 
 (function() {
-    const VERSION = "3.0.1"; 
+    const VERSION = "3.0.3"; 
     const path = window.location.pathname;
     
     // Page Route Detection
@@ -47,26 +47,26 @@
                 emergencyDiv.innerHTML = `
                     <div style="max-width: 448px; width: 100%;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 28px;">
-                            <div style="width: 52px; height: 52px; background-color: #ef4444; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.2);">
+                            <div style="width: 52px; height: 52px; background-color: #e10b17; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.2);">
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
                             </div>
                             <div style="display: flex; flex-direction: column; text-align: left; line-height: 1;">
                                 <span style="font-weight: 800; font-size: 22px; color: #0f172a; margin-bottom: 4px;">The Data Pilot</span>
-                                <span style="font-size: 13px; font-weight: 600; color: #ef4444;">Logic-First. AI-Fast.</span>
+                                <span style="font-size: 13px; font-weight: 600; color: #e10b17;">Logic-First. AI-Fast.</span>
                             </div>
                         </div>
                         <div style="background-color: white; padding: 30px; border-radius: 40px; border: 1px solid #e2e8f0; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);">
                             <div style="width: 100px; height: 80px; margin: 0 auto 32px auto; position: relative;">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; top: 0; left: 0;" class="gear-large">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#e10b17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; top: 0; left: 0;" class="gear-large">
                                     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
                                 </svg>
-                                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; bottom: 0; right: 0;" class="gear-small">
+                                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#e10b17" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; bottom: 0; right: 0;" class="gear-small">
                                     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
                                 </svg>
                             </div>
                             <h2 style="font-weight: 800; font-size: 24px; margin: 0 0 12px 0; color: #0f172a;">System is temporarily down</h2>
                             <p style="color: #64748b; font-weight: 500; margin-bottom: 36px; line-height: 1.6; font-size: 15px;">We are working on it and will be back online shortly.</p>
-                            <button onclick="window.location.reload(true)" style="width: 100%; background-color: #ef4444; color: white; padding: 22px; border-radius: 16px; font-weight: 800; font-size: 15px; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3);">Check Connection</button>
+                            <button onclick="window.location.reload(true)" style="width: 100%; background-color: #e10b17; color: white; padding: 22px; border-radius: 16px; font-weight: 800; font-size: 15px; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3);">Check Connection</button>
                         </div>
                         <p style="margin-top: 18px; font-size: 12px; font-weight: 700; color: #94a3b8; letter-spacing: 0.05em;">Commitment to world-class data services and mentorship</p>
                     </div>
