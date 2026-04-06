@@ -105,12 +105,24 @@ window.Icon = ({ name, size = 20, className = "" }) => {
 window.Navbar = ({ activeProgramId, onProgramChange }) => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+    const dropdownTimeoutRef = React.useRef(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
     const [modalFormData, setModalFormData] = React.useState({ full_name: '', email: '', phone: '' });
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     
     const { settings, programs } = window.SITE_DATA;
     const brand = settings?.brand?.name || "The Data Pilot";
+
+    const handleMouseEnterDropdown = () => {
+        if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+        setIsDropdownOpen(true);
+    };
+
+    const handleMouseLeaveDropdown = () => {
+        dropdownTimeoutRef.current = setTimeout(() => {
+            setIsDropdownOpen(false);
+        }, 250);
+    };
 
     const path = window.location.pathname;
     const isProductsPage = path.endsWith('products.html');
@@ -160,7 +172,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     <a href="products.html" className={`hover:text-cyan-500 transition-colors font-bold tracking-tight ${isProductsPage ? 'text-cyan-600' : ''}`}>Products</a>
                     <a href="services.html" className={`hover:text-cyan-500 transition-colors font-bold tracking-tight ${isServicesPage ? 'text-cyan-600' : ''}`}>Services</a>
                     
-                    <div className="relative group py-2" onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}>
+                    <div className="relative group py-2" onMouseEnter={handleMouseEnterDropdown} onMouseLeave={handleMouseLeaveDropdown}>
                         <button className={`flex items-center space-x-1 hover:text-cyan-500 transition-colors font-bold tracking-tight ${isLandingPage ? 'text-cyan-600' : ''}`}>
                             <span>All Programs</span>
                             <window.Icon name="chevron-down" size={14} className={isDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
