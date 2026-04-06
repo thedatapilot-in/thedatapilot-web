@@ -121,7 +121,12 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
     const handleMouseLeaveDropdown = () => {
         dropdownTimeoutRef.current = setTimeout(() => {
             setIsDropdownOpen(false);
-        }, 250);
+        }, 300);
+    };
+
+    const handleDropdownClick = () => {
+        if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+        setIsDropdownOpen(prev => !prev);
     };
 
     const path = window.location.pathname;
@@ -173,13 +178,15 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     <a href="services.html" className={`hover:text-cyan-500 transition-colors font-bold tracking-tight ${isServicesPage ? 'text-cyan-600' : ''}`}>Services</a>
                     
                     <div className="relative group py-2" onMouseEnter={handleMouseEnterDropdown} onMouseLeave={handleMouseLeaveDropdown}>
-                        <button className={`flex items-center space-x-1 hover:text-cyan-500 transition-colors font-bold tracking-tight ${isLandingPage ? 'text-cyan-600' : ''}`}>
+                        <button onClick={handleDropdownClick} className={`flex items-center space-x-1 hover:text-cyan-500 transition-colors font-bold tracking-tight ${isLandingPage ? 'text-cyan-600' : ''}`}>
                             <span>All Programs</span>
                             <window.Icon name="chevron-down" size={14} className={isDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} />
                         </button>
                         {isDropdownOpen && programs && (
-                            <div className="absolute top-full left-0 w-64 pt-2 animate-in slide-in-from-top-2 duration-200">
-                                <div className="bg-white border border-slate-100 shadow-xl rounded-lg py-3">
+                            <div className="absolute top-full left-0 w-64 pt-2 animate-in slide-in-from-top-2 duration-200 z-50">
+                                {/* Hover Safe Wrapper: Extends hover hit-area physically to prevent vanishing */}
+                                <div className="absolute -inset-x-12 -inset-y-6 bg-transparent z-[-1]" />
+                                <div className="bg-white border border-slate-100 shadow-xl rounded-lg py-3 relative z-10">
                                     <div className="px-4">
                                 {Object.entries(programs).map(([progId, prog]) => (
                                     <button 
