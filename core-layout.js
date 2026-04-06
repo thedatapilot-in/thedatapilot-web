@@ -165,12 +165,12 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
             <div className="max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left">
                 <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => window.location.href = 'index.html'}>
                     <img src="thedatapilot_logo.png" alt="" className="h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0" />
-                    <span className="font-bold text-[25px] text-secondary-800 tracking-tight">{brand}</span>
+                    <span className="font-bold text-[22px] text-secondary-800 tracking-tight">{brand}</span>
                 </div>
 
                 <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-secondary-500">
-                    <a href="products.html" className={`hover:text-brand-500 transition-colors font-bold text-[19px] tracking-tight ${isProductsPage ? 'text-brand-600' : ''}`}>Products</a>
-                    <a href="services.html" className={`hover:text-brand-500 transition-colors font-bold text-[19px] tracking-tight ${isServicesPage ? 'text-brand-600' : ''}`}>Services</a>
+                    <a href="products.html" className={`hover:text-brand-500 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'text-brand-600' : ''}`}>Products</a>
+                    <a href="services.html" className={`hover:text-brand-500 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'text-brand-600' : ''}`}>Services</a>
                     
                     <div 
                         ref={dropdownRef}
@@ -183,7 +183,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                 e.preventDefault();
                                 setIsDropdownOpen(true);
                             }}
-                            className={`flex items-center space-x-1 hover:text-brand-500 transition-colors font-bold text-[19px] tracking-tight ${isLandingPage ? 'text-brand-600' : ''}`}
+                            className={`flex items-center space-x-1 hover:text-brand-500 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'text-brand-600' : ''}`}
                         >
                             <span>All Programs</span>
                             <window.Icon 
@@ -215,8 +215,8 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         )}
                     </div>
 
-                    <button onClick={() => setIsModalOpen(true)} className="text-brand-600 font-bold hover:underline text-[19px] tracking-tight">Request Callback</button>
-                    <button onClick={() => setIsModalOpen(true)} className="bg-brand-500 text-white px-6 py-2.5 rounded font-bold text-[19px] hover:bg-brand-600 transition-colors shadow-lg shadow-brand-500/20 active:scale-95 transition-transform tracking-tight">Join Program</button>
+                    <button onClick={() => setIsModalOpen(true)} className="text-brand-600 font-bold hover:underline text-[17px] tracking-tight">Request Callback</button>
+                    <button onClick={() => setIsModalOpen(true)} className="bg-brand-500 text-white px-6 py-2.5 rounded font-bold text-[17px] hover:bg-brand-600 transition-colors shadow-lg shadow-brand-500/20 active:scale-95 transition-transform tracking-tight">Join Program</button>
                 </div>
 
                 <button className="lg:hidden p-2 text-secondary-600 outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
