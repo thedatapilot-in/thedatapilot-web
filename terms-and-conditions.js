@@ -87,25 +87,25 @@ const App = () => {
     const safeSections = termsData.sections || [];
 
     return (
-        <div className="min-h-screen text-slate-800 bg-white animate-in fade-in duration-700">
+        <div className="min-h-screen text-secondary-800 bg-white animate-in fade-in duration-700">
             <Navbar />
 
-            <header className="pt-36 pb-10 px-6 bg-slate-50/50 border-b border-slate-200">
+            <header className="pt-36 pb-10 px-6 bg-secondary-50/50 border-b border-secondary-200">
                 <div className="max-w-4xl mx-auto text-left">
-                    <h1 className="text-4xl font-extrabold text-slate-900 mb-2">{safeHeader.title}</h1>
-                    <p className="text-slate-400 font-medium italic text-sm">{safeHeader.subtitle}</p>
+                    <h1 className="text-4xl font-extrabold text-secondary-900 mb-2">{safeHeader.title}</h1>
+                    <p className="text-secondary-400 font-medium italic text-sm">{safeHeader.subtitle}</p>
                 </div>
             </header>
 
             <section className="py-12 px-6 text-left">
                 <div className="max-w-4xl mx-auto">
-                    <div className="text-slate-600 space-y-2 leading-relaxed">
+                    <div className="text-secondary-600 space-y-2 leading-relaxed">
                         <p className="mb-6">{safeIntro}</p>
 
                         <div className="policy-content space-y-8">
                             {safeSections.map((section, idx) => (
                                 <div key={idx}>
-                                    <h2 className="text-xl font-bold text-slate-900 mb-3 tracking-tight">{section.title}</h2>
+                                    <h2 className="text-xl font-bold text-secondary-900 mb-3 tracking-tight">{section.title}</h2>
                                     <p className={section.list && section.list.length > 0 ? "mb-3" : ""}>
                                         {section.content}
                                     </p>
@@ -120,12 +120,12 @@ const App = () => {
 
                                     {section.title.toLowerCase().includes('contact') && (
                                         <ul className="space-y-3 mt-4">
-                                            <li className="flex items-center gap-3 font-semibold text-slate-800">
-                                                <Icon name="mail" size={18} className="text-cyan-500" /> 
+                                            <li className="flex items-center gap-3 font-semibold text-secondary-800">
+                                                <Icon name="mail" size={18} className="text-brand-500" /> 
                                                 <span>{contactEmail}</span>
                                             </li>
-                                            <li className="flex items-center gap-3 font-semibold text-slate-800">
-                                                <Icon name="map-pin" size={18} className="text-cyan-500" /> 
+                                            <li className="flex items-center gap-3 font-semibold text-secondary-800">
+                                                <Icon name="map-pin" size={18} className="text-brand-500" /> 
                                                 <span>{businessAddress}</span>
                                             </li>
                                         </ul>

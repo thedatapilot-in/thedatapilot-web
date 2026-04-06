@@ -86,18 +86,18 @@ const EligibilityChecker = () => {
         setProfile({ type, message });
     };
 
-    const inputClass = "w-full p-4 border border-slate-200 bg-white rounded-lg text-sm focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none font-medium transition-all text-slate-700";
-    const btnClass = "bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-md flex items-center justify-center gap-2";
+    const inputClass = "w-full p-4 border border-secondary-200 bg-white rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all text-secondary-700";
+    const btnClass = "bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-md flex items-center justify-center gap-2";
 
     if (profile) {
         return (
-            <div key="profile-view" className="bg-slate-900 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl animate-in zoom-in duration-500 self-center w-full">
-                <div className="w-20 h-20 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Icon name="award" size={40} className="text-cyan-400" />
+            <div key="profile-view" className="bg-secondary-900 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl animate-in zoom-in duration-500 self-center w-full">
+                <div className="w-20 h-20 bg-brand-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Icon name="award" size={40} className="text-brand-400" />
                 </div>
-                <h3 className="text-cyan-400 font-bold uppercase tracking-widest text-xs mb-2">Profile Match</h3>
+                <h3 className="text-brand-400 font-bold uppercase tracking-widest text-xs mb-2">Profile Match</h3>
                 <h2 className="text-3xl font-extrabold mb-6">{profile.type}</h2>
-                <p className="text-slate-300 leading-relaxed mb-8 max-w-lg mx-auto">{profile.message}</p>
+                <p className="text-secondary-300 leading-relaxed mb-8 max-w-lg mx-auto">{profile.message}</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button 
                         type="button" 
@@ -107,26 +107,26 @@ const EligibilityChecker = () => {
                             setStep(1); 
                             setFormData({education: '', experience: '', analyticalScore: 5, tools: [], note: ''}); 
                         }} 
-                        className="px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest border border-slate-700 text-slate-300 hover:bg-slate-800 transition-all"
+                        className="px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest border border-secondary-700 text-secondary-300 hover:bg-secondary-800 transition-all"
                     >
                         Retake Assessment
                     </button>
-                    <a href="#about" className="bg-cyan-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-lg">Enroll Now</a>
+                    <a href="#about" className="bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg">Enroll Now</a>
                 </div>
             </div>
         );
     }
 
     return (
-        <div key="form-view" className="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden self-center w-full">
+        <div key="form-view" className="bg-secondary-50 border border-secondary-200 rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden self-center w-full">
             {/* Progress Bar */}
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-slate-200">
-                <div className="h-full bg-cyan-500 transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }}></div>
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-secondary-200">
+                <div className="h-full bg-brand-500 transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }}></div>
             </div>
 
             <div className="mb-8 mt-2">
-                <span className="text-cyan-600 font-bold uppercase tracking-widest text-[10px]">Step 0{step} of 03</span>
-                <h3 className="text-xl font-bold text-slate-900 mt-1">
+                <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px]">Step 0{step} of 03</span>
+                <h3 className="text-xl font-bold text-secondary-900 mt-1">
                     {step === 1 && "Education & Experience"}
                     {step === 2 && "Skills & Tools"}
                     {step === 3 && "Final Details"}
@@ -137,7 +137,7 @@ const EligibilityChecker = () => {
                 {step === 1 && (
                     <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Highest Education</label>
+                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-2">Highest Education</label>
                             <select value={formData.education} onChange={e => setFormData({...formData, education: e.target.value})} className={inputClass}>
                                 <option value="" disabled>Select your degree...</option>
                                 <option value="High School / Diploma">High School / Diploma</option>
@@ -147,7 +147,7 @@ const EligibilityChecker = () => {
                             </select>
                         </div>
                         <div>
-                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Work Experience</label>
+                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-2">Work Experience</label>
                             <select value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} className={inputClass}>
                                 <option value="" disabled>Select experience level...</option>
                                 <option value="Fresher">Fresher (0 Years)</option>
@@ -163,24 +163,24 @@ const EligibilityChecker = () => {
                 {step === 2 && (
                     <div className="space-y-8 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-4 flex justify-between">
+                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-4 flex justify-between">
                                 <span>Analytical Skill Rating</span>
-                                <span className="text-cyan-600">{formData.analyticalScore} / 10</span>
+                                <span className="text-brand-600">{formData.analyticalScore} / 10</span>
                             </label>
-                            <input type="range" min="1" max="10" value={formData.analyticalScore} onChange={e => setFormData({...formData, analyticalScore: parseInt(e.target.value)})} className="w-full accent-cyan-500 cursor-pointer" />
-                            <div className="flex justify-between text-[10px] text-slate-400 font-bold uppercase mt-2">
+                            <input type="range" min="1" max="10" value={formData.analyticalScore} onChange={e => setFormData({...formData, analyticalScore: parseInt(e.target.value)})} className="w-full accent-brand-500 cursor-pointer" />
+                            <div className="flex justify-between text-[10px] text-secondary-400 font-bold uppercase mt-2">
                                 <span>Beginner</span><span>Expert</span>
                             </div>
                         </div>
                         <div>
-                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Tools You've Used</label>
+                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-3">Tools You've Used</label>
                             <div className="flex flex-wrap gap-2">
                                 {toolOptions.map(tool => (
                                     <button 
                                         key={tool} 
                                         type="button"
                                         onClick={(e) => handleToolToggle(e, tool)}
-                                        className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-cyan-500 border-cyan-500 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-cyan-300'}`}
+                                        className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-brand-500 border-brand-500 text-white' : 'bg-white border-secondary-200 text-secondary-600 hover:border-brand-300'}`}
                                     >
                                         {tool}
                                     </button>
@@ -193,7 +193,7 @@ const EligibilityChecker = () => {
                 {step === 3 && (
                     <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Career Goal (Optional)</label>
+                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-2">Career Goal (Optional)</label>
                             <textarea 
                                 rows="4" 
                                 placeholder="What are you hoping to achieve with this program?" 
@@ -206,9 +206,9 @@ const EligibilityChecker = () => {
                 )}
             </div>
 
-            <div className="mt-8 flex justify-between pt-6 border-t border-slate-200">
+            <div className="mt-8 flex justify-between pt-6 border-t border-secondary-200">
                 {step > 1 ? (
-                    <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }} className="px-5 py-2.5 text-sm font-bold text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-2">
+                    <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }} className="px-5 py-2.5 text-sm font-bold text-secondary-500 hover:text-secondary-800 transition-colors flex items-center gap-2">
                         <Icon name="arrow-left" size={16} /> Back
                     </button>
                 ) : <div></div>}
@@ -365,7 +365,7 @@ const App = () => {
         { 
             name: 'PostgreSQL', 
             img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', 
-            color: 'bg-slate-50' 
+            color: 'bg-secondary-50' 
         },
         { 
             name: 'Power BI', 
@@ -390,7 +390,7 @@ const App = () => {
         { 
             name: 'Data Warehousing', 
             img: 'https://api.iconify.design/vscode-icons:file-type-sql.svg?width=144&height=144', 
-            color: 'bg-cyan-50' 
+            color: 'bg-brand-50' 
         },
         { 
             name: 'Gemini AI', 
@@ -406,7 +406,7 @@ const App = () => {
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
     // Calculates exact remaining screen space (100svh - 132px navbar) so Flexbox geometric center perfectly matches visual center.
-    const sectionClass = "min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-slate-200";
+    const sectionClass = "min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-secondary-200";
 
     const handleModuleToggle = (idx) => {
         const isMobile = window.innerWidth < 1024;
@@ -418,21 +418,21 @@ const App = () => {
     };
 
     return (
-        <div className="min-h-screen text-slate-800 animate-in fade-in duration-700 overflow-x-hidden bg-white text-left">
+        <div className="min-h-screen text-secondary-800 animate-in fade-in duration-700 overflow-x-hidden bg-white text-left">
             <Navbar activeProgramId={activeProgramId} onProgramChange={(id) => { setActiveProgramId(id); setActiveModuleIdx(0); setFormData({...formData, discountApplied: false, couponCode: ''}); }} />
 
             {feedback.show && (
-                <div className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-4 rounded-2xl shadow-2xl animate-in slide-in-from-bottom-10 fade-in duration-300 ${feedback.status === 'success' ? 'bg-slate-900 border-l-4 border-cyan-500' : 'bg-rose-900 border-l-4 border-rose-400'}`}>
-                    <Icon name={feedback.status === 'success' ? 'check-circle' : 'alert-circle'} size={20} className={feedback.status === 'success' ? 'text-cyan-400' : 'text-rose-300'} />
+                <div className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-4 rounded-2xl shadow-2xl animate-in slide-in-from-bottom-10 fade-in duration-300 ${feedback.status === 'success' ? 'bg-secondary-900 border-l-4 border-brand-500' : 'bg-rose-900 border-l-4 border-rose-400'}`}>
+                    <Icon name={feedback.status === 'success' ? 'check-circle' : 'alert-circle'} size={20} className={feedback.status === 'success' ? 'text-brand-400' : 'text-rose-300'} />
                     <span className="text-white font-bold text-sm tracking-tight">{feedback.message}</span>
                     <button onClick={() => setFeedback({ ...feedback, show: false })} className="ml-4 text-white/50 hover:text-white"><Icon name="x" size={16} /></button>
                 </div>
             )}
 
-            <div className="fixed top-20 w-full z-40 bg-slate-50 border-b border-slate-200 hidden md:block text-slate-500 font-bold">
+            <div className="fixed top-20 w-full z-40 bg-secondary-50 border-b border-secondary-200 hidden md:block text-secondary-500 font-bold">
                 <div className="max-w-5xl mx-auto flex justify-between px-4">
                     {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => (
-                        <a key={tab} href={`#${tab.toLowerCase()}`} className="py-4 text-sm hover:text-cyan-500 border-b-2 border-transparent hover:border-cyan-500 transition-all font-bold">
+                        <a key={tab} href={`#${tab.toLowerCase()}`} className="py-4 text-sm hover:text-brand-500 border-b-2 border-transparent hover:border-brand-500 transition-all font-bold">
                             {tab}
                         </a>
                     ))}
@@ -440,38 +440,38 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-slate-50/50 scroll-mt-[80px] md:scroll-mt-[132px]">
+            <header id="about" className="min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-secondary-50/50 scroll-mt-[80px] md:scroll-mt-[132px]">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full">
                     <div className="space-y-6 md:space-y-8 text-left">
-                        <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900 tracking-tight">Certification in <br/><span className="text-cyan-500">{currentProgram.title}</span></h1>
-                        <p className="text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed mb-6">
+                        <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
+                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-secondary-900 tracking-tight">Certification in <br/><span className="text-brand-500">{currentProgram.title}</span></h1>
+                        <p className="text-sm md:text-base text-secondary-600 max-w-2xl leading-relaxed mb-6">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
-                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-slate-700 text-left">
-                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-cyan-500 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-cyan-500 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-cyan-500 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-cyan-500 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
+                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-secondary-700 text-left">
+                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-brand-500 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-brand-500 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-500 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-500 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-                            <a href="#syllabus" className="bg-slate-100 text-slate-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-slate-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a>
-                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="text-cyan-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-cyan-700 transition-colors">Download Brochure</a>
+                            <a href="#syllabus" className="bg-secondary-100 text-secondary-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-secondary-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a>
+                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="text-brand-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-brand-700 transition-colors">Download Brochure</a>
                         </div>
                     </div>
                     
-                    <div className="bg-white p-8 border border-slate-100 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0">
-                        <h3 className="text-xl font-bold mb-2 text-slate-900">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
-                        <p className="text-sm text-slate-400 mb-6 font-medium">{settings?.ui?.modalSubText}</p>
+                    <div className="bg-white p-8 border border-secondary-100 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0">
+                        <h3 className="text-xl font-bold mb-2 text-secondary-900">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
+                        <p className="text-sm text-secondary-400 mb-6 font-medium">{settings?.ui?.modalSubText}</p>
                         <form className="space-y-4" onSubmit={handleSubmit}>
-                            <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium transition-all" />
-                            <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium transition-all" />
-                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-slate-100 bg-slate-50 rounded text-sm focus:border-cyan-500 outline-none font-medium transition-all" />
-                            <button type="submit" disabled={isSubmitting} className="w-full bg-cyan-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-cyan-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
+                            <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <button type="submit" disabled={isSubmitting} className="w-full bg-brand-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
                                 {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
                             </button>
-                            <p className="mt-3 text-[10px] text-slate-400 text-center leading-tight">
-                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-cyan-600">Privacy Policy</a>. Data is used only for your professional consultation.
+                            <p className="mt-3 text-[10px] text-secondary-400 text-center leading-tight">
+                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-600">Privacy Policy</a>. Data is used only for your professional consultation.
                             </p>
                         </form>
                     </div>
@@ -480,7 +480,7 @@ const App = () => {
 
             <section id="syllabus" className={`${sectionClass} bg-white`}>
                 <div className="w-full max-w-7xl mx-auto">
-                    <h2 className="text-3xl font-extrabold text-left mb-16 text-slate-900 tracking-tight">Job-Ready Data Analytics Curriculum</h2>
+                    <h2 className="text-3xl font-extrabold text-left mb-16 text-secondary-900 tracking-tight">Job-Ready Data Analytics Curriculum</h2>
                     
                     <div className="flex flex-col lg:flex-row gap-6 min-h-[400px]">
                         <div className="lg:w-1/3 flex flex-col space-y-3">
@@ -488,7 +488,7 @@ const App = () => {
                                 <div key={idx} className="flex flex-col">
                                     <button 
                                         onClick={() => handleModuleToggle(idx)} 
-                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-cyan-500 border-cyan-500 text-white shadow-lg' : 'bg-white border-slate-100 text-slate-600 hover:border-cyan-200'}`}
+                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-white border-secondary-100 text-secondary-600 hover:border-brand-200'}`}
                                     >
                                         <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                         <svg 
@@ -508,23 +508,23 @@ const App = () => {
 
                                     {/* MOBILE ACCORDION CONTENT */}
                                     <div className={`lg:hidden overflow-hidden transition-all duration-300 ${activeModuleIdx === idx ? 'max-h-[1200px] opacity-100 py-6' : 'max-h-0 opacity-0'}`}>
-                                        <div className="bg-slate-50/80 rounded-2xl p-6 border border-slate-100 space-y-6">
+                                        <div className="bg-secondary-50/80 rounded-2xl p-6 border border-secondary-100 space-y-6">
                                             <div className="flex flex-col space-y-1">
-                                                <span className="text-cyan-600 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
+                                                <span className="text-brand-600 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
                                                 <div className="flex items-center gap-2 mt-2">
-                                                    <Icon name="play-circle" size={16} className="text-cyan-500" />
-                                                    <span className="text-[11px] font-bold text-slate-400 uppercase">Live: {mod.lectures} • {mod.hours} Hours</span>
+                                                    <Icon name="play-circle" size={16} className="text-brand-500" />
+                                                    <span className="text-[11px] font-bold text-secondary-400 uppercase">Live: {mod.lectures} • {mod.hours} Hours</span>
                                                 </div>
                                             </div>
                                             <div className="space-y-3">
                                                 {(mod.content || []).map((bullet, i) => (
                                                     <div key={i} className="flex items-start space-x-3 text-left">
-                                                        <Icon name="check-circle" size={14} className="text-cyan-400 mt-1 flex-shrink-0" />
-                                                        <span className="text-sm font-medium text-slate-600 leading-snug">{bullet}</span>
+                                                        <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
+                                                        <span className="text-sm font-medium text-secondary-600 leading-snug">{bullet}</span>
                                                     </div>
                                                 ))}
                                             </div>
-                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-cyan-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
+                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
                                         </div>
                                     </div>
                                 </div>
@@ -532,31 +532,31 @@ const App = () => {
                         </div>
 
                         {/* DESKTOP DETAIL VIEW */}
-                        <div className="hidden lg:flex lg:w-2/3 bg-white p-10 rounded-2xl border border-slate-200 flex-col shadow-sm">
+                        <div className="hidden lg:flex lg:w-2/3 bg-white p-10 rounded-2xl border border-secondary-200 flex-col shadow-sm">
                             {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
                                 <>
-                                    <div className="mb-8 pb-6 border-b border-slate-50 flex flex-col md:flex-row md:items-start justify-between gap-4">
+                                    <div className="mb-8 pb-6 border-b border-secondary-50 flex flex-col md:flex-row md:items-start justify-between gap-4">
                                         <div className="space-y-1 text-left">
-                                            <span className="text-cyan-500 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
-                                            <h3 className="text-2xl font-bold text-slate-900 mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
+                                            <span className="text-brand-500 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
+                                            <h3 className="text-2xl font-bold text-secondary-900 mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
                                             <div className="flex items-center gap-2 mt-2">
-                                                <Icon name="play-circle" size={18} className="text-cyan-500" />
-                                                <span className="text-xs font-bold text-slate-400 uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
+                                                <Icon name="play-circle" size={18} className="text-brand-500" />
+                                                <span className="text-xs font-bold text-secondary-400 uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                             </div>
                                         </div>
-                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="flex items-center space-x-2 bg-cyan-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-cyan-600 transition-all shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
+                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left">
                                         {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
                                             <div key={i} className="flex items-start space-x-3 group">
-                                                <Icon name="check-circle" size={14} className="text-cyan-400 mt-1 flex-shrink-0" />
-                                                <span className="text-[14px] font-medium text-slate-500 leading-tight group-hover:text-slate-900 transition-colors">{bullet}</span>
+                                                <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
+                                                <span className="text-[14px] font-medium text-secondary-500 leading-tight group-hover:text-secondary-900 transition-colors">{bullet}</span>
                                             </div>
                                         ))}
                                     </div>
                                 </>
                             ) : (
-                                <div className="flex items-center justify-center h-full text-slate-400 font-bold">Please select a module to view curriculum details.</div>
+                                <div className="flex items-center justify-center h-full text-secondary-400 font-bold">Please select a module to view curriculum details.</div>
                             )}
                         </div>
                     </div>
@@ -565,10 +565,10 @@ const App = () => {
 
             <section id="tools" className={`${sectionClass} bg-white`}>
                 <div className="w-full max-w-7xl mx-auto text-left">
-                    <h2 className="text-3xl font-bold mb-16 text-slate-900 tracking-tight">Modern Industry Tool Stack</h2>
+                    <h2 className="text-3xl font-bold mb-16 text-secondary-900 tracking-tight">Modern Industry Tool Stack</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {tools.map((tool, i) => (
-                        <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-slate-100 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1`}>
+                        <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-secondary-100 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1`}>
                             <div className="w-16 h-16 flex items-center justify-center">
                                 <img 
                                     src={tool.img} 
@@ -577,7 +577,7 @@ const App = () => {
                                     onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
                                 />
                             </div>
-                            <span className="font-bold text-slate-700 text-sm">{tool.name}</span>
+                            <span className="font-bold text-secondary-700 text-sm">{tool.name}</span>
                         </div>
                     ))}
                     </div>
@@ -585,17 +585,17 @@ const App = () => {
             </section>
 
             {/* PROJECTS SECTION - UI FIX: Shrunk images and gaps so they fit beautifully on one screen */}
-            <section id="projects" className={`${sectionClass} bg-slate-50`}>
+            <section id="projects" className={`${sectionClass} bg-secondary-50`}>
                 <div className="w-full max-w-7xl mx-auto text-left">
-                    <h2 className="text-3xl font-bold mb-8 md:mb-12 text-slate-900 tracking-tight">6+ Real-Time Industry Projects</h2>
+                    <h2 className="text-3xl font-bold mb-8 md:mb-12 text-secondary-900 tracking-tight">6+ Real-Time Industry Projects</h2>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                         {(media.projects || []).map((proj) => (
-                            <div key={proj.id} className="bg-white rounded-xl overflow-hidden border border-slate-200 group shadow-sm hover:shadow-md transition-all">
-                                <div className="h-32 md:h-40 bg-slate-100 flex items-center justify-center relative overflow-hidden">
+                            <div key={proj.id} className="bg-white rounded-xl overflow-hidden border border-secondary-200 group shadow-sm hover:shadow-md transition-all">
+                                <div className="h-32 md:h-40 bg-secondary-100 flex items-center justify-center relative overflow-hidden">
                                     <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => e.target.style.display='none'} />
                                     <Icon name="image" size={32} className="opacity-20 absolute" />
                                 </div>
-                                <div className="p-4"><h4 className="font-bold text-slate-800 text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4></div>
+                                <div className="p-4"><h4 className="font-bold text-secondary-800 text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4></div>
                             </div>
                         ))}
                     </div>
@@ -604,12 +604,12 @@ const App = () => {
 
             <section id="videos" className={`${sectionClass} bg-white`}>
                  <div className="w-full max-w-7xl mx-auto text-left">
-                    <h2 className="text-3xl font-bold text-slate-900 tracking-tight mb-12">Program Overview & Demos</h2>
+                    <h2 className="text-3xl font-bold text-secondary-900 tracking-tight mb-12">Program Overview & Demos</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {(media.videos || []).map((vid, i) => (
-                            <div key={i} className="aspect-video bg-slate-100 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-slate-200 shadow-sm">
-                                <Icon name="play" size={40} className="text-cyan-500 opacity-80 group-hover:scale-110 transition-all z-10" />
-                                <div className="absolute bottom-4 left-4 text-slate-900 font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
+                            <div key={i} className="aspect-video bg-secondary-100 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-secondary-200 shadow-sm">
+                                <Icon name="play" size={40} className="text-brand-500 opacity-80 group-hover:scale-110 transition-all z-10" />
+                                <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
                             </div>
                         ))}
                     </div>
@@ -619,23 +619,23 @@ const App = () => {
             <section id="eligibility" className={`${sectionClass} bg-white`}>
                 <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
                     <div className="space-y-6 md:space-y-8 w-full self-center">
-                        <div className="inline-block bg-cyan-50 text-cyan-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">Check Your Eligibility Profile</h2>
-                        <p className="text-slate-500 font-medium leading-relaxed text-sm md:text-base">
+                        <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-secondary-900 tracking-tight">Check Your Eligibility Profile</h2>
+                        <p className="text-secondary-500 font-medium leading-relaxed text-sm md:text-base">
                             Discover how this program aligns with your current skills. Whether you are a fresh graduate or an experienced professional, our AI-powered curriculum adapts to accelerate your career.
                         </p>
-                        <div className="space-y-4 font-bold text-slate-700 mt-8">
+                        <div className="space-y-4 font-bold text-secondary-700 mt-8">
                             {[
                                 "Final year students or graduates from any discipline.", 
                                 "Working professionals looking for career acceleration.", 
                                 "A basic understanding of logical reasoning.", 
                                 "Commitment to 15-20 hours of weekly learning."
                             ].map((criteria, i) => (
-                                <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-slate-50 border border-slate-100 shadow-sm">
-                                    <div className="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                        <Icon name="check" size={14} className="text-cyan-600 font-bold" />
+                                <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-secondary-50 border border-secondary-100 shadow-sm">
+                                    <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <Icon name="check" size={14} className="text-brand-600 font-bold" />
                                     </div>
-                                    <span className="text-sm font-bold text-slate-700 leading-snug">{criteria}</span>
+                                    <span className="text-sm font-bold text-secondary-700 leading-snug">{criteria}</span>
                                 </div>
                             ))}
                         </div>
@@ -648,23 +648,23 @@ const App = () => {
             </section>
 
             {/* FEES SECTION */}
-            <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-slate-50 scroll-mt-[80px] md:scroll-mt-[132px]">
-                <div className="w-full max-w-5xl mx-auto bg-white rounded-[3rem] border border-slate-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
+            <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-secondary-50 scroll-mt-[80px] md:scroll-mt-[132px]">
+                <div className="w-full max-w-5xl mx-auto bg-white rounded-[3rem] border border-secondary-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
                     <div className="p-8 md:p-14 space-y-8 text-left">
-                        <h3 className="text-2xl font-extrabold tracking-tight text-slate-900">Program Package</h3>
+                        <h3 className="text-2xl font-extrabold tracking-tight text-secondary-900">Program Package</h3>
                         <div className="space-y-5">
                             {(currentProgram.highlights || []).map((t, i) => (
                                 <div key={i} className="flex items-center space-x-4">
-                                    <Icon name="check-circle" size={20} className="text-cyan-500 flex-shrink-0" />
-                                    <span className="text-md font-bold text-slate-600">{t}</span>
+                                    <Icon name="check-circle" size={20} className="text-brand-500 flex-shrink-0" />
+                                    <span className="text-md font-bold text-secondary-600">{t}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    <div className="p-8 md:p-14 bg-slate-900 text-white flex flex-col justify-center space-y-8 text-left">
+                    <div className="p-8 md:p-14 bg-secondary-900 text-white flex flex-col justify-center space-y-8 text-left">
                         <div className="space-y-1">
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-cyan-400">Total Program Investment</span>
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-400">Total Program Investment</span>
                             <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentProgram.title} Fee</h3>
                         </div>
 
@@ -676,42 +676,42 @@ const App = () => {
                                 
                                 {formData.discountApplied && (
                                     <div className="flex flex-wrap items-center gap-2">
-                                        <span className="text-slate-500 line-through text-xs md:text-sm font-medium whitespace-nowrap">
+                                        <span className="text-secondary-500 line-through text-xs md:text-sm font-medium whitespace-nowrap">
                                             ₹{currentProgram.price?.toLocaleString()} /-
                                         </span>
-                                        <span className="text-cyan-400 text-xs md:text-sm font-bold whitespace-nowrap">
+                                        <span className="text-brand-400 text-xs md:text-sm font-bold whitespace-nowrap">
                                             - ₹{formData.discountAmount?.toLocaleString()} /-
                                         </span>
                                     </div>
                                 )}
                             </div>
-                            <p className="text-slate-400 text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
+                            <p className="text-secondary-400 text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
                         </div>
 
                         <div className="space-y-3">
-                            <div className="flex gap-2 p-1 bg-white/5 border border-white/10 rounded-xl focus-within:border-cyan-500 transition-all">
+                            <div className="flex gap-2 p-1 bg-white/5 border border-white/10 rounded-xl focus-within:border-brand-500 transition-all">
                                 <input 
                                     type="text" 
                                     placeholder="Enter Coupon Code" 
-                                    className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:text-slate-600 text-cyan-400 min-w-0"
+                                    className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:text-secondary-600 text-brand-400 min-w-0"
                                     value={formData.couponCode}
                                     onChange={(e) => setFormData({...formData, couponCode: e.target.value})}
                                 />
                                 <button 
                                     onClick={applyCoupon}
-                                    className="bg-cyan-500 hover:bg-cyan-600 text-white px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
+                                    className="bg-brand-500 hover:bg-brand-600 text-white px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
                                 >
                                     Apply
                                 </button>
                             </div>
                             {formData.discountApplied && (
-                                <p className="text-[10px] text-cyan-400 font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
+                                <p className="text-[10px] text-brand-400 font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
                                     <Icon name="tag" size={10} /> Discount Applied Successfully
                                 </p>
                             )}
                         </div>
 
-                        <button className="w-full bg-white text-slate-900 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-cyan-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
+                        <button className="w-full bg-white text-secondary-900 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
                             <Icon name="credit-card" size={18} className="flex-shrink-0" />
                             <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
                         </button>

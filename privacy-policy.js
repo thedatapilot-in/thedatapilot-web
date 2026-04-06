@@ -94,30 +94,30 @@ const App = () => {
     const safeSections = privacyData.sections || [];
 
     return (
-        <div className="min-h-screen text-slate-800 bg-white animate-in fade-in duration-700">
+        <div className="min-h-screen text-secondary-800 bg-white animate-in fade-in duration-700">
             <Navbar />
 
             {/* Tightened Header Section */}
-            <header className="pt-36 pb-10 px-6 bg-slate-50/50 border-b border-slate-200">
+            <header className="pt-36 pb-10 px-6 bg-secondary-50/50 border-b border-secondary-200">
                 <div className="max-w-4xl mx-auto text-left">
-                    <h1 className="text-4xl font-extrabold text-slate-900 mb-2">{safeHeader.title}</h1>
-                    <p className="text-slate-400 font-medium italic text-sm">{safeHeader.subtitle}</p>
+                    <h1 className="text-4xl font-extrabold text-secondary-900 mb-2">{safeHeader.title}</h1>
+                    <p className="text-secondary-400 font-medium italic text-sm">{safeHeader.subtitle}</p>
                 </div>
             </header>
 
             <section className="py-12 px-6">
-                <div className="max-w-4xl mx-auto space-y-10 text-slate-600 font-medium leading-relaxed text-left">
+                <div className="max-w-4xl mx-auto space-y-10 text-secondary-600 font-medium leading-relaxed text-left">
                     {safeSections.map((section, idx) => (
                         <div key={idx} className="space-y-4">
-                            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">{section.title}</h2>
+                            <h2 className="text-2xl font-bold text-secondary-900 tracking-tight">{section.title}</h2>
                             <p>{section.content}</p>
                             
                             {/* Dynamically append the contact email if the section is the 'Contact Us' block */}
                             {section.title.toLowerCase().includes('contact') && (
                                 <ul className="space-y-3 pt-2">
-                                    <li className="flex items-center gap-3 font-semibold text-slate-800">
-                                        <Icon name="mail" size={18} className="text-cyan-500" /> 
-                                        <a href={`mailto:${contactEmail}`} className="text-cyan-600 font-bold hover:underline transition-all">
+                                    <li className="flex items-center gap-3 font-semibold text-secondary-800">
+                                        <Icon name="mail" size={18} className="text-brand-500" /> 
+                                        <a href={`mailto:${contactEmail}`} className="text-brand-600 font-bold hover:underline transition-all">
                                             {contactEmail}
                                         </a>
                                     </li>
