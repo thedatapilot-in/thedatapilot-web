@@ -25,7 +25,7 @@ const THEMES = {
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'gold';       // Choose: crimson, cyan, blue, emerald, indigo, gold, violet, slate, amber
+window.LIVE_THEME = 'blue';       // Choose: crimson, cyan, blue, emerald, indigo, gold, violet, slate, amber
 window.ACTIVE_VARIANT = 'glassmorphism'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
 
 const THEME_VARIANTS = {
