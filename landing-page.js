@@ -36,7 +36,7 @@ const InternalEmergencyUI = ({ errorMsg }) => (
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
                     </svg>
                 </div>
-                <h2 style={{fontWeight: '800', fontSize: '24px', margin: '0 0 12px 0', color: '#0f172a'}}>System is temporarily down</h2>
+                <h2 style={{fontWeight: '800', fontSize: '24px', margin: '0 0 12px 0', color: '#0f172a'}}>REACT EMERGENCY</h2>
                 <p style={{color: '#64748b', fontWeight: '500', marginBottom: '36px', lineHeight: '1.6', fontSize: '15px'}}>{errorMsg || "Connecting to logic engine..."}</p>
                 <button onClick={() => window.location.reload()} style={{width: '100%', backgroundColor: 'var(--brand-500)', color: 'white', padding: '22px', borderRadius: '16px', fontWeight: '800', fontSize: '15px', textTransform: 'uppercase', letterSpacing: '0.1em', border: 'none', cursor: 'pointer', boxShadow: '0 10px 15px -3px rgba(6, 182, 212, 0.2)'}}>Check Connection</button>
             </div>
@@ -233,6 +233,8 @@ const App = () => {
     const [activeModuleIdx, setActiveModuleIdx] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     
+    console.log("App component render. isLoaded:", isLoaded, "error:", error, "SITE_DATA.isLoaded:", window.SITE_DATA?.isLoaded, window.Navbar ? "Navbar ready" : "Navbar MISSING");
+
     const [formData, setFormData] = useState({ 
         full_name: '', 
         email: '', 
@@ -255,10 +257,13 @@ const App = () => {
         let syncInterval;
 
         const attemptSync = () => {
-            if (window.SITE_DATA?.isLoaded && window.Navbar && window.Footer) {
+            if ((window.SITE_DATA?.isLoaded || window.SITE_DATA?.error) && window.Navbar && window.Footer) {
                 if (isMounted) {
                     if (window.SITE_DATA.error) setError(window.SITE_DATA.error);
                     setIsLoaded(true);
+                    
+                    const emergencyUI = document.getElementById('emergency-ui');
+                    if (emergencyUI) emergencyUI.remove();
                 }
                 clearInterval(syncInterval);
             }
@@ -724,5 +729,7 @@ const App = () => {
     );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+if (!window._reactRoot) {
+    window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(<App />);

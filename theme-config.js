@@ -60,6 +60,7 @@ Object.keys(activeVariantVars).forEach(key => {
 });
 
 // 2. Setup standard Tailwind Configuration
+window.tailwind = window.tailwind || {};
 window.tailwind.config = {
     darkMode: window.ACTIVE_VARIANT === 'cyberDark' ? 'class' : 'media',
     theme: {

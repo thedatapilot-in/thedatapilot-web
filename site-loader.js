@@ -9,7 +9,7 @@
  */
 
 (function() {
-    const VERSION = "3.0.5"; 
+    const VERSION = "3.0.6"; 
     const path = window.location.pathname;
     
     // Page Route Detection
@@ -33,6 +33,7 @@
             @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
             .gear-large { animation: spin 8s linear infinite; transform-origin: center; }
             .gear-small { animation: spin-reverse 4s linear infinite; transform-origin: center; }
+            #root:not(:empty) ~ #emergency-ui { display: none !important; }
         `;
         document.head.appendChild(style);
 
