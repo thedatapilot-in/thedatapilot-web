@@ -16,7 +16,7 @@ const THEMES = {
 // ACTIVE GLOBAL THEME
 // Change this value to switch the primary brand color globally
 // ============================================
-window.LIVE_THEME = 'crimson';
+window.LIVE_THEME = 'emerald';
 
 // Global Semantic Variants (Prepared for Future Cyber-Dark Implementations)
 const THEME_VARIANTS = {
