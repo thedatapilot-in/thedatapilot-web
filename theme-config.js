@@ -16,6 +16,7 @@ const THEMES = {
     indigo: { 50: "#eef2ff", 100: "#e0e7ff", 200: "#c7d2fe", 300: "#a5b4fc", 400: "#818cf8", 500: "#6366f1", 600: "#4f46e5", 700: "#4338ca", 800: "#3730a3", 900: "#312e81" },
     
     // NEW PROFESSIONAL & DYNAMIC THEMES
+    crimsonRed: { 50: "#f8e6e9", 100: "#f1cdd3", 200: "#e49ba6", 300: "#d76a7a", 400: "#ca384d", 500: "#9b0021", 600: "#84001c", 700: "#6c0017", 800: "#550012", 900: "#3d000d" }, // Custom Crimson Red
     gold: { 50: "#fdfbf7", 100: "#f7f1e2", 200: "#eee1bc", 300: "#e1ca89", 400: "#d2ab56", 500: "#c28e33", 600: "#a87328", 700: "#875721", 800: "#6f461f", 900: "#5c3a1c" }, // Premium/Executive
     violet: { 50: "#f5f3ff", 100: "#ede9fe", 200: "#ddd6fe", 300: "#c4b5fd", 400: "#a78bfa", 500: "#8b5cf6", 600: "#7c3aed", 700: "#6d28d9", 800: "#5b21b6", 900: "#4c1d95" }, // Modern Tech
     slate: { 50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1", 400: "#94a3b8", 500: "#64748b", 600: "#475569", 700: "#334155", 800: "#1e293b", 900: "#0f172a" }, // Minimalist
@@ -25,7 +26,7 @@ const THEMES = {
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'crimson';       // Choose: crimson, cyan, blue, emerald, indigo, gold, violet, slate, amber
+window.LIVE_THEME = 'crimsonRed';    // Choose: crimson, crimsonRed, cyan, blue, emerald, indigo, gold, violet, slate, amber
 window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
 
 const THEME_VARIANTS = {
