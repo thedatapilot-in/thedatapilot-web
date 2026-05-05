@@ -94,11 +94,11 @@ const THEME_VARIANTS = {
         '--blur-token': '0px'
     },
     elementorAI: {
-        '--bg-base': '#0b051d',
-        '--text-base': '#ffffff',
+        '--bg-base': '#05031A',
+        '--text-base': '#e2e8f0',
         '--surface-card': 'rgba(255, 255, 255, 0.03)',
         '--surface-form': 'rgba(255, 255, 255, 0.05)',
-        '--nav-bg': 'rgba(11, 5, 29, 0.65)',
+        '--nav-bg': 'rgba(5, 3, 26, 0.65)',
         '--border-color': 'rgba(255, 255, 255, 0.08)',
         '--shadow-token': '0 8px 32px 0 rgba(99, 69, 237, 0.15)',
         '--blur-token': '16px'

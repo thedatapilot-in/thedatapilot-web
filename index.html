@@ -39,9 +39,18 @@
       .custom-scrollbar::-webkit-scrollbar { width: 4px; }
       .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
       .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--brand-500); border-radius: 10px; }
+      .bg-mesh-pattern {
+          background-image: 
+            radial-gradient(circle at top right, rgba(99, 69, 237, 0.15) 0%, transparent 60%),
+            radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+            linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+          background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+          background-position: center, center, center, center;
+      }
   </style>
 </head>
-<body class="bg-white">
+<body class="bg-semantic-base text-semantic-text">
   <!-- React App mounts here -->
   <div id="root"></div>
 </body>
