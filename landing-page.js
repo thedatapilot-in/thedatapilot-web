@@ -218,7 +218,7 @@ const EligibilityChecker = () => {
                     >
                         Retake Assessment
                     </button>
-                    <a href="#about" className="bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg">Enroll Now</a>
+                    <TiltCard><a href="#about" className="bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg block">Enroll Now</a></TiltCard>
                 </div>
             </div>
         );
@@ -606,8 +606,8 @@ const App = () => {
                             <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-500 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-                            <a href="#syllabus" className="bg-secondary-100 text-secondary-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-secondary-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a>
-                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="text-brand-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-brand-700 transition-colors">Download Brochure</a>
+                            <TiltCard><a href="#syllabus" className="block w-full bg-secondary-100 text-secondary-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-secondary-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a></TiltCard>
+                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block w-full text-brand-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-brand-700 transition-colors">Download Brochure</a></TiltCard>
                         </div>
                     </div>
                     
@@ -619,9 +619,11 @@ const App = () => {
                             <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
                             <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
                             <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
-                            <button type="submit" disabled={isSubmitting} className="w-full bg-brand-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
-                                {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
-                            </button>
+                            <TiltCard>
+                                <button type="submit" disabled={isSubmitting} className="w-full block bg-brand-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
+                                    {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
+                                </button>
+                            </TiltCard>
                             <p className="mt-3 text-[10px] text-secondary-400 text-center leading-tight">
                                 By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-600">Privacy Policy</a>. Data is used only for your professional consultation.
                             </p>
@@ -667,7 +669,7 @@ const App = () => {
                                                         </div>
                                                     ))}
                                                 </div>
-                                                <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
+                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                             </div>
                                         </div>
                                     </div>
@@ -687,7 +689,7 @@ const App = () => {
                                                     <span className="text-xs font-bold text-secondary-400 uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                                 </div>
                                             </div>
-                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
+                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                         </div>
                                         
                                         <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
@@ -875,12 +877,14 @@ const App = () => {
                                         value={formData.couponCode}
                                         onChange={(e) => setFormData({...formData, couponCode: e.target.value})}
                                     />
-                                    <button 
-                                        onClick={applyCoupon}
-                                        className="bg-brand-500 hover:bg-brand-600 text-white px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
-                                    >
-                                        Apply
-                                    </button>
+                                    <TiltCard>
+                                        <button 
+                                            onClick={applyCoupon}
+                                            className="block bg-brand-500 hover:bg-brand-600 text-white px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
+                                        >
+                                            Apply
+                                        </button>
+                                    </TiltCard>
                                 </div>
                                 {formData.discountApplied && (
                                     <p className="text-[10px] text-brand-400 font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
@@ -889,10 +893,12 @@ const App = () => {
                                 )}
                             </div>
     
-                            <button className="w-full bg-white text-secondary-900 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
-                                <Icon name="credit-card" size={18} className="flex-shrink-0" />
-                                <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
-                            </button>
+                            <TiltCard>
+                                <button className="w-full block bg-white text-secondary-900 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
+                                    <Icon name="credit-card" size={18} className="flex-shrink-0" />
+                                    <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
+                                </button>
+                            </TiltCard>
                         </div>
                     </div>
                 </section>
