@@ -249,24 +249,27 @@ const App = () => {
     const [activeTab, setActiveTab] = useState('about');
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveTab(entry.target.id);
+        const handleScroll = () => {
+            const sections = ['about', 'syllabus', 'tools', 'projects', 'videos', 'eligibility', 'fees'];
+            let current = 'about';
+            for (const id of sections) {
+                const el = document.getElementById(id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    // Determine which section is currently closest to the top of the viewport
+                    if (rect.top <= window.innerHeight * 0.4) {
+                        current = id;
                     }
-                });
-            },
-            { rootMargin: '-20% 0px -80% 0px' } 
-        );
+                }
+            }
+            setActiveTab(current);
+        };
 
-        const sections = ['about', 'syllabus', 'tools', 'projects', 'videos', 'eligibility', 'fees'];
-        sections.forEach((id) => {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
-        });
-
-        return () => observer.disconnect();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        // Trigger once to set the initial state
+        handleScroll();
+        
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const triggerFeedback = (status, message) => {
@@ -519,7 +522,7 @@ const App = () => {
                                 <div key={idx} className="flex flex-col">
                                     <button 
                                         onClick={() => handleModuleToggle(idx)} 
-                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-white border-secondary-100 text-secondary-600 hover:border-brand-200 hover:bg-brand-50'}`}
+                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-white border-brand-200 text-secondary-600 hover:border-brand-400 hover:bg-brand-50'}`}
                                     >
                                         <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                         <svg 
@@ -563,7 +566,7 @@ const App = () => {
                         </div>
 
                         {/* DESKTOP DETAIL VIEW */}
-                        <div className="hidden lg:flex lg:w-2/3 bg-white p-10 rounded-2xl border border-secondary-200 flex-col shadow-sm">
+                        <div className="hidden lg:flex lg:w-2/3 bg-white p-10 rounded-2xl border border-brand-300 flex-col shadow-sm">
                             {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
                                 <>
                                     <div className="mb-8 pb-6 border-b border-secondary-50 flex flex-col md:flex-row md:items-start justify-between gap-4">
@@ -599,7 +602,7 @@ const App = () => {
                     <h2 className="text-3xl font-bold mb-16 text-secondary-900 tracking-tight">Modern Industry Tool Stack</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {tools.map((tool, i) => (
-                        <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-secondary-100 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1`}>
+                        <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-brand-200 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1 hover:border-brand-400`}>
                             <div className="w-16 h-16 flex items-center justify-center">
                                 <img 
                                     src={tool.img} 
@@ -621,7 +624,7 @@ const App = () => {
                     <h2 className="text-3xl font-bold mb-8 md:mb-12 text-secondary-900 tracking-tight">6+ Real-Time Industry Projects</h2>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                         {(media.projects || []).map((proj) => (
-                            <div key={proj.id} className="bg-white rounded-xl overflow-hidden border border-secondary-200 group shadow-sm hover:shadow-md transition-all">
+                            <div key={proj.id} className="bg-white rounded-xl overflow-hidden border border-brand-200 group shadow-sm hover:shadow-md transition-all hover:border-brand-400">
                                 <div className="h-32 md:h-40 bg-secondary-100 flex items-center justify-center relative overflow-hidden">
                                     <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => e.target.style.display='none'} />
                                     <Icon name="image" size={32} className="opacity-20 absolute" />
@@ -638,7 +641,7 @@ const App = () => {
                     <h2 className="text-3xl font-bold text-secondary-900 tracking-tight mb-12">Program Overview & Demos</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {(media.videos || []).map((vid, i) => (
-                            <div key={i} className="aspect-video bg-secondary-100 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-secondary-200 shadow-sm">
+                            <div key={i} className="aspect-video bg-secondary-100 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-brand-200 hover:border-brand-400 transition-all shadow-sm">
                                 <Icon name="play" size={40} className="text-brand-500 opacity-80 group-hover:scale-110 transition-all z-10" />
                                 <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
                             </div>
@@ -662,7 +665,7 @@ const App = () => {
                                 "A basic understanding of logical reasoning.", 
                                 "Commitment to 15-20 hours of weekly learning."
                             ].map((criteria, i) => (
-                                <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-secondary-50 border border-secondary-100 shadow-sm">
+                                <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-secondary-50 border border-brand-200 shadow-sm">
                                     <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                                         <Icon name="check" size={14} className="text-brand-600 font-bold" />
                                     </div>
@@ -680,7 +683,7 @@ const App = () => {
 
             {/* FEES SECTION */}
             <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-secondary-50 scroll-mt-[80px] md:scroll-mt-[132px]">
-                <div className="w-full max-w-5xl mx-auto bg-white rounded-[3rem] border border-secondary-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
+                <div className="w-full max-w-5xl mx-auto bg-white rounded-[3rem] border border-brand-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
                     <div className="p-8 md:p-14 space-y-8 text-left">
                         <h3 className="text-2xl font-extrabold tracking-tight text-secondary-900">Program Package</h3>
                         <div className="space-y-5">
