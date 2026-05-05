@@ -114,13 +114,6 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
             }
         };
         document.addEventListener('mousedown', handleClickOutside);
-        
-        // Initialize high standard scroll animations
-        if (window.initScrollAnimations) {
-            // Small timeout to ensure DOM is fully painted
-            setTimeout(() => window.initScrollAnimations(), 100);
-        }
-        
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
@@ -164,15 +157,15 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
         }
     };
 
-    const activeItemClass = "bg-brand-500/20 text-brand-500 border-l-4 border-brand-500";
-    const inactiveItemClass = "text-secondary-400 border-l-4 border-transparent hover:bg-secondary-800/50 hover:text-white";
+    const activeItemClass = "bg-brand-50/60 text-brand-700 border-l-4 border-brand-500";
+    const inactiveItemClass = "text-secondary-600 border-l-4 border-transparent hover:bg-secondary-50";
 
     return (
-        <nav className="fixed w-full z-50 bg-semantic-nav backdrop-blur-theme border-b border-semantic-border h-20 flex items-center shadow-theme">
+        <nav className="fixed w-full z-50 bg-white border-b border-secondary-100 h-20 flex items-center shadow-sm">
             <div className="max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left">
                 <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => window.location.href = 'index.html'}>
                     <img src="thedatapilot_logo.png" alt="" className="h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0" />
-                    <span className="font-bold text-[22px] text-white tracking-tight">{brand}</span>
+                    <span className="font-bold text-[22px] text-secondary-800 tracking-tight">{brand}</span>
                 </div>
 
                 <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-secondary-500">
@@ -203,7 +196,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         {isDropdownOpen && programs && (
                             <div className="absolute top-full left-0 w-64 z-50 animate-in fade-in duration-200">
                                 {/* The Visual Menu Card connected directly with 0 gaps */}
-                                <div className="bg-semantic-card backdrop-blur-theme border border-semantic-border shadow-theme rounded-3xl py-2 overflow-hidden">
+                                <div className="bg-white border border-secondary-100 shadow-xl rounded-xl py-2 overflow-hidden">
                                     {Object.entries(programs).map(([progId, prog]) => (
                                         <button 
                                             key={progId} 
@@ -232,7 +225,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
             </div>
 
             {isMenuOpen && (
-                <div className="lg:hidden absolute top-20 left-0 w-full bg-semantic-nav backdrop-blur-theme border-b border-semantic-border shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]">
+                <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-b border-secondary-100 shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]">
                     <div className="flex flex-col space-y-4 text-sm font-bold">
                         <a href="products.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${isProductsPage ? activeItemClass : inactiveItemClass}`}>Products</a>
                         <a href="services.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${isServicesPage ? activeItemClass : inactiveItemClass}`}>Services</a>
@@ -273,7 +266,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
 
             {isModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary-900/80 backdrop-blur-sm">
-                    <div className="bg-semantic-card backdrop-blur-theme border border-semantic-border w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-theme">
+                    <div className="bg-white w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-2xl">
                         <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 text-secondary-400 hover:text-secondary-900">
                             <window.Icon name="x" size={24} />
                         </button>

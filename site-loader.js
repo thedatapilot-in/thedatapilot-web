@@ -27,46 +27,15 @@
         // 1. Inject Global Styles (Fonts & Animations) for ALL pages
         const style = document.createElement('style');
         style.innerHTML = `
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
-            body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; color: var(--text-base); margin: 0; padding: 0; background-color: var(--bg-base); }
-            h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+            body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; color: #334155; margin: 0; padding: 0; }
             @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
             @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
             .gear-large { animation: spin 8s linear infinite; transform-origin: center; }
             .gear-small { animation: spin-reverse 4s linear infinite; transform-origin: center; }
             #root:not(:empty) ~ #emergency-ui { display: none !important; }
-            
-            /* High Standard Scroll Animations */
-            .animate-on-scroll {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-                will-change: opacity, transform;
-            }
-            .animate-on-scroll.is-visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            .delay-100 { transition-delay: 100ms; }
-            .delay-200 { transition-delay: 200ms; }
-            .delay-300 { transition-delay: 300ms; }
         `;
         document.head.appendChild(style);
-        
-        // Global Scroll Observer Setup
-        window.initScrollAnimations = function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Only animate once
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-            
-            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-        };
-
 
         // 2. Start the Watchdog Timer
         setTimeout(() => {

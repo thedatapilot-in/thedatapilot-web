@@ -445,61 +445,47 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="relative min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden bg-transparent">
-                <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center w-full animate-on-scroll">
+            <header id="about" className="min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-secondary-50/50 scroll-mt-[80px] md:scroll-mt-[132px]">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full">
                     <div className="space-y-6 md:space-y-8 text-left">
-                        <div className="inline-block bg-brand-500/20 text-brand-400 border border-brand-500/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-white tracking-tight drop-shadow-lg">Certification in <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-cyan-400">{currentProgram.title}</span></h1>
-                        <p className="text-sm md:text-lg text-slate-300 max-w-xl leading-relaxed mb-6 font-medium">
+                        <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
+                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-secondary-900 tracking-tight">Certification in <br/><span className="text-brand-500">{currentProgram.title}</span></h1>
+                        <p className="text-sm md:text-base text-secondary-600 max-w-2xl leading-relaxed mb-6">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
-                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-slate-200 text-left">
-                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-brand-400 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-brand-400 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-400 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
+                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-secondary-700 text-left">
+                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-brand-500 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-brand-500 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-500 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-500 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-                            <a href="#syllabus" className="bg-brand-500 text-white px-8 py-3.5 md:py-4 rounded-xl font-bold hover:bg-brand-400 transition-all text-sm uppercase tracking-widest text-center shadow-theme hover:-translate-y-1">Explore Curriculum</a>
-                            <a href="#apply" className="text-brand-400 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-brand-300 transition-colors">Apply Now</a>
+                            <a href="#syllabus" className="bg-secondary-100 text-secondary-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-secondary-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a>
+                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="text-brand-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-brand-700 transition-colors">Download Brochure</a>
                         </div>
                     </div>
                     
-                    <div className="relative flex items-center justify-center">
-                        <div className="absolute inset-0 bg-brand-500/20 blur-[100px] rounded-full w-3/4 h-3/4 m-auto pointer-events-none"></div>
-                        <img src="ai_hero_cover.png" alt="AI Hero Abstract" className="relative z-10 w-full max-w-lg h-auto object-contain drop-shadow-[0_0_40px_rgba(99,69,237,0.4)] animate-[pulse_4s_ease-in-out_infinite]" />
-                    </div>
-                </div>
-            </header>
-
-            {/* APPLICATION FORM SECTION MOVED DOWN */}
-            <section id="apply" className="py-16 px-6 bg-transparent relative z-10">
-                <div className="max-w-4xl mx-auto bg-semantic-card backdrop-blur-theme border border-semantic-border p-8 md:p-12 rounded-[24px] shadow-theme animate-on-scroll relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500 rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
-                    <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <div className="text-left relative z-10">
-                            <h3 className="text-2xl font-bold mb-4 text-white">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
-                            <p className="text-slate-300 font-medium mb-6">{settings?.ui?.modalSubText || "Secure your spot in the next cohort."}</p>
-                            <img src="ai_feature_data.png" alt="Data" className="w-48 opacity-80 mix-blend-screen drop-shadow-xl hidden md:block" />
-                        </div>
-                        <form className="space-y-4 relative z-10" onSubmit={handleSubmit}>
-                            <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-semantic-border bg-black/40 rounded-xl text-sm focus:border-brand-500 outline-none font-medium transition-all text-white placeholder:text-slate-400" />
-                            <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-semantic-border bg-black/40 rounded-xl text-sm focus:border-brand-500 outline-none font-medium transition-all text-white placeholder:text-slate-400" />
-                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-semantic-border bg-black/40 rounded-xl text-sm focus:border-brand-500 outline-none font-medium transition-all text-white placeholder:text-slate-400" />
-                            <button type="submit" disabled={isSubmitting} className="w-full bg-brand-500 text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-brand-400 transition-all shadow-theme active:scale-95 disabled:opacity-50 mt-4">
+                    <div className="bg-white p-8 border border-secondary-100 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0">
+                        <h3 className="text-xl font-bold mb-2 text-secondary-900">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
+                        <p className="text-sm text-secondary-400 mb-6 font-medium">{settings?.ui?.modalSubText}</p>
+                        <form className="space-y-4" onSubmit={handleSubmit}>
+                            <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <button type="submit" disabled={isSubmitting} className="w-full bg-brand-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
                                 {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
                             </button>
-                            <p className="mt-3 text-[10px] text-slate-400 text-center leading-tight">
-                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-300">Privacy Policy</a>. Data is used only for your professional consultation.
+                            <p className="mt-3 text-[10px] text-secondary-400 text-center leading-tight">
+                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-600">Privacy Policy</a>. Data is used only for your professional consultation.
                             </p>
                         </form>
                     </div>
                 </div>
-            </section>
+            </header>
 
-            <section id="syllabus" className={`${sectionClass} bg-transparent`}>
-                <div className="w-full max-w-7xl mx-auto animate-on-scroll">
-                    <h2 className="text-3xl font-extrabold text-left mb-16 text-white tracking-tight">Job-Ready Data Analytics Curriculum</h2>
+            <section id="syllabus" className={`${sectionClass} bg-white`}>
+                <div className="w-full max-w-7xl mx-auto">
+                    <h2 className="text-3xl font-extrabold text-left mb-16 text-secondary-900 tracking-tight">Job-Ready Data Analytics Curriculum</h2>
                     
                     <div className="flex flex-col lg:flex-row gap-6 min-h-[400px]">
                         <div className="lg:w-1/3 flex flex-col space-y-3">
@@ -582,21 +568,21 @@ const App = () => {
                 </div>
             </section>
 
-            <section id="tools" className={`${sectionClass} bg-transparent`}>
-                <div className="w-full max-w-7xl mx-auto text-left animate-on-scroll">
-                    <h2 className="text-3xl font-bold mb-16 text-white tracking-tight">Modern Industry Tool Stack</h2>
+            <section id="tools" className={`${sectionClass} bg-white`}>
+                <div className="w-full max-w-7xl mx-auto text-left">
+                    <h2 className="text-3xl font-bold mb-16 text-secondary-900 tracking-tight">Modern Industry Tool Stack</h2>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {tools.map((tool, i) => (
-                        <div key={i} className={`p-8 flex flex-col items-center justify-center space-y-4 border border-semantic-border shadow-theme bg-semantic-card backdrop-blur-theme rounded-[24px] transition-all duration-300 hover:shadow-brand-500/20 hover:-translate-y-2 hover:border-brand-500/50`}>
+                        <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-secondary-100 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1`}>
                             <div className="w-16 h-16 flex items-center justify-center">
                                 <img 
                                     src={tool.img} 
                                     alt={tool.name} 
-                                    className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                                    className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all"
                                     onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
                                 />
                             </div>
-                            <span className="font-bold text-white text-sm">{tool.name}</span>
+                            <span className="font-bold text-secondary-700 text-sm">{tool.name}</span>
                         </div>
                     ))}
                     </div>
@@ -604,48 +590,43 @@ const App = () => {
             </section>
 
             {/* PROJECTS SECTION - UI FIX: Shrunk images and gaps so they fit beautifully on one screen */}
-            <section id="projects" className={`${sectionClass} bg-transparent relative overflow-hidden`}>
-                <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-brand-500/20 rounded-full blur-[120px] pointer-events-none"></div>
-                <div className="w-full max-w-7xl mx-auto text-left relative z-10 animate-on-scroll">
-                    <h2 className="text-3xl font-bold mb-8 md:mb-12 text-white tracking-tight">6+ Real-Time Industry Projects</h2>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                        {(media.projects || []).map((proj, idx) => (
-                            <div key={proj.id} className="bg-semantic-card backdrop-blur-theme rounded-[24px] overflow-hidden border border-semantic-border group shadow-theme hover:shadow-brand-500/20 transition-all hover:-translate-y-2">
-                                <div className="h-48 md:h-56 bg-black/40 flex items-center justify-center relative overflow-hidden">
-                                    {/* Alternate between the generated feature images for demo purposes */}
-                                    <img src={idx % 2 === 0 ? "ai_feature_data.png" : "ai_feature_analytics.png"} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90" />
-                                    <Icon name="image" size={32} className="opacity-0 absolute" />
+            <section id="projects" className={`${sectionClass} bg-secondary-50`}>
+                <div className="w-full max-w-7xl mx-auto text-left">
+                    <h2 className="text-3xl font-bold mb-8 md:mb-12 text-secondary-900 tracking-tight">6+ Real-Time Industry Projects</h2>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                        {(media.projects || []).map((proj) => (
+                            <div key={proj.id} className="bg-white rounded-xl overflow-hidden border border-secondary-200 group shadow-sm hover:shadow-md transition-all">
+                                <div className="h-32 md:h-40 bg-secondary-100 flex items-center justify-center relative overflow-hidden">
+                                    <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => e.target.style.display='none'} />
+                                    <Icon name="image" size={32} className="opacity-20 absolute" />
                                 </div>
-                                <div className="p-6">
-                                    <div className="w-10 h-1 bg-brand-500 rounded-full mb-4"></div>
-                                    <h4 className="font-bold text-white text-[15px] md:text-base tracking-tight line-clamp-2">{proj.title}</h4>
-                                </div>
+                                <div className="p-4"><h4 className="font-bold text-secondary-800 text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4></div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            <section id="videos" className={`${sectionClass} bg-transparent`}>
-                 <div className="w-full max-w-7xl mx-auto text-left animate-on-scroll">
-                    <h2 className="text-3xl font-bold text-white tracking-tight mb-12">Program Overview & Demos</h2>
+            <section id="videos" className={`${sectionClass} bg-white`}>
+                 <div className="w-full max-w-7xl mx-auto text-left">
+                    <h2 className="text-3xl font-bold text-secondary-900 tracking-tight mb-12">Program Overview & Demos</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {(media.videos || []).map((vid, i) => (
-                            <div key={i} className="aspect-video bg-semantic-card backdrop-blur-theme rounded-[24px] flex items-center justify-center group cursor-pointer relative overflow-hidden border border-semantic-border shadow-theme">
-                                <Icon name="play" size={40} className="text-brand-500 opacity-80 group-hover:scale-110 group-hover:text-brand-400 transition-all z-10 drop-shadow-[0_0_15px_rgba(99,69,237,0.5)]" />
-                                <div className="absolute bottom-4 left-4 text-white font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
+                            <div key={i} className="aspect-video bg-secondary-100 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-secondary-200 shadow-sm">
+                                <Icon name="play" size={40} className="text-brand-500 opacity-80 group-hover:scale-110 transition-all z-10" />
+                                <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
                             </div>
                         ))}
                     </div>
                  </div>
             </section>
 
-            <section id="eligibility" className={`${sectionClass} bg-transparent`}>
-                <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left animate-on-scroll">
+            <section id="eligibility" className={`${sectionClass} bg-white`}>
+                <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
                     <div className="space-y-6 md:space-y-8 w-full self-center">
-                        <div className="inline-block bg-brand-500/20 text-brand-400 border border-brand-500/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Check Your Eligibility Profile</h2>
-                        <p className="text-secondary-300 font-medium leading-relaxed text-sm md:text-base">
+                        <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-secondary-900 tracking-tight">Check Your Eligibility Profile</h2>
+                        <p className="text-secondary-500 font-medium leading-relaxed text-sm md:text-base">
                             Discover how this program aligns with your current skills. Whether you are a fresh graduate or an experienced professional, our AI-powered curriculum adapts to accelerate your career.
                         </p>
                         <div className="space-y-4 font-bold text-secondary-700 mt-8">
@@ -655,11 +636,11 @@ const App = () => {
                                 "A basic understanding of logical reasoning.", 
                                 "Commitment to 15-20 hours of weekly learning."
                             ].map((criteria, i) => (
-                                <div key={i} className="flex items-start space-x-4 p-4 rounded-2xl bg-semantic-card backdrop-blur-theme border border-semantic-border shadow-theme">
-                                    <div className="w-6 h-6 bg-brand-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 border border-brand-500/30">
-                                        <Icon name="check" size={14} className="text-brand-400 font-bold" />
+                                <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-secondary-50 border border-secondary-100 shadow-sm">
+                                    <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <Icon name="check" size={14} className="text-brand-600 font-bold" />
                                     </div>
-                                    <span className="text-sm font-bold text-white leading-snug">{criteria}</span>
+                                    <span className="text-sm font-bold text-secondary-700 leading-snug">{criteria}</span>
                                 </div>
                             ))}
                         </div>
@@ -672,22 +653,21 @@ const App = () => {
             </section>
 
             {/* FEES SECTION */}
-            <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-transparent scroll-mt-[80px] md:scroll-mt-[132px]">
-                <div className="w-full max-w-5xl mx-auto bg-semantic-card backdrop-blur-theme rounded-[3rem] border border-semantic-border overflow-hidden shadow-theme grid md:grid-cols-2 animate-on-scroll relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 to-transparent pointer-events-none"></div>
-                    <div className="p-8 md:p-14 space-y-8 text-left relative z-10">
-                        <h3 className="text-2xl font-extrabold tracking-tight text-white">Program Package</h3>
+            <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-secondary-50 scroll-mt-[80px] md:scroll-mt-[132px]">
+                <div className="w-full max-w-5xl mx-auto bg-white rounded-[3rem] border border-secondary-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
+                    <div className="p-8 md:p-14 space-y-8 text-left">
+                        <h3 className="text-2xl font-extrabold tracking-tight text-secondary-900">Program Package</h3>
                         <div className="space-y-5">
                             {(currentProgram.highlights || []).map((t, i) => (
                                 <div key={i} className="flex items-center space-x-4">
-                                    <Icon name="check-circle" size={20} className="text-brand-400 flex-shrink-0" />
-                                    <span className="text-md font-bold text-secondary-200">{t}</span>
+                                    <Icon name="check-circle" size={20} className="text-brand-500 flex-shrink-0" />
+                                    <span className="text-md font-bold text-secondary-600">{t}</span>
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    <div className="p-8 md:p-14 bg-black/40 text-white flex flex-col justify-center space-y-8 text-left relative z-10 border-l border-semantic-border/50">
+                    <div className="p-8 md:p-14 bg-secondary-900 text-white flex flex-col justify-center space-y-8 text-left">
                         <div className="space-y-1">
                             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-400">Total Program Investment</span>
                             <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentProgram.title} Fee</h3>
@@ -736,7 +716,7 @@ const App = () => {
                             )}
                         </div>
 
-                        <button className="w-full bg-brand-500 text-white py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-brand-500/20 shadow-lg hover:bg-brand-600 active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
+                        <button className="w-full bg-white text-secondary-900 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
                             <Icon name="credit-card" size={18} className="flex-shrink-0" />
                             <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
                         </button>
