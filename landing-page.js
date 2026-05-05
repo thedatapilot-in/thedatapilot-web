@@ -45,32 +45,32 @@ const InternalEmergencyUI = ({ errorMsg }) => (
     </div>
 );
 
-const TypewriterText = ({ text, delay = 60, cursor = true }) => {
+const TypewriterText = ({ text }) => {
     const { useState, useEffect } = React;
     const [displayedLength, setDisplayedLength] = useState(0);
-    
+
     useEffect(() => {
         setDisplayedLength(0);
-        if (!text) return;
         
         const timer = setInterval(() => {
             setDisplayedLength(prev => {
-                if (prev < text.length) {
-                    return prev + 1;
-                } else {
+                if (prev >= text.length) {
                     clearInterval(timer);
                     return prev;
                 }
+                return prev + 1;
             });
-        }, delay);
-        
+        }, 100);
+
         return () => clearInterval(timer);
-    }, [text, delay]);
+    }, [text]);
+
+    const isDone = displayedLength >= text.length;
 
     return (
-        <span className="inline-block">
-            {text ? text.substring(0, displayedLength) : ''}
-            {cursor && <span className="animate-[pulse_1s_ease-in-out_infinite] font-light text-brand-500 inline-block ml-1 opacity-70">|</span>}
+        <span className="inline-block relative">
+            {text.substring(0, displayedLength)}
+            {!isDone && <span className="absolute -right-2 top-1/2 -translate-y-1/2 w-[3px] h-[70%] bg-brand-500 animate-pulse"></span>}
         </span>
     );
 };
@@ -339,7 +339,6 @@ const App = () => {
     const [activeProgramId, setActiveProgramId] = useState('ada');
     const [activeModuleIdx, setActiveModuleIdx] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [showAISummary, setShowAISummary] = useState(false);
     
     console.log("App component render. isLoaded:", isLoaded, "error:", error, "SITE_DATA.isLoaded:", window.SITE_DATA?.isLoaded, window.Navbar ? "Navbar ready" : "Navbar MISSING");
 
@@ -610,20 +609,6 @@ const App = () => {
                             <a href="#syllabus" className="bg-secondary-100 text-secondary-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-secondary-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a>
                             <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="text-brand-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-brand-700 transition-colors">Download Brochure</a>
                         </div>
-                        
-                        {/* 2026 AI Prompt Bar Upgrade */}
-                        <div className="mt-8 pt-6 border-t border-secondary-200/50">
-                            <form className="relative group" onSubmit={(e) => { e.preventDefault(); triggerFeedback('success', 'AI Pilot activated. Analyzing your request...'); }}>
-                                <div className="absolute -inset-1 bg-gradient-to-r from-brand-400 to-brand-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-                                <div className="relative flex items-center bg-white/60 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl p-2 transition-all group-focus-within:bg-white group-focus-within:border-brand-300">
-                                    <Icon name="sparkles" size={20} className="text-brand-500 ml-3 mr-2 animate-pulse flex-shrink-0" />
-                                    <input type="text" placeholder="Ask me anything about our data programs..." className="w-full bg-transparent border-none outline-none text-sm font-medium text-secondary-800 placeholder-secondary-400 py-3" />
-                                    <button type="submit" className="bg-brand-500 hover:bg-brand-600 text-white rounded-xl px-4 py-3 flex items-center justify-center transition-all active:scale-95 shadow-md shadow-brand-500/30">
-                                        <Icon name="arrow-right" size={16} />
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                     
                     <div className="bg-brand-50 p-8 border-2 border-brand-500 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0 relative overflow-hidden">
@@ -650,13 +635,6 @@ const App = () => {
                     <div className="w-full max-w-7xl mx-auto">
                         <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 md:mb-16 gap-6 border-b border-secondary-100 pb-6">
                             <h2 className="text-3xl font-extrabold text-left text-secondary-900 tracking-tight">Job-Ready Data Analytics Curriculum</h2>
-                            {/* TL;DR AI Summary Toggle */}
-                            <div className="flex items-center gap-3 bg-secondary-50 p-1.5 rounded-full border border-secondary-200 self-start md:self-auto">
-                                <button onClick={() => setShowAISummary(false)} className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${!showAISummary ? 'bg-white shadow-sm text-secondary-900' : 'text-secondary-500 hover:text-secondary-800'}`}>Full Case Study</button>
-                                <button onClick={() => setShowAISummary(true)} className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${showAISummary ? 'bg-brand-500 text-white shadow-md' : 'text-secondary-500 hover:text-secondary-800'}`}>
-                                    <Icon name="sparkles" size={14} className={showAISummary ? "animate-pulse" : ""} /> AI Summary
-                                </button>
-                            </div>
                         </div>
                         
                         <div className="flex flex-col lg:flex-row gap-6 min-h-[400px]">
@@ -682,15 +660,12 @@ const App = () => {
                                                     </div>
                                                 </div>
                                                 <div className="space-y-3">
-                                                    {(showAISummary ? (mod.content || []).slice(0, 3) : (mod.content || [])).map((bullet, i) => (
+                                                    {(mod.content || []).map((bullet, i) => (
                                                         <div key={i} className="flex items-start space-x-3 text-left">
-                                                            <Icon name={showAISummary ? "zap" : "check-circle"} size={14} className={`${showAISummary ? "text-amber-500" : "text-brand-400"} mt-1 flex-shrink-0`} />
-                                                            <span className={`text-sm ${showAISummary ? "font-bold text-secondary-800" : "font-medium text-secondary-600"} leading-snug`}>{bullet}</span>
+                                                            <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
+                                                            <span className="text-sm font-medium text-secondary-600 leading-snug">{bullet}</span>
                                                         </div>
                                                     ))}
-                                                    {showAISummary && mod.content?.length > 3 && (
-                                                        <div className="text-xs font-bold text-brand-500 mt-2">+ {mod.content.length - 3} more technical topics covered.</div>
-                                                    )}
                                                 </div>
                                                 <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
                                             </div>
@@ -701,7 +676,6 @@ const App = () => {
     
                             {/* DESKTOP DETAIL VIEW */}
                             <div className="hidden lg:flex lg:w-2/3 bg-brand-50 p-10 rounded-2xl border border-brand-300 flex-col shadow-sm relative overflow-hidden">
-                                {showAISummary && <div className="absolute top-0 right-0 w-64 h-64 bg-brand-400/10 rounded-full blur-3xl pointer-events-none"></div>}
                                 {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
                                     <>
                                         <div className="mb-8 pb-6 border-b border-secondary-200/50 flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
@@ -716,35 +690,14 @@ const App = () => {
                                             <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
                                         </div>
                                         
-                                        {showAISummary ? (
-                                            <div className="space-y-6 text-left relative z-10">
-                                                <h4 className="text-sm font-black text-secondary-900 uppercase tracking-widest flex items-center gap-2">
-                                                    <Icon name="sparkles" size={16} className="text-brand-500" /> Executive Summary
-                                                </h4>
-                                                <div className="grid gap-4">
-                                                    {(currentProgram.syllabus[activeModuleIdx].content || []).slice(0, 3).map((bullet, i) => (
-                                                        <div key={i} className="flex items-start space-x-4 p-4 bg-white rounded-xl border border-secondary-200 shadow-sm">
-                                                            <Icon name="zap" size={18} className="text-amber-500 mt-0.5 flex-shrink-0" />
-                                                            <span className="text-[15px] font-bold text-secondary-800 leading-tight">{bullet}</span>
-                                                        </div>
-                                                    ))}
+                                        <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
+                                            {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
+                                                <div key={i} className="flex items-start space-x-3 group">
+                                                    <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
+                                                    <span className="text-[14px] font-medium text-secondary-500 leading-tight group-hover:text-secondary-900 transition-colors">{bullet}</span>
                                                 </div>
-                                                {currentProgram.syllabus[activeModuleIdx].content?.length > 3 && (
-                                                    <p className="text-sm font-bold text-brand-600 pt-2 flex items-center gap-2">
-                                                        <Icon name="info" size={16} /> Plus {currentProgram.syllabus[activeModuleIdx].content.length - 3} deeper technical implementations covered in class.
-                                                    </p>
-                                                )}
-                                            </div>
-                                        ) : (
-                                            <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
-                                                {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
-                                                    <div key={i} className="flex items-start space-x-3 group">
-                                                        <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
-                                                        <span className="text-[14px] font-medium text-secondary-500 leading-tight group-hover:text-secondary-900 transition-colors">{bullet}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
+                                            ))}
+                                        </div>
                                     </>
                                 ) : (
                                     <div className="flex items-center justify-center h-full text-secondary-400 font-bold">Please select a module to view curriculum details.</div>
@@ -778,37 +731,35 @@ const App = () => {
                 </section>
             </ScrollReveal>
 
-            {/* PROJECTS SECTION - 2026 Bento & Glassmorphism Upgrade */}
+            {/* PROJECTS SECTION - 2026 Tilt Grid */}
             <ScrollReveal>
-                <section id="projects" className="snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-secondary-900 bg-[#0a0a0b] text-white">
+                <section id="projects" className={`${sectionClass} bg-secondary-50`}>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
-                        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
                         
-                        <h2 className="text-3xl font-extrabold mb-8 md:mb-12 text-white tracking-tight flex items-center gap-3">
+                        <h2 className="text-3xl font-extrabold mb-8 md:mb-12 text-secondary-900 tracking-tight flex items-center gap-3">
                             <Icon name="layout-grid" size={32} className="text-brand-500" />
                             6+ Real-Time Industry Projects
                         </h2>
                         
-                        {/* Bento Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-6">
-                            {(media.projects || []).slice(0, 5).map((proj, idx) => (
-                                <TiltCard key={proj.id} className={`${idx === 0 ? 'md:col-span-2 md:row-span-2' : 'col-span-1'} group`}>
-                                    <div className="h-full w-full bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 overflow-hidden relative transition-all duration-300 hover:border-brand-500/50 hover:bg-white/10 flex flex-col">
-                                        <div className={`relative flex-grow bg-black/40 flex items-center justify-center overflow-hidden ${idx === 0 ? 'h-64 md:h-auto min-h-[250px]' : 'h-32 md:h-40'}`}>
-                                            <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" onError={e => e.target.style.display='none'} />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b] to-transparent opacity-80"></div>
-                                            <Icon name="image" size={32} className="opacity-10 absolute text-white" />
+                        {/* Tile Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                            {(media.projects || []).slice(0, 6).map((proj, idx) => (
+                                <TiltCard key={proj.id} className="col-span-1 group">
+                                    <div className="h-full w-full bg-brand-50 rounded-2xl border border-brand-200 overflow-hidden relative transition-all duration-300 hover:border-brand-400 hover:shadow-md flex flex-col">
+                                        <div className="h-32 md:h-40 bg-secondary-100 flex items-center justify-center relative overflow-hidden">
+                                            <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700" onError={e => e.target.style.display='none'} />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                            <Icon name="image" size={32} className="opacity-20 absolute" />
                                         </div>
-                                        <div className="p-5 md:p-6 relative z-10">
+                                        <div className="p-4 md:p-5 relative z-10 bg-brand-50 flex-grow">
                                             <div className="flex items-center gap-2 mb-2">
-                                                <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
-                                                <span className="text-[10px] font-black uppercase tracking-widest text-brand-400">Project {idx + 1}</span>
+                                                <span className="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
+                                                <span className="text-[10px] font-bold uppercase tracking-widest text-secondary-500">Project {idx + 1}</span>
                                             </div>
-                                            <h4 className={`font-bold text-white tracking-tight ${idx === 0 ? 'text-lg md:text-xl' : 'text-sm'} line-clamp-2`}>{proj.title}</h4>
+                                            <h4 className="font-bold text-secondary-800 text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
                                         </div>
-                                        {/* Hover Glow Effect */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/10 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
+                                        {/* Hover Glow Effect adapted for light mode */}
+                                        <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/5 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
                                     </div>
                                 </TiltCard>
                             ))}
@@ -823,10 +774,13 @@ const App = () => {
                         <h2 className="text-3xl font-bold text-secondary-900 tracking-tight mb-12">Program Overview & Demos</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {(media.videos || []).map((vid, i) => (
-                                <div key={i} className="aspect-video bg-brand-50 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-brand-200 hover:border-brand-400 transition-all shadow-sm">
-                                    <Icon name="play" size={40} className="text-brand-500 opacity-80 group-hover:scale-110 transition-all z-10" />
-                                    <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
-                                </div>
+                                <TiltCard key={i} className="group">
+                                    <div className="aspect-video bg-brand-50 rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border border-brand-200 hover:border-brand-400 hover:shadow-md transition-all">
+                                        <img src={`https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-60 group-hover:opacity-80" onError={e => e.target.style.display='none'} />
+                                        <Icon name="play" size={40} className="text-brand-500 opacity-90 group-hover:scale-110 transition-all z-10 drop-shadow-md" />
+                                        <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10 bg-white/80 backdrop-blur px-2 py-1 rounded">{vid.title}</div>
+                                    </div>
+                                </TiltCard>
                             ))}
                         </div>
                      </div>
