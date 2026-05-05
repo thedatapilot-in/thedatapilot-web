@@ -246,6 +246,28 @@ const App = () => {
     });
     
     const [feedback, setFeedback] = useState({ show: false, status: '', message: '' });
+    const [activeTab, setActiveTab] = useState('about');
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveTab(entry.target.id);
+                    }
+                });
+            },
+            { rootMargin: '-20% 0px -80% 0px' } 
+        );
+
+        const sections = ['about', 'syllabus', 'tools', 'projects', 'videos', 'eligibility', 'fees'];
+        sections.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
+    }, []);
 
     const triggerFeedback = (status, message) => {
         setFeedback({ show: true, status, message });
@@ -410,31 +432,7 @@ const App = () => {
     ];
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
-    // Calculates exact remaining screen space (100svh - 132px navbar) so Flexbox geometric center perfectly matches visual center.
     const sectionClass = "min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-secondary-200";
-
-    const [activeTab, setActiveTab] = React.useState('about');
-
-    React.useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveTab(entry.target.id);
-                    }
-                });
-            },
-            { rootMargin: '-20% 0px -80% 0px' } // triggers when section is near top of viewport
-        );
-
-        const sections = ['about', 'syllabus', 'tools', 'projects', 'videos', 'eligibility', 'fees'];
-        sections.forEach((id) => {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
-        });
-
-        return () => observer.disconnect();
-    }, []);
 
     const handleModuleToggle = (idx) => {
         const isMobile = window.innerWidth < 1024;
