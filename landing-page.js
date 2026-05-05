@@ -714,17 +714,21 @@ const App = () => {
                         <h2 className="text-3xl font-bold mb-16 text-secondary-900 tracking-tight">Modern Industry Tool Stack</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {tools.map((tool, i) => (
-                            <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-brand-200 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1 hover:border-brand-400`}>
-                                <div className="w-16 h-16 flex items-center justify-center">
-                                    <img 
-                                        src={tool.img} 
-                                        alt={tool.name} 
-                                        className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all"
-                                        onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
-                                    />
+                            <TiltCard key={i} className="group h-full">
+                                <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-brand-200 shadow-sm rounded-2xl transition-all h-full hover:border-brand-400 relative overflow-hidden`}>
+                                    <div className="w-16 h-16 flex items-center justify-center relative z-10">
+                                        <img 
+                                            src={tool.img} 
+                                            alt={tool.name} 
+                                            className="w-12 h-12 md:w-16 md:h-16 object-contain transition-transform group-hover:scale-110 duration-500"
+                                            onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
+                                        />
+                                    </div>
+                                    <span className="font-bold text-secondary-700 text-sm relative z-10">{tool.name}</span>
+                                    {/* Hover Glow Effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-500/0 via-brand-500/5 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 blur-md"></div>
                                 </div>
-                                <span className="font-bold text-secondary-700 text-sm">{tool.name}</span>
-                            </div>
+                            </TiltCard>
                         ))}
                         </div>
                     </div>
