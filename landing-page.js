@@ -27,7 +27,7 @@ const InternalEmergencyUI = ({ errorMsg }) => (
                     <span style={{fontSize: '13px', fontWeight: '600', color: 'var(--brand-500)'}}>Logic-First. AI-Fast.</span>
                 </div>
             </div>
-            <div style={{backgroundColor: 'white', padding: '30px', borderRadius: '40px', border: '1px solid #e2e8f0', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.05)'}}>
+            <div style={{backgroundColor: 'var(--brand-50)', padding: '30px', borderRadius: '40px', border: '1px solid var(--brand-200)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.05)'}}>
                 <div style={{width: '100px', height: '80px', margin: '0 auto 32px auto', position: 'relative'}}>
                     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--brand-500)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{position: 'absolute', top: 0, left: 0}} className="gear-large">
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
@@ -47,25 +47,29 @@ const InternalEmergencyUI = ({ errorMsg }) => (
 
 const TypewriterText = ({ text, delay = 60, cursor = true }) => {
     const { useState, useEffect } = React;
-    const [displayedText, setDisplayedText] = useState('');
+    const [displayedLength, setDisplayedLength] = useState(0);
     
     useEffect(() => {
-        let i = 0;
-        setDisplayedText('');
+        setDisplayedLength(0);
+        if (!text) return;
+        
         const timer = setInterval(() => {
-            if (i < (text || '').length) {
-                setDisplayedText(prev => prev + (text || '').charAt(i));
-                i++;
-            } else {
-                clearInterval(timer);
-            }
+            setDisplayedLength(prev => {
+                if (prev < text.length) {
+                    return prev + 1;
+                } else {
+                    clearInterval(timer);
+                    return prev;
+                }
+            });
         }, delay);
+        
         return () => clearInterval(timer);
     }, [text, delay]);
 
     return (
         <span className="inline-block">
-            {displayedText}
+            {text ? text.substring(0, displayedLength) : ''}
             {cursor && <span className="animate-[pulse_1s_ease-in-out_infinite] font-light text-brand-500 inline-block ml-1 opacity-70">|</span>}
         </span>
     );
@@ -112,7 +116,7 @@ const EligibilityChecker = () => {
         setProfile({ type, message });
     };
 
-    const inputClass = "w-full p-4 border border-secondary-200 bg-white rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all text-secondary-700";
+    const inputClass = "w-full p-4 border border-brand-200 bg-brand-50 rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all text-secondary-700";
     const btnClass = "bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-md flex items-center justify-center gap-2";
 
     if (profile) {
@@ -144,7 +148,7 @@ const EligibilityChecker = () => {
     }
 
     return (
-        <div key="form-view" className="bg-secondary-50 border border-secondary-200 rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden self-center w-full">
+        <div key="form-view" className="bg-brand-50 border border-brand-200 rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden self-center w-full">
             {/* Progress Bar */}
             <div className="absolute top-0 left-0 w-full h-1.5 bg-secondary-200">
                 <div className="h-full bg-brand-500 transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }}></div>
@@ -206,7 +210,7 @@ const EligibilityChecker = () => {
                                         key={tool} 
                                         type="button"
                                         onClick={(e) => handleToolToggle(e, tool)}
-                                        className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-brand-500 border-brand-500 text-white' : 'bg-white border-secondary-200 text-secondary-600 hover:border-brand-300'}`}
+                                        className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-brand-500 border-brand-500 text-white' : 'bg-brand-50 border-brand-200 text-secondary-600 hover:border-brand-300'}`}
                                     >
                                         {tool}
                                     </button>
@@ -421,27 +425,27 @@ const App = () => {
         { 
             name: 'PostgreSQL', 
             img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', 
-            color: 'bg-secondary-50' 
+            color: 'bg-brand-50' 
         },
         { 
             name: 'Power BI', 
             img: 'https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg', 
-            color: 'bg-amber-50' 
+            color: 'bg-brand-50' 
         },
         { 
             name: 'Python', 
             img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', 
-            color: 'bg-yellow-50' 
+            color: 'bg-brand-50' 
         },
         { 
             name: 'Spreadsheets', 
             img: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg', 
-            color: 'bg-green-50' 
+            color: 'bg-brand-50' 
         },
         { 
             name: 'Jupyter', 
             img: 'https://www.vectorlogo.zone/logos/jupyter/jupyter-icon.svg', 
-            color: 'bg-orange-50' 
+            color: 'bg-brand-50' 
         },
         { 
             name: 'Data Warehousing', 
@@ -451,12 +455,12 @@ const App = () => {
         { 
             name: 'Gemini AI', 
             img: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg', 
-            color: 'bg-indigo-50' 
+            color: 'bg-brand-50' 
         },
         { 
             name: 'Soft Skills', 
             img: 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', 
-            color: 'bg-rose-50' 
+            color: 'bg-brand-50' 
         }
     ];
 
@@ -519,14 +523,14 @@ const App = () => {
                         </div>
                     </div>
                     
-                    <div className="bg-white p-8 border-2 border-brand-500 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0 relative overflow-hidden">
+                    <div className="bg-brand-50 p-8 border-2 border-brand-500 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0 relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-brand-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
                         <h3 className="text-xl font-bold mb-2 text-secondary-900 relative z-10">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
                         <p className="text-sm text-secondary-400 mb-6 font-medium relative z-10">{settings?.ui?.modalSubText}</p>
                         <form className="space-y-4" onSubmit={handleSubmit}>
-                            <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
-                            <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
-                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
+                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
                             <button type="submit" disabled={isSubmitting} className="w-full bg-brand-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
                                 {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
                             </button>
@@ -548,7 +552,7 @@ const App = () => {
                                 <div key={idx} className="flex flex-col">
                                     <button 
                                         onClick={() => handleModuleToggle(idx)} 
-                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-white border-brand-200 text-secondary-600 hover:border-brand-400 hover:bg-brand-50'}`}
+                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-brand-50 border-brand-200 text-secondary-600 hover:border-brand-400 hover:bg-brand-100'}`}
                                     >
                                         <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                         <svg 
@@ -568,7 +572,7 @@ const App = () => {
 
                                     {/* MOBILE ACCORDION CONTENT */}
                                     <div className={`lg:hidden overflow-hidden transition-all duration-300 ${activeModuleIdx === idx ? 'max-h-[1200px] opacity-100 py-6' : 'max-h-0 opacity-0'}`}>
-                                        <div className="bg-secondary-50/80 rounded-2xl p-6 border border-secondary-100 space-y-6">
+                                        <div className="bg-brand-50 rounded-2xl p-6 border border-brand-200 space-y-6">
                                             <div className="flex flex-col space-y-1">
                                                 <span className="text-brand-600 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
                                                 <div className="flex items-center gap-2 mt-2">
@@ -592,7 +596,7 @@ const App = () => {
                         </div>
 
                         {/* DESKTOP DETAIL VIEW */}
-                        <div className="hidden lg:flex lg:w-2/3 bg-white p-10 rounded-2xl border border-brand-300 flex-col shadow-sm">
+                        <div className="hidden lg:flex lg:w-2/3 bg-brand-50 p-10 rounded-2xl border border-brand-300 flex-col shadow-sm">
                             {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
                                 <>
                                     <div className="mb-8 pb-6 border-b border-secondary-50 flex flex-col md:flex-row md:items-start justify-between gap-4">
@@ -650,7 +654,7 @@ const App = () => {
                     <h2 className="text-3xl font-bold mb-8 md:mb-12 text-secondary-900 tracking-tight">6+ Real-Time Industry Projects</h2>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                         {(media.projects || []).map((proj) => (
-                            <div key={proj.id} className="bg-white rounded-xl overflow-hidden border border-brand-200 group shadow-sm hover:shadow-md transition-all hover:border-brand-400">
+                            <div key={proj.id} className="bg-brand-50 rounded-xl overflow-hidden border border-brand-200 group shadow-sm hover:shadow-md transition-all hover:border-brand-400">
                                 <div className="h-32 md:h-40 bg-secondary-100 flex items-center justify-center relative overflow-hidden">
                                     <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => e.target.style.display='none'} />
                                     <Icon name="image" size={32} className="opacity-20 absolute" />
@@ -667,7 +671,7 @@ const App = () => {
                     <h2 className="text-3xl font-bold text-secondary-900 tracking-tight mb-12">Program Overview & Demos</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {(media.videos || []).map((vid, i) => (
-                            <div key={i} className="aspect-video bg-secondary-100 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-brand-200 hover:border-brand-400 transition-all shadow-sm">
+                            <div key={i} className="aspect-video bg-brand-50 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-brand-200 hover:border-brand-400 transition-all shadow-sm">
                                 <Icon name="play" size={40} className="text-brand-500 opacity-80 group-hover:scale-110 transition-all z-10" />
                                 <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
                             </div>
@@ -691,7 +695,7 @@ const App = () => {
                                 "A basic understanding of logical reasoning.", 
                                 "Commitment to 15-20 hours of weekly learning."
                             ].map((criteria, i) => (
-                                <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-secondary-50 border border-brand-200 shadow-sm">
+                                <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-brand-50 border border-brand-200 shadow-sm">
                                     <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                                         <Icon name="check" size={14} className="text-brand-600 font-bold" />
                                     </div>
@@ -709,7 +713,7 @@ const App = () => {
 
             {/* FEES SECTION */}
             <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-secondary-50 scroll-mt-[80px] md:scroll-mt-[132px]">
-                <div className="w-full max-w-5xl mx-auto bg-white rounded-[3rem] border border-brand-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
+                <div className="w-full max-w-5xl mx-auto bg-brand-50 rounded-[3rem] border border-brand-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
                     <div className="p-8 md:p-14 space-y-8 text-left">
                         <h3 className="text-2xl font-extrabold tracking-tight text-secondary-900">Program Package</h3>
                         <div className="space-y-5">
