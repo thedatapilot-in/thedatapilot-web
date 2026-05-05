@@ -141,3 +141,20 @@ window.tailwind.config = {
         }
     }
 };
+
+// ============================================
+// DYNAMIC FAVICON INJECTION
+// ============================================
+(function() {
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+        const theme = window.LIVE_THEME || 'crimson';
+        let link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            link.type = 'image/png';
+            document.head.appendChild(link);
+        }
+        link.href = `assets/images/thedatapilot_logo_${theme}.png`;
+    }
+})();
