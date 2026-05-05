@@ -29,7 +29,7 @@ const THEMES = {
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'the7ai';    // Choose: crimson, crimsonRed, cyan, blue, emerald, indigo, gold, violet, slate, amber, the7ai
+window.LIVE_THEME = 'crimson';    // Choose: crimson, crimsonRed, cyan, blue, emerald, indigo, gold, violet, slate, amber, the7ai
 window.ACTIVE_VARIANT = 'elementorAI'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight, elementorAI
 
 const THEME_VARIANTS = {
