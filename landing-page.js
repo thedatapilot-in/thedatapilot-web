@@ -716,7 +716,7 @@ const App = () => {
                         <h2 className="text-3xl font-bold mb-16 text-secondary-900 tracking-tight">Modern Industry Tool Stack</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {tools.map((tool, i) => (
-                            <TiltCard key={i} className="group h-full">
+                            <TiltCard key={i} className="group h-full rounded-2xl">
                                 <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-brand-200 shadow-sm rounded-2xl transition-all h-full hover:border-brand-400 relative overflow-hidden`}>
                                     <div className="w-16 h-16 flex items-center justify-center relative z-10">
                                         <img 
