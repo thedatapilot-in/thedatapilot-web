@@ -36,6 +36,10 @@ def parse_themes(config_path='theme-config.js'):
     with open(config_path, 'r') as f:
         content = f.read()
     
+    themes_match = re.search(r'const THEMES = \{(.*?)\n};', content, re.DOTALL)
+    if themes_match:
+        content = themes_match.group(1)
+    
     # Match theme lines inside the THEMES object
     pattern = r'([a-zA-Z0-9_]+):\s*\{[^}]*500:\s*"([^"]+)"'
     matches = re.findall(pattern, content)
