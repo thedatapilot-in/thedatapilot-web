@@ -435,7 +435,7 @@ const App = () => {
     ];
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
-    const sectionClass = "min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-secondary-200";
+    const sectionClass = "snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-secondary-200";
 
     const handleModuleToggle = (idx) => {
         const isMobile = window.innerWidth < 1024;
@@ -473,7 +473,7 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-secondary-50/50 scroll-mt-[80px] md:scroll-mt-[132px]">
+            <header id="about" className="snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-secondary-50/50 scroll-mt-[80px] md:scroll-mt-[132px]">
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full">
                     <div className="space-y-6 md:space-y-8 text-left">
                         <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
