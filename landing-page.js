@@ -45,6 +45,32 @@ const InternalEmergencyUI = ({ errorMsg }) => (
     </div>
 );
 
+const TypewriterText = ({ text, delay = 60, cursor = true }) => {
+    const { useState, useEffect } = React;
+    const [displayedText, setDisplayedText] = useState('');
+    
+    useEffect(() => {
+        let i = 0;
+        setDisplayedText('');
+        const timer = setInterval(() => {
+            if (i < (text || '').length) {
+                setDisplayedText(prev => prev + (text || '').charAt(i));
+                i++;
+            } else {
+                clearInterval(timer);
+            }
+        }, delay);
+        return () => clearInterval(timer);
+    }, [text, delay]);
+
+    return (
+        <span className="inline-block">
+            {displayedText}
+            {cursor && <span className="animate-[pulse_1s_ease-in-out_infinite] font-light text-brand-500 inline-block ml-1 opacity-70">|</span>}
+        </span>
+    );
+};
+
 const EligibilityChecker = () => {
     const { useState } = React;
     const { Icon } = window;
@@ -477,7 +503,7 @@ const App = () => {
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full">
                     <div className="space-y-6 md:space-y-8 text-left">
                         <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-secondary-900 tracking-tight">Certification in <br/><span className="text-brand-500">{currentProgram.title}</span></h1>
+                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-secondary-900 tracking-tight">Certification in <br/><span className="text-brand-500"><TypewriterText text={currentProgram.title} /></span></h1>
                         <p className="text-sm md:text-base text-secondary-600 max-w-2xl leading-relaxed mb-6">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
