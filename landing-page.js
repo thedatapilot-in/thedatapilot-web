@@ -75,6 +75,83 @@ const TypewriterText = ({ text, delay = 60, cursor = true }) => {
     );
 };
 
+const useIntersectionObserver = (options) => {
+    const { useState, useEffect, useRef } = React;
+    const [isIntersecting, setIsIntersecting] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setIsIntersecting(true);
+                observer.unobserve(entry.target);
+            }
+        }, options);
+
+        if (ref.current) {
+            observer.observe(ref.current);
+        }
+
+        return () => {
+            if (ref.current) observer.unobserve(ref.current);
+        };
+    }, [options]);
+
+    return [ref, isIntersecting];
+};
+
+const ScrollReveal = ({ children, className = "", delay = 0 }) => {
+    const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
+    return (
+        <div ref={ref} className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+            {children}
+        </div>
+    );
+};
+
+const TiltCard = ({ children, className = "" }) => {
+    const { useRef, useState } = React;
+    const cardRef = useRef(null);
+    const [style, setStyle] = useState({});
+
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -10; 
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        setStyle({
+            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`,
+            transition: 'transform 0.1s ease-out',
+            boxShadow: `0 25px 50px -12px rgba(0, 0, 0, 0.5)`
+        });
+    };
+
+    const handleMouseLeave = () => {
+        setStyle({
+            transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+            transition: 'transform 0.5s ease-out',
+            boxShadow: 'none'
+        });
+    };
+
+    return (
+        <div 
+            ref={cardRef} 
+            onMouseMove={handleMouseMove} 
+            onMouseLeave={handleMouseLeave}
+            className={`transition-all will-change-transform ${className}`}
+            style={style}
+        >
+            {children}
+        </div>
+    );
+};
+
 const EligibilityChecker = () => {
     const { useState } = React;
     const { Icon } = window;
@@ -262,6 +339,7 @@ const App = () => {
     const [activeProgramId, setActiveProgramId] = useState('ada');
     const [activeModuleIdx, setActiveModuleIdx] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showAISummary, setShowAISummary] = useState(false);
     
     console.log("App component render. isLoaded:", isLoaded, "error:", error, "SITE_DATA.isLoaded:", window.SITE_DATA?.isLoaded, window.Navbar ? "Navbar ready" : "Navbar MISSING");
 
@@ -301,6 +379,17 @@ const App = () => {
         
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    // Predictive Navigation AI Toast
+    useEffect(() => {
+        let timer;
+        if (activeTab === 'projects') {
+            timer = setTimeout(() => {
+                triggerFeedback('success', "💡 AI Suggestion: Want to build projects like these? Check out our Eligibility Profiler.");
+            }, 4000);
+        }
+        return () => clearTimeout(timer);
+    }, [activeTab]);
 
     const triggerFeedback = (status, message) => {
         setFeedback({ show: true, status, message });
@@ -507,7 +596,7 @@ const App = () => {
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full">
                     <div className="space-y-6 md:space-y-8 text-left">
                         <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-secondary-900 tracking-tight">Certification in <br/><span className="text-brand-500"><TypewriterText text={currentProgram.title} /></span></h1>
+                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-secondary-900 tracking-tight transition-all duration-300 hover:scale-[1.02] hover:drop-shadow-lg cursor-default">Certification in <br/><span className="text-brand-500"><TypewriterText text={currentProgram.title} /></span></h1>
                         <p className="text-sm md:text-base text-secondary-600 max-w-2xl leading-relaxed mb-6">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
@@ -520,6 +609,20 @@ const App = () => {
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <a href="#syllabus" className="bg-secondary-100 text-secondary-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-secondary-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a>
                             <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="text-brand-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-brand-700 transition-colors">Download Brochure</a>
+                        </div>
+                        
+                        {/* 2026 AI Prompt Bar Upgrade */}
+                        <div className="mt-8 pt-6 border-t border-secondary-200/50">
+                            <form className="relative group" onSubmit={(e) => { e.preventDefault(); triggerFeedback('success', 'AI Pilot activated. Analyzing your request...'); }}>
+                                <div className="absolute -inset-1 bg-gradient-to-r from-brand-400 to-brand-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+                                <div className="relative flex items-center bg-white/60 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl p-2 transition-all group-focus-within:bg-white group-focus-within:border-brand-300">
+                                    <Icon name="sparkles" size={20} className="text-brand-500 ml-3 mr-2 animate-pulse flex-shrink-0" />
+                                    <input type="text" placeholder="Ask me anything about our data programs..." className="w-full bg-transparent border-none outline-none text-sm font-medium text-secondary-800 placeholder-secondary-400 py-3" />
+                                    <button type="submit" className="bg-brand-500 hover:bg-brand-600 text-white rounded-xl px-4 py-3 flex items-center justify-center transition-all active:scale-95 shadow-md shadow-brand-500/30">
+                                        <Icon name="arrow-right" size={16} />
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     
@@ -542,246 +645,300 @@ const App = () => {
                 </div>
             </header>
 
-            <section id="syllabus" className={`${sectionClass} bg-white`}>
-                <div className="w-full max-w-7xl mx-auto">
-                    <h2 className="text-3xl font-extrabold text-left mb-16 text-secondary-900 tracking-tight">Job-Ready Data Analytics Curriculum</h2>
-                    
-                    <div className="flex flex-col lg:flex-row gap-6 min-h-[400px]">
-                        <div className="lg:w-1/3 flex flex-col space-y-3">
-                            {(currentProgram.syllabus || []).map((mod, idx) => (
-                                <div key={idx} className="flex flex-col">
-                                    <button 
-                                        onClick={() => handleModuleToggle(idx)} 
-                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-brand-50 border-brand-200 text-secondary-600 hover:border-brand-400 hover:bg-brand-100'}`}
-                                    >
-                                        <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
-                                        <svg 
-                                            width="16" 
-                                            height="16" 
-                                            viewBox="0 0 24 24" 
-                                            fill="none" 
-                                            stroke="currentColor" 
-                                            strokeWidth="2.5" 
-                                            strokeLinecap="round" 
-                                            strokeLinejoin="round" 
-                                            className={`transition-all duration-300 transform ${activeModuleIdx === idx ? 'rotate-90 opacity-100' : 'rotate-0 opacity-40 group-hover:opacity-70'}`}
+            <ScrollReveal delay={100}>
+                <section id="syllabus" className={`${sectionClass} bg-white`}>
+                    <div className="w-full max-w-7xl mx-auto">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 md:mb-16 gap-6 border-b border-secondary-100 pb-6">
+                            <h2 className="text-3xl font-extrabold text-left text-secondary-900 tracking-tight">Job-Ready Data Analytics Curriculum</h2>
+                            {/* TL;DR AI Summary Toggle */}
+                            <div className="flex items-center gap-3 bg-secondary-50 p-1.5 rounded-full border border-secondary-200 self-start md:self-auto">
+                                <button onClick={() => setShowAISummary(false)} className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${!showAISummary ? 'bg-white shadow-sm text-secondary-900' : 'text-secondary-500 hover:text-secondary-800'}`}>Full Case Study</button>
+                                <button onClick={() => setShowAISummary(true)} className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${showAISummary ? 'bg-brand-500 text-white shadow-md' : 'text-secondary-500 hover:text-secondary-800'}`}>
+                                    <Icon name="sparkles" size={14} className={showAISummary ? "animate-pulse" : ""} /> AI Summary
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div className="flex flex-col lg:flex-row gap-6 min-h-[400px]">
+                            <div className="lg:w-1/3 flex flex-col space-y-3">
+                                {(currentProgram.syllabus || []).map((mod, idx) => (
+                                    <div key={idx} className="flex flex-col">
+                                        <button 
+                                            onClick={() => handleModuleToggle(idx)} 
+                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-brand-50 border-brand-200 text-secondary-600 hover:border-brand-400 hover:bg-brand-100'}`}
                                         >
-                                            <path d="m9 18 6-6-6-6"/>
-                                        </svg>
-                                    </button>
-
-                                    {/* MOBILE ACCORDION CONTENT */}
-                                    <div className={`lg:hidden overflow-hidden transition-all duration-300 ${activeModuleIdx === idx ? 'max-h-[1200px] opacity-100 py-6' : 'max-h-0 opacity-0'}`}>
-                                        <div className="bg-brand-50 rounded-2xl p-6 border border-brand-200 space-y-6">
-                                            <div className="flex flex-col space-y-1">
-                                                <span className="text-brand-600 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
+                                            <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
+                                            <Icon name="chevron-right" size={20} className={`transition-all duration-300 transform ${activeModuleIdx === idx ? 'rotate-90 opacity-100' : 'rotate-0 opacity-40 group-hover:opacity-70'}`} />
+                                        </button>
+    
+                                        {/* MOBILE ACCORDION CONTENT */}
+                                        <div className={`lg:hidden overflow-hidden transition-all duration-300 ${activeModuleIdx === idx ? 'max-h-[1200px] opacity-100 py-6' : 'max-h-0 opacity-0'}`}>
+                                            <div className="bg-brand-50 rounded-2xl p-6 border border-brand-200 space-y-6">
+                                                <div className="flex flex-col space-y-1">
+                                                    <span className="text-brand-600 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
+                                                    <div className="flex items-center gap-2 mt-2">
+                                                        <Icon name="play-circle" size={16} className="text-brand-500" />
+                                                        <span className="text-[11px] font-bold text-secondary-400 uppercase">Live: {mod.lectures} • {mod.hours} Hours</span>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-3">
+                                                    {(showAISummary ? (mod.content || []).slice(0, 3) : (mod.content || [])).map((bullet, i) => (
+                                                        <div key={i} className="flex items-start space-x-3 text-left">
+                                                            <Icon name={showAISummary ? "zap" : "check-circle"} size={14} className={`${showAISummary ? "text-amber-500" : "text-brand-400"} mt-1 flex-shrink-0`} />
+                                                            <span className={`text-sm ${showAISummary ? "font-bold text-secondary-800" : "font-medium text-secondary-600"} leading-snug`}>{bullet}</span>
+                                                        </div>
+                                                    ))}
+                                                    {showAISummary && mod.content?.length > 3 && (
+                                                        <div className="text-xs font-bold text-brand-500 mt-2">+ {mod.content.length - 3} more technical topics covered.</div>
+                                                    )}
+                                                </div>
+                                                <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+    
+                            {/* DESKTOP DETAIL VIEW */}
+                            <div className="hidden lg:flex lg:w-2/3 bg-brand-50 p-10 rounded-2xl border border-brand-300 flex-col shadow-sm relative overflow-hidden">
+                                {showAISummary && <div className="absolute top-0 right-0 w-64 h-64 bg-brand-400/10 rounded-full blur-3xl pointer-events-none"></div>}
+                                {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
+                                    <>
+                                        <div className="mb-8 pb-6 border-b border-secondary-200/50 flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
+                                            <div className="space-y-1 text-left">
+                                                <span className="text-brand-500 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
+                                                <h3 className="text-2xl font-bold text-secondary-900 mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
                                                 <div className="flex items-center gap-2 mt-2">
-                                                    <Icon name="play-circle" size={16} className="text-brand-500" />
-                                                    <span className="text-[11px] font-bold text-secondary-400 uppercase">Live: {mod.lectures} • {mod.hours} Hours</span>
+                                                    <Icon name="play-circle" size={18} className="text-brand-500" />
+                                                    <span className="text-xs font-bold text-secondary-400 uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                                 </div>
                                             </div>
-                                            <div className="space-y-3">
-                                                {(mod.content || []).map((bullet, i) => (
-                                                    <div key={i} className="flex items-start space-x-3 text-left">
+                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
+                                        </div>
+                                        
+                                        {showAISummary ? (
+                                            <div className="space-y-6 text-left relative z-10">
+                                                <h4 className="text-sm font-black text-secondary-900 uppercase tracking-widest flex items-center gap-2">
+                                                    <Icon name="sparkles" size={16} className="text-brand-500" /> Executive Summary
+                                                </h4>
+                                                <div className="grid gap-4">
+                                                    {(currentProgram.syllabus[activeModuleIdx].content || []).slice(0, 3).map((bullet, i) => (
+                                                        <div key={i} className="flex items-start space-x-4 p-4 bg-white rounded-xl border border-secondary-200 shadow-sm">
+                                                            <Icon name="zap" size={18} className="text-amber-500 mt-0.5 flex-shrink-0" />
+                                                            <span className="text-[15px] font-bold text-secondary-800 leading-tight">{bullet}</span>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                                {currentProgram.syllabus[activeModuleIdx].content?.length > 3 && (
+                                                    <p className="text-sm font-bold text-brand-600 pt-2 flex items-center gap-2">
+                                                        <Icon name="info" size={16} /> Plus {currentProgram.syllabus[activeModuleIdx].content.length - 3} deeper technical implementations covered in class.
+                                                    </p>
+                                                )}
+                                            </div>
+                                        ) : (
+                                            <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
+                                                {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
+                                                    <div key={i} className="flex items-start space-x-3 group">
                                                         <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
-                                                        <span className="text-sm font-medium text-secondary-600 leading-snug">{bullet}</span>
+                                                        <span className="text-[14px] font-medium text-secondary-500 leading-tight group-hover:text-secondary-900 transition-colors">{bullet}</span>
                                                     </div>
                                                 ))}
                                             </div>
-                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* DESKTOP DETAIL VIEW */}
-                        <div className="hidden lg:flex lg:w-2/3 bg-brand-50 p-10 rounded-2xl border border-brand-300 flex-col shadow-sm">
-                            {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
-                                <>
-                                    <div className="mb-8 pb-6 border-b border-secondary-50 flex flex-col md:flex-row md:items-start justify-between gap-4">
-                                        <div className="space-y-1 text-left">
-                                            <span className="text-brand-500 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
-                                            <h3 className="text-2xl font-bold text-secondary-900 mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
-                                            <div className="flex items-center gap-2 mt-2">
-                                                <Icon name="play-circle" size={18} className="text-brand-500" />
-                                                <span className="text-xs font-bold text-secondary-400 uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
-                                            </div>
-                                        </div>
-                                            <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a>
-                                    </div>
-                                    <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left">
-                                        {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
-                                            <div key={i} className="flex items-start space-x-3 group">
-                                                <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
-                                                <span className="text-[14px] font-medium text-secondary-500 leading-tight group-hover:text-secondary-900 transition-colors">{bullet}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="flex items-center justify-center h-full text-secondary-400 font-bold">Please select a module to view curriculum details.</div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="tools" className={`${sectionClass} bg-white`}>
-                <div className="w-full max-w-7xl mx-auto text-left">
-                    <h2 className="text-3xl font-bold mb-16 text-secondary-900 tracking-tight">Modern Industry Tool Stack</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    {tools.map((tool, i) => (
-                        <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-brand-200 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1 hover:border-brand-400`}>
-                            <div className="w-16 h-16 flex items-center justify-center">
-                                <img 
-                                    src={tool.img} 
-                                    alt={tool.name} 
-                                    className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all"
-                                    onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
-                                />
-                            </div>
-                            <span className="font-bold text-secondary-700 text-sm">{tool.name}</span>
-                        </div>
-                    ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* PROJECTS SECTION - UI FIX: Shrunk images and gaps so they fit beautifully on one screen */}
-            <section id="projects" className={`${sectionClass} bg-secondary-50`}>
-                <div className="w-full max-w-7xl mx-auto text-left">
-                    <h2 className="text-3xl font-bold mb-8 md:mb-12 text-secondary-900 tracking-tight">6+ Real-Time Industry Projects</h2>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                        {(media.projects || []).map((proj) => (
-                            <div key={proj.id} className="bg-brand-50 rounded-xl overflow-hidden border border-brand-200 group shadow-sm hover:shadow-md transition-all hover:border-brand-400">
-                                <div className="h-32 md:h-40 bg-secondary-100 flex items-center justify-center relative overflow-hidden">
-                                    <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onError={e => e.target.style.display='none'} />
-                                    <Icon name="image" size={32} className="opacity-20 absolute" />
-                                </div>
-                                <div className="p-4"><h4 className="font-bold text-secondary-800 text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4></div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section id="videos" className={`${sectionClass} bg-white`}>
-                 <div className="w-full max-w-7xl mx-auto text-left">
-                    <h2 className="text-3xl font-bold text-secondary-900 tracking-tight mb-12">Program Overview & Demos</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {(media.videos || []).map((vid, i) => (
-                            <div key={i} className="aspect-video bg-brand-50 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-brand-200 hover:border-brand-400 transition-all shadow-sm">
-                                <Icon name="play" size={40} className="text-brand-500 opacity-80 group-hover:scale-110 transition-all z-10" />
-                                <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
-                            </div>
-                        ))}
-                    </div>
-                 </div>
-            </section>
-
-            <section id="eligibility" className={`${sectionClass} bg-white`}>
-                <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
-                    <div className="space-y-6 md:space-y-8 w-full self-center">
-                        <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-secondary-900 tracking-tight">Check Your Eligibility Profile</h2>
-                        <p className="text-secondary-500 font-medium leading-relaxed text-sm md:text-base">
-                            Discover how this program aligns with your current skills. Whether you are a fresh graduate or an experienced professional, our AI-powered curriculum adapts to accelerate your career.
-                        </p>
-                        <div className="space-y-4 font-bold text-secondary-700 mt-8">
-                            {[
-                                "Final year students or graduates from any discipline.", 
-                                "Working professionals looking for career acceleration.", 
-                                "A basic understanding of logical reasoning.", 
-                                "Commitment to 15-20 hours of weekly learning."
-                            ].map((criteria, i) => (
-                                <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-brand-50 border border-brand-200 shadow-sm">
-                                    <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                        <Icon name="check" size={14} className="text-brand-600 font-bold" />
-                                    </div>
-                                    <span className="text-sm font-bold text-secondary-700 leading-snug">{criteria}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    
-                    {/* The Interactive React Component */}
-                    <EligibilityChecker />
-                    
-                </div>
-            </section>
-
-            {/* FEES SECTION */}
-            <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-secondary-50 scroll-mt-[80px] md:scroll-mt-[132px]">
-                <div className="w-full max-w-5xl mx-auto bg-brand-50 rounded-[3rem] border border-brand-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
-                    <div className="p-8 md:p-14 space-y-8 text-left">
-                        <h3 className="text-2xl font-extrabold tracking-tight text-secondary-900">Program Package</h3>
-                        <div className="space-y-5">
-                            {(currentProgram.highlights || []).map((t, i) => (
-                                <div key={i} className="flex items-center space-x-4">
-                                    <Icon name="check-circle" size={20} className="text-brand-500 flex-shrink-0" />
-                                    <span className="text-md font-bold text-secondary-600">{t}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="p-8 md:p-14 bg-secondary-900 text-white flex flex-col justify-center space-y-8 text-left">
-                        <div className="space-y-1">
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-400">Total Program Investment</span>
-                            <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentProgram.title} Fee</h3>
-                        </div>
-
-                        <div className="space-y-1">
-                            <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 flex-wrap overflow-hidden">
-                                <span className="text-2xl md:text-4xl font-bold tracking-tight whitespace-nowrap">
-                                    ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-
-                                </span>
-                                
-                                {formData.discountApplied && (
-                                    <div className="flex flex-wrap items-center gap-2">
-                                        <span className="text-secondary-500 line-through text-xs md:text-sm font-medium whitespace-nowrap">
-                                            ₹{currentProgram.price?.toLocaleString()} /-
-                                        </span>
-                                        <span className="text-brand-400 text-xs md:text-sm font-bold whitespace-nowrap">
-                                            - ₹{formData.discountAmount?.toLocaleString()} /-
-                                        </span>
-                                    </div>
+                                        )}
+                                    </>
+                                ) : (
+                                    <div className="flex items-center justify-center h-full text-secondary-400 font-bold">Please select a module to view curriculum details.</div>
                                 )}
                             </div>
-                            <p className="text-secondary-400 text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
                         </div>
-
-                        <div className="space-y-3">
-                            <div className="flex gap-2 p-1 bg-white/5 border border-white/10 rounded-xl focus-within:border-brand-500 transition-all">
-                                <input 
-                                    type="text" 
-                                    placeholder="Enter Coupon Code" 
-                                    className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:text-secondary-600 text-brand-400 min-w-0"
-                                    value={formData.couponCode}
-                                    onChange={(e) => setFormData({...formData, couponCode: e.target.value})}
-                                />
-                                <button 
-                                    onClick={applyCoupon}
-                                    className="bg-brand-500 hover:bg-brand-600 text-white px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
-                                >
-                                    Apply
-                                </button>
-                            </div>
-                            {formData.discountApplied && (
-                                <p className="text-[10px] text-brand-400 font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
-                                    <Icon name="tag" size={10} /> Discount Applied Successfully
-                                </p>
-                            )}
-                        </div>
-
-                        <button className="w-full bg-white text-secondary-900 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
-                            <Icon name="credit-card" size={18} className="flex-shrink-0" />
-                            <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
-                        </button>
                     </div>
-                </div>
-            </section>
+                </section>
+            </ScrollReveal>
+
+            <ScrollReveal delay={100}>
+                <section id="tools" className={`${sectionClass} bg-white`}>
+                    <div className="w-full max-w-7xl mx-auto text-left">
+                        <h2 className="text-3xl font-bold mb-16 text-secondary-900 tracking-tight">Modern Industry Tool Stack</h2>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        {tools.map((tool, i) => (
+                            <div key={i} className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-brand-200 shadow-sm rounded-2xl transition-all hover:shadow-md hover:-translate-y-1 hover:border-brand-400`}>
+                                <div className="w-16 h-16 flex items-center justify-center">
+                                    <img 
+                                        src={tool.img} 
+                                        alt={tool.name} 
+                                        className="w-12 h-12 md:w-16 md:h-16 object-contain transition-all"
+                                        onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
+                                    />
+                                </div>
+                                <span className="font-bold text-secondary-700 text-sm">{tool.name}</span>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
+                </section>
+            </ScrollReveal>
+
+            {/* PROJECTS SECTION - 2026 Bento & Glassmorphism Upgrade */}
+            <ScrollReveal>
+                <section id="projects" className="snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-secondary-900 bg-[#0a0a0b] text-white">
+                    <div className="w-full max-w-7xl mx-auto text-left relative z-10">
+                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+                        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+                        
+                        <h2 className="text-3xl font-extrabold mb-8 md:mb-12 text-white tracking-tight flex items-center gap-3">
+                            <Icon name="layout-grid" size={32} className="text-brand-500" />
+                            6+ Real-Time Industry Projects
+                        </h2>
+                        
+                        {/* Bento Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 md:gap-6">
+                            {(media.projects || []).slice(0, 5).map((proj, idx) => (
+                                <TiltCard key={proj.id} className={`${idx === 0 ? 'md:col-span-2 md:row-span-2' : 'col-span-1'} group`}>
+                                    <div className="h-full w-full bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 overflow-hidden relative transition-all duration-300 hover:border-brand-500/50 hover:bg-white/10 flex flex-col">
+                                        <div className={`relative flex-grow bg-black/40 flex items-center justify-center overflow-hidden ${idx === 0 ? 'h-64 md:h-auto min-h-[250px]' : 'h-32 md:h-40'}`}>
+                                            <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" onError={e => e.target.style.display='none'} />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b] to-transparent opacity-80"></div>
+                                            <Icon name="image" size={32} className="opacity-10 absolute text-white" />
+                                        </div>
+                                        <div className="p-5 md:p-6 relative z-10">
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                                                <span className="text-[10px] font-black uppercase tracking-widest text-brand-400">Project {idx + 1}</span>
+                                            </div>
+                                            <h4 className={`font-bold text-white tracking-tight ${idx === 0 ? 'text-lg md:text-xl' : 'text-sm'} line-clamp-2`}>{proj.title}</h4>
+                                        </div>
+                                        {/* Hover Glow Effect */}
+                                        <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/10 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
+                                    </div>
+                                </TiltCard>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            </ScrollReveal>
+
+            <ScrollReveal delay={100}>
+                <section id="videos" className={`${sectionClass} bg-white`}>
+                     <div className="w-full max-w-7xl mx-auto text-left">
+                        <h2 className="text-3xl font-bold text-secondary-900 tracking-tight mb-12">Program Overview & Demos</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {(media.videos || []).map((vid, i) => (
+                                <div key={i} className="aspect-video bg-brand-50 rounded-xl flex items-center justify-center group cursor-pointer relative overflow-hidden border border-brand-200 hover:border-brand-400 transition-all shadow-sm">
+                                    <Icon name="play" size={40} className="text-brand-500 opacity-80 group-hover:scale-110 transition-all z-10" />
+                                    <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10">{vid.title}</div>
+                                </div>
+                            ))}
+                        </div>
+                     </div>
+                </section>
+            </ScrollReveal>
+
+            <ScrollReveal delay={100}>
+                <section id="eligibility" className={`${sectionClass} bg-white`}>
+                    <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
+                        <div className="space-y-6 md:space-y-8 w-full self-center">
+                            <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
+                            <h2 className="text-3xl md:text-4xl font-extrabold text-secondary-900 tracking-tight">Check Your Eligibility Profile</h2>
+                            <p className="text-secondary-500 font-medium leading-relaxed text-sm md:text-base">
+                                Discover how this program aligns with your current skills. Whether you are a fresh graduate or an experienced professional, our AI-powered curriculum adapts to accelerate your career.
+                            </p>
+                            <div className="space-y-4 font-bold text-secondary-700 mt-8">
+                                {[
+                                    "Final year students or graduates from any discipline.", 
+                                    "Working professionals looking for career acceleration.", 
+                                    "A basic understanding of logical reasoning.", 
+                                    "Commitment to 15-20 hours of weekly learning."
+                                ].map((criteria, i) => (
+                                    <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-brand-50 border border-brand-200 shadow-sm">
+                                        <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                            <Icon name="check" size={14} className="text-brand-600 font-bold" />
+                                        </div>
+                                        <span className="text-sm font-bold text-secondary-700 leading-snug">{criteria}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        {/* The Interactive React Component */}
+                        <EligibilityChecker />
+                        
+                    </div>
+                </section>
+            </ScrollReveal>
+
+            {/* FEES SECTION */}
+            <ScrollReveal delay={100}>
+                <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-secondary-50 scroll-mt-[80px] md:scroll-mt-[132px]">
+                    <div className="w-full max-w-5xl mx-auto bg-brand-50 rounded-[3rem] border border-brand-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
+                        <div className="p-8 md:p-14 space-y-8 text-left">
+                            <h3 className="text-2xl font-extrabold tracking-tight text-secondary-900">Program Package</h3>
+                            <div className="space-y-5">
+                                {(currentProgram.highlights || []).map((t, i) => (
+                                    <div key={i} className="flex items-center space-x-4">
+                                        <Icon name="check-circle" size={20} className="text-brand-500 flex-shrink-0" />
+                                        <span className="text-md font-bold text-secondary-600">{t}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+    
+                        <div className="p-8 md:p-14 bg-secondary-900 text-white flex flex-col justify-center space-y-8 text-left">
+                            <div className="space-y-1">
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-400">Total Program Investment</span>
+                                <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentProgram.title} Fee</h3>
+                            </div>
+    
+                            <div className="space-y-1">
+                                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2 flex-wrap overflow-hidden">
+                                    <span className="text-2xl md:text-4xl font-bold tracking-tight whitespace-nowrap">
+                                        ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-
+                                    </span>
+                                    
+                                    {formData.discountApplied && (
+                                        <div className="flex flex-wrap items-center gap-2">
+                                            <span className="text-secondary-500 line-through text-xs md:text-sm font-medium whitespace-nowrap">
+                                                ₹{currentProgram.price?.toLocaleString()} /-
+                                            </span>
+                                            <span className="text-brand-400 text-xs md:text-sm font-bold whitespace-nowrap">
+                                                - ₹{formData.discountAmount?.toLocaleString()} /-
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                                <p className="text-secondary-400 text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
+                            </div>
+    
+                            <div className="space-y-3">
+                                <div className="flex gap-2 p-1 bg-white/5 border border-white/10 rounded-xl focus-within:border-brand-500 transition-all">
+                                    <input 
+                                        type="text" 
+                                        placeholder="Enter Coupon Code" 
+                                        className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:text-secondary-600 text-brand-400 min-w-0"
+                                        value={formData.couponCode}
+                                        onChange={(e) => setFormData({...formData, couponCode: e.target.value})}
+                                    />
+                                    <button 
+                                        onClick={applyCoupon}
+                                        className="bg-brand-500 hover:bg-brand-600 text-white px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
+                                    >
+                                        Apply
+                                    </button>
+                                </div>
+                                {formData.discountApplied && (
+                                    <p className="text-[10px] text-brand-400 font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
+                                        <Icon name="tag" size={10} /> Discount Applied Successfully
+                                    </p>
+                                )}
+                            </div>
+    
+                            <button className="w-full bg-white text-secondary-900 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
+                                <Icon name="credit-card" size={18} className="flex-shrink-0" />
+                                <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </ScrollReveal>
 
             <Footer />
         </div>
