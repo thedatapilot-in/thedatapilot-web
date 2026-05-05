@@ -1,26 +1,35 @@
 import colorsys
 import os
+import re
+import sys
 from PIL import Image
 
 def hex_to_rgb(hex_code):
     hex_code = hex_code.lstrip('#')
     return tuple(int(hex_code[i:i+2], 16) for i in (0, 2, 4))
 
-THEMES = {
-    "crimson": "#e10b17",
-    "crimsonRed": "#9B0021",
-    "cyan": "#06b6d4",
-    "blue": "#3b82f6",
-    "emerald": "#10b981",
-    "indigo": "#6366f1",
-    "gold": "#c28e33",
-    "violet": "#8b5cf6",
-    "slate": "#64748b",
-    "amber": "#f59e0b",
-    "the7ai": "#6345ed"
-}
+def parse_themes(config_path='theme-config.js'):
+    themes = {}
+    if not os.path.exists(config_path):
+        print(f"Error: Could not find {config_path}")
+        return themes
+        
+    with open(config_path, 'r') as f:
+        content = f.read()
+    
+    # Match theme lines inside the THEMES object
+    # e.g. crimson: { ..., 500: "#e10b17", ... }
+    pattern = r'([a-zA-Z0-9_]+):\s*\{[^}]*500:\s*"([^"]+)"'
+    matches = re.findall(pattern, content)
+    for name, color in matches:
+        themes[name] = color
+    return themes
 
 def recolor_image(image_path, target_hex, output_path):
+    if not os.path.exists(image_path):
+        print(f"Error: Source image {image_path} not found.")
+        return False
+        
     img = Image.open(image_path).convert("RGBA")
     data = img.getdata()
     
@@ -49,9 +58,31 @@ def recolor_image(image_path, target_hex, output_path):
         
     img.putdata(new_data)
     img.save(output_path)
+    return True
 
 if __name__ == "__main__":
-    for theme_name, hex_color in THEMES.items():
-        print(f"Generating logo for {theme_name}...")
-        recolor_image('thedatapilot_logo.png', hex_color, f'thedatapilot_logo_{theme_name}.png')
-    print("Done!")
+    print("Parsing themes from theme-config.js...")
+    themes = parse_themes()
+    
+    if not themes:
+        print("No themes found. Exiting.")
+        sys.exit(1)
+        
+    print(f"Found {len(themes)} themes: {', '.join(themes.keys())}")
+    
+    # Create target directory if it doesn't exist
+    target_dir = 'assets/images'
+    os.makedirs(target_dir, exist_ok=True)
+    
+    # Base logo to use as template
+    base_logo = os.path.join(target_dir, 'thedatapilot_logo.png')
+    
+    for theme_name, hex_color in themes.items():
+        output_path = os.path.join(target_dir, f'thedatapilot_logo_{theme_name}.png')
+        print(f"Generating logo for {theme_name} ({hex_color})...")
+        success = recolor_image(base_logo, hex_color, output_path)
+        if not success:
+            break
+            
+    print("Done! All logos have been generated and updated in the assets/images directory.")
+    print("If you add a new theme in the future, just run `python3 generate_logos.py` again!")

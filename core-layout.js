@@ -164,7 +164,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
         <nav className="fixed w-full z-50 bg-white border-b border-secondary-100 h-20 flex items-center shadow-sm">
             <div className="max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left">
                 <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => window.location.href = 'index.html'}>
-                    <img src={`thedatapilot_logo_${window.LIVE_THEME || 'crimson'}.png`} alt="" className="h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0" />
+                    <img src={`assets/images/thedatapilot_logo_${window.LIVE_THEME || 'crimson'}.png`} alt="" className="h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0" />
                     <span className="font-bold text-[22px] text-brand-600 tracking-tight">{brand}</span>
                 </div>
 
