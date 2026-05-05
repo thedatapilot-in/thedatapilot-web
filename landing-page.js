@@ -413,6 +413,29 @@ const App = () => {
     // Calculates exact remaining screen space (100svh - 132px navbar) so Flexbox geometric center perfectly matches visual center.
     const sectionClass = "min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-secondary-200";
 
+    const [activeTab, setActiveTab] = React.useState('about');
+
+    React.useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveTab(entry.target.id);
+                    }
+                });
+            },
+            { rootMargin: '-20% 0px -80% 0px' } // triggers when section is near top of viewport
+        );
+
+        const sections = ['about', 'syllabus', 'tools', 'projects', 'videos', 'eligibility', 'fees'];
+        sections.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
     const handleModuleToggle = (idx) => {
         const isMobile = window.innerWidth < 1024;
         if (isMobile) {
@@ -436,11 +459,15 @@ const App = () => {
 
             <div className="fixed top-20 w-full z-40 bg-secondary-50 border-b border-secondary-200 hidden md:block text-secondary-500 font-bold">
                 <div className="max-w-5xl mx-auto flex justify-between px-4">
-                    {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => (
-                        <a key={tab} href={`#${tab.toLowerCase()}`} className="py-4 text-[15px] hover:text-brand-500 border-b-2 border-transparent hover:border-brand-500 transition-all font-bold">
-                            {tab}
-                        </a>
-                    ))}
+                    {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => {
+                        const sectionId = tab.toLowerCase();
+                        const isActive = activeTab === sectionId;
+                        return (
+                            <a key={tab} href={`#${sectionId}`} className={`py-4 text-[15px] hover:text-brand-500 transition-all font-bold border-b-2 ${isActive ? 'border-brand-500 text-brand-600' : 'border-transparent'}`}>
+                                {tab}
+                            </a>
+                        );
+                    })}
                 </div>
             </div>
 
@@ -465,9 +492,10 @@ const App = () => {
                         </div>
                     </div>
                     
-                    <div className="bg-white p-8 border border-secondary-100 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0">
-                        <h3 className="text-xl font-bold mb-2 text-secondary-900">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
-                        <p className="text-sm text-secondary-400 mb-6 font-medium">{settings?.ui?.modalSubText}</p>
+                    <div className="bg-white p-8 border-2 border-brand-500 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+                        <h3 className="text-xl font-bold mb-2 text-secondary-900 relative z-10">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
+                        <p className="text-sm text-secondary-400 mb-6 font-medium relative z-10">{settings?.ui?.modalSubText}</p>
                         <form className="space-y-4" onSubmit={handleSubmit}>
                             <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
                             <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
@@ -493,7 +521,7 @@ const App = () => {
                                 <div key={idx} className="flex flex-col">
                                     <button 
                                         onClick={() => handleModuleToggle(idx)} 
-                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-white border-secondary-100 text-secondary-600 hover:border-brand-200'}`}
+                                        className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-white border-secondary-100 text-secondary-600 hover:border-brand-200 hover:bg-brand-50'}`}
                                     >
                                         <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                         <svg 
