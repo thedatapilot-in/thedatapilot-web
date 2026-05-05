@@ -20,14 +20,17 @@ const THEMES = {
     gold: { 50: "#fdfbf7", 100: "#f7f1e2", 200: "#eee1bc", 300: "#e1ca89", 400: "#d2ab56", 500: "#c28e33", 600: "#a87328", 700: "#875721", 800: "#6f461f", 900: "#5c3a1c" }, // Premium/Executive
     violet: { 50: "#f5f3ff", 100: "#ede9fe", 200: "#ddd6fe", 300: "#c4b5fd", 400: "#a78bfa", 500: "#8b5cf6", 600: "#7c3aed", 700: "#6d28d9", 800: "#5b21b6", 900: "#4c1d95" }, // Modern Tech
     slate: { 50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1", 400: "#94a3b8", 500: "#64748b", 600: "#475569", 700: "#334155", 800: "#1e293b", 900: "#0f172a" }, // Minimalist
-    amber: { 50: "#fffbeb", 100: "#fef3c7", 200: "#fde68a", 300: "#fcd34d", 400: "#fbbf24", 500: "#f59e0b", 600: "#d97706", 700: "#b45309", 800: "#92400e", 900: "#78350f" }  // Attention Grabbing
+    amber: { 50: "#fffbeb", 100: "#fef3c7", 200: "#fde68a", 300: "#fcd34d", 400: "#fbbf24", 500: "#f59e0b", 600: "#d97706", 700: "#b45309", 800: "#92400e", 900: "#78350f" },  // Attention Grabbing
+    
+    // AI THEME - THE7 ELEMENTOR AI INSPIRED
+    the7ai: { 50: "#f3f1ff", 100: "#ebe6ff", 200: "#d9cfff", 300: "#bda8ff", 400: "#9b75ff", 500: "#6345ed", 600: "#5732db", 700: "#4823bc", 800: "#3d1e9b", 900: "#331a7c" }
 };
 
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'gold';    // Choose: crimson, crimsonRed, cyan, blue, emerald, indigo, gold, violet, slate, amber
-window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
+window.LIVE_THEME = 'the7ai';    // Choose: crimson, crimsonRed, cyan, blue, emerald, indigo, gold, violet, slate, amber, the7ai
+window.ACTIVE_VARIANT = 'elementorAI'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight, elementorAI
 
 const THEME_VARIANTS = {
     light: {
@@ -89,6 +92,16 @@ const THEME_VARIANTS = {
         '--border-color': '#1e293b',
         '--shadow-token': '0 10px 15px -3px rgba(0, 0, 0, 0.5)',
         '--blur-token': '0px'
+    },
+    elementorAI: {
+        '--bg-base': '#0b051d',
+        '--text-base': '#ffffff',
+        '--surface-card': 'rgba(255, 255, 255, 0.03)',
+        '--surface-form': 'rgba(255, 255, 255, 0.05)',
+        '--nav-bg': 'rgba(11, 5, 29, 0.65)',
+        '--border-color': 'rgba(255, 255, 255, 0.08)',
+        '--shadow-token': '0 8px 32px 0 rgba(99, 69, 237, 0.15)',
+        '--blur-token': '16px'
     }
 };
 
@@ -110,9 +123,13 @@ Object.keys(activeVariantVars).forEach(key => {
 // 2. TAILWIND CONFIGURATION EXTENSION
 window.tailwind = window.tailwind || {};
 window.tailwind.config = {
-    darkMode: (window.ACTIVE_VARIANT === 'cyberDark' || window.ACTIVE_VARIANT === 'midnight') ? 'class' : 'media',
+    darkMode: (window.ACTIVE_VARIANT === 'cyberDark' || window.ACTIVE_VARIANT === 'midnight' || window.ACTIVE_VARIANT === 'elementorAI') ? 'class' : 'media',
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                heading: ['Outfit', 'sans-serif']
+            },
             colors: {
                 brand: activeColors,
                 secondary: { 50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1", 400: "#94a3b8", 500: "#64748b", 600: "#475569", 700: "#334155", 800: "#1e293b", 900: "#0f172a" },
