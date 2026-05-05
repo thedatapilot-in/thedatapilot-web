@@ -21,13 +21,14 @@ const THEMES = {
     violet: { 50: "#f5f3ff", 100: "#ede9fe", 200: "#ddd6fe", 300: "#c4b5fd", 400: "#a78bfa", 500: "#8b5cf6", 600: "#7c3aed", 700: "#6d28d9", 800: "#5b21b6", 900: "#4c1d95" }, // Modern Tech
     slate: { 50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1", 400: "#94a3b8", 500: "#64748b", 600: "#475569", 700: "#334155", 800: "#1e293b", 900: "#0f172a" }, // Minimalist
     amber: { 50: "#fffbeb", 100: "#fef3c7", 200: "#fde68a", 300: "#fcd34d", 400: "#fbbf24", 500: "#f59e0b", 600: "#d97706", 700: "#b45309", 800: "#92400e", 900: "#78350f" },  // Attention Grabbing
-    the7ai: { 50: "#f3f1ff", 100: "#ebe6ff", 200: "#d9cfff", 300: "#bda8ff", 400: "#9b75ff", 500: "#6345ed", 600: "#5732db", 700: "#4823bc", 800: "#3d1e9b", 900: "#331a7c" }
+    the7ai: { 50: "#f3f1ff", 100: "#ebe6ff", 200: "#d9cfff", 300: "#bda8ff", 400: "#9b75ff", 500: "#6345ed", 600: "#5732db", 700: "#4823bc", 800: "#3d1e9b", 900: "#331a7c" },
+    oliveGreen: { 50: "#f4f7f2", 100: "#e5ece1", 200: "#ccdcc5", 300: "#a9c59f", 400: "#84aa76", 500: "#658a55", 600: "#4f6d42", 700: "#3e5634", 800: "#33452c", 900: "#2a3925" } // Olive Green
 };
 
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'the7ai';    // Choose: crimson, crimsonRed, cyan, blue, emerald, indigo, gold, violet, slate, amber, the7ai
+window.LIVE_THEME = 'oliveGreen';    // Choose: crimson, crimsonRed, cyan, blue, emerald, indigo, gold, violet, slate, amber, the7ai, oliveGreen
 window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
 
 const THEME_VARIANTS = {
