@@ -1,1 +1,13 @@
 node_modules/
+
+# AI Agent & Workflow Folders (Local Only)
+.agents/
+workstreams/
+knowledge-vault/
+chat-logs/
+archive/
+logs/
+scripts/
+tmp_chrome_data/
+tmp_chrome_profile/
+BACKLOG.md

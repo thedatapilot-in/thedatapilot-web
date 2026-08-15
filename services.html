@@ -6,6 +6,7 @@
    <link rel="icon" href="assets/images/thedatapilot_logo.png" type="image/png">
    <title>Services | The Data Pilot</title>
    <script src="https://cdn.tailwindcss.com"></script>
+   <script src="theme-config.js"></script>
    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -18,9 +19,15 @@
        @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
        .gear-large { animation: spin 8s linear infinite; transform-origin: center; }
        .gear-small { animation: spin-reverse 4s linear infinite; transform-origin: center; }
+       .theme-bg { background-color: var(--bg-base); transition: background-color 0.5s, color 0.5s; }
+       .theme-card { background-color: var(--surface-card); transition: background-color 0.5s; }
+       .theme-text-primary { color: var(--text-base); }
+       .theme-text-secondary { color: var(--text-base); opacity: 0.8; }
+       .theme-text-muted { color: var(--text-base); opacity: 0.6; }
+       .theme-border { border-color: var(--border-color); }
    </style>
 </head>
-<body class="bg-white">
+<body class="theme-bg">
    <div id="root"></div>
    <script type="text/babel">
        const { useState, useEffect } = React;
@@ -74,12 +81,12 @@
            const { services } = window.SITE_DATA;
 
            return (
-               <div className="min-h-screen text-secondary-800 animate-in fade-in duration-700">
+               <div className="min-h-screen theme-text-primary animate-in fade-in duration-700">
                    <window.Navbar />
-                   <header class="pt-48 pb-20 px-6 bg-secondary-50/50">
+                   <header class="pt-48 pb-20 px-6 theme-bg/50">
                        <div class="max-w-4xl mx-auto text-center">
-                           <h1 class="text-4xl md:text-5xl font-extrabold text-secondary-900 mb-6">Expert Services</h1>
-                           <p class="text-lg text-secondary-500 font-medium leading-relaxed">
+                           <h1 class="text-4xl md:text-5xl font-extrabold theme-text-primary mb-6">Expert Services</h1>
+                           <p class="text-lg theme-text-muted font-medium leading-relaxed">
                                Professional consulting and training designed for corporate teams and high-level strategy.
                            </p>
                        </div>
@@ -88,12 +95,12 @@
                        <div className="grid md:grid-cols-3 gap-8">
                            {services.items.map(service => (
                                <div key={service.id} className="bg-secondary-900 text-white rounded-[2rem] p-10 flex flex-col hover:scale-[1.02] transition-all">
-                                   <div className="inline-block bg-brand-500 text-secondary-900 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest w-fit mb-8">
+                                   <div className="inline-block bg-brand-500 theme-text-primary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest w-fit mb-8">
                                        {service.category}
                                    </div>
                                    <h3 className="text-2xl font-bold mb-6">{service.title}</h3>
-                                   <p className="text-secondary-400 font-medium leading-relaxed mb-10">{service.description}</p>
-                                   <button className="w-full bg-white text-secondary-900 py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-brand-500 transition-colors mt-auto">
+                                   <p className="theme-text-muted font-medium leading-relaxed mb-10">{service.description}</p>
+                                   <button className="w-full theme-bg theme-text-primary py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-brand-500 transition-colors mt-auto">
                                        {service.cta}
                                    </button>
                                </div>

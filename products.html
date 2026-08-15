@@ -6,6 +6,7 @@
    <link rel="icon" href="assets/images/thedatapilot_logo.png" type="image/png">
    <title>Products | The Data Pilot</title>
    <script src="https://cdn.tailwindcss.com"></script>
+   <script src="theme-config.js"></script>
    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -19,9 +20,15 @@
        @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
        .gear-large { animation: spin 8s linear infinite; transform-origin: center; }
        .gear-small { animation: spin-reverse 4s linear infinite; transform-origin: center; }
+       .theme-bg { background-color: var(--bg-base); transition: background-color 0.5s, color 0.5s; }
+       .theme-card { background-color: var(--surface-card); transition: background-color 0.5s; }
+       .theme-text-primary { color: var(--text-base); }
+       .theme-text-secondary { color: var(--text-base); opacity: 0.8; }
+       .theme-text-muted { color: var(--text-base); opacity: 0.6; }
+       .theme-border { border-color: var(--border-color); }
    </style>
 </head>
-<body class="bg-white">
+<body class="theme-bg">
    <div id="root"></div>
    <script type="text/babel">
        const { useState, useEffect } = React;
@@ -82,12 +89,12 @@
            const { products } = window.SITE_DATA;
 
            return (
-               <div className="min-h-screen text-secondary-800 animate-in fade-in duration-700">
+               <div className="min-h-screen theme-text-primary animate-in fade-in duration-700">
                    <window.Navbar />
-                   <header class="pt-48 pb-20 px-6 bg-secondary-50/50">
+                   <header class="pt-48 pb-20 px-6 theme-bg/50">
                        <div class="max-w-4xl mx-auto text-center">
-                           <h1 class="text-4xl md:text-5xl font-extrabold text-secondary-900 mb-6">Digital Products</h1>
-                           <p class="text-lg text-secondary-500 font-medium leading-relaxed">
+                           <h1 class="text-4xl md:text-5xl font-extrabold theme-text-primary mb-6">Digital Products</h1>
+                           <p class="text-lg theme-text-muted font-medium leading-relaxed">
                                Logic-ready templates and automated scripts to accelerate your daily data workflows.
                            </p>
                        </div>
@@ -95,14 +102,14 @@
                    <main class="py-20 px-6 max-w-7xl mx-auto">
                        <div className="grid md:grid-cols-3 gap-8">
                            {products.items.map(product => (
-                               <div key={product.id} className="bg-white border border-secondary-200 rounded-3xl p-8 flex flex-col hover:shadow-xl transition-all">
-                                   <div className="inline-block bg-brand-50 text-brand-600 px-3 py-1 rounded text-[10px] font-black uppercase tracking-widest w-fit mb-6">
+                               <div key={product.id} className="theme-bg border theme-border rounded-3xl p-8 flex flex-col hover:shadow-xl transition-all">
+                                   <div className="inline-block theme-card text-brand-600 px-3 py-1 rounded text-[10px] font-black uppercase tracking-widest w-fit mb-6">
                                        {product.type}
                                    </div>
-                                   <h3 className="text-xl font-bold text-secondary-900 mb-4">{product.title}</h3>
-                                   <p className="text-sm text-secondary-500 font-medium leading-relaxed flex-grow mb-8">{product.description}</p>
+                                   <h3 className="text-xl font-bold theme-text-primary mb-4">{product.title}</h3>
+                                   <p className="text-sm theme-text-muted font-medium leading-relaxed flex-grow mb-8">{product.description}</p>
                                    <div className="pt-6 border-t border-secondary-50 flex items-center justify-between mt-auto">
-                                       <span className="text-2xl font-black text-secondary-900">{product.currency}{product.price}</span>
+                                       <span className="text-2xl font-black theme-text-primary">{product.currency}{product.price}</span>
                                        <button className="bg-secondary-900 text-white px-6 py-3 rounded-xl font-bold text-sm hover:bg-brand-500 transition-colors">Get Access</button>
                                    </div>
                                </div>

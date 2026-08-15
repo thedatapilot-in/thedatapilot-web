@@ -107,6 +107,18 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
     const dropdownRef = React.useRef(null);
 
+    // FIX: Lock body scroll when mobile menu is active
+    React.useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isMenuOpen]);
+
     React.useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -157,20 +169,20 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
         }
     };
 
-    const activeItemClass = "bg-brand-50/60 text-brand-700 border-l-4 border-brand-500";
-    const inactiveItemClass = "text-secondary-600 border-l-4 border-transparent hover:bg-secondary-50";
+    const activeItemClass = "theme-card/60 text-brand-700 border-l-4 border-brand-500";
+    const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:theme-bg";
 
     return (
-        <nav className="fixed w-full z-50 bg-white border-b border-secondary-100 h-20 flex items-center shadow-sm">
+        <nav className="fixed w-full z-50 theme-bg border-b theme-border h-20 flex items-center shadow-sm">
             <div className="max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left">
                 <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => window.location.href = 'index.html'}>
                     <img src={`assets/images/thedatapilot_logo_${window.LIVE_THEME || 'crimson'}.png`} alt="" className="h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0" />
-                    <span className="font-bold text-[22px] text-brand-600 tracking-tight">{brand}</span>
+                    <span className="font-bold text-[22px] text-brand-400 tracking-tight">{brand}</span>
                 </div>
 
-                <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-secondary-500">
-                    <a href="products.html" className={`hover:text-brand-500 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'text-brand-600' : ''}`}>Products</a>
-                    <a href="services.html" className={`hover:text-brand-500 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'text-brand-600' : ''}`}>Services</a>
+                <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold theme-text-primary">
+                    <a href="products.html" className={`hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'text-brand-400' : 'theme-text-primary'}`}>Products</a>
+                    <a href="services.html" className={`hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'text-brand-400' : 'theme-text-primary'}`}>Services</a>
                     
                     <div 
                         ref={dropdownRef}
@@ -183,49 +195,54 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                 e.preventDefault();
                                 setIsDropdownOpen(true);
                             }}
-                            className={`flex items-center space-x-1 hover:text-brand-500 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'text-brand-600' : ''}`}
+                            className={`flex items-center space-x-1 hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'text-brand-400' : 'theme-text-primary'}`}
                         >
                             <span>All Programs</span>
                             <window.Icon 
                                 name="chevron-down" 
                                 size={14} 
-                                className={isDropdownOpen ? 'rotate-180 transition-transform' : 'transition-transform'} 
+                                className={isDropdownOpen ? 'rotate-180 transition-transform text-brand-400' : 'transition-transform text-slate-300'} 
                             />
                         </button>
                         
                         {isDropdownOpen && programs && (
-                            <div className="absolute top-full left-0 w-64 z-50 animate-in fade-in duration-200">
-                                {/* The Visual Menu Card connected directly with 0 gaps */}
-                                <div className="bg-white border border-secondary-100 shadow-xl rounded-xl py-2 overflow-hidden">
-                                    {Object.entries(programs).map(([progId, prog]) => (
-                                        <button 
-                                            key={progId} 
-                                            onClick={() => { 
-                                                if(onProgramChange) onProgramChange(progId); 
-                                                else window.location.href=`index.html#about`; 
-                                                setIsDropdownOpen(false); 
-                                            }} 
-                                            className={`w-full text-left px-4 py-2 hover:bg-secondary-50 font-bold text-xs tracking-tight transition-colors ${progId === activeProgramId ? 'text-brand-600' : 'text-secondary-600'}`}
-                                        >
-                                            {prog.title}
-                                        </button>
-                                    ))}
+                            <div className="absolute top-full left-0 w-max min-w-[220px] max-w-xs z-[60] animate-in fade-in duration-200 pt-1">
+                                {/* Seamless edge-to-edge dropdown card */}
+                                <div className="bg-[#0f172a] border border-slate-700/80 shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl">
+                                    {Object.entries(programs).map(([progId, prog]) => {
+                                        const isSelected = progId === activeProgramId;
+                                        return (
+                                            <button 
+                                                key={progId} 
+                                                onClick={() => { 
+                                                    if(onProgramChange) onProgramChange(progId); 
+                                                    else window.location.href=`index.html#about`; 
+                                                    setIsDropdownOpen(false); 
+                                                }} 
+                                                className={`w-full text-left px-4 py-3 hover:bg-slate-800/90 font-bold text-xs tracking-tight transition-colors ${
+                                                    isSelected ? 'text-brand-400 font-extrabold bg-slate-800/50' : 'text-slate-200'
+                                                }`}
+                                            >
+                                                {prog.title}
+                                            </button>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         )}
                     </div>
 
-                    <button onClick={() => setIsModalOpen(true)} className="text-brand-600 font-bold hover:underline text-[17px] tracking-tight">Request Callback</button>
-                    <button onClick={() => setIsModalOpen(true)} className="bg-brand-500 text-white px-6 py-2.5 rounded font-bold text-[17px] hover:bg-brand-600 transition-colors shadow-lg shadow-brand-500/20 active:scale-95 transition-transform tracking-tight">Join Program</button>
+                    <button onClick={() => setIsModalOpen(true)} className="text-brand-400 hover:text-brand-300 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
+                    <button onClick={() => setIsModalOpen(true)} className="bg-brand-500 text-white px-6 py-2.5 rounded-xl font-bold text-[17px] hover:bg-brand-400 transition-colors shadow-lg shadow-brand-500/20 active:scale-95 transition-transform tracking-tight">Join Program</button>
                 </div>
 
-                <button className="lg:hidden p-2 text-secondary-600 outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <button className="lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <window.Icon name={isMenuOpen ? "x" : "menu"} size={28} />
                 </button>
             </div>
 
             {isMenuOpen && (
-                <div className="lg:hidden absolute top-20 left-0 w-full bg-white border-b border-secondary-100 shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]">
+                <div className="lg:hidden absolute top-20 left-0 w-full theme-bg border-b theme-border shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]">
                     <div className="flex flex-col space-y-4 text-sm font-bold">
                         <a href="products.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${isProductsPage ? activeItemClass : inactiveItemClass}`}>Products</a>
                         <a href="services.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${isServicesPage ? activeItemClass : inactiveItemClass}`}>Services</a>
@@ -247,7 +264,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                                 else window.location.href=`index.html#about`; 
                                                 setIsMenuOpen(false); 
                                             }} 
-                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'bg-brand-100/50 text-brand-700' : 'text-secondary-500 hover:bg-secondary-50'}`}
+                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'bg-brand-100/50 text-brand-700' : 'theme-text-muted hover:theme-bg'}`}
                                         >
                                             {prog.title}
                                         </button>
@@ -266,16 +283,16 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
 
             {isModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary-900/80 backdrop-blur-sm">
-                    <div className="bg-white w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-2xl">
-                        <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 text-secondary-400 hover:text-secondary-900">
+                    <div className="theme-bg w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-2xl">
+                        <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 theme-text-muted hover:theme-text-primary">
                             <window.Icon name="x" size={24} />
                         </button>
-                        <h3 className="font-bold text-2xl mb-2 text-secondary-900 tracking-tight">{settings?.ui?.modalTitle}</h3>
-                        <p className="text-sm text-secondary-500 mb-8 font-medium">{settings?.ui?.modalSubText}</p>
+                        <h3 className="font-bold text-2xl mb-2 theme-text-primary tracking-tight">{settings?.ui?.modalTitle}</h3>
+                        <p className="text-sm theme-text-muted mb-8 font-medium">{settings?.ui?.modalSubText}</p>
                         <form className="space-y-4" onSubmit={handleModalSubmit}>
-                            <input type="text" placeholder="Full Name" required value={modalFormData.full_name} onChange={e => setModalFormData({...modalFormData, full_name: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
-                            <input type="email" placeholder="Email Address" required value={modalFormData.email} onChange={e => setModalFormData({...modalFormData, email: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
-                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={modalFormData.phone} onChange={e => setModalFormData({...modalFormData, phone: e.target.value})} className="w-full p-4 border border-secondary-100 bg-secondary-50 rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
+                            <input type="text" placeholder="Full Name" required value={modalFormData.full_name} onChange={e => setModalFormData({...modalFormData, full_name: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
+                            <input type="email" placeholder="Email Address" required value={modalFormData.email} onChange={e => setModalFormData({...modalFormData, email: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
+                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={modalFormData.phone} onChange={e => setModalFormData({...modalFormData, phone: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
                             <button type="submit" disabled={isSubmitting} className="w-full bg-brand-500 text-white py-5 rounded-xl font-bold uppercase tracking-widest shadow-lg hover:bg-brand-600 active:scale-95 transition-all disabled:opacity-50">
                                 {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Submit Request')}
                             </button>
@@ -326,7 +343,7 @@ window.Footer = () => {
                 <div className="space-y-6">
                     <div>
                         <div className="font-extrabold text-2xl text-brand-400 mb-2">{settings?.brand?.name}</div>
-                        <p className="text-secondary-400 text-[13px] font-medium leading-relaxed max-w-xs">{settings?.ui?.footerDescription}</p>
+                        <p className="theme-text-muted text-[13px] font-medium leading-relaxed max-w-xs">{settings?.ui?.footerDescription}</p>
                     </div>
                     
                     <div className="flex items-center gap-3">
@@ -356,7 +373,7 @@ window.Footer = () => {
                 </div>
 
                 {/* Legal & Navigation - Unified Size */}
-                <div className="flex flex-col space-y-4 text-secondary-400">
+                <div className="flex flex-col space-y-4 theme-text-muted">
                     <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-40 mb-2">Legal & Navigation</h5>
                     <div className="flex flex-col space-y-3 font-bold text-sm">
                         <a href="about-us.html" className="hover:text-brand-400 transition-colors">About Us</a>
@@ -367,12 +384,12 @@ window.Footer = () => {
                 </div>
 
                 {/* Contact Section - Slightly smaller for professional hierarchy */}
-                <div className="space-y-4 text-secondary-400">
+                <div className="space-y-4 theme-text-muted">
                     <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-40 mb-2">Contact</h5>
                     <div className="space-y-5">
                         <div className="flex items-start gap-2.5">
                             <window.Icon name="map-pin" size={14} className="text-brand-500 mt-1 flex-shrink-0 opacity-80"/> 
-                            <div className="text-[13px] text-secondary-400 font-medium leading-relaxed">
+                            <div className="text-[13px] theme-text-muted font-medium leading-relaxed">
                                 {(settings?.contact?.addressLines || []).map((line, idx) => (
                                     <div key={idx} className={idx === 0 ? "font-bold text-secondary-300" : ""}>{line}</div>
                                 ))}
@@ -380,10 +397,10 @@ window.Footer = () => {
                         </div>
                         <div className="text-[13px] font-bold flex items-center gap-2.5">
                             <window.Icon name="mail" size={14} className="text-brand-500 opacity-80"/> 
-                            <span className="text-secondary-500">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 hover:text-brand-400 transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
+                            <span className="theme-text-muted">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 hover:text-brand-400 transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
                         </div>
                     </div>
-                    <div className="pt-8 text-[10px] font-black text-secondary-700 tracking-[0.4em] uppercase select-none">Logic-First. AI-Fast.</div>
+                    <div className="pt-8 text-[10px] font-black theme-text-secondary tracking-[0.4em] uppercase select-none">Logic-First. AI-Fast.</div>
                 </div>
             </div>
         </footer>

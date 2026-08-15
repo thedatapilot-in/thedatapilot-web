@@ -80,19 +80,19 @@ const App = () => {
     const safeSections = refundData.sections || [];
 
     return (
-        <div className="min-h-screen text-secondary-800 bg-white animate-in fade-in duration-700">
+        <div className="min-h-screen theme-text-primary theme-bg animate-in fade-in duration-700">
             <Navbar />
 
-            <header className="pt-36 pb-10 px-6 bg-secondary-50/50 border-b border-secondary-200">
+            <header className="pt-36 pb-10 px-6 theme-bg/50 border-b theme-border">
                 <div className="max-w-4xl mx-auto text-left">
-                    <h1 className="text-4xl font-extrabold text-secondary-900 mb-2">{safeHeader.title}</h1>
-                    <p className="text-secondary-400 font-medium italic text-sm">{safeHeader.subtitle}</p>
+                    <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
+                    <p className="theme-text-muted font-medium italic text-sm">{safeHeader.subtitle}</p>
                 </div>
             </header>
 
             <section className="py-12 px-6 text-left">
                 <div className="max-w-4xl mx-auto">
-                    <div className="text-secondary-600 space-y-2 leading-relaxed">
+                    <div className="theme-text-secondary space-y-2 leading-relaxed">
                         <p className="mb-6">{safeIntro}</p>
 
                         <div className="policy-content space-y-8">
@@ -102,7 +102,7 @@ const App = () => {
                                 
                                 return (
                                     <div key={idx}>
-                                        <h2 className="text-xl font-bold text-secondary-900 mb-3 tracking-tight">{section.title}</h2>
+                                        <h2 className="text-xl font-bold theme-text-primary mb-3 tracking-tight">{section.title}</h2>
                                         <p className={section.list && section.list.length > 0 ? "mb-3" : ""}>
                                             {section.content}
                                         </p>
@@ -118,10 +118,10 @@ const App = () => {
                                 );
                             })}
 
-                            <div className="bg-secondary-50 p-8 rounded-3xl border border-secondary-100 mt-12">
-                                <h2 className="text-xl font-bold text-secondary-900 mb-3 tracking-tight">Contact Support</h2>
+                            <div className="theme-bg p-8 rounded-3xl border theme-border mt-12">
+                                <h2 className="text-xl font-bold theme-text-primary mb-3 tracking-tight">Contact Support</h2>
                                 <p className="mb-4">If you have any questions regarding our refund terms, please reach out to our admissions team:</p>
-                                <div className="flex items-center gap-3 font-semibold text-secondary-800">
+                                <div className="flex items-center gap-3 font-semibold theme-text-primary">
                                     <Icon name="mail" size={18} className="text-brand-500" /> 
                                     <a href={`mailto:${contactEmail}`} className="text-brand-600 hover:underline">{contactEmail}</a>
                                 </div>

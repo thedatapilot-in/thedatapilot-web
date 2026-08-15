@@ -193,7 +193,7 @@ const EligibilityChecker = () => {
         setProfile({ type, message });
     };
 
-    const inputClass = "w-full p-4 border border-brand-200 bg-brand-50 rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all text-secondary-700";
+    const inputClass = "w-full p-4 border theme-border theme-card rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all theme-text-secondary";
     const btnClass = "bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-md flex items-center justify-center gap-2";
 
     if (profile) {
@@ -225,7 +225,7 @@ const EligibilityChecker = () => {
     }
 
     return (
-        <div key="form-view" className="bg-brand-50 border border-brand-200 rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden self-center w-full">
+        <div key="form-view" className="theme-card border theme-border rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden self-center w-full">
             {/* Progress Bar */}
             <div className="absolute top-0 left-0 w-full h-1.5 bg-secondary-200">
                 <div className="h-full bg-brand-500 transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }}></div>
@@ -233,7 +233,7 @@ const EligibilityChecker = () => {
 
             <div className="mb-8 mt-2">
                 <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px]">Step 0{step} of 03</span>
-                <h3 className="text-xl font-bold text-secondary-900 mt-1">
+                <h3 className="text-xl font-bold theme-text-primary mt-1">
                     {step === 1 && "Education & Experience"}
                     {step === 2 && "Skills & Tools"}
                     {step === 3 && "Final Details"}
@@ -244,7 +244,7 @@ const EligibilityChecker = () => {
                 {step === 1 && (
                     <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-2">Highest Education</label>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-2">Highest Education</label>
                             <select value={formData.education} onChange={e => setFormData({...formData, education: e.target.value})} className={inputClass}>
                                 <option value="" disabled>Select your degree...</option>
                                 <option value="High School / Diploma">High School / Diploma</option>
@@ -254,7 +254,7 @@ const EligibilityChecker = () => {
                             </select>
                         </div>
                         <div>
-                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-2">Work Experience</label>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-2">Work Experience</label>
                             <select value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} className={inputClass}>
                                 <option value="" disabled>Select experience level...</option>
                                 <option value="Fresher">Fresher (0 Years)</option>
@@ -270,24 +270,24 @@ const EligibilityChecker = () => {
                 {step === 2 && (
                     <div className="space-y-8 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-4 flex justify-between">
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-4 flex justify-between">
                                 <span>Analytical Skill Rating</span>
                                 <span className="text-brand-600">{formData.analyticalScore} / 10</span>
                             </label>
                             <input type="range" min="1" max="10" value={formData.analyticalScore} onChange={e => setFormData({...formData, analyticalScore: parseInt(e.target.value)})} className="w-full accent-brand-500 cursor-pointer" />
-                            <div className="flex justify-between text-[10px] text-secondary-400 font-bold uppercase mt-2">
+                            <div className="flex justify-between text-[10px] theme-text-muted font-bold uppercase mt-2">
                                 <span>Beginner</span><span>Expert</span>
                             </div>
                         </div>
                         <div>
-                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-3">Tools You've Used</label>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">Tools You've Used</label>
                             <div className="flex flex-wrap gap-2">
                                 {toolOptions.map(tool => (
                                     <button 
                                         key={tool} 
                                         type="button"
                                         onClick={(e) => handleToolToggle(e, tool)}
-                                        className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-brand-500 border-brand-500 text-white' : 'bg-brand-50 border-brand-200 text-secondary-600 hover:border-brand-300'}`}
+                                        className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-brand-500 border-brand-500 text-white' : 'theme-card theme-border theme-text-secondary hover:theme-border'}`}
                                     >
                                         {tool}
                                     </button>
@@ -300,7 +300,7 @@ const EligibilityChecker = () => {
                 {step === 3 && (
                     <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold text-secondary-500 uppercase tracking-wider mb-2">Career Goal (Optional)</label>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-2">Career Goal (Optional)</label>
                             <textarea 
                                 rows="4" 
                                 placeholder="What are you hoping to achieve with this program?" 
@@ -313,9 +313,9 @@ const EligibilityChecker = () => {
                 )}
             </div>
 
-            <div className="mt-8 flex justify-between pt-6 border-t border-secondary-200">
+            <div className="mt-8 flex justify-between pt-6 border-t theme-border">
                 {step > 1 ? (
-                    <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }} className="px-5 py-2.5 text-sm font-bold text-secondary-500 hover:text-secondary-800 transition-colors flex items-center gap-2">
+                    <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }} className="px-5 py-2.5 text-sm font-bold theme-text-muted hover:theme-text-primary transition-colors flex items-center gap-2">
                         <Icon name="arrow-left" size={16} /> Back
                     </button>
                 ) : <div></div>}
@@ -513,47 +513,47 @@ const App = () => {
         { 
             name: 'PostgreSQL', 
             img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', 
-            color: 'bg-brand-50' 
+            color: 'theme-card' 
         },
         { 
             name: 'Power BI', 
             img: 'https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg', 
-            color: 'bg-brand-50' 
+            color: 'theme-card' 
         },
         { 
             name: 'Python', 
             img: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', 
-            color: 'bg-brand-50' 
+            color: 'theme-card' 
         },
         { 
             name: 'Spreadsheets', 
             img: 'https://upload.wikimedia.org/wikipedia/commons/3/30/Google_Sheets_logo_%282014-2020%29.svg', 
-            color: 'bg-brand-50' 
+            color: 'theme-card' 
         },
         { 
             name: 'Jupyter', 
             img: 'https://www.vectorlogo.zone/logos/jupyter/jupyter-icon.svg', 
-            color: 'bg-brand-50' 
+            color: 'theme-card' 
         },
         { 
             name: 'Data Warehousing', 
             img: 'https://api.iconify.design/vscode-icons:file-type-sql.svg?width=144&height=144', 
-            color: 'bg-brand-50' 
+            color: 'theme-card' 
         },
         { 
             name: 'Gemini AI', 
             img: 'https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg', 
-            color: 'bg-brand-50' 
+            color: 'theme-card' 
         },
         { 
             name: 'Soft Skills', 
             img: 'https://cdn-icons-png.flaticon.com/512/3135/3135755.png', 
-            color: 'bg-brand-50' 
+            color: 'theme-card' 
         }
     ];
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
-    const sectionClass = "snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b border-secondary-200";
+    const sectionClass = "snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b theme-border";
 
     const handleModuleToggle = (idx) => {
         const isMobile = window.innerWidth < 1024;
@@ -565,7 +565,7 @@ const App = () => {
     };
 
     return (
-        <div className="min-h-screen text-secondary-800 animate-in fade-in duration-700 overflow-x-hidden bg-white text-left">
+        <div className="min-h-screen theme-text-primary animate-in fade-in duration-700 overflow-x-hidden theme-bg text-left">
             <Navbar activeProgramId={activeProgramId} onProgramChange={(id) => { setActiveProgramId(id); setActiveModuleIdx(0); setFormData({...formData, discountApplied: false, couponCode: ''}); }} />
 
             {feedback.show && (
@@ -576,13 +576,21 @@ const App = () => {
                 </div>
             )}
 
-            <div className="fixed top-20 w-full z-40 bg-secondary-50 border-b border-secondary-200 hidden md:block text-secondary-500 font-bold">
-                <div className="max-w-5xl mx-auto flex justify-between px-4">
+            <div className="fixed top-20 left-0 right-0 w-full z-40 bg-[#0f172a]/95 backdrop-blur-xl border-b border-slate-800/80 shadow-md hidden md:block py-2.5">
+                <div className="max-w-5xl mx-auto flex items-center justify-between px-4">
                     {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => {
                         const sectionId = tab.toLowerCase();
                         const isActive = activeTab === sectionId;
                         return (
-                            <a key={tab} href={`#${sectionId}`} className={`py-4 text-[15px] hover:text-brand-500 transition-all font-bold border-b-2 ${isActive ? 'border-brand-500 text-brand-600' : 'border-transparent'}`}>
+                            <a 
+                                key={tab} 
+                                href={`#${sectionId}`} 
+                                className={`px-4 py-2 rounded-xl text-[14px] transition-all duration-200 font-bold ${
+                                    isActive 
+                                        ? 'bg-brand-500/15 text-brand-400 font-extrabold border border-brand-500/40 shadow-sm' 
+                                        : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent'
+                                }`}
+                            >
                                 {tab}
                             </a>
                         );
@@ -591,41 +599,73 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-secondary-50/50 scroll-mt-[80px] md:scroll-mt-[132px]">
-                <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full">
+            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-[var(--bg-base)] scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
+                {/* Dynamic Background Data-Node Animation */}
+                <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+                    <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-brand-700 rounded-full mix-blend-screen filter blur-[100px] animate-pulse" style={{animationDelay: '2s'}}></div>
+                    {/* Rotating grid/node structure */}
+                    <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10" 
+                         style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
+                    </div>
+                </div>
+
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full relative z-10">
                     <div className="space-y-6 md:space-y-8 text-left">
-                        <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">{settings?.brand?.tagline || "Logic-First. AI-Fast."}</div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-secondary-900 tracking-tight transition-all duration-300 hover:scale-[1.02] hover:drop-shadow-lg cursor-default">Certification in <br/><span className="text-brand-500"><TypewriterText text={currentProgram.title} /></span></h1>
-                        <p className="text-sm md:text-base text-secondary-600 max-w-2xl leading-relaxed mb-6">
+                        <div className="inline-block bg-brand-500/10 text-brand-400 border border-brand-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-brand-500/20">
+                            {settings?.brand?.tagline || "Logic-First. AI-Fast."}
+                        </div>
+                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-[var(--text-base)] tracking-tight transition-all duration-300 hover:scale-[1.01] hover:drop-shadow-lg cursor-default">
+                            Certification in <br/>
+                            <span className="text-brand-500">
+                                <TypewriterText text={currentProgram.title} />
+                            </span>
+                        </h1>
+                        <p className="text-sm md:text-base text-[var(--text-base)] opacity-70 max-w-2xl leading-relaxed mb-6 font-medium">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
-                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-secondary-700 text-left">
-                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-brand-500 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-brand-500 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-500 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-500 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
+                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-[var(--text-base)] opacity-90 text-left">
+                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-brand-400 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-brand-400 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-400 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-                            <TiltCard><a href="#syllabus" className="block w-full bg-secondary-100 text-secondary-900 px-8 py-3.5 md:py-4 rounded font-bold hover:bg-secondary-200 transition-all text-sm uppercase tracking-widest text-center">Explore Curriculum</a></TiltCard>
-                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block w-full text-brand-600 font-bold underline underline-offset-4 decoration-2 uppercase tracking-widest text-sm py-2 text-center hover:text-brand-700 transition-colors">Download Brochure</a></TiltCard>
+                            <TiltCard>
+                                <a href="#syllabus" className="block w-full bg-brand-500 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-brand-600 transition-all text-sm uppercase tracking-widest text-center shadow-lg shadow-brand-500/40 hover:shadow-brand-500/60">
+                                    Explore Curriculum
+                                </a>
+                            </TiltCard>
+                            <TiltCard>
+                                <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block w-full bg-[var(--surface-form)] border border-[var(--border-color)] text-[var(--text-base)] font-bold px-8 py-3.5 md:py-4 rounded uppercase tracking-widest text-sm text-center hover:border-brand-500 hover:text-brand-400 transition-all">
+                                    Download Brochure
+                                </a>
+                            </TiltCard>
                         </div>
                     </div>
                     
-                    <div className="bg-brand-50 p-8 border-2 border-brand-500 rounded-lg max-w-md ml-auto w-full shadow-lg text-left mt-8 lg:mt-0 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-brand-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-                        <h3 className="text-xl font-bold mb-2 text-secondary-900 relative z-10">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
-                        <p className="text-sm text-secondary-400 mb-6 font-medium relative z-10">{settings?.ui?.modalSubText}</p>
-                        <form className="space-y-4" onSubmit={handleSubmit}>
-                            <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
-                            <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
-                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-brand-200 bg-white rounded text-sm focus:border-brand-500 outline-none font-medium transition-all" />
-                            <TiltCard>
-                                <button type="submit" disabled={isSubmitting} className="w-full block bg-brand-500 text-white py-4 rounded font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg active:scale-95 disabled:opacity-50">
-                                    {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
-                                </button>
-                            </TiltCard>
-                            <p className="mt-3 text-[10px] text-secondary-400 text-center leading-tight">
-                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-600">Privacy Policy</a>. Data is used only for your professional consultation.
+                    <div className="bg-[var(--surface-form)] p-8 border border-[var(--border-color)] rounded-3xl max-w-md ml-auto w-full shadow-2xl backdrop-blur-md text-left mt-8 lg:mt-0 relative overflow-hidden group">
+                        <div className="absolute top-[-50px] right-[-50px] w-32 h-32 bg-brand-500 rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"></div>
+                        <div className="absolute bottom-[-50px] left-[-50px] w-32 h-32 bg-brand-300 rounded-full blur-[60px] opacity-10 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"></div>
+                        
+                        <h3 className="text-2xl font-extrabold mb-2 text-[var(--text-base)] relative z-10 tracking-tight">{settings?.ui?.modalTitle || "Begin Your Journey"}</h3>
+                        <p className="text-sm text-[var(--text-base)] opacity-60 mb-6 font-medium relative z-10">{settings?.ui?.modalSubText}</p>
+                        
+                        <form className="space-y-4 relative z-10" onSubmit={handleSubmit}>
+                            <input type="text" placeholder="Full Name" required value={formData.full_name} onChange={e => setFormData({...formData, full_name: e.target.value})} className="w-full p-4 border border-[var(--border-color)] bg-[var(--surface-card)] text-[var(--text-base)] rounded-xl text-sm focus:border-brand-500 outline-none font-medium transition-all placeholder-[var(--text-base)] placeholder-opacity-40 focus:ring-1 focus:ring-brand-500" />
+                            <input type="email" placeholder="Email Address" required value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full p-4 border border-[var(--border-color)] bg-[var(--surface-card)] text-[var(--text-base)] rounded-xl text-sm focus:border-brand-500 outline-none font-medium transition-all placeholder-[var(--text-base)] placeholder-opacity-40 focus:ring-1 focus:ring-brand-500" />
+                            <input type="tel" placeholder="Mobile Number" required maxLength="10" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full p-4 border border-[var(--border-color)] bg-[var(--surface-card)] text-[var(--text-base)] rounded-xl text-sm focus:border-brand-500 outline-none font-medium transition-all placeholder-[var(--text-base)] placeholder-opacity-40 focus:ring-1 focus:ring-brand-500" />
+                            
+                            <div className="pt-2">
+                                <TiltCard>
+                                    <button type="submit" disabled={isSubmitting} className="w-full block bg-gradient-to-r from-brand-600 to-brand-500 text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest hover:from-brand-500 hover:to-brand-400 transition-all shadow-lg shadow-brand-500/50 active:scale-95 disabled:opacity-50">
+                                        {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
+                                    </button>
+                                </TiltCard>
+                            </div>
+                            
+                            <p className="mt-4 text-[10px] text-[var(--text-base)] opacity-40 text-center leading-tight">
+                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-400">Privacy Policy</a>. Data is used only for your professional consultation.
                             </p>
                         </form>
                     </div>
@@ -633,10 +673,20 @@ const App = () => {
             </header>
 
             <ScrollReveal delay={100}>
-                <section id="syllabus" className={`${sectionClass} bg-white`}>
-                    <div className="w-full max-w-7xl mx-auto">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 md:mb-16 gap-6 border-b border-secondary-100 pb-6">
-                            <h2 className="text-3xl font-extrabold text-left text-secondary-900 tracking-tight">Job-Ready Data Analytics Curriculum</h2>
+                <section id="syllabus" className={`${sectionClass} bg-[#0f172a]/80 border-y border-slate-800/80 relative overflow-hidden`}>
+                    {/* Futuristic Gradient Section Separator */}
+                    <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-500/50 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-500/30 to-transparent"></div>
+                    
+                    {/* Ambient Glow Pill Spotlights */}
+                    <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div className="w-full max-w-7xl mx-auto relative z-10">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 md:mb-16 gap-6 border-b border-slate-800/80 pb-6">
+                            <div>
+                                <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
+                                <h2 className="text-3xl font-extrabold text-left theme-text-primary tracking-tight">Job-Ready Data Analytics Curriculum</h2>
+                            </div>
                         </div>
                         
                         <div className="flex flex-col lg:flex-row gap-6 min-h-[400px]">
@@ -645,7 +695,7 @@ const App = () => {
                                     <div key={idx} className="flex flex-col">
                                         <button 
                                             onClick={() => handleModuleToggle(idx)} 
-                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-500 text-white shadow-lg' : 'bg-brand-50 border-brand-200 text-secondary-600 hover:border-brand-400 hover:bg-brand-100'}`}
+                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-400 text-white shadow-lg shadow-brand-500/30' : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-brand-500/40 hover:text-white'}`}
                                         >
                                             <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                             <Icon name="chevron-right" size={20} className={`transition-all duration-300 transform ${activeModuleIdx === idx ? 'rotate-90 opacity-100' : 'rotate-0 opacity-40 group-hover:opacity-70'}`} />
@@ -653,23 +703,23 @@ const App = () => {
     
                                         {/* MOBILE ACCORDION CONTENT */}
                                         <div className={`lg:hidden overflow-hidden transition-all duration-300 ${activeModuleIdx === idx ? 'max-h-[1200px] opacity-100 py-6' : 'max-h-0 opacity-0'}`}>
-                                            <div className="bg-brand-50 rounded-2xl p-6 border border-brand-200 space-y-6">
+                                            <div className="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 space-y-6">
                                                 <div className="flex flex-col space-y-1">
-                                                    <span className="text-brand-600 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
+                                                    <span className="text-brand-400 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
                                                     <div className="flex items-center gap-2 mt-2">
-                                                        <Icon name="play-circle" size={16} className="text-brand-500" />
-                                                        <span className="text-[11px] font-bold text-secondary-400 uppercase">Live: {mod.lectures} • {mod.hours} Hours</span>
+                                                        <Icon name="play-circle" size={16} className="text-brand-400" />
+                                                        <span className="text-[11px] font-bold theme-text-muted uppercase">Live: {mod.lectures} • {mod.hours} Hours</span>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-3">
                                                     {(mod.content || []).map((bullet, i) => (
                                                         <div key={i} className="flex items-start space-x-3 text-left">
                                                             <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
-                                                            <span className="text-sm font-medium text-secondary-600 leading-snug">{bullet}</span>
+                                                            <span className="text-sm font-medium theme-text-secondary leading-snug">{bullet}</span>
                                                         </div>
                                                     ))}
                                                 </div>
-                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
+                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-lg shadow-brand-500/40 cursor-pointer hover:bg-brand-600 transition-all"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                             </div>
                                         </div>
                                     </div>
@@ -677,32 +727,34 @@ const App = () => {
                             </div>
     
                             {/* DESKTOP DETAIL VIEW */}
-                            <div className="hidden lg:flex lg:w-2/3 bg-brand-50 p-10 rounded-2xl border border-brand-300 flex-col shadow-sm relative overflow-hidden">
+                            <div className="hidden lg:flex lg:w-2/3 bg-slate-900/80 p-10 rounded-2xl border border-slate-800 flex-col shadow-2xl relative overflow-hidden group backdrop-blur-xl">
+                                <div className="absolute top-[-50px] right-[-50px] w-48 h-48 bg-brand-500 rounded-full blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"></div>
+
                                 {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
                                     <>
-                                        <div className="mb-8 pb-6 border-b border-secondary-200/50 flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
+                                        <div className="mb-8 pb-6 border-b border-slate-800 flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
                                             <div className="space-y-1 text-left">
-                                                <span className="text-brand-500 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
-                                                <h3 className="text-2xl font-bold text-secondary-900 mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
+                                                <span className="text-brand-400 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
+                                                <h3 className="text-2xl font-bold theme-text-primary mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
                                                 <div className="flex items-center gap-2 mt-2">
-                                                    <Icon name="play-circle" size={18} className="text-brand-500" />
-                                                    <span className="text-xs font-bold text-secondary-400 uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
+                                                    <Icon name="play-circle" size={18} className="text-brand-400" />
+                                                    <span className="text-xs font-bold theme-text-muted uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                                 </div>
                                             </div>
-                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-md cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
+                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-lg shadow-brand-500/40 cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                         </div>
                                         
                                         <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
                                             {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
-                                                <div key={i} className="flex items-start space-x-3 group">
+                                                <div key={i} className="flex items-start space-x-3 group/bullet">
                                                     <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
-                                                    <span className="text-[14px] font-medium text-secondary-500 leading-tight group-hover:text-secondary-900 transition-colors">{bullet}</span>
+                                                    <span className="text-[14px] font-medium theme-text-secondary group-hover/bullet:text-white transition-colors">{bullet}</span>
                                                 </div>
                                             ))}
                                         </div>
                                     </>
                                 ) : (
-                                    <div className="flex items-center justify-center h-full text-secondary-400 font-bold">Please select a module to view curriculum details.</div>
+                                    <div className="flex items-center justify-center h-full theme-text-muted font-bold relative z-10">Please select a module to view curriculum details.</div>
                                 )}
                             </div>
                         </div>
@@ -711,13 +763,13 @@ const App = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-                <section id="tools" className={`${sectionClass} bg-white`}>
+                <section id="tools" className={`${sectionClass} theme-bg`}>
                     <div className="w-full max-w-7xl mx-auto text-left">
-                        <h2 className="text-3xl font-bold mb-16 text-secondary-900 tracking-tight">Modern Industry Tool Stack</h2>
+                        <h2 className="text-3xl font-bold mb-16 theme-text-primary tracking-tight">Modern Industry Tool Stack</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {tools.map((tool, i) => (
                             <TiltCard key={i} className="group h-full rounded-2xl">
-                                <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border border-brand-200 shadow-sm rounded-2xl transition-all h-full hover:border-brand-400 relative overflow-hidden`}>
+                                <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border theme-border shadow-sm rounded-2xl transition-all h-full hover:border-brand-400 relative overflow-hidden`}>
                                     <div className="w-16 h-16 flex items-center justify-center relative z-10">
                                         <img 
                                             src={tool.img} 
@@ -726,7 +778,7 @@ const App = () => {
                                             onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
                                         />
                                     </div>
-                                    <span className="font-bold text-secondary-700 text-sm relative z-10">{tool.name}</span>
+                                    <span className="font-bold theme-text-secondary text-sm relative z-10">{tool.name}</span>
                                     {/* Hover Glow Effect */}
                                     <div className="absolute inset-0 bg-gradient-to-tr from-brand-500/0 via-brand-500/5 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 blur-md"></div>
                                 </div>
@@ -739,10 +791,10 @@ const App = () => {
 
             {/* PROJECTS SECTION - 2026 Tilt Grid */}
             <ScrollReveal>
-                <section id="projects" className={`${sectionClass} bg-secondary-50`}>
+                <section id="projects" className={`${sectionClass} theme-bg`}>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
                         
-                        <h2 className="text-3xl font-extrabold mb-8 md:mb-12 text-secondary-900 tracking-tight flex items-center gap-3">
+                        <h2 className="text-3xl font-extrabold mb-8 md:mb-12 theme-text-primary tracking-tight flex items-center gap-3">
                             <Icon name="layout-grid" size={32} className="text-brand-500" />
                             6+ Real-Time Industry Projects
                         </h2>
@@ -751,18 +803,18 @@ const App = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                             {(media.projects || []).slice(0, 6).map((proj, idx) => (
                                 <TiltCard key={proj.id} className="col-span-1 group">
-                                    <div className="h-full w-full bg-brand-50 rounded-2xl border border-brand-200 overflow-hidden relative transition-all duration-300 hover:border-brand-400 hover:shadow-md flex flex-col">
-                                        <div className="h-32 md:h-40 bg-secondary-100 flex items-center justify-center relative overflow-hidden">
+                                    <div className="h-full w-full theme-card rounded-2xl border theme-border overflow-hidden relative transition-all duration-300 hover:border-brand-400 hover:shadow-md flex flex-col">
+                                        <div className="h-32 md:h-40 theme-card flex items-center justify-center relative overflow-hidden">
                                             <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700" onError={e => e.target.style.display='none'} />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                             <Icon name="image" size={32} className="opacity-20 absolute" />
                                         </div>
-                                        <div className="p-4 md:p-5 relative z-10 bg-brand-50 flex-grow">
+                                        <div className="p-4 md:p-5 relative z-10 theme-card flex-grow">
                                             <div className="flex items-center gap-2 mb-2">
                                                 <span className="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
-                                                <span className="text-[10px] font-bold uppercase tracking-widest text-secondary-500">Project {idx + 1}</span>
+                                                <span className="text-[10px] font-bold uppercase tracking-widest theme-text-muted">Project {idx + 1}</span>
                                             </div>
-                                            <h4 className="font-bold text-secondary-800 text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
+                                            <h4 className="font-bold theme-text-primary text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
                                         </div>
                                         {/* Hover Glow Effect adapted for light mode */}
                                         <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/5 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
@@ -775,16 +827,16 @@ const App = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-                <section id="videos" className={`${sectionClass} bg-white`}>
+                <section id="videos" className={`${sectionClass} theme-bg`}>
                      <div className="w-full max-w-7xl mx-auto text-left">
-                        <h2 className="text-3xl font-bold text-secondary-900 tracking-tight mb-12">Program Overview & Demos</h2>
+                        <h2 className="text-3xl font-bold theme-text-primary tracking-tight mb-12">Program Overview & Demos</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {(media.videos || []).map((vid, i) => (
                                 <TiltCard key={i} className="group">
-                                    <div className="aspect-video bg-brand-50 rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border border-brand-200 hover:border-brand-400 hover:shadow-md transition-all">
+                                    <div className="aspect-video theme-card rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border theme-border hover:border-brand-400 hover:shadow-md transition-all">
                                         <img src={`https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-60 group-hover:opacity-80" onError={e => e.target.style.display='none'} />
                                         <Icon name="play" size={40} className="text-brand-500 opacity-90 group-hover:scale-110 transition-all z-10 drop-shadow-md" />
-                                        <div className="absolute bottom-4 left-4 text-secondary-900 font-bold text-[10px] uppercase tracking-wider z-10 bg-white/80 backdrop-blur px-2 py-1 rounded">{vid.title}</div>
+                                        <div className="absolute bottom-4 left-4 theme-text-primary font-bold text-[10px] uppercase tracking-wider z-10 theme-bg/80 backdrop-blur px-2 py-1 rounded">{vid.title}</div>
                                     </div>
                                 </TiltCard>
                             ))}
@@ -794,26 +846,26 @@ const App = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-                <section id="eligibility" className={`${sectionClass} bg-white`}>
+                <section id="eligibility" className={`${sectionClass} theme-bg`}>
                     <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
                         <div className="space-y-6 md:space-y-8 w-full self-center">
-                            <div className="inline-block bg-brand-50 text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
-                            <h2 className="text-3xl md:text-4xl font-extrabold text-secondary-900 tracking-tight">Check Your Eligibility Profile</h2>
-                            <p className="text-secondary-500 font-medium leading-relaxed text-sm md:text-base">
+                            <div className="inline-block theme-card text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
+                            <h2 className="text-3xl md:text-4xl font-extrabold theme-text-primary tracking-tight">Check Your Eligibility Profile</h2>
+                            <p className="theme-text-muted font-medium leading-relaxed text-sm md:text-base">
                                 Discover how this program aligns with your current skills. Whether you are a fresh graduate or an experienced professional, our AI-powered curriculum adapts to accelerate your career.
                             </p>
-                            <div className="space-y-4 font-bold text-secondary-700 mt-8">
+                            <div className="space-y-4 font-bold theme-text-secondary mt-8">
                                 {[
                                     "Final year students or graduates from any discipline.", 
                                     "Working professionals looking for career acceleration.", 
                                     "A basic understanding of logical reasoning.", 
                                     "Commitment to 15-20 hours of weekly learning."
                                 ].map((criteria, i) => (
-                                    <div key={i} className="flex items-start space-x-4 p-4 rounded-xl bg-brand-50 border border-brand-200 shadow-sm">
+                                    <div key={i} className="flex items-start space-x-4 p-4 rounded-xl theme-card border theme-border shadow-sm">
                                         <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                                             <Icon name="check" size={14} className="text-brand-600 font-bold" />
                                         </div>
-                                        <span className="text-sm font-bold text-secondary-700 leading-snug">{criteria}</span>
+                                        <span className="text-sm font-bold theme-text-secondary leading-snug">{criteria}</span>
                                     </div>
                                 ))}
                             </div>
@@ -828,15 +880,15 @@ const App = () => {
 
             {/* FEES SECTION */}
             <ScrollReveal delay={100}>
-                <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 bg-secondary-50 scroll-mt-[80px] md:scroll-mt-[132px]">
-                    <div className="w-full max-w-5xl mx-auto bg-brand-50 rounded-[3rem] border border-brand-200 overflow-hidden shadow-2xl grid md:grid-cols-2">
+                <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
+                    <div className="w-full max-w-5xl mx-auto theme-card rounded-[3rem] border theme-border overflow-hidden shadow-2xl grid md:grid-cols-2">
                         <div className="p-8 md:p-14 space-y-8 text-left">
-                            <h3 className="text-2xl font-extrabold tracking-tight text-secondary-900">Program Package</h3>
+                            <h3 className="text-2xl font-extrabold tracking-tight theme-text-primary">Program Package</h3>
                             <div className="space-y-5">
                                 {(currentProgram.highlights || []).map((t, i) => (
                                     <div key={i} className="flex items-center space-x-4">
                                         <Icon name="check-circle" size={20} className="text-brand-500 flex-shrink-0" />
-                                        <span className="text-md font-bold text-secondary-600">{t}</span>
+                                        <span className="text-md font-bold theme-text-secondary">{t}</span>
                                     </div>
                                 ))}
                             </div>
@@ -856,7 +908,7 @@ const App = () => {
                                     
                                     {formData.discountApplied && (
                                         <div className="flex flex-wrap items-center gap-2">
-                                            <span className="text-secondary-500 line-through text-xs md:text-sm font-medium whitespace-nowrap">
+                                            <span className="theme-text-muted line-through text-xs md:text-sm font-medium whitespace-nowrap">
                                                 ₹{currentProgram.price?.toLocaleString()} /-
                                             </span>
                                             <span className="text-brand-400 text-xs md:text-sm font-bold whitespace-nowrap">
@@ -865,15 +917,15 @@ const App = () => {
                                         </div>
                                     )}
                                 </div>
-                                <p className="text-secondary-400 text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
+                                <p className="theme-text-muted text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
                             </div>
     
                             <div className="space-y-3">
-                                <div className="flex gap-2 p-1 bg-white/5 border border-white/10 rounded-xl focus-within:border-brand-500 transition-all">
+                                <div className="flex gap-2 p-1 theme-bg/5 border border-white/10 rounded-xl focus-within:border-brand-500 transition-all">
                                     <input 
                                         type="text" 
                                         placeholder="Enter Coupon Code" 
-                                        className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:text-secondary-600 text-brand-400 min-w-0"
+                                        className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:theme-text-secondary text-brand-400 min-w-0"
                                         value={formData.couponCode}
                                         onChange={(e) => setFormData({...formData, couponCode: e.target.value})}
                                     />
@@ -894,7 +946,7 @@ const App = () => {
                             </div>
     
                             <TiltCard>
-                                <button className="w-full block bg-white text-secondary-900 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
+                                <button className="w-full block theme-bg theme-text-primary py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
                                     <Icon name="credit-card" size={18} className="flex-shrink-0" />
                                     <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
                                 </button>

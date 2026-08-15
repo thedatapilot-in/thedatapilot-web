@@ -93,21 +93,21 @@ const App = () => {
     const safeCta = aboutData.cta || { title: "Join the Cohort", description: "", buttonText: "Explore Our Curriculum", buttonLink: "index.html#about" };
 
     return (
-        <div className="min-h-screen text-secondary-800 bg-white animate-in fade-in duration-700">
+        <div className="min-h-screen theme-text-primary theme-bg animate-in fade-in duration-700">
             <Navbar />
             
-            <header className="pt-36 pb-10 px-6 bg-secondary-50/50 border-b border-secondary-200">
+            <header className="pt-36 pb-10 px-6 theme-bg/50 border-b theme-border">
                 <div className="max-w-4xl mx-auto text-left">
-                    <h1 className="text-4xl font-extrabold text-secondary-900 mb-2">{safeHeader.title}</h1>
-                    <p className="text-secondary-400 font-medium italic text-sm">{safeHeader.subtitle}</p>
+                    <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
+                    <p className="theme-text-muted font-medium italic text-sm">{safeHeader.subtitle}</p>
                 </div>
             </header>
 
             <main className="flex-grow py-12 px-6">
                 <div className="max-w-4xl mx-auto">
-                    <div className="space-y-6 text-secondary-600 text-left">
+                    <div className="space-y-6 theme-text-secondary text-left">
                         {/* Intro Paragraph */}
-                        <p className="text-xl font-medium text-secondary-900 leading-relaxed mb-10">
+                        <p className="text-xl font-medium theme-text-primary leading-relaxed mb-10">
                             {safeHeader.intro.split('Augmented Data Analysts').map((part, i, arr) => 
                                 i === arr.length - 1 ? part : <span key={i}>{part}<strong>Augmented Data Analysts</strong></span>
                             )}
@@ -116,14 +116,14 @@ const App = () => {
                         <div className="space-y-12">
                             {/* Mission Section */}
                             <section>
-                                <h2 className="text-2xl font-bold text-secondary-900 mb-5 tracking-tight">{safeMission.title}</h2>
+                                <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeMission.title}</h2>
                                 <p className="text-lg leading-relaxed">{safeMission.description}</p>
                             </section>
 
                             {/* Methodology Section */}
                             {safeMethodology.points.length > 0 && (
                                 <section>
-                                    <h2 className="text-2xl font-bold text-secondary-900 mb-5 tracking-tight">{safeMethodology.title}</h2>
+                                    <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeMethodology.title}</h2>
                                     <ul className="space-y-4">
                                         {safeMethodology.points.map((point, idx) => (
                                             <li key={idx} className="flex items-start gap-3">
@@ -137,14 +137,14 @@ const App = () => {
 
                             {/* Who We Are Section */}
                             <section>
-                                <h2 className="text-2xl font-bold text-secondary-900 mb-5 tracking-tight">{safeWhoWeAre.title}</h2>
+                                <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeWhoWeAre.title}</h2>
                                 <p className="text-lg leading-relaxed">{safeWhoWeAre.description}</p>
                             </section>
                         </div>
 
                         {/* Call to Action Block */}
-                        <div className="bg-secondary-50 p-10 rounded-[2.5rem] border border-secondary-100 mt-16 shadow-sm">
-                            <h3 className="font-bold text-secondary-900 mb-4 uppercase tracking-widest text-sm">{safeCta.title}</h3>
+                        <div className="theme-bg p-10 rounded-[2.5rem] border theme-border mt-16 shadow-sm">
+                            <h3 className="font-bold theme-text-primary mb-4 uppercase tracking-widest text-sm">{safeCta.title}</h3>
                             <p className="mb-8 text-lg">{safeCta.description}</p>
                             <a href={safeCta.buttonLink} className="inline-block bg-secondary-900 text-white px-10 py-4 rounded-xl font-bold hover:bg-brand-500 transition-all shadow-lg active:scale-95">
                                 {safeCta.buttonText}
