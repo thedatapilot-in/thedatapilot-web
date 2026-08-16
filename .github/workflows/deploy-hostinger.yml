@@ -43,6 +43,7 @@ jobs:
           password: ${{ secrets.HOSTINGER_FTP_PASS }}
           server-dir: ${{ steps.target.outputs.remote_dir }}
           state-name: .ftp-deploy-sync-state-v4.json
+          timeout: 60000
           exclude: |
             **/.git*
             **/.git*/**
