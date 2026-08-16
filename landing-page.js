@@ -649,7 +649,7 @@ const App = () => {
                         { label: 'Videos', id: 'videos' },
                         ...(SHOW_TESTIMONIALS ? [{ label: 'Reviews', id: 'testimonials' }] : []),
                         { label: 'Eligibility', id: 'eligibility' },
-                        { label: 'Invest', id: 'fees' },
+                        { label: 'Pricing', id: 'fees' },
                     ].map((tab) => {
                         const isActive = activeTab === tab.id;
                         return (
@@ -1027,16 +1027,13 @@ const App = () => {
             <ScrollReveal delay={100}>
                 <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-12 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
                     <div className="w-full max-w-5xl mx-auto text-left mb-4">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Pricing</span>
-                        <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight">Your Investment</h2>
-                        <p className="theme-text-muted text-sm font-medium mt-2">
-                            Average first-year salary gain after program completion: <span className="text-brand-400 font-bold">₹3–5 LPA</span> above current CTC.
-                        </p>
+                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Certification Program</span>
+                        <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight">Program Fees</h2>
                     </div>
                     <div className="w-full max-w-5xl mx-auto theme-card rounded-[3rem] border theme-border overflow-hidden shadow-2xl grid md:grid-cols-2">
-                        <div className="p-8 md:p-14 space-y-8 text-left">
-                            <h3 className="text-2xl font-extrabold tracking-tight theme-text-primary">What You Get</h3>
-                            <div className="space-y-5">
+                        <div className="p-6 md:p-10 space-y-5 text-left">
+                            <h3 className="text-xl font-extrabold tracking-tight theme-text-primary">What's Included</h3>
+                            <div className="space-y-3">
                                 {(currentProgram.highlights || []).map((t, i) => (
                                     <div key={i} className="flex items-center space-x-4">
                                         <Icon name="check-circle" size={20} className="text-brand-500 flex-shrink-0" />
@@ -1046,10 +1043,10 @@ const App = () => {
                             </div>
                         </div>
     
-                        <div className="p-8 md:p-14 bg-secondary-900 text-white flex flex-col justify-center space-y-8 text-left">
+                        <div className="p-6 md:p-10 bg-secondary-900 text-white flex flex-col justify-center space-y-5 text-left">
                             <div className="space-y-1">
-                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-400">Total Program Investment</span>
-                                <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentProgram.title} Fee</h3>
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-400">Program Fee</span>
+                                <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentProgram.title}</h3>
                             </div>
     
                             <div className="space-y-1">
@@ -1097,15 +1094,8 @@ const App = () => {
                                 )}
                             </div>
     
-                            <div className="flex items-start gap-3 py-3 px-4 rounded-xl bg-brand-500/10 border border-brand-500/20">
-                                <Icon name="trending-up" size={16} className="text-brand-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-xs font-bold text-brand-300 leading-snug">
-                                    Avg. salary gain post-program: <strong className="text-brand-400">₹3–5 LPA</strong> above current CTC
-                                </span>
-                            </div>
-
                             <TiltCard>
-                                <button className="w-full block theme-bg theme-text-primary py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
+                                <button className="w-full block bg-brand-500 hover:bg-brand-600 text-white py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl shadow-brand-500/40 hover:shadow-brand-500/60 active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
                                     <Icon name="credit-card" size={18} className="flex-shrink-0" />
                                     <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
                                 </button>
