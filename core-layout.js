@@ -554,7 +554,9 @@ window.TypewriterText = ({ text }) => {
                 const proximity = Math.max(0, 1 - dist / MOUSE_R);
                 const pulse = 0.5 + 0.5 * Math.sin(t * 0.0007 + d.phase);
                 const r = BASE_R + proximity * (MAX_R - BASE_R);
-                const alpha = 0.07 + pulse * 0.04 + proximity * 0.35;
+                const alpha = proximity > 0
+                    ? 0.06 + proximity * 0.45
+                    : pulse * 0.012;
 
                 ctx.beginPath();
                 ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
