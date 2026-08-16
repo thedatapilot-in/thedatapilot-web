@@ -152,6 +152,67 @@ const TiltCard = ({ children, className = "" }) => {
     );
 };
 
+const CountUpStat = ({ target, suffix = '', label }) => {
+    const [count, setCount] = useState(0);
+    const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
+    const started = React.useRef(false);
+
+    useEffect(() => {
+        if (!isVisible || started.current) return;
+        started.current = true;
+        const steps = 35;
+        const increment = target / steps;
+        let current = 0;
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                setCount(target);
+                clearInterval(timer);
+            } else {
+                setCount(Math.floor(current));
+            }
+        }, 1400 / steps);
+        return () => clearInterval(timer);
+    }, [isVisible, target]);
+
+    return (
+        <div ref={ref} className="text-center px-2">
+            <div className="text-2xl md:text-3xl font-extrabold text-brand-400 tabular-nums">
+                {count}{suffix}
+            </div>
+            <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1">
+                {label}
+            </div>
+        </div>
+    );
+};
+
+const SHOW_TESTIMONIALS = false;
+
+const DUMMY_TESTIMONIALS = [
+    {
+        name: "Priya S.",
+        role: "Data Analyst, Mid-size MNC",
+        before: "Commerce Graduate — 0 coding background",
+        quote: "I had zero coding background. After 4 months I landed my first analyst role with a 280% salary jump. The SQL and Power BI modules were the game-changers for me.",
+        initials: "PS",
+    },
+    {
+        name: "Rahul M.",
+        role: "Business Analyst, Early-stage Startup",
+        before: "Sales Executive — 3 years experience",
+        quote: "Switched from a dead-end sales role to data. The live projects gave me a portfolio that actually got me shortlisted. Worth every rupee, genuinely.",
+        initials: "RM",
+    },
+    {
+        name: "Anjali K.",
+        role: "BI Developer, IT Services Firm",
+        before: "BCA Graduate — Fresh Talent profile",
+        quote: "The eligibility checker said I was a fresh talent. The program delivered exactly what it promised — from zero to job-ready in 16 weeks. No filler content.",
+        initials: "AK",
+    }
+];
+
 const EligibilityChecker = () => {
     const { useState } = React;
     const { Icon } = window;
@@ -357,7 +418,9 @@ const App = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            const sections = ['about', 'syllabus', 'tools', 'projects', 'videos', 'eligibility', 'fees'];
+            const sections = ['about', 'syllabus', 'tools', 'projects', 'videos',
+                ...(SHOW_TESTIMONIALS ? ['testimonials'] : []),
+                'eligibility', 'fees'];
             let current = 'about';
             for (const id of sections) {
                 const el = document.getElementById(id);
@@ -578,20 +641,28 @@ const App = () => {
 
             <div className="fixed top-20 left-0 right-0 w-full z-40 bg-[#0f172a]/95 backdrop-blur-xl border-b border-slate-800/80 shadow-md hidden md:block py-2.5">
                 <div className="max-w-5xl mx-auto flex items-center justify-between px-4">
-                    {['About', 'Syllabus', 'Tools', 'Projects', 'Videos', 'Eligibility', 'Fees'].map((tab) => {
-                        const sectionId = tab.toLowerCase();
-                        const isActive = activeTab === sectionId;
+                    {[
+                        { label: 'About', id: 'about' },
+                        { label: 'Syllabus', id: 'syllabus' },
+                        { label: 'Tools', id: 'tools' },
+                        { label: 'Projects', id: 'projects' },
+                        { label: 'Videos', id: 'videos' },
+                        ...(SHOW_TESTIMONIALS ? [{ label: 'Reviews', id: 'testimonials' }] : []),
+                        { label: 'Eligibility', id: 'eligibility' },
+                        { label: 'Invest', id: 'fees' },
+                    ].map((tab) => {
+                        const isActive = activeTab === tab.id;
                         return (
-                            <a 
-                                key={tab} 
-                                href={`#${sectionId}`} 
+                            <a
+                                key={tab.id}
+                                href={`#${tab.id}`}
                                 className={`px-4 py-2 rounded-xl text-[14px] transition-all duration-200 font-bold ${
-                                    isActive 
-                                        ? 'bg-brand-500/15 text-brand-400 font-extrabold border border-brand-500/40 shadow-sm' 
+                                    isActive
+                                        ? 'bg-brand-500/15 text-brand-400 font-extrabold border border-brand-500/40 shadow-sm'
                                         : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent'
                                 }`}
                             >
-                                {tab}
+                                {tab.label}
                             </a>
                         );
                     })}
@@ -630,6 +701,12 @@ const App = () => {
                             <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-400 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
                             <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
+                        <div className="grid grid-cols-3 gap-0 py-5 border-y theme-border-strong">
+                            <CountUpStat target={280} suffix="+" label="Students Enrolled" />
+                            <CountUpStat target={16} suffix=" Wks" label="Intensive Program" />
+                            <CountUpStat target={12} suffix="+" label="Live Projects" />
+                        </div>
+
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
                                 <a href="#syllabus" className="block w-full bg-brand-500 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-brand-600 transition-all text-sm uppercase tracking-widest text-center shadow-lg shadow-brand-500/40 hover:shadow-brand-500/60">
@@ -689,6 +766,36 @@ const App = () => {
                             </div>
                         </div>
                         
+                        {/* Module Progress Roadmap */}
+                        <div className="flex items-start gap-0 mb-10 overflow-x-auto pb-3 -mx-1 px-1" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+                            {(currentProgram.syllabus || []).map((mod, idx) => (
+                                <React.Fragment key={idx}>
+                                    <button
+                                        onClick={() => handleModuleToggle(idx)}
+                                        className="flex-shrink-0 flex flex-col items-center gap-1.5 group"
+                                    >
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all ${
+                                            idx <= activeModuleIdx
+                                                ? 'bg-brand-500 border-brand-500 text-white shadow-md shadow-brand-500/30'
+                                                : 'bg-transparent border-slate-600 text-slate-500 group-hover:border-brand-500/50'
+                                        }`}>
+                                            {idx + 1}
+                                        </div>
+                                        <span className={`text-[9px] font-bold uppercase tracking-wider whitespace-nowrap transition-colors max-w-[64px] text-center leading-tight ${
+                                            idx === activeModuleIdx ? 'text-brand-400' : 'text-slate-500'
+                                        }`}>
+                                            {mod.title.split(' ').slice(0, 2).join(' ')}
+                                        </span>
+                                    </button>
+                                    {idx < (currentProgram.syllabus?.length || 1) - 1 && (
+                                        <div className={`flex-1 h-0.5 mx-1 min-w-[20px] mt-4 transition-colors ${
+                                            idx < activeModuleIdx ? 'bg-brand-500' : 'bg-slate-700'
+                                        }`}></div>
+                                    )}
+                                </React.Fragment>
+                            ))}
+                        </div>
+
                         <div className="flex flex-col lg:flex-row gap-6 min-h-[400px]">
                             <div className="lg:w-1/3 flex flex-col space-y-3">
                                 {(currentProgram.syllabus || []).map((mod, idx) => (
@@ -719,7 +826,7 @@ const App = () => {
                                                         </div>
                                                     ))}
                                                 </div>
-                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 bg-brand-500 text-white py-3 rounded-lg text-xs font-bold uppercase tracking-widest shadow-lg shadow-brand-500/40 cursor-pointer hover:bg-brand-600 transition-all"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
+                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 border border-brand-500/60 text-brand-400 py-3 rounded-lg text-xs font-bold uppercase tracking-widest cursor-pointer hover:bg-brand-500/10 transition-all"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                             </div>
                                         </div>
                                     </div>
@@ -741,7 +848,7 @@ const App = () => {
                                                     <span className="text-xs font-bold theme-text-muted uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                                 </div>
                                             </div>
-                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block flex items-center space-x-2 bg-brand-500 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-600 transition-all shadow-lg shadow-brand-500/40 cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
+                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block flex items-center space-x-2 border border-brand-500/60 text-brand-400 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-500/10 transition-all cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                         </div>
                                         
                                         <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
@@ -768,7 +875,8 @@ const App = () => {
                         <h2 className="text-3xl font-bold mb-16 theme-text-primary tracking-tight">Modern Industry Tool Stack</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {tools.map((tool, i) => (
-                            <TiltCard key={i} className="group h-full rounded-2xl">
+                            <ScrollReveal key={i} delay={i * 70}>
+                            <TiltCard className="group h-full rounded-2xl">
                                 <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border theme-border shadow-sm rounded-2xl transition-all h-full hover:border-brand-400 relative overflow-hidden`}>
                                     <div className="w-16 h-16 flex items-center justify-center relative z-10">
                                         <img 
@@ -783,6 +891,7 @@ const App = () => {
                                     <div className="absolute inset-0 bg-gradient-to-tr from-brand-500/0 via-brand-500/5 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 blur-md"></div>
                                 </div>
                             </TiltCard>
+                            </ScrollReveal>
                         ))}
                         </div>
                     </div>
@@ -845,6 +954,41 @@ const App = () => {
                 </section>
             </ScrollReveal>
 
+            {SHOW_TESTIMONIALS && (
+                <ScrollReveal delay={100}>
+                    <section id="testimonials" className={`${sectionClass} theme-bg-alt`}>
+                        <div className="w-full max-w-7xl mx-auto text-left">
+                            <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Student Outcomes</span>
+                            <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight mb-12">
+                                Real Students. Real Results.
+                            </h2>
+                            <div className="grid md:grid-cols-3 gap-6">
+                                {DUMMY_TESTIMONIALS.map((t, i) => (
+                                    <ScrollReveal key={i} delay={i * 120}>
+                                        <div className="theme-card border theme-border-strong rounded-[2rem] p-8 flex flex-col h-full border-l-4" style={{borderLeftColor: 'var(--brand-500)'}}>
+                                            <div className="flex items-center gap-4 mb-6">
+                                                <div className="w-12 h-12 rounded-full bg-brand-500/20 flex items-center justify-center flex-shrink-0">
+                                                    <span className="text-brand-400 font-extrabold text-sm">{t.initials}</span>
+                                                </div>
+                                                <div>
+                                                    <div className="font-bold theme-text-primary text-sm">{t.name}</div>
+                                                    <div className="text-[11px] text-brand-400 font-bold">{t.role}</div>
+                                                </div>
+                                            </div>
+                                            <p className="theme-text-secondary text-sm leading-relaxed flex-grow mb-5">"{t.quote}"</p>
+                                            <div className="flex items-center gap-2 pt-4 border-t theme-border">
+                                                <Icon name="arrow-right" size={12} className="text-brand-500 flex-shrink-0" />
+                                                <span className="text-[10px] font-bold theme-text-muted uppercase tracking-wider">Before: {t.before}</span>
+                                            </div>
+                                        </div>
+                                    </ScrollReveal>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+                </ScrollReveal>
+            )}
+
             <ScrollReveal delay={100}>
                 <section id="eligibility" className={`${sectionClass} theme-bg-alt`}>
                     <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
@@ -878,12 +1022,19 @@ const App = () => {
                 </section>
             </ScrollReveal>
 
-            {/* FEES SECTION */}
+            {/* INVEST SECTION */}
             <ScrollReveal delay={100}>
                 <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
+                    <div className="w-full max-w-5xl mx-auto text-left mb-8">
+                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Pricing</span>
+                        <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight">Your Investment</h2>
+                        <p className="theme-text-muted text-sm font-medium mt-2">
+                            Average first-year salary gain after program completion: <span className="text-brand-400 font-bold">₹3–5 LPA</span> above current CTC.
+                        </p>
+                    </div>
                     <div className="w-full max-w-5xl mx-auto theme-card rounded-[3rem] border theme-border overflow-hidden shadow-2xl grid md:grid-cols-2">
                         <div className="p-8 md:p-14 space-y-8 text-left">
-                            <h3 className="text-2xl font-extrabold tracking-tight theme-text-primary">Program Package</h3>
+                            <h3 className="text-2xl font-extrabold tracking-tight theme-text-primary">What You Get</h3>
                             <div className="space-y-5">
                                 {(currentProgram.highlights || []).map((t, i) => (
                                     <div key={i} className="flex items-center space-x-4">
@@ -945,6 +1096,13 @@ const App = () => {
                                 )}
                             </div>
     
+                            <div className="flex items-start gap-3 py-3 px-4 rounded-xl bg-brand-500/10 border border-brand-500/20">
+                                <Icon name="trending-up" size={16} className="text-brand-400 flex-shrink-0 mt-0.5" />
+                                <span className="text-xs font-bold text-brand-300 leading-snug">
+                                    Avg. salary gain post-program: <strong className="text-brand-400">₹3–5 LPA</strong> above current CTC
+                                </span>
+                            </div>
+
                             <TiltCard>
                                 <button className="w-full block theme-bg theme-text-primary py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl hover:bg-brand-500 hover:text-white active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
                                     <Icon name="credit-card" size={18} className="flex-shrink-0" />
