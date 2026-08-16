@@ -28,10 +28,10 @@ jobs:
         id: target
         run: |
           if [ "${{ github.ref_name }}" = "main" ]; then
-            echo "remote_dir=/public_html/" >> $GITHUB_OUTPUT
+            echo "remote_dir=/domains/thedatapilot.in/public_html/" >> $GITHUB_OUTPUT
             echo "env_label=production" >> $GITHUB_OUTPUT
           else
-            echo "remote_dir=/public_html/staging/" >> $GITHUB_OUTPUT
+            echo "remote_dir=/domains/thedatapilot.in/public_html/staging/" >> $GITHUB_OUTPUT
             echo "env_label=staging" >> $GITHUB_OUTPUT
           fi
 
@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.HOSTINGER_FTP_USER }}
           password: ${{ secrets.HOSTINGER_FTP_PASS }}
           server-dir: ${{ steps.target.outputs.remote_dir }}
-          state-name: .ftp-deploy-sync-state-v2.json
+          state-name: .ftp-deploy-sync-state-v3.json
           exclude: |
             **/.git*
             **/.git*/**
