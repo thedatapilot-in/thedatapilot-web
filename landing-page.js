@@ -670,7 +670,7 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-[var(--bg-base)] scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
+            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-20 md:pt-36 pb-10 md:pb-16 px-6 bg-[var(--bg-base)] scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation */}
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
                     <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
@@ -682,7 +682,7 @@ const App = () => {
                 </div>
 
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full relative z-10">
-                    <div className="space-y-6 md:space-y-8 text-left">
+                    <div className="space-y-4 md:space-y-5 text-left">
                         <div className="inline-block bg-brand-500/10 text-brand-400 border border-brand-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-brand-500/20">
                             {settings?.brand?.tagline || "Logic-First. AI-Fast."}
                         </div>
@@ -701,7 +701,7 @@ const App = () => {
                             <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-400 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
                             <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
-                        <div className="grid grid-cols-3 gap-0 py-5 border-y theme-border-strong">
+                        <div className="grid grid-cols-3 gap-0 py-3 border-y theme-border-strong">
                             <CountUpStat target={280} suffix="+" label="Students Enrolled" />
                             <CountUpStat target={16} suffix=" Wks" label="Intensive Program" />
                             <CountUpStat target={12} suffix="+" label="Live Projects" />
@@ -759,7 +759,7 @@ const App = () => {
                     <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
                     <div className="w-full max-w-7xl mx-auto relative z-10">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 md:mb-16 gap-6 border-b border-slate-800/80 pb-6">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 border-b border-slate-800/80 pb-4">
                             <div>
                                 <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
                                 <h2 className="text-3xl font-extrabold text-left theme-text-primary tracking-tight">Job-Ready Data Analytics Curriculum</h2>
@@ -767,7 +767,7 @@ const App = () => {
                         </div>
                         
                         {/* Module Progress Roadmap */}
-                        <div className="flex items-start gap-0 mb-10 overflow-x-auto pb-3 -mx-1 px-1" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+                        <div className="flex items-start gap-0 mb-5 overflow-x-auto pb-2 -mx-1 px-1" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
                             {(currentProgram.syllabus || []).map((mod, idx) => (
                                 <React.Fragment key={idx}>
                                     <button
@@ -796,7 +796,7 @@ const App = () => {
                             ))}
                         </div>
 
-                        <div className="flex flex-col lg:flex-row gap-6 min-h-[400px]">
+                        <div className="flex flex-col lg:flex-row gap-6 min-h-[300px]">
                             <div className="lg:w-1/3 flex flex-col space-y-3">
                                 {(currentProgram.syllabus || []).map((mod, idx) => (
                                     <div key={idx} className="flex flex-col">
@@ -1024,8 +1024,8 @@ const App = () => {
 
             {/* INVEST SECTION */}
             <ScrollReveal delay={100}>
-                <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-16 md:py-20 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
-                    <div className="w-full max-w-5xl mx-auto text-left mb-8">
+                <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-12 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
+                    <div className="w-full max-w-5xl mx-auto text-left mb-4">
                         <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Pricing</span>
                         <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight">Your Investment</h2>
                         <p className="theme-text-muted text-sm font-medium mt-2">
