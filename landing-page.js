@@ -11,6 +11,8 @@
 
 const { useState, useEffect } = React;
 
+const PROJECT_COUNT = 6;
+
 /**
  * InternalEmergencyUI
  * Fallback UI used if data fetching or React mounting fails.
@@ -152,6 +154,41 @@ const TiltCard = ({ children, className = "" }) => {
     );
 };
 
+const CountDownStat = ({ from = 100, to, label }) => {
+    const [count, setCount] = useState(from);
+    const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
+    const started = React.useRef(false);
+
+    useEffect(() => {
+        if (!isVisible || started.current) return;
+        started.current = true;
+        const steps = 35;
+        const decrement = (from - to) / steps;
+        let current = from;
+        const timer = setInterval(() => {
+            current -= decrement;
+            if (current <= to) {
+                setCount(to);
+                clearInterval(timer);
+            } else {
+                setCount(Math.ceil(current));
+            }
+        }, 1400 / steps);
+        return () => clearInterval(timer);
+    }, [isVisible, from, to]);
+
+    return (
+        <div ref={ref} className="text-center px-2">
+            <div className="text-xl md:text-3xl font-extrabold text-brand-400 tabular-nums whitespace-nowrap">
+                &lt;{count}
+            </div>
+            <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1">
+                {label}
+            </div>
+        </div>
+    );
+};
+
 const CountUpStat = ({ target, suffix = '', label }) => {
     const [count, setCount] = useState(0);
     const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
@@ -177,7 +214,7 @@ const CountUpStat = ({ target, suffix = '', label }) => {
 
     return (
         <div ref={ref} className="text-center px-2">
-            <div className="text-2xl md:text-3xl font-extrabold text-brand-400 tabular-nums">
+            <div className="text-xl md:text-3xl font-extrabold text-brand-400 tabular-nums whitespace-nowrap">
                 {count}{suffix}
             </div>
             <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1">
@@ -216,180 +253,353 @@ const DUMMY_TESTIMONIALS = [
 const EligibilityChecker = () => {
     const { useState } = React;
     const { Icon } = window;
+
+    const TOTAL_STEPS = 4;
     const [step, setStep] = useState(1);
     const [profile, setProfile] = useState(null);
     const [formData, setFormData] = useState({
-        education: '',
-        experience: '',
-        analyticalScore: 5,
-        tools: [],
-        note: ''
+        education: '', experience: '', field: '',
+        tools: [], analyticalScore: 5,
+        targetRole: '', timeline: '', motivation: ''
     });
 
-    const toolOptions = ['Excel', 'SQL', 'Python', 'Power BI', 'Google Sheets', 'Gemini / LLMs'];
+    const toolOptions = [
+        'Excel', 'Google Sheets', 'SQL', 'Python',
+        'Power BI', 'Tableau', 'Gemini / AI Tools', 'None yet'
+    ];
 
     const handleToolToggle = (e, tool) => {
-        e.preventDefault(); // Prevents page reload
-        setFormData(prev => ({
-            ...prev,
-            tools: prev.tools.includes(tool) 
-                ? prev.tools.filter(t => t !== tool) 
-                : [...prev.tools, tool]
-        }));
-    };
-
-    const calculateProfile = (e) => {
         e.preventDefault();
-        let type = "Career Accelerator";
-        let message = "This program will bridge your current skills with industry-demanded tools, preparing you for a swift pivot into data roles.";
-        
-        if (formData.experience === 'Fresher' || formData.experience === '< 1 Year') {
-            type = "Fresh Talent";
-            message = "Perfect timing. We will fast-track your tech foundations (SQL, Python) and build a portfolio to bypass entry-level barriers.";
-        } else if (formData.tools.length >= 3 || formData.analyticalScore >= 7) {
-            type = "Strategic Analyst";
-            message = "You already have a solid foundation! This program will help you master advanced AI workflows (Gemini) and complex data warehousing to secure senior roles.";
-        }
-
-        setProfile({ type, message });
+        setFormData(prev => {
+            if (tool === 'None yet') return { ...prev, tools: ['None yet'] };
+            const without = prev.tools.filter(t => t !== 'None yet');
+            return {
+                ...prev,
+                tools: without.includes(tool)
+                    ? without.filter(t => t !== tool)
+                    : [...without, tool]
+            };
+        });
     };
 
-    const inputClass = "w-full p-4 border theme-border theme-card rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all theme-text-secondary";
-    const btnClass = "bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-md flex items-center justify-center gap-2";
+    const buildProfile = (e) => {
+        e.preventDefault();
+        const { field, experience, tools, analyticalScore, targetRole, timeline } = formData;
+        const hasNoTools  = tools.length === 0 || tools.includes('None yet');
+        const toolCount   = tools.filter(t => t !== 'None yet').length;
+        const isFresher   = ['Fresher', '1-2 Years'].includes(experience);
+        const isSenior    = experience === '5+ Years';
+        const isTech      = field === 'Tech / Engineering';
+        const isFinance   = field === 'Finance / Accounting';
+        const isMkt       = field === 'Marketing / Sales';
+        const hasAdvanced = toolCount >= 3 || analyticalScore >= 7;
+
+        let key;
+        if (isFresher && hasNoTools)                    key = 'zero';
+        else if (!isTech && !hasAdvanced && !isSenior)  key = 'switcher';
+        else if (isTech && toolCount >= 1)              key = 'tech';
+        else if (isSenior || hasAdvanced)               key = 'senior';
+        else                                            key = 'accelerator';
+
+        const fieldLabel = field || 'your current domain';
+        const roleLabel  = targetRole || 'Data Analyst';
+        const toolList   = toolCount > 0
+            ? tools.filter(t => t !== 'None yet').join(', ')
+            : 'no tools yet';
+
+        const PROFILES = {
+            zero: {
+                title: 'Zero-to-Analyst Track',
+                badge: 'High-Impact Starting Point',
+                icon: 'rocket',
+                strength: `Starting from scratch is your biggest advantage — no bad habits, no technical debt to unlearn. Students with zero tool experience who commit fully consistently land their first data role within 5-6 months. Your profile is exactly what this curriculum was designed for.`,
+                gap: `Your priority path is clear: Mathematics and logical thinking first, then SQL (the language every analyst needs), Python for automation, and Power BI to turn numbers into decisions that stakeholders act on.`,
+                modules: ['Math Compass', 'SQL Engine', 'Python', 'Power BI'],
+                outcome: `A ${roleLabel} role is well within reach. Graduates from a similar zero-experience starting point have landed roles at companies like Deloitte, KPMG, and Razorpay within 4-5 months of focused work.`
+            },
+            switcher: {
+                title: 'Domain-to-Data Career Switcher',
+                badge: 'Strategic Career Pivot',
+                icon: 'git-branch',
+                strength: `You bring ${experience} of real-world experience from ${fieldLabel}. That context is worth more than you think — every SQL query you write and every dashboard you build will immediately make sense, because you already understand the business behind the numbers.`,
+                gap: `You currently know ${toolList}. This program closes the technical gap systematically: SQL and Python give you the data engineering layer, Power BI converts analysis into executive storytelling, and Gemini AI gives you a serious productivity edge.`,
+                modules: ['SQL Engine', 'Python', 'Power BI', 'Gemini AI'],
+                outcome: `With your domain background, a ${roleLabel} role in ${isFinance ? 'BFSI, fintech, or corporate analytics' : isMkt ? 'marketing analytics or growth analytics' : 'your industry vertical'} is highly achievable within 4-5 months of structured commitment.`
+            },
+            tech: {
+                title: 'Tech-to-Analytics Fast Track',
+                badge: 'Accelerated Candidate',
+                icon: 'zap',
+                strength: `Your engineering background means you already think in systems and logic. You've worked with ${toolList} — which means SQL and Python will click within weeks, not months. Technically-grounded candidates are among the fastest-progressing profiles in this program.`,
+                gap: `The gap isn't technical — it's analytical storytelling. Power BI, DAX, and data visualisation are where engineers typically plateau. This program turns your coding fluency into dashboard intelligence that business stakeholders actually act on.`,
+                modules: ['SQL Engine', 'Power BI', 'Gemini AI', 'Career Launch'],
+                outcome: `You are a strong fit for a ${roleLabel} or BI Developer role. Engineers who speak data fluently command 30-40% higher compensation than peers in pure coding tracks.`
+            },
+            senior: {
+                title: 'Strategic Analyst Upgrade',
+                badge: 'Senior-Track Candidate',
+                icon: 'trending-up',
+                strength: `With ${experience} of professional experience and hands-on use of ${toolList}, you are not here to learn basics — you're here to close precision gaps and position for senior roles. Your analytical self-rating of ${analyticalScore}/10 confirms you already operate at a high level.`,
+                gap: `The modules that will unlock the most value for you are the Gemini AI Ecosystem — prompt engineering for real data workflows — advanced DAX in Power BI, and the Career Acceleration module for positioning yourself in senior, lead, or consulting roles.`,
+                modules: ['SQL Engine', 'Power BI', 'Gemini AI', 'Career Launch'],
+                outcome: `Targeting a Senior ${roleLabel}, Analytics Lead, or Data Manager role is realistic on your profile. Graduates on the senior track have moved into ₹18-25 LPA roles within 3-4 months of completion.`
+            },
+            accelerator: {
+                title: 'Career Accelerator Profile',
+                badge: 'Ready to Launch',
+                icon: 'award',
+                strength: `You come in with ${experience} of professional experience from ${fieldLabel} and have already worked with ${toolList}. That combination — real-world business exposure plus some technical familiarity — is exactly what employers look for in a data analyst hire.`,
+                gap: `This program will systematically fill the remaining gaps: structured SQL querying on real industry datasets, Python-based data manipulation, Power BI executive storytelling, and AI-augmented workflows with Gemini that most analysts in the market do not have yet.`,
+                modules: ['SQL Engine', 'Python', 'Power BI', 'Gemini AI'],
+                outcome: `A ${roleLabel} role is well within your reach. Your profile is among the most employer-ready that we see, and our graduates in this category have consistently secured offers before the program even ends.`
+            }
+        };
+
+        setProfile({ key, data: PROFILES[key] });
+    };
+
+    const reset = () => {
+        setProfile(null);
+        setStep(1);
+        setFormData({ education: '', experience: '', field: '', tools: [], analyticalScore: 5, targetRole: '', timeline: '', motivation: '' });
+    };
+
+    const inputClass = "w-full p-3.5 border theme-border theme-card rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all theme-text-secondary";
+    const btnClass   = "bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-md flex items-center justify-center gap-2";
+
+    const step1Valid = formData.education && formData.experience && formData.field;
+    const step2Valid = formData.tools.length > 0;
+    const step3Valid = formData.targetRole;
 
     if (profile) {
+        const { data } = profile;
         return (
-            <div key="profile-view" className="bg-secondary-900 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl animate-in zoom-in duration-500 self-center w-full">
-                <div className="w-20 h-20 bg-brand-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Icon name="award" size={40} className="text-brand-400" />
+            <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 relative overflow-hidden self-center w-full animate-in zoom-in duration-500"
+                style={{boxShadow: '0 0 0 1px color-mix(in srgb, var(--brand-500) 40%, transparent), 0 24px 48px -8px rgba(0,0,0,0.25)'}}>
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-600 via-brand-400 to-brand-500"></div>
+                <div className="flex items-start gap-4 mb-5">
+                    <div className="w-11 h-11 bg-brand-500/15 rounded-xl flex items-center justify-center flex-shrink-0 border border-brand-500/20">
+                        <Icon name={data.icon} size={22} className="text-brand-400" />
+                    </div>
+                    <div>
+                        <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-0.5">{data.badge}</span>
+                        <h2 className="text-lg font-extrabold theme-text-primary leading-tight">{data.title}</h2>
+                    </div>
                 </div>
-                <h3 className="text-brand-400 font-bold uppercase tracking-widest text-xs mb-2">Profile Match</h3>
-                <h2 className="text-3xl font-extrabold mb-6">{profile.type}</h2>
-                <p className="text-secondary-300 leading-relaxed mb-8 max-w-lg mx-auto">{profile.message}</p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button 
-                        type="button" 
-                        onClick={(e) => { 
-                            e.preventDefault(); 
-                            setProfile(null); 
-                            setStep(1); 
-                            setFormData({education: '', experience: '', analyticalScore: 5, tools: [], note: ''}); 
-                        }} 
-                        className="px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest border border-secondary-700 text-secondary-300 hover:bg-secondary-800 transition-all"
-                    >
-                        Retake Assessment
+                <div className="mb-3 p-4 rounded-xl bg-brand-500/5 border border-brand-500/15">
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">What you bring</span>
+                    <p className="text-[13px] theme-text-secondary leading-relaxed">{data.strength}</p>
+                </div>
+                <div className="mb-3 p-4 rounded-xl theme-card border theme-border">
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">Where this program closes your gap</span>
+                    <p className="text-[13px] theme-text-secondary leading-relaxed">{data.gap}</p>
+                </div>
+                <div className="mb-3">
+                    <span className="text-[9px] font-bold uppercase tracking-widest theme-text-muted block mb-2">Your critical modules</span>
+                    <div className="flex flex-wrap gap-1.5">
+                        {data.modules.map((m, i) => (
+                            <span key={i} className="text-[10px] font-bold uppercase tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/20 px-2.5 py-1 rounded-full">{m}</span>
+                        ))}
+                    </div>
+                </div>
+                <div className="mb-5 p-4 rounded-xl bg-brand-500/5 border border-brand-500/15">
+                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">Projected outcome</span>
+                    <p className="text-[13px] theme-text-secondary leading-relaxed">{data.outcome}</p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t theme-border">
+                    <button type="button" onClick={reset}
+                        className="px-4 py-2.5 text-xs font-bold theme-text-muted hover:theme-text-primary uppercase tracking-widest border theme-border rounded-lg transition-all flex items-center justify-center gap-2">
+                        <Icon name="rotate-ccw" size={13} /> Retake
                     </button>
-                    <TiltCard><a href="#about" className="bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg block">Enroll Now</a></TiltCard>
+                    <a href="#about"
+                        className="flex-1 bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg text-center">
+                        Start Your Journey
+                    </a>
                 </div>
             </div>
         );
     }
 
     return (
-        <div key="form-view" className="theme-card border theme-border-strong rounded-3xl p-5 md:p-7 relative overflow-hidden self-center w-full" style={{boxShadow: '0 0 0 1px color-mix(in srgb, var(--brand-500) 35%, transparent), 0 20px 40px -8px rgba(0,0,0,0.15)'}}>
-            {/* Progress Bar */}
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-secondary-200">
-                <div className="h-full bg-brand-500 transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }}></div>
+        <div className="theme-card border theme-border-strong rounded-3xl p-5 md:p-7 relative overflow-hidden self-center w-full"
+            style={{boxShadow: '0 0 0 1px color-mix(in srgb, var(--brand-500) 35%, transparent), 0 20px 40px -8px rgba(0,0,0,0.15)'}}>
+            <div className="absolute top-0 left-0 w-full h-1 bg-slate-800">
+                <div className="h-full bg-gradient-to-r from-brand-500 to-brand-400 transition-all duration-500"
+                    style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}></div>
             </div>
-
-            <div className="mb-4 mt-1">
-                <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px]">Step 0{step} of 03</span>
-                <h3 className="text-xl font-bold theme-text-primary mt-1">
-                    {step === 1 && "Education & Experience"}
-                    {step === 2 && "Skills & Tools"}
-                    {step === 3 && "Final Details"}
+            <div className="mb-5 mt-1">
+                <div className="flex items-center justify-between mb-1">
+                    <span className="text-brand-500 font-bold uppercase tracking-widest text-[10px]">Step {step} of {TOTAL_STEPS}</span>
+                    <span className="text-[10px] theme-text-muted font-medium">{Math.round((step / TOTAL_STEPS) * 100)}% complete</span>
+                </div>
+                <h3 className="text-lg font-bold theme-text-primary">
+                    {step === 1 && "Your Background"}
+                    {step === 2 && "Your Current Skills"}
+                    {step === 3 && "Your Career Goal"}
+                    {step === 4 && "Your Timeline"}
                 </h3>
+                <p className="text-xs theme-text-muted mt-0.5">
+                    {step === 1 && "Tell us where you're coming from — your education, experience, and domain."}
+                    {step === 2 && "Be honest. This shapes the gap analysis in your profile."}
+                    {step === 3 && "Where do you want to land? This personalises your outcome forecast."}
+                    {step === 4 && "How fast do you want to get there?"}
+                </p>
             </div>
-
-            <div className="min-h-[220px]">
+            <div className="min-h-[240px]">
                 {step === 1 && (
-                    <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
+                    <div className="space-y-4 animate-in slide-in-from-right-8 duration-300">
                         <div>
                             <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-2">Highest Education</label>
                             <select value={formData.education} onChange={e => setFormData({...formData, education: e.target.value})} className={inputClass}>
                                 <option value="" disabled>Select your degree...</option>
-                                <option value="High School / Diploma">High School / Diploma</option>
-                                <option value="Bachelor's Degree">Bachelor's Degree</option>
-                                <option value="Master's Degree">Master's Degree</option>
-                                <option value="PhD">PhD</option>
+                                <option>High School / Diploma</option>
+                                <option>Bachelor's Degree</option>
+                                <option>Master's Degree</option>
+                                <option>PhD</option>
                             </select>
                         </div>
                         <div>
                             <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-2">Work Experience</label>
                             <select value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} className={inputClass}>
                                 <option value="" disabled>Select experience level...</option>
-                                <option value="Fresher">Fresher (0 Years)</option>
-                                <option value="< 1 Year">Less than 1 Year</option>
-                                <option value="1-3 Years">1 to 3 Years</option>
-                                <option value="3-5 Years">3 to 5 Years</option>
-                                <option value="5+ Years">5+ Years</option>
+                                <option>Fresher</option>
+                                <option>1-2 Years</option>
+                                <option>3-5 Years</option>
+                                <option>5+ Years</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-2">Current / Previous Domain</label>
+                            <select value={formData.field} onChange={e => setFormData({...formData, field: e.target.value})} className={inputClass}>
+                                <option value="" disabled>Select your domain...</option>
+                                <option>Tech / Engineering</option>
+                                <option>Finance / Accounting</option>
+                                <option>Marketing / Sales</option>
+                                <option>Healthcare / Pharma</option>
+                                <option>Operations / Supply Chain</option>
+                                <option>Fresher — No Domain Yet</option>
                             </select>
                         </div>
                     </div>
                 )}
-
                 {step === 2 && (
-                    <div className="space-y-8 animate-in slide-in-from-right-8 duration-300">
+                    <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-4 flex justify-between">
-                                <span>Analytical Skill Rating</span>
-                                <span className="text-brand-600">{formData.analyticalScore} / 10</span>
-                            </label>
-                            <input type="range" min="1" max="10" value={formData.analyticalScore} onChange={e => setFormData({...formData, analyticalScore: parseInt(e.target.value)})} className="w-full accent-brand-500 cursor-pointer" />
-                            <div className="flex justify-between text-[10px] theme-text-muted font-bold uppercase mt-2">
-                                <span>Beginner</span><span>Expert</span>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">Tools You Have Worked With <span className="text-brand-500 normal-case font-medium">(pick all that apply)</span></label>
+                            <div className="flex flex-wrap gap-2">
+                                {toolOptions.map(tool => (
+                                    <button key={tool} type="button" onClick={(e) => handleToolToggle(e, tool)}
+                                        className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all border ${
+                                            formData.tools.includes(tool)
+                                                ? 'bg-brand-500 border-brand-500 text-white shadow-md shadow-brand-500/20'
+                                                : 'theme-card theme-border theme-text-secondary hover:border-brand-500/40'
+                                        }`}>
+                                        {tool}
+                                    </button>
+                                ))}
                             </div>
                         </div>
                         <div>
-                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">Tools You've Used</label>
-                            <div className="flex flex-wrap gap-2">
-                                {toolOptions.map(tool => (
-                                    <button 
-                                        key={tool} 
-                                        type="button"
-                                        onClick={(e) => handleToolToggle(e, tool)}
-                                        className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${formData.tools.includes(tool) ? 'bg-brand-500 border-brand-500 text-white' : 'theme-card theme-border theme-text-secondary hover:theme-border'}`}
-                                    >
-                                        {tool}
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3 flex justify-between">
+                                <span>Honest Self-Rating — Data & Analytics</span>
+                                <span className="text-brand-400 font-black">{formData.analyticalScore} / 10</span>
+                            </label>
+                            <input type="range" min="1" max="10" value={formData.analyticalScore}
+                                onChange={e => setFormData({...formData, analyticalScore: parseInt(e.target.value)})}
+                                className="w-full accent-brand-500 cursor-pointer" />
+                            <div className="flex justify-between text-[9px] theme-text-muted font-bold uppercase mt-1.5">
+                                <span>Complete Beginner</span><span>Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {step === 3 && (
+                    <div className="space-y-4 animate-in slide-in-from-right-8 duration-300">
+                        <div>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-2">Target Role After the Program</label>
+                            <select value={formData.targetRole} onChange={e => setFormData({...formData, targetRole: e.target.value})} className={inputClass}>
+                                <option value="" disabled>Select your target role...</option>
+                                <option>Data Analyst</option>
+                                <option>Business Analyst</option>
+                                <option>BI / Reporting Analyst</option>
+                                <option>Data Engineer</option>
+                                <option>SQL / Database Developer</option>
+                                <option>Marketing Analyst</option>
+                                <option>Financial Analyst</option>
+                                <option>Not Sure Yet</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">What is driving this decision?</label>
+                            <div className="grid grid-cols-1 gap-2">
+                                {[
+                                    'Switch careers into data',
+                                    'Get promoted in my current company',
+                                    'Increase my salary significantly',
+                                    'Build skills for freelancing or consulting'
+                                ].map(m => (
+                                    <button key={m} type="button"
+                                        onClick={(e) => { e.preventDefault(); setFormData({...formData, motivation: m}); }}
+                                        className={`text-left px-4 py-2.5 rounded-lg text-xs font-bold transition-all border ${
+                                            formData.motivation === m
+                                                ? 'bg-brand-500/10 border-brand-500/50 text-brand-400'
+                                                : 'theme-card theme-border theme-text-secondary hover:border-brand-500/30'
+                                        }`}>
+                                        {m}
                                     </button>
                                 ))}
                             </div>
                         </div>
                     </div>
                 )}
-
-                {step === 3 && (
-                    <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
+                {step === 4 && (
+                    <div className="space-y-4 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-2">Career Goal (Optional)</label>
-                            <textarea 
-                                rows="4" 
-                                placeholder="What are you hoping to achieve with this program?" 
-                                value={formData.note} 
-                                onChange={e => setFormData({...formData, note: e.target.value})} 
-                                className={`${inputClass} resize-none`}
-                            ></textarea>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">When do you want to land your target role?</label>
+                            <div className="grid grid-cols-2 gap-2">
+                                {[
+                                    ['Within 3 months', 'Urgent — I need to move fast'],
+                                    ['3-6 months', 'Focused — I have a clear timeline'],
+                                    ['6-12 months', 'Steady — building while working'],
+                                    ['Just exploring', "I'm in research mode right now"]
+                                ].map(([val, desc]) => (
+                                    <button key={val} type="button"
+                                        onClick={(e) => { e.preventDefault(); setFormData({...formData, timeline: val}); }}
+                                        className={`text-left px-3 py-3 rounded-xl text-xs font-bold transition-all border ${
+                                            formData.timeline === val
+                                                ? 'bg-brand-500/10 border-brand-500/50 text-brand-400'
+                                                : 'theme-card theme-border theme-text-secondary hover:border-brand-500/30'
+                                        }`}>
+                                        <span className="block font-black text-[11px] mb-0.5">{val}</span>
+                                        <span className="text-[10px] opacity-70 font-medium">{desc}</span>
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 )}
             </div>
-
-            <div className="mt-8 flex justify-between pt-6 border-t theme-border">
-                {step > 1 ? (
-                    <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }} className="px-5 py-2.5 text-sm font-bold theme-text-muted hover:theme-text-primary transition-colors flex items-center gap-2">
-                        <Icon name="arrow-left" size={16} /> Back
-                    </button>
-                ) : <div></div>}
-                
-                {step < 3 ? (
-                    <button type="button" onClick={(e) => { e.preventDefault(); setStep(step + 1); }} disabled={step === 1 && (!formData.education || !formData.experience)} className={`${btnClass} disabled:opacity-50 disabled:cursor-not-allowed`}>
-                        Next Step <Icon name="arrow-right" size={16} />
-                    </button>
-                ) : (
-                    <button type="button" onClick={calculateProfile} className={btnClass}>
-                        Generate Profile <Icon name="sparkles" size={16} />
-                    </button>
-                )}
+            <div className="mt-6 flex justify-between pt-5 border-t theme-border">
+                {step > 1
+                    ? <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }}
+                        className="px-4 py-2.5 text-sm font-bold theme-text-muted hover:theme-text-primary transition-colors flex items-center gap-2">
+                        <Icon name="arrow-left" size={15} /> Back
+                      </button>
+                    : <div></div>
+                }
+                {step < TOTAL_STEPS
+                    ? <button type="button"
+                        onClick={(e) => { e.preventDefault(); setStep(step + 1); }}
+                        disabled={(step === 1 && !step1Valid) || (step === 2 && !step2Valid) || (step === 3 && !step3Valid)}
+                        className={`${btnClass} disabled:opacity-40 disabled:cursor-not-allowed`}>
+                        Continue <Icon name="arrow-right" size={15} />
+                      </button>
+                    : <button type="button" onClick={buildProfile}
+                        disabled={!formData.timeline}
+                        className={`${btnClass} disabled:opacity-40 disabled:cursor-not-allowed`}>
+                        See My Profile <Icon name="sparkles" size={15} />
+                      </button>
+                }
             </div>
         </div>
     );
@@ -699,7 +909,7 @@ const App = () => {
                             <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-brand-400 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
                             <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-brand-400 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
                             <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-400 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
@@ -742,9 +952,9 @@ const App = () => {
                         </form>
                     </div>
                     <div className="grid grid-cols-3 gap-0 py-4 border theme-border-strong rounded-2xl overflow-hidden">
-                        <CountUpStat target={280} suffix="+" label="Students Enrolled" />
-                        <CountUpStat target={16} suffix=" Wks" label="Intensive Program" />
-                        <CountUpStat target={12} suffix="+" label="Live Projects" />
+                        <CountDownStat from={100} to={30} label="Seats Per Batch" />
+                        <CountUpStat target={16} suffix=" Weeks" label="Intensive Program" />
+                        <CountUpStat target={PROJECT_COUNT} suffix="+" label="Live Projects" />
                     </div>
                     </div>
                 </div>
@@ -782,10 +992,10 @@ const App = () => {
                                         }`}>
                                             {idx + 1}
                                         </div>
-                                        <span className={`text-[9px] font-bold uppercase tracking-wider whitespace-nowrap transition-colors max-w-[64px] text-center leading-tight ${
+                                        <span className={`text-[9px] font-bold uppercase tracking-wider transition-colors max-w-[64px] text-center leading-tight ${
                                             idx === activeModuleIdx ? 'text-brand-400' : 'text-slate-500'
                                         }`}>
-                                            {mod.title.split(' ').slice(0, 2).join(' ')}
+                                            {mod.shortLabel || mod.title.split(' ').slice(0, 2).join(' ')}
                                         </span>
                                     </button>
                                     {idx < (currentProgram.syllabus?.length || 1) - 1 && (
@@ -871,25 +1081,30 @@ const App = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-                <section id="tools" className={`${sectionClass} theme-bg`}>
-                    <div className="w-full max-w-7xl mx-auto text-left">
+                <section id="tools" className={`${sectionClass} theme-bg relative overflow-hidden`}>
+                    {/* Inner aurora glow — matches hero technique */}
+                    <div className="absolute top-[-15%] left-[-10%] w-[45vw] h-[45vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] opacity-[0.07] animate-pulse pointer-events-none"></div>
+                    <div className="absolute bottom-[-15%] right-[-10%] w-[35vw] h-[35vw] bg-brand-400 rounded-full mix-blend-screen filter blur-[100px] opacity-[0.05] animate-pulse pointer-events-none" style={{animationDelay:'3s'}}></div>
+                    <div className="w-full max-w-7xl mx-auto text-left relative z-10">
+                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Industry Stack</span>
                         <h2 className="text-3xl font-bold mb-16 theme-text-primary tracking-tight">Modern Industry Tool Stack</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {tools.map((tool, i) => (
                             <ScrollReveal key={i} delay={i * 70}>
                             <TiltCard className="group h-full rounded-2xl">
-                                <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border theme-border shadow-sm rounded-2xl transition-all h-full hover:border-brand-400 relative overflow-hidden`}>
+                                <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border theme-border shadow-sm rounded-2xl transition-all duration-300 h-full hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 relative overflow-hidden`}>
                                     <div className="w-16 h-16 flex items-center justify-center relative z-10">
-                                        <img 
-                                            src={tool.img} 
-                                            alt={tool.name} 
+                                        <img
+                                            src={tool.img}
+                                            alt={tool.name}
                                             className="w-12 h-12 md:w-16 md:h-16 object-contain transition-transform group-hover:scale-110 duration-500"
-                                            onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }} 
+                                            onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }}
                                         />
                                     </div>
-                                    <span className="font-bold theme-text-secondary text-sm relative z-10">{tool.name}</span>
-                                    {/* Hover Glow Effect */}
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-500/0 via-brand-500/5 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0 blur-md"></div>
+                                    <span className="font-bold theme-text-secondary text-sm relative z-10 group-hover:text-brand-400 transition-colors duration-300">{tool.name}</span>
+                                    {/* Hover Glow */}
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-500/0 via-brand-500/10 to-brand-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+                                    <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-brand-500 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
                                 </div>
                             </TiltCard>
                             </ScrollReveal>
@@ -901,33 +1116,41 @@ const App = () => {
 
             {/* PROJECTS SECTION - 2026 Tilt Grid */}
             <ScrollReveal>
-                <section id="projects" className={`${sectionClass} theme-bg-alt`}>
+                <section id="projects" className={`${sectionClass} theme-bg-alt relative overflow-hidden`}>
+                    <div className="absolute top-[-10%] right-[-8%] w-[40vw] h-[40vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[130px] opacity-[0.06] animate-pulse pointer-events-none"></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        
+                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Hands-On Work</span>
                         <h2 className="text-3xl font-extrabold mb-8 md:mb-12 theme-text-primary tracking-tight flex items-center gap-3">
                             <Icon name="layout-grid" size={32} className="text-brand-500" />
-                            6+ Real-Time Industry Projects
+                            {PROJECT_COUNT}+ Real-Time Industry Projects
                         </h2>
-                        
+
                         {/* Tile Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                             {(media.projects || []).slice(0, 6).map((proj, idx) => (
                                 <TiltCard key={proj.id} className="col-span-1 group">
-                                    <div className="h-full w-full theme-card rounded-2xl border theme-border overflow-hidden relative transition-all duration-300 hover:border-brand-400 hover:shadow-md flex flex-col">
+                                    <div className="h-full w-full theme-card rounded-2xl border theme-border overflow-hidden relative transition-all duration-300 hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 flex flex-col">
                                         <div className="h-32 md:h-40 theme-card flex items-center justify-center relative overflow-hidden">
                                             <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700" onError={e => e.target.style.display='none'} />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
                                             <Icon name="image" size={32} className="opacity-20 absolute" />
+                                            {/* Project number badge on image */}
+                                            <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-black/50 backdrop-blur text-brand-400 px-2 py-1 rounded border border-brand-500/30">
+                                                {String(idx + 1).padStart(2, '0')}
+                                            </span>
                                         </div>
-                                        <div className="p-4 md:p-5 relative z-10 theme-card flex-grow">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-brand-500"></span>
-                                                <span className="text-[10px] font-bold uppercase tracking-widest theme-text-muted">Project {idx + 1}</span>
-                                            </div>
+                                        <div className="p-4 md:p-5 relative z-10 theme-card flex-grow flex flex-col gap-2">
                                             <h4 className="font-bold theme-text-primary text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
+                                            {proj.description && <p className="text-[11px] theme-text-muted leading-snug line-clamp-2">{proj.description}</p>}
+                                            {proj.tools && proj.tools.length > 0 && (
+                                                <div className="flex flex-wrap gap-1 mt-auto pt-1">
+                                                    {proj.tools.map((t, ti) => (
+                                                        <span key={ti} className="text-[9px] font-bold uppercase tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/20 px-1.5 py-0.5 rounded">{t}</span>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
-                                        {/* Hover Glow Effect adapted for light mode */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/5 to-brand-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl"></div>
+                                        <div className="absolute inset-0 bg-gradient-to-br from-brand-500/0 via-brand-500/5 to-brand-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                                     </div>
                                 </TiltCard>
                             ))}
@@ -937,17 +1160,30 @@ const App = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-                <section id="videos" className={`${sectionClass} theme-bg`}>
-                     <div className="w-full max-w-7xl mx-auto text-left">
+                <section id="videos" className={`${sectionClass} theme-bg relative overflow-hidden`}>
+                    <div className="absolute bottom-[-15%] left-[-8%] w-[40vw] h-[40vw] bg-brand-400 rounded-full mix-blend-screen filter blur-[120px] opacity-[0.06] animate-pulse pointer-events-none" style={{animationDelay:'1.5s'}}></div>
+                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
+                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Watch & Learn</span>
                         <h2 className="text-3xl font-bold theme-text-primary tracking-tight mb-12">Program Overview & Demos</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {(media.videos || []).map((vid, i) => (
                                 <TiltCard key={i} className="group">
-                                    <div className="aspect-video theme-card rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border theme-border hover:border-brand-400 hover:shadow-md transition-all">
-                                        <img src={`https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-60 group-hover:opacity-80" onError={e => e.target.style.display='none'} />
-                                        <Icon name="play" size={40} className="text-brand-500 opacity-90 group-hover:scale-110 transition-all z-10 drop-shadow-md" />
-                                        <div className="absolute bottom-4 left-4 theme-text-primary font-bold text-[10px] uppercase tracking-wider z-10 theme-bg/80 backdrop-blur px-2 py-1 rounded">{vid.title}</div>
-                                    </div>
+                                    <a href={vid.url || '#'} target="_blank" rel="noopener noreferrer" className="block aspect-video theme-card rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border theme-border hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/15 transition-all duration-300">
+                                        <img src={vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-85 group-hover:opacity-100" onError={e => e.target.style.display='none'} />
+                                        {/* Dark overlay for readability */}
+                                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-300"></div>
+                                        {/* Pulsing play button ring */}
+                                        <div className="relative z-10 flex items-center justify-center">
+                                            <div className="absolute w-14 h-14 rounded-full bg-brand-500/30 animate-ping"></div>
+                                            <div className="w-12 h-12 rounded-full bg-brand-500/90 backdrop-blur flex items-center justify-center shadow-lg shadow-brand-500/50 group-hover:scale-110 transition-transform duration-300">
+                                                <Icon name="play" size={20} className="text-white ml-0.5" />
+                                            </div>
+                                        </div>
+                                        {/* Title badge */}
+                                        <div className="absolute bottom-0 left-0 right-0 px-3 py-2.5 bg-gradient-to-t from-black/70 to-transparent">
+                                            <span className="theme-text-primary font-semibold text-[11px] uppercase tracking-wide line-clamp-2 leading-tight">{vid.title}</span>
+                                        </div>
+                                    </a>
                                 </TiltCard>
                             ))}
                         </div>

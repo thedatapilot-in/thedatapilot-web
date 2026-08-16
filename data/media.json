@@ -1,17 +1,33 @@
 {
     "videos": [
-        { "title": "Curriculum Walkthrough", "url": "https://www.youtube.com/embed/placeholder1" },
-        { "title": "Data Analytics Masterclass", "url": "https://www.youtube.com/embed/placeholder2" },
-        { "title": "Student Success Stories", "url": "https://www.youtube.com/embed/placeholder3" },
-        { "title": "Career Roadmap 2026", "url": "https://www.youtube.com/embed/placeholder4" }
+        {
+            "title": "What is Data Analytics? — Career Roadmap 2026",
+            "thumb": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+            "url": "https://www.youtube.com/embed/placeholder1"
+        },
+        {
+            "title": "SQL Crash Course — Query Real Databases from Scratch",
+            "thumb": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=800&q=80",
+            "url": "https://www.youtube.com/embed/placeholder2"
+        },
+        {
+            "title": "Power BI Masterclass — Build Your First Live Dashboard",
+            "thumb": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+            "url": "https://www.youtube.com/embed/placeholder3"
+        },
+        {
+            "title": "Python for Data Analysts — Pandas, Plots & Automation",
+            "thumb": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+            "url": "https://www.youtube.com/embed/placeholder4"
+        }
     ],
     "projects": [
-        { "id": 1, "img": "assets/images/project-1.jpg", "title": "E-Commerce Growth Dashboard" },
-        { "id": 2, "img": "assets/images/project-2.jpg", "title": "Financial Risk Audit" },
-        { "id": 3, "img": "assets/images/project-3.jpg", "title": "Supply Chain Optimizer" },
-        { "id": 4, "img": "assets/images/project-4.jpg", "title": "Healthcare Data Schema" },
-        { "id": 5, "img": "assets/images/project-5.jpg", "title": "Real-time Sales Engine" },
-        { "id": 6, "img": "assets/images/project-6.jpg", "title": "Churn Prediction Model" }
+        { "id": 1, "img": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80", "title": "Northwind Traders — Sales & Ops Intelligence", "description": "Full SQL + Power BI analysis of orders, suppliers, and product margins on the classic Northwind dataset.", "tools": ["PostgreSQL", "Power BI", "DAX"] },
+        { "id": 2, "img": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80", "title": "DVD Rental Store — Revenue & Churn Analysis", "description": "Customer rental behaviour, late-return patterns, and inventory turnover using the Sakila/DVD Rental schema.", "tools": ["PostgreSQL", "Python", "Pandas"] },
+        { "id": 3, "img": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80", "title": "Sample Superstore — Regional Performance Dashboard", "description": "Tableau-style executive dashboard built in Power BI — profit by region, sub-category drill-down, and return analysis.", "tools": ["Power BI", "DAX", "Excel"] },
+        { "id": 4, "img": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80", "title": "AdventureWorks — Manufacturing & Sales Warehouse", "description": "End-to-end data warehouse on AdventureWorks: Star Schema design, complex DAX measures, and KPI scorecards.", "tools": ["SQL Server", "Power BI", "DAX"] },
+        { "id": 5, "img": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80", "title": "Bank Loan Analysis — Risk & Approval Intelligence", "description": "Loan approval prediction and repayment risk scoring using Python ML, with an executive Power BI risk dashboard.", "tools": ["Python", "Pandas", "Power BI"] },
+        { "id": 6, "img": "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=800&q=80", "title": "Retail E-Commerce — Capstone SQL Warehouse", "description": "Capstone project: ingest and clean 5,000+ row raw sales CSV, model into a relational schema, and surface KPIs.", "tools": ["PostgreSQL", "Google Sheets", "Power BI"] }
     ],
     "downloads": {
     "brochure": "https://docs.google.com/document/d/11a-7fbi7d_p24wRmlz6S3Gy9RGFdZF9LCkPeAaGRYYM/export?format=pdf",

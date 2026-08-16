@@ -517,6 +517,10 @@ window.TypewriterText = ({ text }) => {
         let fadeIn = 0;
         let cursorActive = false;
         let lastMoveTime = 0;
+        // Soap-bubble spring state
+        let stretchVal = 1.0;
+        let stretchVel = 0.0;
+        let bubbleAngle = 0;
 
         function getBrandRgb() {
             const raw = getComputedStyle(document.documentElement)
@@ -556,9 +560,9 @@ window.TypewriterText = ({ text }) => {
                 cursorActive = false;
             }
 
-            // Smooth velocity from raw target delta (exponential moving average)
-            vx = vx * 0.75 + (targetX - prevTX) * 0.25;
-            vy = vy * 0.75 + (targetY - prevTY) * 0.25;
+            // Smooth velocity — heavy lag so shape deforms gradually
+            vx = vx * 0.90 + (targetX - prevTX) * 0.10;
+            vy = vy * 0.90 + (targetY - prevTY) * 0.10;
             prevTX = targetX;
             prevTY = targetY;
 
@@ -577,23 +581,42 @@ window.TypewriterText = ({ text }) => {
 
             const globalBase = fadeIn * 0.055;
 
-            // Soap-bubble stretch: elongate ellipse along velocity direction
+            // Soap-bubble spring physics
             const speed = Math.sqrt(vx * vx + vy * vy);
-            const stretch = Math.min(1 + speed * 0.065, 3.0);
-            const angle = speed > 0.4 ? Math.atan2(vy, vx) : 0;
-            const cosA = Math.cos(angle);
-            const sinA = Math.sin(angle);
+            // Lerp angle smoothly — orientation rotates gradually, never snaps
+            if (speed > 0.2) {
+                const tAngle = Math.atan2(vy, vx);
+                let da = tAngle - bubbleAngle;
+                if (da > Math.PI) da -= 2 * Math.PI;
+                if (da < -Math.PI) da += 2 * Math.PI;
+                bubbleAngle += da * 0.06;
+            }
+            // Spring: slow, viscous — target stretch driven by speed
+            const targetStretch = 1 + speed * 0.22;
+            const springForce = (Math.min(targetStretch, 3.2) - stretchVal) * 0.04;
+            stretchVel = stretchVel * 0.82 + springForce;
+            stretchVal = Math.max(1.0, stretchVal + stretchVel);
+            // Incompressible area conservation: a×b = R² (major stretches, minor shrinks equally)
+            // At stretchVal=1 → circle. At stretchVal=3 → 3× long, 1/3 narrow. Same area.
+            const cosA = Math.cos(bubbleAngle);
+            const sinA = Math.sin(bubbleAngle);
 
             for (const d of dots) {
                 const dx = d.x - mouseX;
                 const dy = d.y - mouseY;
-                // Rotate delta into velocity frame; compress along movement axis
-                const lx = (dx * cosA + dy * sinA) / stretch;
-                const ly = -dx * sinA + dy * cosA;
+                // Stretch along travel, compress cross-axis by same factor → area constant
+                const along = dx * cosA + dy * sinA;   // + = ahead of cursor, - = behind
+                const lx = along / stretchVal;
+                const ly = (-dx * sinA + dy * cosA) * stretchVal;
                 const dist = Math.sqrt(lx * lx + ly * ly);
                 const proximity = Math.max(0, 1 - dist / MOUSE_R);
+                // Suppress dots ahead of cursor when moving: tail only trails behind
+                const fwdClip = MOUSE_R * 0.28;
+                const frontFade = stretchVal > 1.06
+                    ? Math.max(0, 1 - Math.max(0, along - fwdClip) / fwdClip)
+                    : 1;
                 const r = BASE_R + proximity * fadeIn * (MAX_R - BASE_R);
-                const alpha = globalBase + proximity * fadeIn * 0.42;
+                const alpha = (globalBase + proximity * fadeIn * 0.42) * frontFade;
 
                 if (alpha < 0.004) continue;
                 ctx.beginPath();
@@ -628,29 +651,75 @@ window.TypewriterText = ({ text }) => {
 })();
 
 // ============================================================
-// AURORA BACKGROUND — two drifting brand-colored blobs.
-// Sits at z-index:0, below dot grid canvas (z:1).
-// Provides ambient depth in hero / transparent sections.
+// AURORA BACKGROUND — organic blob glows on all pages.
+// Matches landing-page hero technique: solid brand color +
+// mix-blend-mode:screen + animate-pulse. No overflow:hidden
+// so blurs feather organically beyond the container edge.
+// z-index:45 — above all sections, below nav z-50.
 // ============================================================
 (function initAuroraBackground() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    const styleEl = document.createElement('style');
+    styleEl.textContent = `
+      @keyframes orb-drift-a {
+        0%,100% { transform: translateY(0) scale(1); }
+        50%      { transform: translateY(6vh) scale(1.08); }
+      }
+      @keyframes orb-drift-b {
+        0%,100% { transform: translateY(0) scale(1.05); }
+        50%      { transform: translateY(-5vh) scale(0.95); }
+      }
+      #aurora-orbs > div {
+        position: absolute;
+        border-radius: 50%;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        filter: blur(110px);
+      }
+    `;
+    document.head.appendChild(styleEl);
+
     function setup() {
         const wrap = document.createElement('div');
-        wrap.id = 'aurora-bg';
-        wrap.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden';
+        wrap.id = 'aurora-orbs';
+        // No overflow:hidden — lets blur feather past container edges
+        wrap.style.cssText =
+            'position:fixed;inset:0;z-index:45;pointer-events:none';
 
-        const blobs = [
-            'position:absolute;width:75vw;height:75vw;top:-25%;left:-20%;border-radius:50%;filter:blur(130px);opacity:0.045;animation:aurora-a 28s ease-in-out infinite;background:radial-gradient(circle,var(--brand-500) 0%,transparent 65%)',
-            'position:absolute;width:60vw;height:60vw;bottom:-20%;right:-15%;border-radius:50%;filter:blur(110px);opacity:0.03;animation:aurora-b 22s ease-in-out infinite;background:radial-gradient(circle,var(--brand-400) 0%,transparent 65%)'
-        ];
-        blobs.forEach(css => {
-            const el = document.createElement('div');
-            el.style.cssText = css;
-            wrap.appendChild(el);
-        });
+        // Left — upper blob
+        const b1 = document.createElement('div');
+        b1.style.cssText =
+            'width:50vw;height:50vw;top:-15%;left:-25%;' +
+            'background:var(--brand-500);opacity:0.13;' +
+            'animation:orb-drift-a 20s ease-in-out infinite';
 
-        document.body.insertBefore(wrap, document.body.firstChild);
+        // Left — lower blob (offset timing)
+        const b2 = document.createElement('div');
+        b2.style.cssText =
+            'width:40vw;height:40vw;bottom:-10%;left:-20%;' +
+            'background:var(--brand-400);opacity:0.09;' +
+            'animation:orb-drift-b 26s ease-in-out infinite';
+
+        // Right — upper blob
+        const b3 = document.createElement('div');
+        b3.style.cssText =
+            'width:50vw;height:50vw;top:-15%;right:-25%;' +
+            'background:var(--brand-500);opacity:0.11;' +
+            'animation:orb-drift-b 22s ease-in-out infinite';
+
+        // Right — lower blob
+        const b4 = document.createElement('div');
+        b4.style.cssText =
+            'width:40vw;height:40vw;bottom:-10%;right:-20%;' +
+            'background:var(--brand-400);opacity:0.08;' +
+            'animation:orb-drift-a 28s ease-in-out infinite';
+
+        wrap.appendChild(b1);
+        wrap.appendChild(b2);
+        wrap.appendChild(b3);
+        wrap.appendChild(b4);
+        document.body.appendChild(wrap);
     }
 
     if (document.body) setup();

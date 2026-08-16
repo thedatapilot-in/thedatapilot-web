@@ -10,7 +10,7 @@
         "highlights": [
                 "4-Month Intensive Zero-to-Job Ready Bootcamp",
                 "Master Python, SQL, Power BI, and Generative AI",
-                "Build a Portfolio with 12+ Industry Projects",
+                "Build a Portfolio with 6+ Industry Projects",
                 "Professional Resume and LinkedIn Optimization",
                 "Role-Specific Mock Interviews and Technical Prep",
                 "Placement Assistance for All Eligible Candidates",
@@ -20,6 +20,7 @@
         "syllabus": [
     {
         "id": 0,
+        "shortLabel": "Math Compass",
         "title": "The Mathematical Compass (Analytical Foundations)",
         "lectures": 2,
         "hours": 4,
@@ -41,6 +42,7 @@
     },
     {
         "id": 1,
+        "shortLabel": "Spreadsheets",
         "title": "The Spreadsheet Blueprint (Google Sheets & Excel)",
         "lectures": 6,
         "hours": 12,
@@ -67,6 +69,7 @@
     },
     {
         "id": 2,
+        "shortLabel": "SQL Engine",
         "title": "The SQL Engine: Relational Logic",
         "lectures": 12,
         "hours": 24,
@@ -93,6 +96,7 @@
     },
     {
         "id": 3,
+        "shortLabel": "Power BI",
         "title": "Data Storytelling with Power BI",
         "lectures": 7,
         "hours": 14,
@@ -119,6 +123,7 @@
     },
     {
         "id": 4,
+        "shortLabel": "Python",
         "title": "Python for Data Analytics",
         "lectures": 5,
         "hours": 10,
@@ -145,6 +150,7 @@
     },
     {
         "id": 5,
+        "shortLabel": "Gemini AI",
         "title": "The Gemini Ecosystem (Generative AI)",
         "lectures": 3,
         "hours": 6,
@@ -171,6 +177,7 @@
     },
     {
         "id": 6,
+        "shortLabel": "Career Launch",
         "title": "Career Acceleration & Placement Mastery",
         "lectures": 3,
         "hours": 6,

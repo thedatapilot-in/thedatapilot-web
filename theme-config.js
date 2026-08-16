@@ -69,13 +69,131 @@ const THEMES = {
         50:  "#ecfeff", 100: "#ccfbfe", 200: "#9af5fc",
         300: "#4eebf9", 400: "#0dd8f0", 500: "#06b6d4",
         600: "#0892b2", 700: "#0e7490", 800: "#155e75", 900: "#164e63"
+    },
+
+    // ── PREMIUM DATA PLATFORM PALETTE ───────────────────────────
+
+    // nova — electric emerald. New Relic / Databricks growth-green.
+    // Distinctive on dark; signals precision, health metrics, success.
+    nova: {
+        50:  "#edfff6", 100: "#d1ffea", 200: "#a3f5d2",
+        300: "#5ee8b0", 400: "#1dd68a", 500: "#0eba72",
+        600: "#089659", 700: "#077545", 800: "#065c37", 900: "#054a2d"
+    },
+
+    // arctic — ice-sapphire blue. Snowflake / cloud analytics DNA.
+    // Cleaner, brighter, and airier than cyan — conveys data clarity.
+    arctic: {
+        50:  "#f0f9ff", 100: "#e0f2fe", 200: "#b9e6fe",
+        300: "#7cd4fd", 400: "#36bbf7", 500: "#0ba4e8",
+        600: "#0284c7", 700: "#0369a1", 800: "#075985", 900: "#0c4a6e"
+    },
+
+    // sapphire — deep authoritative blue. IBM / enterprise analytics.
+    // More serious and navy-anchored than plasma (royal cobalt).
+    sapphire: {
+        50:  "#eff2ff", 100: "#dce3ff", 200: "#c0ccff",
+        300: "#94a8ff", 400: "#5e78ff", 500: "#3852f0",
+        600: "#2640d8", 700: "#1e32b5", 800: "#182891", 900: "#131f6e"
+    },
+
+    // copper — premium warm bronze. Datadog / Grafana instrumentation.
+    // Rich amber-copper; warmer and more metallic than ember's coral.
+    copper: {
+        50:  "#fff8f0", 100: "#ffedda", 200: "#ffd7ad",
+        300: "#ffb870", 400: "#ff922e", 500: "#f07010",
+        600: "#d45a06", 700: "#b04606", 800: "#8c3808", 900: "#6e2d0a"
+    },
+
+    // ── BLUE · WHITE · VIOLET PREMIUM PALETTE ───────────────────
+
+    // iris — electric periwinkle. Blue and violet fused at equal weight.
+    // Sits between aura and volt — uniquely both at once. Crisp on dark.
+    iris: {
+        50:  "#f3f1ff", 100: "#e8e5ff", 200: "#d4cfff",
+        300: "#b8b0ff", 400: "#9a88ff", 500: "#8070ff",
+        600: "#6858e8", 700: "#5242cc", 800: "#3e30a8", 900: "#2c2284"
+    },
+
+    // frost — soft lavender mist. Light violet, low-saturation, airy.
+    // Premium and gentle — glows like frosted glass on a dark surface.
+    frost: {
+        50:  "#fdf8ff", 100: "#f7eeff", 200: "#eeddff",
+        300: "#e0c8ff", 400: "#ceb0ff", 500: "#b48af5",
+        600: "#9a6ae0", 700: "#7e4ec8", 800: "#6438a8", 900: "#4e2a88"
+    },
+
+    // cobalt — prussian enterprise blue. Deep and authoritative.
+    // More navy-anchored than plasma; reads as premium, serious, trusted.
+    cobalt: {
+        50:  "#eff4ff", 100: "#dce9ff", 200: "#b8d0ff",
+        300: "#86acff", 400: "#3878f8", 500: "#1855d8",
+        600: "#1242bc", 700: "#0e32a0", 800: "#0a2580", 900: "#071a62"
+    },
+
+    // lilac — warm light violet. Soft premium purple, approachable luxury.
+    // Warmer hue than frost; 400 reads as a glowing warm violet on dark.
+    lilac: {
+        50:  "#faf4ff", 100: "#f3e6ff", 200: "#e8d0ff",
+        300: "#d8b0ff", 400: "#c080ff", 500: "#a455e8",
+        600: "#8838d0", 700: "#6e28b8", 800: "#561e98", 900: "#40167a"
+    },
+
+    // ── COBALT FAMILY — 6 variations around deep premium blue ────
+
+    // navy — deep prussian authority. IBM-grade trust, serious enterprise.
+    // Darker and heavier than cobalt — premium suit energy.
+    navy: {
+        50:  "#eef2ff", 100: "#dce7ff", 200: "#b8d0ff",
+        300: "#88a8ff", 400: "#3068e8", 500: "#1a4dc8",
+        600: "#103eb0", 700: "#0b2e90", 800: "#072270", 900: "#051855"
+    },
+
+    // ocean — cobalt with teal undertone. Analytics depth, data current.
+    // Has movement — the blue you feel in ocean data dashboards.
+    ocean: {
+        50:  "#edf5ff", 100: "#d8eeff", 200: "#b0d8ff",
+        300: "#78bcff", 400: "#1880e0", 500: "#0c65c0",
+        600: "#0950a8", 700: "#073c88", 800: "#052c6a", 900: "#041f4e"
+    },
+
+    // azure — bright crisp cloud blue. Microsoft / Snowflake tech clarity.
+    // The lightest and most electric of the cobalt family — open-sky energy.
+    azure: {
+        50:  "#edf8ff", 100: "#d8f0ff", 200: "#b0dfff",
+        300: "#72c8ff", 400: "#2896ff", 500: "#1278e8",
+        600: "#0c62cc", 700: "#094ab0", 800: "#073690", 900: "#052870"
+    },
+
+    // midnight — ultra-deep cobalt-navy. Near indigo. Mysterious premium.
+    // Use when the brand needs to feel like deep space intelligence.
+    midnight: {
+        50:  "#eef0ff", 100: "#dde2ff", 200: "#bbc6ff",
+        300: "#8898ff", 400: "#2050e8", 500: "#0f35b0",
+        600: "#0a2898", 700: "#071e80", 800: "#051668", 900: "#040f52"
+    },
+
+    // steel — muted blue-grey. Understated, premium, corporate restraint.
+    // Lower saturation; reads as sophisticated rather than vibrant.
+    steel: {
+        50:  "#f0f4fa", 100: "#dde8f5", 200: "#bed0ee",
+        300: "#92aede", 400: "#5078b8", 500: "#3460a0",
+        600: "#284e8a", 700: "#1e3c72", 800: "#152c5a", 900: "#0e2046"
+    },
+
+    // royal — classic vibrant royal blue. Rich, saturated, slight violet lean.
+    // More regal and confident than cobalt — a proper brand statement color.
+    royal: {
+        50:  "#eef1ff", 100: "#dde4ff", 200: "#bbc8ff",
+        300: "#8ca0ff", 400: "#4068f8", 500: "#2248e0",
+        600: "#1836c8", 700: "#1228aa", 800: "#0e1e8a", 900: "#0a1668"
     }
 };
 
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'volt';    // Choose: volt, aura, ember, neonRose, plasma, the7ai, cyan | legacy: crimson, blue, slate, gold, oliveGreen
+window.LIVE_THEME = 'cobalt';    // Choose: nova, arctic, sapphire, copper, volt, aura, ember, neonRose, plasma, the7ai, cyan | legacy: crimson, blue, slate, gold, oliveGreen
 window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
 
 const THEME_VARIANTS = {
@@ -93,7 +211,7 @@ const THEME_VARIANTS = {
     },
     cyberDark: {
         '--bg-base': '#0f172a',
-        '--bg-alt': '#1e293b',
+        '--bg-alt': '#132240',
         '--text-base': '#f8fafc',
         '--surface-card': 'rgba(30, 41, 59, 0.4)',
         '--surface-form': 'rgba(15, 23, 42, 0.6)',
