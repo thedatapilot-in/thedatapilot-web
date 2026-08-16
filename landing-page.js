@@ -670,7 +670,7 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-20 md:pt-36 pb-10 md:pb-16 px-6 bg-[var(--bg-base)] scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
+            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-[var(--bg-base)] scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation */}
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
                     <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
@@ -682,7 +682,7 @@ const App = () => {
                 </div>
 
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full relative z-10">
-                    <div className="space-y-4 md:space-y-5 text-left">
+                    <div className="space-y-6 md:space-y-8 text-left">
                         <div className="inline-block bg-brand-500/10 text-brand-400 border border-brand-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-brand-500/20">
                             {settings?.brand?.tagline || "Logic-First. AI-Fast."}
                         </div>
@@ -701,12 +701,6 @@ const App = () => {
                             <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-400 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
                             <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>12+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
-                        <div className="grid grid-cols-3 gap-0 py-3 border-y theme-border-strong">
-                            <CountUpStat target={280} suffix="+" label="Students Enrolled" />
-                            <CountUpStat target={16} suffix=" Wks" label="Intensive Program" />
-                            <CountUpStat target={12} suffix="+" label="Live Projects" />
-                        </div>
-
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
                                 <a href="#syllabus" className="block w-full bg-brand-500 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-brand-600 transition-all text-sm uppercase tracking-widest text-center shadow-lg shadow-brand-500/40 hover:shadow-brand-500/60">
@@ -721,7 +715,8 @@ const App = () => {
                         </div>
                     </div>
                     
-                    <div className="bg-[var(--surface-form)] p-8 border border-[var(--border-color)] rounded-3xl max-w-md ml-auto w-full shadow-2xl backdrop-blur-md text-left mt-8 lg:mt-0 relative overflow-hidden group">
+                    <div className="flex flex-col gap-4 max-w-md ml-auto w-full">
+                    <div className="bg-[var(--surface-form)] p-8 border border-[var(--border-color)] rounded-3xl w-full shadow-2xl backdrop-blur-md text-left mt-8 lg:mt-0 relative overflow-hidden group">
                         <div className="absolute top-[-50px] right-[-50px] w-32 h-32 bg-brand-500 rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"></div>
                         <div className="absolute bottom-[-50px] left-[-50px] w-32 h-32 bg-brand-300 rounded-full blur-[60px] opacity-10 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"></div>
                         
@@ -745,6 +740,12 @@ const App = () => {
                                 By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-400">Privacy Policy</a>. Data is used only for your professional consultation.
                             </p>
                         </form>
+                    </div>
+                    <div className="grid grid-cols-3 gap-0 py-4 border theme-border-strong rounded-2xl overflow-hidden">
+                        <CountUpStat target={280} suffix="+" label="Students Enrolled" />
+                        <CountUpStat target={16} suffix=" Wks" label="Intensive Program" />
+                        <CountUpStat target={12} suffix="+" label="Live Projects" />
+                    </div>
                     </div>
                 </div>
             </header>
