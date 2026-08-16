@@ -52,6 +52,24 @@
             .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--brand-500); border-radius: 10px; }
             .bg-brand-500 { background-color: var(--brand-500) !important; transition: all 0.2s ease-in-out; }
             .hover\\:bg-brand-600:hover { background-color: var(--brand-600) !important; }
+            html { background-color: var(--bg-base); }
+            body.theme-bg { background-color: transparent !important; }
+            #root > div:first-child { background-color: transparent !important; }
+            @keyframes aurora-a {
+                0%,100% { transform: translate(0,0) scale(1); }
+                33% { transform: translate(8vw,-6vh) scale(1.08); }
+                66% { transform: translate(-5vw,10vh) scale(0.94); }
+            }
+            @keyframes aurora-b {
+                0%,100% { transform: translate(0,0) scale(1); }
+                40% { transform: translate(-10vw,5vh) scale(1.12); }
+                70% { transform: translate(7vw,-8vh) scale(0.9); }
+            }
+            @keyframes card-glow {
+                0%,100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 15%,transparent), 0 4px 20px -4px rgba(0,0,0,0.12); }
+                50%      { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 40%,transparent), 0 8px 30px -4px rgba(0,0,0,0.18); }
+            }
+            .theme-card:hover { animation: card-glow 2.4s ease-in-out infinite; }
         `;
         document.head.appendChild(style);
 

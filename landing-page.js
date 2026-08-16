@@ -286,13 +286,13 @@ const EligibilityChecker = () => {
     }
 
     return (
-        <div key="form-view" className="theme-card border theme-border rounded-3xl p-6 md:p-10 shadow-sm relative overflow-hidden self-center w-full">
+        <div key="form-view" className="theme-card border theme-border-strong rounded-3xl p-5 md:p-7 relative overflow-hidden self-center w-full" style={{boxShadow: '0 0 0 1px color-mix(in srgb, var(--brand-500) 35%, transparent), 0 20px 40px -8px rgba(0,0,0,0.15)'}}>
             {/* Progress Bar */}
             <div className="absolute top-0 left-0 w-full h-1.5 bg-secondary-200">
                 <div className="h-full bg-brand-500 transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }}></div>
             </div>
 
-            <div className="mb-8 mt-2">
+            <div className="mb-4 mt-1">
                 <span className="text-brand-600 font-bold uppercase tracking-widest text-[10px]">Step 0{step} of 03</span>
                 <h3 className="text-xl font-bold theme-text-primary mt-1">
                     {step === 1 && "Education & Experience"}
@@ -301,7 +301,7 @@ const EligibilityChecker = () => {
                 </h3>
             </div>
 
-            <div className="min-h-[280px]">
+            <div className="min-h-[220px]">
                 {step === 1 && (
                     <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
                         <div>
@@ -628,7 +628,7 @@ const App = () => {
     };
 
     return (
-        <div className="min-h-screen theme-text-primary animate-in fade-in duration-700 overflow-x-hidden theme-bg text-left">
+        <div className="min-h-screen theme-text-primary animate-in fade-in duration-700 text-left">
             <Navbar activeProgramId={activeProgramId} onProgramChange={(id) => { setActiveProgramId(id); setActiveModuleIdx(0); setFormData({...formData, discountApplied: false, couponCode: ''}); }} />
 
             {feedback.show && (
@@ -670,7 +670,7 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 bg-[var(--bg-base)] scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
+            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation */}
                 <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
                     <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
@@ -991,34 +991,54 @@ const App = () => {
             )}
 
             <ScrollReveal delay={100}>
-                <section id="eligibility" className={`${sectionClass} theme-bg-alt`}>
-                    <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
-                        <div className="space-y-6 md:space-y-8 w-full self-center">
-                            <div className="inline-block theme-card text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>
-                            <h2 className="text-3xl md:text-4xl font-extrabold theme-text-primary tracking-tight">Check Your Eligibility Profile</h2>
-                            <p className="theme-text-muted font-medium leading-relaxed text-sm md:text-base">
-                                Discover how this program aligns with your current skills. Whether you are a fresh graduate or an experienced professional, our AI-powered curriculum adapts to accelerate your career.
+                <section id="eligibility" className="snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-10 px-6 border-b theme-border-strong scroll-mt-[80px] md:scroll-mt-[132px] theme-bg-alt relative overflow-hidden">
+                    <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(ellipse 60% 80% at 10% 55%, var(--brand-500) 0%, transparent 60%)', opacity: 0.07}}></div>
+                    <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(ellipse 40% 50% at 90% 40%, var(--brand-700) 0%, transparent 60%)', opacity: 0.04}}></div>
+
+                    <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-center text-left relative z-10">
+
+                        {/* Left — Criteria */}
+                        <div className="space-y-4 w-full self-center">
+                            <div className="inline-flex items-center bg-brand-500/10 text-brand-400 border border-brand-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                                Candidate Profiling
+                            </div>
+                            <h2 className="text-2xl md:text-3xl font-extrabold theme-text-primary tracking-tight leading-tight">
+                                Who Is This<br />
+                                <span style={{color: 'var(--brand-500)'}}>Program For?</span>
+                            </h2>
+                            <p className="theme-text-muted font-medium leading-relaxed text-sm max-w-sm">
+                                Built for graduates, working professionals, and career-changers ready to enter data.
                             </p>
-                            <div className="space-y-4 font-bold theme-text-secondary mt-8">
+
+                            <div className="space-y-2">
                                 {[
-                                    "Final year students or graduates from any discipline.", 
-                                    "Working professionals looking for career acceleration.", 
-                                    "A basic understanding of logical reasoning.", 
+                                    "Final year students or graduates from any discipline.",
+                                    "Working professionals looking for career acceleration.",
+                                    "Basic understanding of logical reasoning required.",
                                     "Commitment to 15-20 hours of weekly learning."
-                                ].map((criteria, i) => (
-                                    <div key={i} className="flex items-start space-x-4 p-4 rounded-xl theme-card border theme-border shadow-sm">
-                                        <div className="w-6 h-6 bg-brand-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                                            <Icon name="check" size={14} className="text-brand-600 font-bold" />
+                                ].map((text, i) => (
+                                    <ScrollReveal key={i} delay={i * 70}>
+                                        <div className="flex items-start gap-3 p-3 rounded-xl border transition-all duration-200 hover:scale-[1.01]"
+                                             style={{
+                                                 background: 'color-mix(in srgb, var(--brand-500) 5%, var(--surface-card))',
+                                                 borderColor: 'color-mix(in srgb, var(--brand-500) 20%, transparent)',
+                                                 borderLeftWidth: '3px',
+                                                 borderLeftColor: 'var(--brand-500)'
+                                             }}>
+                                            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 text-white font-black text-xs"
+                                                 style={{background: 'linear-gradient(135deg, var(--brand-500), var(--brand-600))'}}>
+                                                {i + 1}
+                                            </div>
+                                            <span className="text-sm font-semibold theme-text-secondary leading-snug pt-0.5">{text}</span>
                                         </div>
-                                        <span className="text-sm font-bold theme-text-secondary leading-snug">{criteria}</span>
-                                    </div>
+                                    </ScrollReveal>
                                 ))}
                             </div>
                         </div>
-                        
-                        {/* The Interactive React Component */}
+
+                        {/* Right — Eligibility Checker */}
                         <EligibilityChecker />
-                        
+
                     </div>
                 </section>
             </ScrollReveal>

@@ -489,27 +489,32 @@ window.TypewriterText = ({ text }) => {
 };
 
 // ============================================================
-// DATA NETWORK CANVAS — interactive particle background
+// DOT GRID CANVAS — structured dot grid background
+// Circular dots in a regular grid, pulse animation, mouse glow.
 // Auto-injects on all pages. Color follows --brand-500.
 // Respects prefers-reduced-motion.
 // ============================================================
-(function initDataNetworkBackground() {
+(function initDotGridBackground() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     function setup() {
         const canvas = document.createElement('canvas');
-        canvas.id = 'data-network-bg';
-        canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.15';
+        canvas.id = 'dot-grid-bg';
+        canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:1';
         document.body.insertBefore(canvas, document.body.firstChild);
 
         const ctx = canvas.getContext('2d');
-        let W = canvas.width = window.innerWidth;
-        let H = canvas.height = window.innerHeight;
+        const SPACING = 38;
+        const BASE_R = 1.8;
+        const MAX_R = 4.5;
+        const MOUSE_R = 140;
+        let W, H, dots = [];
         let mouseX = -9999, mouseY = -9999;
 
-        const NODES = 55, CONNECT_DIST = 130, MOUSE_RADIUS = 160, MOUSE_FORCE = 0.06;
-
-        function hexToRgb(hex) {
+        function getBrandRgb() {
+            const raw = getComputedStyle(document.documentElement)
+                .getPropertyValue('--brand-500').trim();
+            const hex = raw.startsWith('#') ? raw : '#84cc16';
             return {
                 r: parseInt(hex.slice(1, 3), 16),
                 g: parseInt(hex.slice(3, 5), 16),
@@ -517,68 +522,42 @@ window.TypewriterText = ({ text }) => {
             };
         }
 
-        function getBrandRgb() {
-            const raw = getComputedStyle(document.documentElement)
-                .getPropertyValue('--brand-500').trim();
-            return hexToRgb(raw.startsWith('#') ? raw : '#658a55');
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+            const cols = Math.ceil(W / SPACING) + 2;
+            const rows = Math.ceil(H / SPACING) + 2;
+            const ox = (W % SPACING) / 2;
+            const oy = (H % SPACING) / 2;
+            dots = [];
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    dots.push({
+                        x: ox + c * SPACING,
+                        y: oy + r * SPACING,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
         }
 
         let rgb = getBrandRgb();
 
-        const nodes = Array.from({ length: NODES }, () => ({
-            x: Math.random() * W, y: Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-            r: Math.random() * 1.5 + 1
-        }));
-
-        function tick() {
+        function tick(t) {
             ctx.clearRect(0, 0, W, H);
             rgb = getBrandRgb();
 
-            for (const n of nodes) {
-                const dx = mouseX - n.x, dy = mouseY - n.y;
+            for (const d of dots) {
+                const dx = d.x - mouseX;
+                const dy = d.y - mouseY;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < MOUSE_RADIUS && dist > 0) {
-                    const f = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * MOUSE_FORCE;
-                    n.vx += (dx / dist) * f;
-                    n.vy += (dy / dist) * f;
-                }
-                n.vx *= 0.98; n.vy *= 0.98;
-                const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
-                if (speed > 0.9) {
-                    n.vx = (n.vx / speed) * 0.9;
-                    n.vy = (n.vy / speed) * 0.9;
-                }
-                n.x += n.vx; n.y += n.vy;
-                if (n.x < 0) n.x = W; if (n.x > W) n.x = 0;
-                if (n.y < 0) n.y = H; if (n.y > H) n.y = 0;
-            }
+                const proximity = Math.max(0, 1 - dist / MOUSE_R);
+                const pulse = 0.5 + 0.5 * Math.sin(t * 0.0007 + d.phase);
+                const r = BASE_R + proximity * (MAX_R - BASE_R);
+                const alpha = 0.07 + pulse * 0.04 + proximity * 0.35;
 
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const d = Math.sqrt(dx * dx + dy * dy);
-                    if (d < CONNECT_DIST) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${(1 - d / CONNECT_DIST) * 0.35})`;
-                        ctx.lineWidth = 0.6;
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            for (const n of nodes) {
-                const dx = mouseX - n.x, dy = mouseY - n.y;
-                const dMouse = Math.sqrt(dx * dx + dy * dy);
-                const alpha = dMouse < MOUSE_RADIUS
-                    ? (1 - dMouse / MOUSE_RADIUS) * 0.9 + 0.25
-                    : 0.25;
                 ctx.beginPath();
-                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
                 ctx.fill();
             }
@@ -586,14 +565,80 @@ window.TypewriterText = ({ text }) => {
             requestAnimationFrame(tick);
         }
 
+        resize();
+        window.addEventListener('resize', resize);
         window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
         window.addEventListener('mouseleave', () => { mouseX = -9999; mouseY = -9999; });
-        window.addEventListener('resize', () => {
-            W = canvas.width = window.innerWidth;
-            H = canvas.height = window.innerHeight;
+        requestAnimationFrame(tick);
+    }
+
+    if (document.body) setup();
+    else document.addEventListener('DOMContentLoaded', setup);
+})();
+
+// ============================================================
+// AURORA BACKGROUND — two drifting brand-colored blobs.
+// Sits at z-index:0, below dot grid canvas (z:1).
+// Provides ambient depth in hero / transparent sections.
+// ============================================================
+(function initAuroraBackground() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    function setup() {
+        const wrap = document.createElement('div');
+        wrap.id = 'aurora-bg';
+        wrap.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden';
+
+        const blobs = [
+            'position:absolute;width:75vw;height:75vw;top:-25%;left:-20%;border-radius:50%;filter:blur(130px);opacity:0.045;animation:aurora-a 28s ease-in-out infinite;background:radial-gradient(circle,var(--brand-500) 0%,transparent 65%)',
+            'position:absolute;width:60vw;height:60vw;bottom:-20%;right:-15%;border-radius:50%;filter:blur(110px);opacity:0.03;animation:aurora-b 22s ease-in-out infinite;background:radial-gradient(circle,var(--brand-400) 0%,transparent 65%)'
+        ];
+        blobs.forEach(css => {
+            const el = document.createElement('div');
+            el.style.cssText = css;
+            wrap.appendChild(el);
         });
 
-        requestAnimationFrame(tick);
+        document.body.insertBefore(wrap, document.body.firstChild);
+    }
+
+    if (document.body) setup();
+    else document.addEventListener('DOMContentLoaded', setup);
+})();
+
+// ============================================================
+// CURSOR GLOW — 60px radial highlight trailing the pointer.
+// Sits at z-index:2 (above dots). pointer-events:none.
+// 150ms position lag via CSS transition for a cinematic feel.
+// ============================================================
+(function initCursorGlow() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    function setup() {
+        const glow = document.createElement('div');
+        glow.id = 'cursor-glow';
+        glow.style.cssText = [
+            'position:fixed',
+            'width:160px',
+            'height:160px',
+            'border-radius:50%',
+            'pointer-events:none',
+            'z-index:2',
+            'transform:translate(-50%,-50%)',
+            'background:radial-gradient(circle,var(--brand-500) 0%,transparent 65%)',
+            'opacity:0',
+            'transition:left 0.15s ease-out,top 0.15s ease-out,opacity 0.4s ease'
+        ].join(';');
+        document.body.appendChild(glow);
+
+        let visible = false;
+        window.addEventListener('mousemove', e => {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+            if (!visible) { glow.style.opacity = '0.07'; visible = true; }
+        });
+        window.addEventListener('mouseleave', () => { glow.style.opacity = '0'; visible = false; });
     }
 
     if (document.body) setup();
