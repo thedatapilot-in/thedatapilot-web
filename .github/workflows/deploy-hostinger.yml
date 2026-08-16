@@ -28,10 +28,10 @@ jobs:
         id: target
         run: |
           if [ "${{ github.ref_name }}" = "main" ]; then
-            echo "remote_dir=/domains/thedatapilot.in/public_html/" >> $GITHUB_OUTPUT
+            echo "remote_dir=/public_html/" >> $GITHUB_OUTPUT
             echo "env_label=production" >> $GITHUB_OUTPUT
           else
-            echo "remote_dir=/domains/thedatapilot.in/public_html/staging/" >> $GITHUB_OUTPUT
+            echo "remote_dir=/public_html/staging/" >> $GITHUB_OUTPUT
             echo "env_label=staging" >> $GITHUB_OUTPUT
           fi
 
