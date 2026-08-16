@@ -96,60 +96,75 @@ const App = () => {
         <div className="min-h-screen theme-text-primary theme-bg animate-in fade-in duration-700">
             <Navbar />
             
-            <header className="pt-36 pb-10 px-6 theme-bg/50 border-b theme-border">
+            <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-left">
-                    <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
-                    <p className="theme-text-muted font-medium italic text-sm">{safeHeader.subtitle}</p>
+                    <window.ScrollReveal>
+                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">About Us</span>
+                        <h1 className="text-4xl md:text-5xl font-extrabold theme-text-primary mb-3">{safeHeader.title}</h1>
+                        <p className="theme-text-muted font-medium text-base">{safeHeader.subtitle}</p>
+                    </window.ScrollReveal>
                 </div>
             </header>
 
-            <main className="flex-grow py-12 px-6">
+            <main className="flex-grow py-16 px-6">
                 <div className="max-w-4xl mx-auto">
                     <div className="space-y-6 theme-text-secondary text-left">
                         {/* Intro Paragraph */}
-                        <p className="text-xl font-medium theme-text-primary leading-relaxed mb-10">
-                            {safeHeader.intro.split('Augmented Data Analysts').map((part, i, arr) => 
-                                i === arr.length - 1 ? part : <span key={i}>{part}<strong>Augmented Data Analysts</strong></span>
-                            )}
-                        </p>
+                        <window.ScrollReveal>
+                            <p className="text-xl font-medium theme-text-primary leading-relaxed mb-10">
+                                {safeHeader.intro.split('Augmented Data Analysts').map((part, i, arr) =>
+                                    i === arr.length - 1 ? part : <span key={i}>{part}<strong>Augmented Data Analysts</strong></span>
+                                )}
+                            </p>
+                        </window.ScrollReveal>
 
                         <div className="space-y-12">
                             {/* Mission Section */}
-                            <section>
-                                <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeMission.title}</h2>
-                                <p className="text-lg leading-relaxed">{safeMission.description}</p>
-                            </section>
+                            <window.ScrollReveal>
+                                <section>
+                                    <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeMission.title}</h2>
+                                    <p className="text-lg leading-relaxed">{safeMission.description}</p>
+                                </section>
+                            </window.ScrollReveal>
 
                             {/* Methodology Section */}
                             {safeMethodology.points.length > 0 && (
-                                <section>
-                                    <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeMethodology.title}</h2>
-                                    <ul className="space-y-4">
-                                        {safeMethodology.points.map((point, idx) => (
-                                            <li key={idx} className="flex items-start gap-3">
-                                                <Icon name="check-circle" size={18} className="text-brand-500 mt-1 flex-shrink-0" />
-                                                <span className="text-lg leading-snug"><strong>{point.title}:</strong> {point.description}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </section>
+                                <window.ScrollReveal>
+                                    <section>
+                                        <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeMethodology.title}</h2>
+                                        <ul className="space-y-4">
+                                            {safeMethodology.points.map((point, idx) => (
+                                                <window.ScrollReveal key={idx} delay={idx * 60}>
+                                                    <li className="flex items-start gap-3">
+                                                        <Icon name="check-circle" size={18} className="text-brand-500 mt-1 flex-shrink-0" />
+                                                        <span className="text-lg leading-snug"><strong>{point.title}:</strong> {point.description}</span>
+                                                    </li>
+                                                </window.ScrollReveal>
+                                            ))}
+                                        </ul>
+                                    </section>
+                                </window.ScrollReveal>
                             )}
 
                             {/* Who We Are Section */}
-                            <section>
-                                <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeWhoWeAre.title}</h2>
-                                <p className="text-lg leading-relaxed">{safeWhoWeAre.description}</p>
-                            </section>
+                            <window.ScrollReveal>
+                                <section>
+                                    <h2 className="text-2xl font-bold theme-text-primary mb-5 tracking-tight">{safeWhoWeAre.title}</h2>
+                                    <p className="text-lg leading-relaxed">{safeWhoWeAre.description}</p>
+                                </section>
+                            </window.ScrollReveal>
                         </div>
 
                         {/* Call to Action Block */}
-                        <div className="theme-bg p-10 rounded-[2.5rem] border theme-border mt-16 shadow-sm">
-                            <h3 className="font-bold theme-text-primary mb-4 uppercase tracking-widest text-sm">{safeCta.title}</h3>
-                            <p className="mb-8 text-lg">{safeCta.description}</p>
-                            <a href={safeCta.buttonLink} className="inline-block bg-brand-500 text-white px-10 py-4 rounded-xl font-bold hover:bg-brand-600 transition-all shadow-lg active:scale-95">
-                                {safeCta.buttonText}
-                            </a>
-                        </div>
+                        <window.ScrollReveal>
+                            <div className="theme-card border theme-border-strong p-10 rounded-[2.5rem] mt-16 shadow-xl">
+                                <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">{safeCta.title}</span>
+                                <p className="theme-text-primary font-semibold text-xl mb-6">{safeCta.description}</p>
+                                <a href={safeCta.buttonLink} className="inline-block bg-brand-500 hover:bg-brand-600 text-white px-10 py-4 rounded-xl font-bold transition-all shadow-lg shadow-brand-500/30 active:scale-95">
+                                    {safeCta.buttonText}
+                                </a>
+                            </div>
+                        </window.ScrollReveal>
                     </div>
                 </div>
             </main>

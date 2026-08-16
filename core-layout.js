@@ -406,3 +406,196 @@ window.Footer = () => {
         </footer>
     );
 };
+
+// ============================================================
+// SHARED REUSABLE COMPONENTS — available to all page scripts
+// ============================================================
+
+window.useIntersectionObserver = (options) => {
+    const [isIntersecting, setIsIntersecting] = React.useState(false);
+    const ref = React.useRef(null);
+    React.useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setIsIntersecting(true);
+                observer.unobserve(entry.target);
+            }
+        }, options);
+        if (ref.current) observer.observe(ref.current);
+        return () => { if (ref.current) observer.unobserve(ref.current); };
+    }, [options]);
+    return [ref, isIntersecting];
+};
+
+window.ScrollReveal = ({ children, className = "", delay = 0 }) => {
+    const [ref, isVisible] = window.useIntersectionObserver({ threshold: 0.1 });
+    return (
+        <div
+            ref={ref}
+            className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${className}`}
+            style={{ transitionDelay: `${delay}ms` }}
+        >
+            {children}
+        </div>
+    );
+};
+
+window.TiltCard = ({ children, className = "" }) => {
+    const cardRef = React.useRef(null);
+    const [style, setStyle] = React.useState({});
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -10;
+        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 10;
+        setStyle({
+            transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02,1.02,1.02)`,
+            transition: 'transform 0.1s ease-out',
+            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)'
+        });
+    };
+    const handleMouseLeave = () => setStyle({
+        transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)',
+        transition: 'transform 0.5s ease-out',
+        boxShadow: 'none'
+    });
+    return (
+        <div ref={cardRef} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}
+             className={`transition-all will-change-transform ${className}`} style={style}>
+            {children}
+        </div>
+    );
+};
+
+window.TypewriterText = ({ text }) => {
+    const [displayedLength, setDisplayedLength] = React.useState(0);
+    React.useEffect(() => {
+        setDisplayedLength(0);
+        const timer = setInterval(() => {
+            setDisplayedLength(prev => {
+                if (prev >= text.length) { clearInterval(timer); return prev; }
+                return prev + 1;
+            });
+        }, 100);
+        return () => clearInterval(timer);
+    }, [text]);
+    const isDone = displayedLength >= text.length;
+    return (
+        <span className="inline-block relative">
+            {text.substring(0, displayedLength)}
+            {!isDone && <span className="absolute -right-2 top-1/2 -translate-y-1/2 w-[3px] h-[70%] bg-brand-500 animate-pulse"></span>}
+        </span>
+    );
+};
+
+// ============================================================
+// DATA NETWORK CANVAS — interactive particle background
+// Auto-injects on all pages. Color follows --brand-500.
+// Respects prefers-reduced-motion.
+// ============================================================
+(function initDataNetworkBackground() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    function setup() {
+        const canvas = document.createElement('canvas');
+        canvas.id = 'data-network-bg';
+        canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.15';
+        document.body.insertBefore(canvas, document.body.firstChild);
+
+        const ctx = canvas.getContext('2d');
+        let W = canvas.width = window.innerWidth;
+        let H = canvas.height = window.innerHeight;
+        let mouseX = -9999, mouseY = -9999;
+
+        const NODES = 55, CONNECT_DIST = 130, MOUSE_RADIUS = 160, MOUSE_FORCE = 0.06;
+
+        function hexToRgb(hex) {
+            return {
+                r: parseInt(hex.slice(1, 3), 16),
+                g: parseInt(hex.slice(3, 5), 16),
+                b: parseInt(hex.slice(5, 7), 16)
+            };
+        }
+
+        function getBrandRgb() {
+            const raw = getComputedStyle(document.documentElement)
+                .getPropertyValue('--brand-500').trim();
+            return hexToRgb(raw.startsWith('#') ? raw : '#658a55');
+        }
+
+        let rgb = getBrandRgb();
+
+        const nodes = Array.from({ length: NODES }, () => ({
+            x: Math.random() * W, y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35,
+            r: Math.random() * 1.5 + 1
+        }));
+
+        function tick() {
+            ctx.clearRect(0, 0, W, H);
+            rgb = getBrandRgb();
+
+            for (const n of nodes) {
+                const dx = mouseX - n.x, dy = mouseY - n.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < MOUSE_RADIUS && dist > 0) {
+                    const f = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * MOUSE_FORCE;
+                    n.vx += (dx / dist) * f;
+                    n.vy += (dy / dist) * f;
+                }
+                n.vx *= 0.98; n.vy *= 0.98;
+                const speed = Math.sqrt(n.vx * n.vx + n.vy * n.vy);
+                if (speed > 0.9) {
+                    n.vx = (n.vx / speed) * 0.9;
+                    n.vy = (n.vy / speed) * 0.9;
+                }
+                n.x += n.vx; n.y += n.vy;
+                if (n.x < 0) n.x = W; if (n.x > W) n.x = 0;
+                if (n.y < 0) n.y = H; if (n.y > H) n.y = 0;
+            }
+
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < CONNECT_DIST) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${(1 - d / CONNECT_DIST) * 0.35})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            for (const n of nodes) {
+                const dx = mouseX - n.x, dy = mouseY - n.y;
+                const dMouse = Math.sqrt(dx * dx + dy * dy);
+                const alpha = dMouse < MOUSE_RADIUS
+                    ? (1 - dMouse / MOUSE_RADIUS) * 0.9 + 0.25
+                    : 0.25;
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
+                ctx.fill();
+            }
+
+            requestAnimationFrame(tick);
+        }
+
+        window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+        window.addEventListener('mouseleave', () => { mouseX = -9999; mouseY = -9999; });
+        window.addEventListener('resize', () => {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        });
+
+        requestAnimationFrame(tick);
+    }
+
+    if (document.body) setup();
+    else document.addEventListener('DOMContentLoaded', setup);
+})();

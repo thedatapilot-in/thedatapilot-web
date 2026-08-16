@@ -83,10 +83,13 @@ const App = () => {
         <div className="min-h-screen theme-text-primary theme-bg animate-in fade-in duration-700">
             <Navbar />
 
-            <header className="pt-36 pb-10 px-6 theme-bg/50 border-b theme-border">
+            <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-left">
-                    <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
-                    <p className="theme-text-muted font-medium italic text-sm">{safeHeader.subtitle}</p>
+                    <window.ScrollReveal>
+                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Legal</span>
+                        <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
+                        <p className="theme-text-muted font-medium text-sm">{safeHeader.subtitle}</p>
+                    </window.ScrollReveal>
                 </div>
             </header>
 

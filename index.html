@@ -16,26 +16,6 @@
   <script src="theme-config.js"></script>
   <script src="site-loader.js?v=3.2.0"></script>
 
-  <!-- Page Specific Styles (theme-* utility classes injected globally by site-loader.js) -->
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .bg-brand-500 {
-        background-color: theme("colors.brand.500") !important;
-        transition: all 0.2s ease-in-out;
-      }
-      .hover\:bg-brand-600:hover {
-        background-color: theme("colors.brand.600") !important;
-      }
-    }
-  </style>
-  <style>
-      section { scroll-margin-top: 150px; }
-      .tool-card { border-radius: 8px; transition: transform 0.2s; }
-      .tool-card:hover { transform: translateY(-4px); }
-      .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-      .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-      .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--brand-500); border-radius: 10px; }
-  </style>
 </head>
 <body class="theme-bg">
   <!-- React App mounts here -->

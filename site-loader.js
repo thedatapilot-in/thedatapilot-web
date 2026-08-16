@@ -18,6 +18,8 @@
     const isPrivacyPage = path.endsWith('privacy-policy.html');
     const isTermsPage = path.endsWith('terms-and-conditions.html');
     const isRefundPage = path.endsWith('refund-policy.html');
+    const isProductsPage = path.endsWith('products.html');
+    const isServicesPage = path.endsWith('services.html');
 
     // --- CENTRALIZED WATCHDOG & EMERGENCY UI ---
     // Increased from 3000 to 10000 to handle slower 4G/mobile latencies
@@ -42,6 +44,14 @@
             .theme-text-muted { color: var(--text-base); opacity: 0.6; }
             .theme-border { border-color: var(--border-color); }
             .theme-border-strong { border-color: var(--border-strong); }
+            section { scroll-margin-top: 150px; }
+            .tool-card { border-radius: 8px; transition: transform 0.2s; }
+            .tool-card:hover { transform: translateY(-4px); }
+            .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+            .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+            .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--brand-500); border-radius: 10px; }
+            .bg-brand-500 { background-color: var(--brand-500) !important; transition: all 0.2s ease-in-out; }
+            .hover\\:bg-brand-600:hover { background-color: var(--brand-600) !important; }
         `;
         document.head.appendChild(style);
 
@@ -123,6 +133,8 @@
         else if (isPrivacyPage) pageSrc = `privacy-policy.js?v=${VERSION}`;
         else if (isTermsPage) pageSrc = `terms-and-conditions.js?v=${VERSION}`;
         else if (isRefundPage) pageSrc = `refund-policy.js?v=${VERSION}`;
+        else if (isProductsPage) pageSrc = `products.js?v=${VERSION}`;
+        else if (isServicesPage) pageSrc = `services.js?v=${VERSION}`;
 
         // Inject the page logic if a valid route was found
         if (pageSrc) {

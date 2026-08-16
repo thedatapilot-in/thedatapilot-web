@@ -97,18 +97,21 @@ const App = () => {
         <div className="min-h-screen theme-text-primary theme-bg animate-in fade-in duration-700">
             <Navbar />
 
-            {/* Tightened Header Section */}
-            <header className="pt-36 pb-10 px-6 theme-bg/50 border-b theme-border">
+            <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-left">
-                    <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
-                    <p className="theme-text-muted font-medium italic text-sm">{safeHeader.subtitle}</p>
+                    <window.ScrollReveal>
+                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Legal</span>
+                        <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
+                        <p className="theme-text-muted font-medium text-sm">{safeHeader.subtitle}</p>
+                    </window.ScrollReveal>
                 </div>
             </header>
 
-            <section className="py-12 px-6">
+            <section className="py-16 px-6">
                 <div className="max-w-4xl mx-auto space-y-10 theme-text-secondary font-medium leading-relaxed text-left">
                     {safeSections.map((section, idx) => (
-                        <div key={idx} className="space-y-4">
+                        <window.ScrollReveal key={idx} delay={idx * 50}>
+                        <div className="space-y-4">
                             <h2 className="text-2xl font-bold theme-text-primary tracking-tight">{section.title}</h2>
                             <p>{section.content}</p>
                             
@@ -124,6 +127,7 @@ const App = () => {
                                 </ul>
                             )}
                         </div>
+                        </window.ScrollReveal>
                     ))}
                 </div>
             </section>
