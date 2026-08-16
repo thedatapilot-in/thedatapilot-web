@@ -20,11 +20,13 @@
        .gear-large { animation: spin 8s linear infinite; transform-origin: center; }
        .gear-small { animation: spin-reverse 4s linear infinite; transform-origin: center; }
        .theme-bg { background-color: var(--bg-base); transition: background-color 0.5s, color 0.5s; }
+       .theme-bg-alt { background-color: var(--bg-alt); transition: background-color 0.5s, color 0.5s; }
        .theme-card { background-color: var(--surface-card); transition: background-color 0.5s; }
        .theme-text-primary { color: var(--text-base); }
        .theme-text-secondary { color: var(--text-base); opacity: 0.8; }
        .theme-text-muted { color: var(--text-base); opacity: 0.6; }
        .theme-border { border-color: var(--border-color); }
+       .theme-border-strong { border-color: var(--border-strong); }
    </style>
 </head>
 <body class="theme-bg">
@@ -94,13 +96,13 @@
                    <main class="py-20 px-6 max-w-7xl mx-auto">
                        <div className="grid md:grid-cols-3 gap-8">
                            {services.items.map(service => (
-                               <div key={service.id} className="bg-secondary-900 text-white rounded-[2rem] p-10 flex flex-col hover:scale-[1.02] transition-all">
-                                   <div className="inline-block bg-brand-500 theme-text-primary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest w-fit mb-8">
+                               <div key={service.id} className="theme-card border theme-border-strong rounded-[2rem] p-10 flex flex-col hover:scale-[1.02] transition-all">
+                                   <div className="inline-block bg-brand-500 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest w-fit mb-8">
                                        {service.category}
                                    </div>
-                                   <h3 className="text-2xl font-bold mb-6">{service.title}</h3>
+                                   <h3 className="text-2xl font-bold theme-text-primary mb-6">{service.title}</h3>
                                    <p className="theme-text-muted font-medium leading-relaxed mb-10">{service.description}</p>
-                                   <button className="w-full theme-bg theme-text-primary py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-brand-500 transition-colors mt-auto">
+                                   <button className="w-full bg-brand-500 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-brand-600 transition-colors mt-auto">
                                        {service.cta}
                                    </button>
                                </div>

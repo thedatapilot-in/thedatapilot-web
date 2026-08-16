@@ -146,7 +146,7 @@ const App = () => {
                         <div className="theme-bg p-10 rounded-[2.5rem] border theme-border mt-16 shadow-sm">
                             <h3 className="font-bold theme-text-primary mb-4 uppercase tracking-widest text-sm">{safeCta.title}</h3>
                             <p className="mb-8 text-lg">{safeCta.description}</p>
-                            <a href={safeCta.buttonLink} className="inline-block bg-secondary-900 text-white px-10 py-4 rounded-xl font-bold hover:bg-brand-500 transition-all shadow-lg active:scale-95">
+                            <a href={safeCta.buttonLink} className="inline-block bg-brand-500 text-white px-10 py-4 rounded-xl font-bold hover:bg-brand-600 transition-all shadow-lg active:scale-95">
                                 {safeCta.buttonText}
                             </a>
                         </div>
