@@ -508,11 +508,15 @@ window.TypewriterText = ({ text }) => {
         const BASE_R = 1.8;
         const MAX_R = 4.5;
         const MOUSE_R = 140;
+        const STILL_MS = 380;
         let W, H, dots = [];
         let mouseX = -9999, mouseY = -9999;
         let targetX = -9999, targetY = -9999;
+        let prevTX = -9999, prevTY = -9999;
+        let vx = 0, vy = 0;
         let fadeIn = 0;
         let cursorActive = false;
+        let lastMoveTime = 0;
 
         function getBrandRgb() {
             const raw = getComputedStyle(document.documentElement)
@@ -546,24 +550,47 @@ window.TypewriterText = ({ text }) => {
 
         let rgb = getBrandRgb();
 
-        function tick(t) {
-            // Smoothly lerp displayed position toward real cursor
+        function tick() {
+            // Deactivate after STILL_MS of no movement
+            if (cursorActive && performance.now() - lastMoveTime > STILL_MS) {
+                cursorActive = false;
+            }
+
+            // Smooth velocity from raw target delta (exponential moving average)
+            vx = vx * 0.75 + (targetX - prevTX) * 0.25;
+            vy = vy * 0.75 + (targetY - prevTY) * 0.25;
+            prevTX = targetX;
+            prevTY = targetY;
+
+            // Lerp displayed position toward target
             mouseX += (targetX - mouseX) * 0.1;
             mouseY += (targetY - mouseY) * 0.1;
 
-            // Fade in slowly on cursor enter, fade out on leave
+            // Fade in/out
             const fadeDest = cursorActive ? 1 : 0;
-            fadeIn += (fadeDest - fadeIn) * (cursorActive ? 0.04 : 0.025);
+            fadeIn += (fadeDest - fadeIn) * (cursorActive ? 0.045 : 0.028);
 
             ctx.clearRect(0, 0, W, H);
             rgb = getBrandRgb();
 
+            if (fadeIn < 0.004) { requestAnimationFrame(tick); return; }
+
             const globalBase = fadeIn * 0.055;
+
+            // Soap-bubble stretch: elongate ellipse along velocity direction
+            const speed = Math.sqrt(vx * vx + vy * vy);
+            const stretch = Math.min(1 + speed * 0.065, 3.0);
+            const angle = speed > 0.4 ? Math.atan2(vy, vx) : 0;
+            const cosA = Math.cos(angle);
+            const sinA = Math.sin(angle);
 
             for (const d of dots) {
                 const dx = d.x - mouseX;
                 const dy = d.y - mouseY;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+                // Rotate delta into velocity frame; compress along movement axis
+                const lx = (dx * cosA + dy * sinA) / stretch;
+                const ly = -dx * sinA + dy * cosA;
+                const dist = Math.sqrt(lx * lx + ly * ly);
                 const proximity = Math.max(0, 1 - dist / MOUSE_R);
                 const r = BASE_R + proximity * fadeIn * (MAX_R - BASE_R);
                 const alpha = globalBase + proximity * fadeIn * 0.42;
@@ -581,9 +608,16 @@ window.TypewriterText = ({ text }) => {
         resize();
         window.addEventListener('resize', resize);
         window.addEventListener('mousemove', e => {
+            const wasInactive = !cursorActive;
             targetX = e.clientX;
             targetY = e.clientY;
-            if (!cursorActive) { cursorActive = true; mouseX = targetX; mouseY = targetY; }
+            cursorActive = true;
+            lastMoveTime = performance.now();
+            if (wasInactive) {
+                mouseX = targetX; mouseY = targetY;
+                prevTX = targetX; prevTY = targetY;
+                vx = 0; vy = 0;
+            }
         });
         window.addEventListener('mouseleave', () => { cursorActive = false; });
         requestAnimationFrame(tick);
