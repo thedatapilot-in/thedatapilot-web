@@ -215,6 +215,10 @@ window.tailwind.config = {
             link.type = 'image/png';
             document.head.appendChild(link);
         }
-        link.href = `assets/images/thedatapilot_logo_${theme}.png`;
+        const themed = `assets/images/thedatapilot_logo_${theme}.png`;
+        const probe = new Image();
+        probe.onload = () => { link.href = themed; };
+        probe.onerror = () => { link.href = 'assets/images/thedatapilot_logo.png'; };
+        probe.src = themed;
     }
 })();
