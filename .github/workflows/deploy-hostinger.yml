@@ -1,0 +1,58 @@
+# Deploy to Hostinger via FTP
+# Staging  → push to `staging` branch → /public_html/staging/
+# Production → push to `main` branch   → /public_html/
+#
+# Required GitHub Secrets (repo → Settings → Secrets → Actions):
+#   HOSTINGER_FTP_HOST   e.g. ftp.thedatapilot.in
+#   HOSTINGER_FTP_USER   e.g. u123456789
+#   HOSTINGER_FTP_PASS   your FTP password
+
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set deploy target path
+        id: target
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "remote_dir=/public_html/" >> $GITHUB_OUTPUT
+            echo "env_label=production" >> $GITHUB_OUTPUT
+          else
+            echo "remote_dir=/public_html/staging/" >> $GITHUB_OUTPUT
+            echo "env_label=staging" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Deploy via FTP → ${{ steps.target.outputs.env_label }}
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_HOST }}
+          username: ${{ secrets.HOSTINGER_FTP_USER }}
+          password: ${{ secrets.HOSTINGER_FTP_PASS }}
+          server-dir: ${{ steps.target.outputs.remote_dir }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/cover image.png
+            **/chat-logs/**
+            **/knowledge-vault/**
+            **/workstreams/**
+            **/archive/**
+            **/logs/**
+            **/.agents/**
+            **/scripts/**
+            **/generate_logos.py
