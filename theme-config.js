@@ -1,34 +1,81 @@
 /**
- * THE DATA PILOT - ADVANCED THEME ENGINE v2.5
+ * THE DATA PILOT - ADVANCED THEME ENGINE v3.0
  * ---------------------------------------------------------
- * This engine manages global design tokens and Tailwind extensions.
- * Added: Premium Gold, Modern Violet, Minimal Slate, Attention Amber.
- * Added: Glassmorphism, 3D Depth, Minimal, and Midnight variants.
+ * Custom-crafted palettes tuned for cyberDark (#0f172a background).
+ * The 400–600 band drives dots, buttons, borders, eyebrow text.
+ * Each hue is hand-picked — not pulled from Tailwind defaults.
  * ---------------------------------------------------------
  */
 
 const THEMES = {
-    // EXISTING THEMES (Preserved)
-    crimson: { 50: "#fff0f2", 100: "#ffdddf", 200: "#ffb0b6", 300: "#ff7480", 400: "#fd3346", 500: "#e10b17", 600: "#c7000e", 700: "#a60009", 800: "#89050e", 900: "#740810" },
-    cyan: { 50: "#ecfeff", 100: "#cffafe", 200: "#a5f3fc", 300: "#67e8f9", 400: "#22d3ee", 500: "#06b6d4", 600: "#0891b2", 700: "#0e7490", 800: "#155e75", 900: "#164e63" },
-    blue: { 50: "#eff6ff", 100: "#dbeafe", 200: "#bfdbfe", 300: "#93c5fd", 400: "#60a5fa", 500: "#3b82f6", 600: "#2563eb", 700: "#1d4ed8", 800: "#1e40af", 900: "#1e3a8a" },
-    emerald: { 50: "#ecfdf5", 100: "#d1fae5", 200: "#a7f3d0", 300: "#6ee7b7", 400: "#34d399", 500: "#10b981", 600: "#059669", 700: "#047857", 800: "#065f46", 900: "#064e3b" },
-    indigo: { 50: "#eef2ff", 100: "#e0e7ff", 200: "#c7d2fe", 300: "#a5b4fc", 400: "#818cf8", 500: "#6366f1", 600: "#4f46e5", 700: "#4338ca", 800: "#3730a3", 900: "#312e81" },
-    
-    // NEW PROFESSIONAL & DYNAMIC THEMES
-    crimsonRed: { 50: "#f8e6e9", 100: "#f1cdd3", 200: "#e49ba6", 300: "#d76a7a", 400: "#ca384d", 500: "#9b0021", 600: "#84001c", 700: "#6c0017", 800: "#550012", 900: "#3d000d" }, // Custom Crimson Red
-    gold: { 50: "#fdfbf7", 100: "#f7f1e2", 200: "#eee1bc", 300: "#e1ca89", 400: "#d2ab56", 500: "#c28e33", 600: "#a87328", 700: "#875721", 800: "#6f461f", 900: "#5c3a1c" }, // Premium/Executive
-    violet: { 50: "#f5f3ff", 100: "#ede9fe", 200: "#ddd6fe", 300: "#c4b5fd", 400: "#a78bfa", 500: "#8b5cf6", 600: "#7c3aed", 700: "#6d28d9", 800: "#5b21b6", 900: "#4c1d95" }, // Modern Tech
-    slate: { 50: "#f8fafc", 100: "#f1f5f9", 200: "#e2e8f0", 300: "#cbd5e1", 400: "#94a3b8", 500: "#64748b", 600: "#475569", 700: "#334155", 800: "#1e293b", 900: "#0f172a" }, // Minimalist
-    amber: { 50: "#fffbeb", 100: "#fef3c7", 200: "#fde68a", 300: "#fcd34d", 400: "#fbbf24", 500: "#f59e0b", 600: "#d97706", 700: "#b45309", 800: "#92400e", 900: "#78350f" },  // Attention Grabbing
-    the7ai: { 50: "#f3f1ff", 100: "#ebe6ff", 200: "#d9cfff", 300: "#bda8ff", 400: "#9b75ff", 500: "#6345ed", 600: "#5732db", 700: "#4823bc", 800: "#3d1e9b", 900: "#331a7c" },
-    oliveGreen: { 50: "#f4f7f2", 100: "#e5ece1", 200: "#ccdcc5", 300: "#a9c59f", 400: "#84aa76", 500: "#658a55", 600: "#4f6d42", 700: "#3e5634", 800: "#33452c", 900: "#2a3925" } // Olive Green
+    // ── UTILITY / LEGACY ──────────────────────────────────────
+    crimson:    { 50:"#fff0f2", 100:"#ffdddf", 200:"#ffb0b6", 300:"#ff7480", 400:"#fd3346", 500:"#e10b17", 600:"#c7000e", 700:"#a60009", 800:"#89050e", 900:"#740810" },
+    blue:       { 50:"#eff6ff", 100:"#dbeafe", 200:"#bfdbfe", 300:"#93c5fd", 400:"#60a5fa", 500:"#3b82f6", 600:"#2563eb", 700:"#1d4ed8", 800:"#1e40af", 900:"#1e3a8a" },
+    slate:      { 50:"#f8fafc", 100:"#f1f5f9", 200:"#e2e8f0", 300:"#cbd5e1", 400:"#94a3b8", 500:"#64748b", 600:"#475569", 700:"#334155", 800:"#1e293b",  900:"#0f172a" },
+    gold:       { 50:"#fdfbf7", 100:"#f7f1e2", 200:"#eee1bc", 300:"#e1ca89", 400:"#d2ab56", 500:"#c28e33", 600:"#a87328", 700:"#875721", 800:"#6f461f",  900:"#5c3a1c" },
+    oliveGreen: { 50:"#f4f7f2", 100:"#e5ece1", 200:"#ccdcc5", 300:"#a9c59f", 400:"#84aa76", 500:"#658a55", 600:"#4f6d42", 700:"#3e5634", 800:"#33452c",  900:"#2a3925" },
+
+    // ── VIBRANT PREMIUM (hand-crafted for dark backgrounds) ───
+
+    // volt — electric warm-purple. Think: deepspace lightning.
+    // Signature tone for The Data Pilot. Hot at 400, electric at 500.
+    volt: {
+        50:  "#f7f0ff", 100: "#ede0ff", 200: "#dbc5ff",
+        300: "#c09aff", 400: "#a468ff", 500: "#8845f0",
+        600: "#7030d4", 700: "#5820ac", 800: "#421882", 900: "#30115e"
+    },
+
+    // aura — deep electric indigo-blue. Premium AI brand energy.
+    // Cooler than volt, heavier gravity, like data flowing in space.
+    aura: {
+        50:  "#eef0ff", 100: "#dde1ff", 200: "#c0c8ff",
+        300: "#929fff", 400: "#6070ff", 500: "#4050f5",
+        600: "#2e3ce0", 700: "#222db8", 800: "#1a2394", 900: "#131972"
+    },
+
+    // ember — warm electric coral. Approachable, energetic, human.
+    // The 400 reads orange-hot on dark; 500 anchors without going red.
+    ember: {
+        50:  "#fff4f0", 100: "#ffe6dc", 200: "#ffc9b0",
+        300: "#ffa07c", 400: "#ff7045", 500: "#f5482a",
+        600: "#d6301a", 700: "#b02010", 800: "#8a160a", 900: "#660f05"
+    },
+
+    // neonRose — electric hot pink. Bold, creative, unforgettable.
+    // Inspired by neon studio signs. 400 nearly glows on dark navy.
+    neonRose: {
+        50:  "#fff0f7", 100: "#ffd4ed", 200: "#ffaad8",
+        300: "#ff75be", 400: "#ff38a4", 500: "#e8178a",
+        600: "#c2006e", 700: "#980055", 800: "#73003f", 900: "#53002e"
+    },
+
+    // plasma — electric royal blue. Clean, trustworthy, data-forward.
+    // The 500 is a bespoke saturated cobalt — not the tired blue-500.
+    plasma: {
+        50:  "#eef4ff", 100: "#dde9ff", 200: "#bbd3ff",
+        300: "#88b2ff", 400: "#4e87ff", 500: "#2262f5",
+        600: "#154bd8", 700: "#0e39b5", 800: "#0a2b90", 900: "#071f6a"
+    },
+
+    // the7ai — kept, refined 400→ more electric on dark
+    the7ai: {
+        50:  "#f3f1ff", 100: "#ebe6ff", 200: "#d9cfff",
+        300: "#bda8ff", 400: "#9b75ff", 500: "#6345ed",
+        600: "#5732db", 700: "#4823bc", 800: "#3d1e9b", 900: "#331a7c"
+    },
+
+    // cyan — kept, 400 pushed brighter for dark BG punch
+    cyan: {
+        50:  "#ecfeff", 100: "#ccfbfe", 200: "#9af5fc",
+        300: "#4eebf9", 400: "#0dd8f0", 500: "#06b6d4",
+        600: "#0892b2", 700: "#0e7490", 800: "#155e75", 900: "#164e63"
+    }
 };
 
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'oliveGreen';    // Choose: crimson, crimsonRed, cyan, blue, emerald, indigo, gold, violet, slate, amber, the7ai, oliveGreen
+window.LIVE_THEME = 'volt';    // Choose: volt, aura, ember, neonRose, plasma, the7ai, cyan | legacy: crimson, blue, slate, gold, oliveGreen
 window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
 
 const THEME_VARIANTS = {
