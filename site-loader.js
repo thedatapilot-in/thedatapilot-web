@@ -35,11 +35,13 @@
             .gear-small { animation: spin-reverse 4s linear infinite; transform-origin: center; }
             #root:not(:empty) ~ #emergency-ui { display: none !important; }
             .theme-bg { background-color: var(--bg-base); transition: background-color 0.5s, color 0.5s; }
+            .theme-bg-alt { background-color: var(--bg-alt); transition: background-color 0.5s, color 0.5s; }
             .theme-card { background-color: var(--surface-card); transition: background-color 0.5s; }
             .theme-text-primary { color: var(--text-base); }
             .theme-text-secondary { color: var(--text-base); opacity: 0.8; }
             .theme-text-muted { color: var(--text-base); opacity: 0.6; }
             .theme-border { border-color: var(--border-color); }
+            .theme-border-strong { border-color: var(--border-strong); }
         `;
         document.head.appendChild(style);
 

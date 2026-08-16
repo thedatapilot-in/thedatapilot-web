@@ -553,7 +553,7 @@ const App = () => {
     ];
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
-    const sectionClass = "snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b theme-border";
+    const sectionClass = "snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b theme-border-strong";
 
     const handleModuleToggle = (idx) => {
         const isMobile = window.innerWidth < 1024;
@@ -673,7 +673,7 @@ const App = () => {
             </header>
 
             <ScrollReveal delay={100}>
-                <section id="syllabus" className={`${sectionClass} bg-[#0f172a]/80 border-y border-slate-800/80 relative overflow-hidden`}>
+                <section id="syllabus" className={`${sectionClass} theme-bg-alt relative overflow-hidden`}>
                     {/* Futuristic Gradient Section Separator */}
                     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-500/50 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-500/30 to-transparent"></div>
@@ -791,7 +791,7 @@ const App = () => {
 
             {/* PROJECTS SECTION - 2026 Tilt Grid */}
             <ScrollReveal>
-                <section id="projects" className={`${sectionClass} theme-bg`}>
+                <section id="projects" className={`${sectionClass} theme-bg-alt`}>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
                         
                         <h2 className="text-3xl font-extrabold mb-8 md:mb-12 theme-text-primary tracking-tight flex items-center gap-3">
@@ -846,7 +846,7 @@ const App = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-                <section id="eligibility" className={`${sectionClass} theme-bg`}>
+                <section id="eligibility" className={`${sectionClass} theme-bg-alt`}>
                     <div className="w-full max-w-7xl mx-auto grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-16 items-center text-left">
                         <div className="space-y-6 md:space-y-8 w-full self-center">
                             <div className="inline-block theme-card text-brand-600 px-4 py-1 rounded text-xs font-bold uppercase tracking-wider">Candidate Profiling</div>

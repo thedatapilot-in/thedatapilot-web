@@ -34,61 +34,73 @@ window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism,
 const THEME_VARIANTS = {
     light: {
         '--bg-base': '#ffffff',
+        '--bg-alt': '#f1f5f9',
         '--text-base': '#334155',
         '--surface-card': '#ffffff',
         '--surface-form': '#ffffff',
         '--nav-bg': 'rgba(255, 255, 255, 0.95)',
         '--border-color': '#e2e8f0',
+        '--border-strong': '#cbd5e1',
         '--shadow-token': '0 4px 6px -1px rgb(0 0 0 / 0.1)',
         '--blur-token': '0px'
     },
     cyberDark: {
         '--bg-base': '#0f172a',
+        '--bg-alt': '#1e293b',
         '--text-base': '#f8fafc',
         '--surface-card': 'rgba(30, 41, 59, 0.4)',
         '--surface-form': 'rgba(15, 23, 42, 0.6)',
         '--nav-bg': 'rgba(15, 23, 42, 0.85)',
         '--border-color': 'rgba(51, 65, 85, 0.5)',
+        '--border-strong': 'rgba(71, 85, 105, 0.7)',
         '--shadow-token': '0 0 20px rgba(0, 0, 0, 0.3)',
         '--blur-token': '0px'
     },
     glassmorphism: {
         '--bg-base': '#f1f5f9',
+        '--bg-alt': '#e2e8f0',
         '--text-base': '#1e293b',
         '--surface-card': 'rgba(255, 255, 255, 0.4)',
         '--surface-form': 'rgba(255, 255, 255, 0.7)',
         '--nav-bg': 'rgba(255, 255, 255, 0.6)',
         '--border-color': 'rgba(255, 255, 255, 0.5)',
+        '--border-strong': 'rgba(203, 213, 225, 0.8)',
         '--shadow-token': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
         '--blur-token': '12px'
     },
     depth3D: {
         '--bg-base': '#f3f4f6',
+        '--bg-alt': '#e5e7eb',
         '--text-base': '#1f2937',
         '--surface-card': '#f3f4f6',
         '--surface-form': '#ffffff',
         '--nav-bg': '#f3f4f6',
         '--border-color': 'transparent',
-        '--shadow-token': '20px 20px 60px #cfd0d3, -20px -20px 60px #ffffff', // Soft Neumorphic depth
+        '--border-strong': '#d1d5db',
+        '--shadow-token': '20px 20px 60px #cfd0d3, -20px -20px 60px #ffffff',
         '--blur-token': '0px'
     },
     minimal: {
         '--bg-base': '#ffffff',
+        '--bg-alt': '#f9fafb',
         '--text-base': '#000000',
         '--surface-card': '#ffffff',
         '--surface-form': '#f8fafc',
         '--nav-bg': '#ffffff',
         '--border-color': '#000000',
+        '--border-strong': '#000000',
         '--shadow-token': 'none',
         '--blur-token': '0px'
     },
     midnight: {
-        '--bg-base': '#020617', // Blacker than CyberDark
+        '--bg-base': '#020617',
+        '--bg-alt': '#0f172a',
         '--text-base': '#cbd5e1',
         '--surface-card': '#0f172a',
         '--surface-form': '#1e293b',
         '--nav-bg': 'rgba(2, 6, 23, 0.9)',
         '--border-color': '#1e293b',
+        '--border-strong': '#334155',
         '--shadow-token': '0 10px 15px -3px rgba(0, 0, 0, 0.5)',
         '--blur-token': '0px'
     }
