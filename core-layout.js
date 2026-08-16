@@ -510,6 +510,9 @@ window.TypewriterText = ({ text }) => {
         const MOUSE_R = 140;
         let W, H, dots = [];
         let mouseX = -9999, mouseY = -9999;
+        let targetX = -9999, targetY = -9999;
+        let fadeIn = 0;
+        let cursorActive = false;
 
         function getBrandRgb() {
             const raw = getComputedStyle(document.documentElement)
@@ -544,6 +547,14 @@ window.TypewriterText = ({ text }) => {
         let rgb = getBrandRgb();
 
         function tick(t) {
+            // Smoothly lerp displayed position toward real cursor
+            mouseX += (targetX - mouseX) * 0.1;
+            mouseY += (targetY - mouseY) * 0.1;
+
+            // Fade in slowly on cursor enter, fade out on leave
+            const fadeDest = cursorActive ? 1 : 0;
+            fadeIn += (fadeDest - fadeIn) * (cursorActive ? 0.04 : 0.025);
+
             ctx.clearRect(0, 0, W, H);
             rgb = getBrandRgb();
 
@@ -551,13 +562,14 @@ window.TypewriterText = ({ text }) => {
                 const dx = d.x - mouseX;
                 const dy = d.y - mouseY;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                const proximity = Math.max(0, 1 - dist / MOUSE_R);
+                const proximity = Math.max(0, 1 - dist / MOUSE_R) * fadeIn;
                 const pulse = 0.5 + 0.5 * Math.sin(t * 0.0007 + d.phase);
                 const r = BASE_R + proximity * (MAX_R - BASE_R);
-                const alpha = proximity > 0
-                    ? 0.06 + proximity * 0.45
-                    : pulse * 0.012;
+                const alpha = proximity > 0.01
+                    ? 0.06 * fadeIn + proximity * 0.45
+                    : pulse * 0.008 * (1 - fadeIn);
 
+                if (alpha < 0.004) continue;
                 ctx.beginPath();
                 ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
@@ -569,8 +581,12 @@ window.TypewriterText = ({ text }) => {
 
         resize();
         window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
-        window.addEventListener('mouseleave', () => { mouseX = -9999; mouseY = -9999; });
+        window.addEventListener('mousemove', e => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+            if (!cursorActive) { cursorActive = true; mouseX = targetX; mouseY = targetY; }
+        });
+        window.addEventListener('mouseleave', () => { cursorActive = false; });
         requestAnimationFrame(tick);
     }
 
