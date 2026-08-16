@@ -558,16 +558,15 @@ window.TypewriterText = ({ text }) => {
             ctx.clearRect(0, 0, W, H);
             rgb = getBrandRgb();
 
+            const globalBase = fadeIn * 0.055;
+
             for (const d of dots) {
                 const dx = d.x - mouseX;
                 const dy = d.y - mouseY;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                const proximity = Math.max(0, 1 - dist / MOUSE_R) * fadeIn;
-                const pulse = 0.5 + 0.5 * Math.sin(t * 0.0007 + d.phase);
-                const r = BASE_R + proximity * (MAX_R - BASE_R);
-                const alpha = proximity > 0.01
-                    ? 0.06 * fadeIn + proximity * 0.45
-                    : pulse * 0.008 * (1 - fadeIn);
+                const proximity = Math.max(0, 1 - dist / MOUSE_R);
+                const r = BASE_R + proximity * fadeIn * (MAX_R - BASE_R);
+                const alpha = globalBase + proximity * fadeIn * 0.42;
 
                 if (alpha < 0.004) continue;
                 ctx.beginPath();
