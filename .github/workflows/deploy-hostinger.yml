@@ -35,22 +35,6 @@ jobs:
             echo "env_label=staging" >> $GITHUB_OUTPUT
           fi
 
-      - name: Debug FTP directory structure
-        run: |
-          sudo apt-get install -y lftp -q
-          lftp -e "
-          set ftp:ssl-allow yes;
-          set ssl:verify-certificate no;
-          open -u ${{ secrets.HOSTINGER_FTP_USER }},${{ secrets.HOSTINGER_FTP_PASS }} ${{ secrets.HOSTINGER_FTP_HOST }};
-          echo '=== FTP ROOT ===';
-          pwd;
-          ls;
-          echo '=== /public_html ===';
-          ls /public_html;
-          echo '=== /public_html/staging ===';
-          ls /public_html/staging;
-          quit" 2>&1 || true
-
       - name: Deploy via FTP → ${{ steps.target.outputs.env_label }}
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
