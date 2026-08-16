@@ -42,6 +42,7 @@ jobs:
           username: ${{ secrets.HOSTINGER_FTP_USER }}
           password: ${{ secrets.HOSTINGER_FTP_PASS }}
           server-dir: ${{ steps.target.outputs.remote_dir }}
+          dangerous-clean-slate: true
           exclude: |
             **/.git*
             **/.git*/**
