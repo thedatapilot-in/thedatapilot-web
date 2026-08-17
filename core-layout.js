@@ -233,7 +233,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     </div>
 
                     <button onClick={() => setIsModalOpen(true)} className="text-brand-400 hover:text-brand-300 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
-                    <button onClick={() => setIsModalOpen(true)} className="bg-brand-500 text-white px-6 py-2.5 rounded-xl font-bold text-[17px] hover:bg-brand-400 transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
+                    <button onClick={() => setIsModalOpen(true)} className="theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
                 </div>
 
                 <button className="lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -275,7 +275,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
 
                         <div className="pt-4 border-t border-secondary-50 flex flex-col space-y-4">
                             <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="text-brand-600 font-bold text-left px-2">Request Callback</button>
-                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="bg-brand-500 text-white py-5 rounded-2xl font-bold shadow-lg text-center">Join Program</button>
+                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-btn-gradient text-white py-5 rounded-2xl font-bold shadow-lg text-center">Join Program</button>
                         </div>
                     </div>
                 </div>
@@ -293,7 +293,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                             <input type="text" placeholder="Full Name" required value={modalFormData.full_name} onChange={e => setModalFormData({...modalFormData, full_name: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
                             <input type="email" placeholder="Email Address" required value={modalFormData.email} onChange={e => setModalFormData({...modalFormData, email: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
                             <input type="tel" placeholder="Mobile Number" required maxLength="10" value={modalFormData.phone} onChange={e => setModalFormData({...modalFormData, phone: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
-                            <button type="submit" disabled={isSubmitting} className="w-full bg-brand-500 text-white py-5 rounded-xl font-bold uppercase tracking-widest shadow-lg hover:bg-brand-600 active:scale-95 transition-all disabled:opacity-50">
+                            <button type="submit" disabled={isSubmitting} className="w-full theme-btn-gradient text-white py-5 rounded-xl font-bold uppercase tracking-widest shadow-lg active:scale-95 transition-all disabled:opacity-50">
                                 {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Submit Request')}
                             </button>
                         </form>
@@ -343,7 +343,7 @@ window.Footer = () => {
                 <div className="space-y-6">
                     <div>
                         <div className="font-extrabold text-2xl text-brand-400 mb-2">{settings?.brand?.name}</div>
-                        <p className="theme-text-muted text-[13px] font-medium leading-relaxed max-w-xs">{settings?.ui?.footerDescription}</p>
+                        <p className="text-white/60 text-[13px] font-medium leading-relaxed max-w-xs">{settings?.ui?.footerDescription}</p>
                     </div>
                     
                     <div className="flex items-center gap-3">
@@ -373,8 +373,8 @@ window.Footer = () => {
                 </div>
 
                 {/* Legal & Navigation - Unified Size */}
-                <div className="flex flex-col space-y-4 theme-text-muted">
-                    <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-40 mb-2">Legal & Navigation</h5>
+                <div className="flex flex-col space-y-4 text-white/60">
+                    <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2">Legal & Navigation</h5>
                     <div className="flex flex-col space-y-3 font-bold text-sm">
                         <a href="about-us.html" className="hover:text-brand-400 transition-colors">About Us</a>
                         <a href="privacy-policy.html" className="hover:text-brand-400 transition-colors">Privacy Policy</a>
@@ -384,23 +384,23 @@ window.Footer = () => {
                 </div>
 
                 {/* Contact Section - Slightly smaller for professional hierarchy */}
-                <div className="space-y-4 theme-text-muted">
-                    <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-40 mb-2">Contact</h5>
+                <div className="space-y-4 text-white/60">
+                    <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2">Contact</h5>
                     <div className="space-y-5">
                         <div className="flex items-start gap-2.5">
-                            <window.Icon name="map-pin" size={14} className="text-brand-500 mt-1 flex-shrink-0 opacity-80"/> 
-                            <div className="text-[13px] theme-text-muted font-medium leading-relaxed">
+                            <window.Icon name="map-pin" size={14} className="text-brand-500 mt-1 flex-shrink-0 opacity-80"/>
+                            <div className="text-[13px] text-white/60 font-medium leading-relaxed">
                                 {(settings?.contact?.addressLines || []).map((line, idx) => (
                                     <div key={idx} className={idx === 0 ? "font-bold text-secondary-300" : ""}>{line}</div>
                                 ))}
                             </div>
                         </div>
                         <div className="text-[13px] font-bold flex items-center gap-2.5">
-                            <window.Icon name="mail" size={14} className="text-brand-500 opacity-80"/> 
-                            <span className="theme-text-muted">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 hover:text-brand-400 transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
+                            <window.Icon name="mail" size={14} className="text-brand-500 opacity-80"/>
+                            <span className="text-white/60">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 hover:text-brand-400 transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
                         </div>
                     </div>
-                    <div className="pt-8 text-[10px] font-black theme-text-secondary tracking-[0.4em] uppercase select-none">Logic-First. AI-Fast.</div>
+                    <div className="pt-8 text-[10px] font-black text-white/50 tracking-[0.4em] uppercase select-none">Logic-First. AI-Fast.</div>
                 </div>
             </div>
         </footer>

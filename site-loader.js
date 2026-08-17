@@ -72,11 +72,11 @@
                 100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
             }
             .theme-card:hover { animation: card-glow 3s ease-in-out infinite; }
-            .theme-gradient-text { background: linear-gradient(135deg, var(--brand-500), var(--brand-accent, var(--brand-400))); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+            .theme-gradient-text { background: linear-gradient(120deg, var(--brand-500) 0%, var(--brand-500) 45%, var(--brand-accent, var(--brand-400)) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
             .theme-accent-text { color: var(--brand-accent, var(--brand-400)); }
             .theme-tertiary-text { color: var(--glow-c, var(--brand-300)); }
             .theme-accent-pill { background: color-mix(in srgb, var(--brand-accent, var(--brand-400)) 12%, transparent); color: var(--brand-accent, var(--brand-400)); border: 1px solid color-mix(in srgb, var(--brand-accent, var(--brand-400)) 28%, transparent); }
-            .theme-btn-gradient { background: linear-gradient(135deg, var(--brand-600), var(--brand-accent, var(--brand-500))); }
+            .theme-btn-gradient { background: linear-gradient(120deg, var(--brand-600) 0%, var(--brand-600) 45%, var(--brand-accent, var(--brand-500)) 100%); }
             .theme-btn-gradient:hover { filter: brightness(1.12); }
             @keyframes chart-bar-grow {
                 0%, 100% { transform: scaleY(0.3); }
@@ -90,9 +90,9 @@
                 0%, 100% { transform: translateY(0); opacity: 0.6; }
                 50% { transform: translateY(-10px); opacity: 1; }
             }
-            .hero-chart-bar { transform-origin: bottom; animation: chart-bar-grow 3.6s ease-in-out infinite; }
-            .hero-chart-line { stroke-dasharray: 240; animation: chart-line-draw 3.2s ease-in-out infinite; }
-            .hero-chart-chip { animation: chart-chip-float 4s ease-in-out infinite; }
+            .hero-chart-bar { transform-origin: bottom; animation: chart-bar-grow 6.5s ease-in-out infinite; }
+            .hero-chart-line { stroke-dasharray: 240; animation: chart-line-draw 6s ease-in-out infinite; }
+            .hero-chart-chip { animation: chart-chip-float 7s ease-in-out infinite; }
         `;
         document.head.appendChild(style);
 

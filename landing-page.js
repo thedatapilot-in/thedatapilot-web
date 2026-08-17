@@ -178,18 +178,21 @@ const CountDownStat = ({ from = 100, to, label }) => {
     }, [isVisible, from, to]);
 
     return (
-        <div ref={ref} className="text-center px-2">
-            <div className="text-xl md:text-3xl font-extrabold text-brand-400 tabular-nums whitespace-nowrap">
-                &lt;{count}
+        <div ref={ref} className="text-center px-2 py-3">
+            <div className="flex items-center justify-center gap-2 mb-1">
+                <Icon name="users" size={14} className="theme-accent-text opacity-70" />
+                <div className="text-xl md:text-3xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
+                    <span className="text-sm md:text-base align-top mr-0.5 opacity-60">&lt;</span>{count}
+                </div>
             </div>
-            <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1">
+            <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted">
                 {label}
             </div>
         </div>
     );
 };
 
-const CountUpStat = ({ target, suffix = '', label }) => {
+const CountUpStat = ({ target, suffix = '', label, icon = 'trending-up' }) => {
     const [count, setCount] = useState(0);
     const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
     const started = React.useRef(false);
@@ -213,9 +216,12 @@ const CountUpStat = ({ target, suffix = '', label }) => {
     }, [isVisible, target]);
 
     return (
-        <div ref={ref} className="text-center px-2">
-            <div className="text-xl md:text-3xl font-extrabold text-brand-400 tabular-nums whitespace-nowrap">
-                {count}{suffix}
+        <div ref={ref} className="text-center px-2 py-3">
+            <div className="flex items-center justify-center gap-2 mb-1">
+                <Icon name={icon} size={14} className="theme-accent-text opacity-70" />
+                <div className="text-xl md:text-3xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
+                    {count}{suffix}
+                </div>
             </div>
             <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1">
                 {label}
@@ -366,7 +372,7 @@ const EligibilityChecker = () => {
     };
 
     const inputClass = "w-full p-3.5 border theme-border theme-card rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all theme-text-secondary";
-    const btnClass   = "bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-md flex items-center justify-center gap-2";
+    const btnClass   = "theme-btn-gradient text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-2";
 
     const step1Valid = formData.education && formData.experience && formData.field;
     const step2Valid = formData.tools.length > 0;
@@ -413,7 +419,7 @@ const EligibilityChecker = () => {
                         <Icon name="rotate-ccw" size={13} /> Retake
                     </button>
                     <a href="#about"
-                        className="flex-1 bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg text-center">
+                        className="flex-1 theme-btn-gradient text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest transition-all shadow-lg text-center">
                         Start Your Journey
                     </a>
                 </div>
@@ -892,8 +898,8 @@ const App = () => {
                     </div>
                 </div>
 
-                {/* Animated Data-Analytics Dashboard Motif — decorative, non-interactive */}
-                <div className="absolute right-[2%] top-[8%] w-[30vw] max-w-[380px] min-w-[220px] opacity-[0.35] pointer-events-none hidden md:block z-0">
+                {/* Animated Data-Analytics Dashboard Motif — decorative background behind left column only, clear of the lead-capture form */}
+                <div className="absolute left-[2%] lg:left-[4%] top-[16%] w-[38vw] max-w-[420px] min-w-[240px] opacity-[0.16] pointer-events-none hidden md:block z-0">
                     <svg viewBox="0 0 320 200" className="w-full h-auto" fill="none">
                         <g className="text-brand-500" stroke="currentColor" strokeWidth="1" opacity="0.25">
                             <line x1="10" y1="170" x2="310" y2="170" />
@@ -932,7 +938,7 @@ const App = () => {
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
-                                <a href="#syllabus" className="block w-full bg-brand-500 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-brand-600 transition-all text-sm uppercase tracking-widest text-center shadow-lg">
+                                <a href="#syllabus" className="block w-full theme-btn-gradient text-white px-8 py-3.5 md:py-4 rounded font-bold transition-all text-sm uppercase tracking-widest text-center shadow-lg">
                                     Explore Curriculum
                                 </a>
                             </TiltCard>
@@ -970,10 +976,10 @@ const App = () => {
                             </p>
                         </form>
                     </div>
-                    <div className="grid grid-cols-3 gap-0 py-4 border theme-border-strong rounded-2xl overflow-hidden">
+                    <div className="grid grid-cols-3 divide-x theme-border-strong border theme-border-strong rounded-2xl overflow-hidden theme-card">
                         <CountDownStat from={100} to={30} label="Seats Per Batch" />
-                        <CountUpStat target={16} suffix=" Weeks" label="Intensive Program" />
-                        <CountUpStat target={PROJECT_COUNT} suffix="+" label="Live Projects" />
+                        <CountUpStat target={16} suffix=" Weeks" label="Intensive Program" icon="calendar" />
+                        <CountUpStat target={PROJECT_COUNT} suffix="+" label="Live Projects" icon="layout-grid" />
                     </div>
                     </div>
                 </div>
