@@ -340,3 +340,30 @@ window.tailwind.config = {
         probe.src = themed;
     }
 })();
+
+// ============================================
+// AUTO THEME CYCLER — rotates every 10s
+// ============================================
+(function() {
+    const CYCLE_KEYS = Object.keys(THEMES);
+    let idx = CYCLE_KEYS.indexOf(window.LIVE_THEME);
+    if (idx === -1) idx = 0;
+
+    setInterval(function() {
+        idx = (idx + 1) % CYCLE_KEYS.length;
+        const next = CYCLE_KEYS[idx];
+        window.LIVE_THEME = next;
+
+        const colors = THEMES[next];
+        const r = document.documentElement;
+        Object.keys(colors).forEach(k => r.style.setProperty(`--brand-${k}`, colors[k]));
+
+        const link = document.querySelector("link[rel~='icon']");
+        if (link) {
+            const p = new Image();
+            p.onload = () => { link.href = `assets/images/thedatapilot_logo_${next}.png`; };
+            p.onerror = () => { link.href = 'assets/images/thedatapilot_logo.png'; };
+            p.src = `assets/images/thedatapilot_logo_${next}.png`;
+        }
+    }, 10000);
+})();
