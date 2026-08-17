@@ -1094,47 +1094,56 @@ const App = () => {
                         </div>
                     </div>
 
-                    {/* Week-by-week rising trend toward Career Launch */}
+                    {/* Week-by-week rising trend toward Career Launch — HTML labels (matches site type scale exactly), SVG used only for the curve/area/dots */}
                     {(currentProgram.syllabus || []).length > 1 && (() => {
                         const totalModules = currentProgram.syllabus.length;
-                        const X0 = 40, X1 = 760, Y0 = 180, Y1 = 40; // start (wk1) -> end (Career Launch)
+                        const X0 = 20, X1 = 780, YBOTTOM = 100, YTOP = 16;
+                        const ease = (t) => t * t; // gradual, accelerating rise — not linear
                         const pointFor = (idx) => {
                             const t = idx / (totalModules - 1);
-                            return { t, x: X0 + t * (X1 - X0), y: Y0 + t * (Y1 - Y0), week: Math.round(1 + t * 15) };
+                            return { t, x: X0 + t * (X1 - X0), y: YBOTTOM + (YTOP - YBOTTOM) * ease(t), week: Math.round(1 + t * 15) };
                         };
-                        const linePath = `M${X0},${Y0} L${X1},${Y1}`;
-                        const areaPath = `M${X0},${Y0} L${X1},${Y1} L${X1},200 L${X0},200 Z`;
+                        const SAMPLES = 48;
+                        const curvePoints = Array.from({ length: SAMPLES + 1 }, (_, i) => {
+                            const t = i / SAMPLES;
+                            return `${X0 + t * (X1 - X0)},${YBOTTOM + (YTOP - YBOTTOM) * ease(t)}`;
+                        });
+                        const linePath = `M${curvePoints.join(' L')}`;
+                        const areaPath = `${linePath} L${X1},118 L${X0},118 Z`;
                         return (
                             <div className="w-full max-w-7xl mx-auto mt-10 pt-8 border-t theme-border relative z-10">
-                                <span className="theme-mid-text font-bold uppercase text-[10px] tracking-widest block mb-1">16-Week Path to</span>
-                                <span className="theme-gradient-text font-black uppercase text-xl tracking-tight block mb-4">Career Launch</span>
-                                <div className="relative w-full" style={{height: '200px'}}>
-                                    <svg viewBox="0 0 800 200" preserveAspectRatio="none" className="w-full h-full" fill="none">
+                                <span className="theme-mid-text font-bold uppercase text-[10px] tracking-widest block mb-4">16-Week Path to Career Launch</span>
+                                <div className="relative w-full" style={{height: '118px'}}>
+                                    <svg viewBox="0 0 800 118" preserveAspectRatio="none" className="absolute inset-0 w-full h-full" fill="none">
                                         <defs>
                                             <linearGradient id="careerLaunchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                                                 <stop offset="0%" stopColor="var(--brand-500)" />
                                                 <stop offset="100%" stopColor="var(--brand-accent)" />
                                             </linearGradient>
                                         </defs>
-                                        <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.14" />
-                                        <path d={linePath} stroke="url(#careerLaunchGrad)" strokeWidth="3" strokeLinecap="round" />
-                                        <circle r="6" fill="url(#careerLaunchGrad)">
-                                            <animateMotion path={linePath} dur="4.5s" repeatCount="indefinite" />
+                                        <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.12" />
+                                        <path d={linePath} stroke="url(#careerLaunchGrad)" strokeWidth="2.5" strokeLinecap="round" />
+                                        <circle r="5" fill="url(#careerLaunchGrad)">
+                                            <animateMotion path={linePath} dur="5s" repeatCount="indefinite" />
                                         </circle>
                                         {(currentProgram.syllabus || []).map((mod, idx) => {
-                                            const { x, y, week } = pointFor(idx);
+                                            const { x, y } = pointFor(idx);
                                             const isLast = idx === totalModules - 1;
-                                            return (
-                                                <g key={idx}>
-                                                    <circle cx={x} cy={y} r={isLast ? 7 : 4.5} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="2" />
-                                                    <text x={x} y={y + 22} textAnchor="middle" className="theme-text-muted" fill="currentColor" fontSize="11" fontWeight="700">Wk {week}</text>
-                                                    {isLast && (
-                                                        <text x={x} y={y - 16} textAnchor="end" className="theme-mid-text" fill="currentColor" fontSize="15" fontWeight="900" style={{textTransform: 'uppercase', letterSpacing: '0.05em'}}>Career Launch</text>
-                                                    )}
-                                                </g>
-                                            );
+                                            return <circle key={idx} cx={x} cy={y} r={isLast ? 6 : 3.5} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="2" />;
                                         })}
                                     </svg>
+                                    {(currentProgram.syllabus || []).map((mod, idx) => {
+                                        const { t, week } = pointFor(idx);
+                                        const isLast = idx === totalModules - 1;
+                                        return (
+                                            <div key={idx} className="absolute" style={{ left: `${t * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
+                                                <span className="text-[10px] font-bold theme-text-muted uppercase tracking-wider whitespace-nowrap">Wk {week}</span>
+                                            </div>
+                                        );
+                                    })}
+                                    <div className="absolute" style={{ left: `${pointFor(totalModules - 1).t * 100}%`, top: `${(pointFor(totalModules - 1).y / 118) * 100}%`, transform: 'translate(-100%, -22px)' }}>
+                                        <span className="theme-mid-text font-black uppercase text-[11px] tracking-wider whitespace-nowrap">Career Launch</span>
+                                    </div>
                                 </div>
                             </div>
                         );
