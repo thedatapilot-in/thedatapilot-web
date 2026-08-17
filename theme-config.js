@@ -322,7 +322,7 @@ const THEME_ACCENTS = {
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'cobalt';    // Choose: nova, arctic, sapphire, copper, volt, aura, ember, neonRose, plasma, the7ai, cyan | legacy: crimson, blue, slate, gold, oliveGreen
+window.LIVE_THEME = 'amber';    // Start at first new theme (27/39). Cycler rotates through all 39: amber→…→neonGrid→crimson→…→royal→amber
 window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
 
 const THEME_VARIANTS = {
