@@ -1094,27 +1094,51 @@ const App = () => {
                         </div>
                     </div>
 
-                    {/* Experimental: week-by-week progress toward Career Launch — evaluate visually, remove if it doesn't earn its space */}
-                    {(currentProgram.syllabus || []).length > 0 && (
-                        <div className="w-full max-w-7xl mx-auto mt-10 pt-8 border-t theme-border relative z-10">
-                            <span className="theme-mid-text font-bold uppercase text-[10px] tracking-widest block mb-4">16-Week Path to Career Launch</span>
-                            <div className="relative flex items-center justify-between">
-                                <div className="absolute left-0 right-0 top-1/2 h-0.5 theme-btn-gradient rounded-full" style={{transform: 'translateY(-50%)'}}></div>
-                                {(currentProgram.syllabus || []).map((mod, idx) => {
-                                    const totalModules = currentProgram.syllabus.length;
-                                    const approxWeek = Math.round(((idx + 1) / totalModules) * 16);
-                                    const isLast = idx === totalModules - 1;
-                                    return (
-                                        <div key={idx} className="relative flex flex-col items-center gap-1.5 z-10" style={{flex: '1 1 0'}}>
-                                            <div className={`w-3 h-3 rounded-full border-2 theme-border-strong ${isLast ? 'theme-btn-gradient border-transparent w-5 h-5' : 'bg-[var(--bg-alt)]'}`}></div>
-                                            <span className="text-[9px] font-bold theme-text-muted whitespace-nowrap">Wk {approxWeek}</span>
-                                            {isLast && <span className="text-[9px] font-black theme-mid-text uppercase tracking-wider whitespace-nowrap">Career Launch</span>}
-                                        </div>
-                                    );
-                                })}
+                    {/* Week-by-week rising trend toward Career Launch */}
+                    {(currentProgram.syllabus || []).length > 1 && (() => {
+                        const totalModules = currentProgram.syllabus.length;
+                        const X0 = 40, X1 = 760, Y0 = 180, Y1 = 40; // start (wk1) -> end (Career Launch)
+                        const pointFor = (idx) => {
+                            const t = idx / (totalModules - 1);
+                            return { t, x: X0 + t * (X1 - X0), y: Y0 + t * (Y1 - Y0), week: Math.round(1 + t * 15) };
+                        };
+                        const linePath = `M${X0},${Y0} L${X1},${Y1}`;
+                        const areaPath = `M${X0},${Y0} L${X1},${Y1} L${X1},200 L${X0},200 Z`;
+                        return (
+                            <div className="w-full max-w-7xl mx-auto mt-10 pt-8 border-t theme-border relative z-10">
+                                <span className="theme-mid-text font-bold uppercase text-[10px] tracking-widest block mb-1">16-Week Path to</span>
+                                <span className="theme-gradient-text font-black uppercase text-xl tracking-tight block mb-4">Career Launch</span>
+                                <div className="relative w-full" style={{height: '200px'}}>
+                                    <svg viewBox="0 0 800 200" preserveAspectRatio="none" className="w-full h-full" fill="none">
+                                        <defs>
+                                            <linearGradient id="careerLaunchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stopColor="var(--brand-500)" />
+                                                <stop offset="100%" stopColor="var(--brand-accent)" />
+                                            </linearGradient>
+                                        </defs>
+                                        <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.14" />
+                                        <path d={linePath} stroke="url(#careerLaunchGrad)" strokeWidth="3" strokeLinecap="round" />
+                                        <circle r="6" fill="url(#careerLaunchGrad)">
+                                            <animateMotion path={linePath} dur="4.5s" repeatCount="indefinite" />
+                                        </circle>
+                                        {(currentProgram.syllabus || []).map((mod, idx) => {
+                                            const { x, y, week } = pointFor(idx);
+                                            const isLast = idx === totalModules - 1;
+                                            return (
+                                                <g key={idx}>
+                                                    <circle cx={x} cy={y} r={isLast ? 7 : 4.5} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="2" />
+                                                    <text x={x} y={y + 22} textAnchor="middle" className="theme-text-muted" fill="currentColor" fontSize="11" fontWeight="700">Wk {week}</text>
+                                                    {isLast && (
+                                                        <text x={x} y={y - 16} textAnchor="end" className="theme-mid-text" fill="currentColor" fontSize="15" fontWeight="900" style={{textTransform: 'uppercase', letterSpacing: '0.05em'}}>Career Launch</text>
+                                                    )}
+                                                </g>
+                                            );
+                                        })}
+                                    </svg>
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        );
+                    })()}
                 </section>
             </ScrollReveal>
 
@@ -1361,7 +1385,7 @@ const App = () => {
                                     <TiltCard>
                                         <button 
                                             onClick={applyCoupon}
-                                            className="block bg-brand-500 hover:bg-brand-600 text-white px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
+                                            className="block bg-white theme-mid-text hover:brightness-95 px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
                                         >
                                             Apply
                                         </button>

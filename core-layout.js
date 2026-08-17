@@ -181,8 +181,8 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                 </div>
 
                 <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold theme-text-primary">
-                    <a href="products.html" className={`hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'text-brand-400' : 'theme-text-primary'}`}>Products</a>
-                    <a href="services.html" className={`hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'text-brand-400' : 'theme-text-primary'}`}>Services</a>
+                    <a href="products.html" className={`hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'theme-mid-text' : 'theme-text-primary'}`}>Products</a>
+                    <a href="services.html" className={`hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'theme-mid-text' : 'theme-text-primary'}`}>Services</a>
                     
                     <div 
                         ref={dropdownRef}
@@ -195,7 +195,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                 e.preventDefault();
                                 setIsDropdownOpen(true);
                             }}
-                            className={`flex items-center space-x-1 hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'text-brand-400' : 'theme-text-primary'}`}
+                            className={`flex items-center space-x-1 hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'theme-mid-text' : 'theme-text-primary'}`}
                         >
                             <span>All Programs</span>
                             <window.Icon 
@@ -232,7 +232,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         )}
                     </div>
 
-                    <button onClick={() => setIsModalOpen(true)} className="text-brand-400 hover:text-brand-300 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
+                    <button onClick={() => setIsModalOpen(true)} className="theme-mid-text hover:brightness-90 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
                     <button onClick={() => setIsModalOpen(true)} className="theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
                 </div>
 
@@ -274,7 +274,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         </div>
 
                         <div className="pt-4 border-t border-secondary-50 flex flex-col space-y-4">
-                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="text-brand-600 font-bold text-left px-2">Request Callback</button>
+                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-mid-text font-bold text-left px-2">Request Callback</button>
                             <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-btn-gradient text-white py-5 rounded-2xl font-bold shadow-lg text-center">Join Program</button>
                         </div>
                     </div>
@@ -388,7 +388,7 @@ window.Footer = () => {
                     <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2">Contact</h5>
                     <div className="space-y-5">
                         <div className="flex items-start gap-2.5">
-                            <window.Icon name="map-pin" size={14} className="text-brand-500 mt-1 flex-shrink-0 opacity-80"/>
+                            <window.Icon name="map-pin" size={14} className="theme-mid-text mt-1 flex-shrink-0 opacity-80"/>
                             <div className="text-[13px] text-white/60 font-medium leading-relaxed">
                                 {(settings?.contact?.addressLines || []).map((line, idx) => (
                                     <div key={idx} className={idx === 0 ? "font-bold text-secondary-300" : ""}>{line}</div>
@@ -396,7 +396,7 @@ window.Footer = () => {
                             </div>
                         </div>
                         <div className="text-[13px] font-bold flex items-center gap-2.5">
-                            <window.Icon name="mail" size={14} className="text-brand-500 opacity-80"/>
+                            <window.Icon name="mail" size={14} className="theme-mid-text opacity-80"/>
                             <span className="text-white/60">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 hover:text-brand-400 transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
                         </div>
                     </div>
