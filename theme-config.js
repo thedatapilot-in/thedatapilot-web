@@ -295,6 +295,32 @@ const THEMES = {
         50:  "#f4ffe8", 100: "#e6ffc0", 200: "#ccff80",
         300: "#aaff30", 400: "#88e000", 500: "#68c000",
         600: "#50a000", 700: "#3c8000", 800: "#2c6200", 900: "#1e4c00"
+    },
+    // ── Multi-Glow Themes — 3 distinct colors per hover glow ──────────────
+    prismatic: {
+        50:  "#faf5ff", 100: "#f3e8ff", 200: "#e9d5ff",
+        300: "#d8b4fe", 400: "#c084fc", 500: "#9333ea",
+        600: "#7e22ce", 700: "#6b21a8", 800: "#4c1d95", 900: "#2e1065"
+    },
+    inferno: {
+        50:  "#fff7ed", 100: "#ffedd5", 200: "#fed7aa",
+        300: "#fdba74", 400: "#fb923c", 500: "#ea580c",
+        600: "#c2410c", 700: "#9a3412", 800: "#7c2d12", 900: "#431407"
+    },
+    northern: {
+        50:  "#ecfdf5", 100: "#d1fae5", 200: "#a7f3d0",
+        300: "#6ee7b7", 400: "#34d399", 500: "#10b981",
+        600: "#059669", 700: "#047857", 800: "#065f46", 900: "#064e3b"
+    },
+    cosmic: {
+        50:  "#eef2ff", 100: "#e0e7ff", 200: "#c7d2fe",
+        300: "#a5b4fc", 400: "#818cf8", 500: "#4f46e5",
+        600: "#4338ca", 700: "#3730a3", 800: "#312e81", 900: "#1e1b4b"
+    },
+    toxicDream: {
+        50:  "#f7fee7", 100: "#ecfccb", 200: "#d9f99d",
+        300: "#bef264", 400: "#a3e635", 500: "#84cc16",
+        600: "#65a30d", 700: "#4d7c0f", 800: "#3f6212", 900: "#365314"
     }
 };
 
@@ -317,12 +343,31 @@ const THEME_ACCENTS = {
     lime:     '#a3e635',
     teal:     '#2dd4bf',
     mint:     '#34d399',
+    // Multi-color glow themes — each has 3 dramatically distinct hues
+    prismatic:  '#00e5ff',  // electric cyan  — violet → cyan → magenta
+    inferno:    '#fbbf24',  // gold           — deep orange → gold → red
+    northern:   '#7c3aed',  // violet         — emerald → violet → sky
+    cosmic:     '#ec4899',  // hot pink       — blue → pink → purple
+    toxicDream: '#eab308',  // yellow         — lime → yellow → fuchsia
+};
+
+// ============================================
+// GLOW-C — third accent color for multi-glow hover animation
+// Consumed as var(--glow-c) in card-glow keyframes.
+// Themes without an entry fall back to --brand-300.
+// ============================================
+const THEME_GLOW_C = {
+    prismatic:  '#ff0099',  // hot magenta
+    inferno:    '#dc2626',  // fire red
+    northern:   '#0ea5e9',  // sky blue
+    cosmic:     '#a855f7',  // deep purple
+    toxicDream: '#d946ef',  // fuchsia
 };
 
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'amber';    // Start at first new theme (27/39). Cycler rotates through all 39: amber→…→neonGrid→crimson→…→royal→amber
+window.LIVE_THEME = 'prismatic'; // Start on first multi-glow theme — showcases 3-color hover effect immediately
 window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
 
 const THEME_VARIANTS = {
@@ -413,6 +458,10 @@ Object.keys(activeColors).forEach(key => {
 // Accent color for gradient utilities
 const accent = THEME_ACCENTS[window.LIVE_THEME] || activeColors['400'];
 root.style.setProperty('--brand-accent', accent);
+
+// Third glow color for multi-color hover animation
+const glowC = THEME_GLOW_C[window.LIVE_THEME] || activeColors['300'];
+root.style.setProperty('--glow-c', glowC);
 
 // Semantic Variables
 Object.keys(activeVariantVars).forEach(key => {
@@ -566,9 +615,11 @@ window.tailwind.config = {
         const r = document.documentElement;
         Object.keys(colors).forEach(k => r.style.setProperty(`--brand-${k}`, colors[k]));
 
-        // Update accent for gradient utilities
+        // Update accent and third glow color per theme rotation
         const cycleAccent = THEME_ACCENTS[next] || colors['400'];
         r.style.setProperty('--brand-accent', cycleAccent);
+        const cycleGlowC = THEME_GLOW_C[next] || colors['300'];
+        r.style.setProperty('--glow-c', cycleGlowC);
 
         updateBadge(next, idx + 1, CYCLE_KEYS.length);
 

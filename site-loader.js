@@ -66,10 +66,12 @@
                 70% { transform: translate(7vw,-8vh) scale(0.9); }
             }
             @keyframes card-glow {
-                0%,100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 15%,transparent), 0 4px 20px -4px rgba(0,0,0,0.12); }
-                50%      { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 40%,transparent), 0 8px 30px -4px rgba(0,0,0,0.18); }
+                0%   { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-500) 45%,transparent); }
+                33%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 45%,transparent); }
+                66%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--glow-c,var(--brand-300)) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--glow-c,var(--brand-300)) 45%,transparent); }
+                100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-500) 45%,transparent); }
             }
-            .theme-card:hover { animation: card-glow 2.4s ease-in-out infinite; }
+            .theme-card:hover { animation: card-glow 3s ease-in-out infinite; }
         `;
         document.head.appendChild(style);
 
