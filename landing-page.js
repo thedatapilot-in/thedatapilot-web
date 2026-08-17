@@ -431,12 +431,12 @@ const EligibilityChecker = () => {
         <div className="theme-card border theme-border-strong rounded-3xl p-5 md:p-7 relative overflow-hidden self-center w-full"
             style={{boxShadow: '0 0 0 1px color-mix(in srgb, var(--brand-500) 35%, transparent), 0 20px 40px -8px rgba(0,0,0,0.15)'}}>
             <div className="absolute top-0 left-0 w-full h-1 theme-border-strong" style={{backgroundColor: 'var(--border-strong)'}}>
-                <div className="h-full bg-gradient-to-r from-brand-500 to-brand-400 transition-all duration-500"
+                <div className="h-full theme-btn-gradient transition-all duration-500"
                     style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}></div>
             </div>
             <div className="mb-5 mt-1">
                 <div className="flex items-center justify-between mb-1">
-                    <span className="text-brand-500 font-bold uppercase tracking-widest text-[10px]">Step {step} of {TOTAL_STEPS}</span>
+                    <span className="theme-mid-text font-bold uppercase tracking-widest text-[10px]">Step {step} of {TOTAL_STEPS}</span>
                     <span className="text-[10px] theme-text-muted font-medium">{Math.round((step / TOTAL_STEPS) * 100)}% complete</span>
                 </div>
                 <h3 className="text-lg font-bold theme-text-primary">
@@ -498,7 +498,7 @@ const EligibilityChecker = () => {
                                     <button key={tool} type="button" onClick={(e) => handleToolToggle(e, tool)}
                                         className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all border ${
                                             formData.tools.includes(tool)
-                                                ? 'bg-brand-500 border-brand-500 text-white shadow-md shadow-brand-500/20'
+                                                ? 'theme-btn-gradient border-transparent text-white shadow-md'
                                                 : 'theme-card theme-border theme-text-secondary hover:border-brand-500/40'
                                         }`}>
                                         {tool}
@@ -931,10 +931,10 @@ const App = () => {
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
                         <div className="space-y-3 md:space-y-4 text-sm font-semibold text-[var(--text-base)] opacity-90 text-left">
-                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-brand-400 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-brand-400 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-400 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="theme-mid-text flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="theme-mid-text flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="theme-mid-text flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
+                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="theme-mid-text flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
@@ -1012,8 +1012,8 @@ const App = () => {
                                     >
                                         <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all ${
                                             idx <= activeModuleIdx
-                                                ? 'bg-brand-500 border-brand-500 text-white shadow-md shadow-brand-500/30'
-                                                : 'bg-transparent border-slate-600 text-slate-500 group-hover:border-brand-500/50'
+                                                ? 'theme-btn-gradient border-transparent text-white shadow-md'
+                                                : 'bg-transparent border-slate-400 text-slate-500 group-hover:border-brand-500/50'
                                         }`}>
                                             {idx + 1}
                                         </div>
@@ -1038,7 +1038,7 @@ const App = () => {
                                     <div key={idx} className="flex flex-col">
                                         <button 
                                             onClick={() => handleModuleToggle(idx)} 
-                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-400 text-white shadow-lg shadow-brand-500/30' : 'theme-card theme-border theme-text-secondary hover:border-brand-500/40 hover:text-[var(--text-base)]'}`}
+                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'theme-btn-gradient border-transparent text-white shadow-lg' : 'theme-card theme-border theme-text-secondary hover:border-brand-500/40 hover:text-[var(--text-base)]'}`}
                                         >
                                             <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                             <Icon name="chevron-right" size={20} className={`transition-all duration-300 transform ${activeModuleIdx === idx ? 'rotate-90 opacity-100' : 'rotate-0 opacity-40 group-hover:opacity-70'}`} />
@@ -1057,7 +1057,7 @@ const App = () => {
                                                 <div className="space-y-3">
                                                     {(mod.content || []).map((bullet, i) => (
                                                         <div key={i} className="flex items-start space-x-3 text-left">
-                                                            <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
+                                                            <Icon name="check-circle" size={14} className="theme-mid-text mt-1 flex-shrink-0" />
                                                             <span className="text-sm font-medium theme-text-secondary leading-snug">{bullet}</span>
                                                         </div>
                                                     ))}
@@ -1090,7 +1090,7 @@ const App = () => {
                                         <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
                                             {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
                                                 <div key={i} className="flex items-start space-x-3 group/bullet">
-                                                    <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
+                                                    <Icon name="check-circle" size={14} className="theme-mid-text mt-1 flex-shrink-0" />
                                                     <span className="text-[14px] font-medium theme-text-secondary group-hover/bullet:text-[var(--text-base)] transition-colors">{bullet}</span>
                                                 </div>
                                             ))}
@@ -1247,12 +1247,12 @@ const App = () => {
 
                         {/* Left — Criteria */}
                         <div className="space-y-4 w-full self-center">
-                            <div className="inline-flex items-center bg-brand-500/10 text-brand-400 border border-brand-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                            <div className="inline-flex items-center theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
                                 Candidate Profiling
                             </div>
                             <h2 className="text-2xl md:text-3xl font-extrabold theme-text-primary tracking-tight leading-tight">
                                 Who Is This<br />
-                                <span style={{color: 'var(--brand-500)'}}>Program For?</span>
+                                <span className="theme-gradient-text">Program For?</span>
                             </h2>
                             <p className="theme-text-muted font-medium leading-relaxed text-sm max-w-sm">
                                 Built for graduates, working professionals, and career-changers ready to enter data.
@@ -1273,8 +1273,7 @@ const App = () => {
                                                  borderLeftWidth: '3px',
                                                  borderLeftColor: 'var(--brand-500)'
                                              }}>
-                                            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 text-white font-black text-xs"
-                                                 style={{background: 'linear-gradient(135deg, var(--brand-500), var(--brand-600))'}}>
+                                            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 text-white font-black text-xs theme-btn-gradient">
                                                 {i + 1}
                                             </div>
                                             <span className="text-sm font-semibold theme-text-secondary leading-snug pt-0.5">{text}</span>
@@ -1304,7 +1303,7 @@ const App = () => {
                             <div className="space-y-3">
                                 {(currentProgram.highlights || []).map((t, i) => (
                                     <div key={i} className="flex items-center space-x-4">
-                                        <Icon name="check-circle" size={20} className="text-brand-500 flex-shrink-0" />
+                                        <Icon name="check-circle" size={20} className="theme-mid-text flex-shrink-0" />
                                         <span className="text-md font-bold theme-text-secondary">{t}</span>
                                     </div>
                                 ))}

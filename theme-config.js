@@ -300,6 +300,11 @@ Object.keys(activeColors).forEach(key => {
 const accent = THEME_ACCENTS[window.LIVE_THEME] || activeColors['400'];
 root.style.setProperty('--brand-accent', accent);
 
+// Fixed solid middle blue-green tone — for small elements (pills, icons, badges)
+// where a gradient clip doesn't read well at small sizes. Gradients stay
+// reserved for large display text and buttons.
+root.style.setProperty('--brand-mid', '#14B8A6');
+
 // Third glow color for multi-color hover animation
 const glowC = THEME_GLOW_C[window.LIVE_THEME] || activeColors['300'];
 root.style.setProperty('--glow-c', glowC);
