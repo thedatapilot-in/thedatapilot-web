@@ -893,12 +893,12 @@ const App = () => {
 
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full relative z-10">
                     <div className="space-y-6 md:space-y-8 text-left">
-                        <div className="inline-block bg-brand-500/10 text-brand-400 border border-brand-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-brand-500/20">
+                        <div className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
                             {settings?.brand?.tagline || "Logic-First. AI-Fast."}
                         </div>
                         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-[var(--text-base)] tracking-tight transition-all duration-300 hover:scale-[1.01] hover:drop-shadow-lg cursor-default">
                             Certification in <br/>
-                            <span className="text-brand-500">
+                            <span className="theme-gradient-text">
                                 <TypewriterText text={currentProgram.title} />
                             </span>
                         </h1>
@@ -913,7 +913,7 @@ const App = () => {
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
-                                <a href="#syllabus" className="block w-full bg-brand-500 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-brand-600 transition-all text-sm uppercase tracking-widest text-center shadow-lg shadow-brand-500/40 hover:shadow-brand-500/60">
+                                <a href="#syllabus" className="block w-full bg-brand-500 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-brand-600 transition-all text-sm uppercase tracking-widest text-center shadow-lg">
                                     Explore Curriculum
                                 </a>
                             </TiltCard>
@@ -940,7 +940,7 @@ const App = () => {
                             
                             <div className="pt-2">
                                 <TiltCard>
-                                    <button type="submit" disabled={isSubmitting} className="w-full block bg-gradient-to-r from-brand-600 to-brand-500 text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest hover:from-brand-500 hover:to-brand-400 transition-all shadow-lg shadow-brand-500/50 active:scale-95 disabled:opacity-50">
+                                    <button type="submit" disabled={isSubmitting} className="w-full block theme-btn-gradient text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 disabled:opacity-50">
                                         {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
                                     </button>
                                 </TiltCard>
@@ -972,7 +972,7 @@ const App = () => {
                     <div className="w-full max-w-7xl mx-auto relative z-10">
                         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 border-b border-slate-800/80 pb-4">
                             <div>
-                                <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
+                                <span className="theme-accent-text font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
                                 <h2 className="text-3xl font-extrabold text-left theme-text-primary tracking-tight">Job-Ready Data Analytics Curriculum</h2>
                             </div>
                         </div>

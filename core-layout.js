@@ -233,7 +233,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     </div>
 
                     <button onClick={() => setIsModalOpen(true)} className="text-brand-400 hover:text-brand-300 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
-                    <button onClick={() => setIsModalOpen(true)} className="bg-brand-500 text-white px-6 py-2.5 rounded-xl font-bold text-[17px] hover:bg-brand-400 transition-colors shadow-lg shadow-brand-500/20 active:scale-95 transition-transform tracking-tight">Join Program</button>
+                    <button onClick={() => setIsModalOpen(true)} className="bg-brand-500 text-white px-6 py-2.5 rounded-xl font-bold text-[17px] hover:bg-brand-400 transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
                 </div>
 
                 <button className="lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -275,7 +275,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
 
                         <div className="pt-4 border-t border-secondary-50 flex flex-col space-y-4">
                             <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="text-brand-600 font-bold text-left px-2">Request Callback</button>
-                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="bg-brand-500 text-white py-5 rounded-2xl font-bold shadow-lg shadow-brand-500/20 text-center">Join Program</button>
+                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="bg-brand-500 text-white py-5 rounded-2xl font-bold shadow-lg text-center">Join Program</button>
                         </div>
                     </div>
                 </div>

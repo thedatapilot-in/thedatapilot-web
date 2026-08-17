@@ -72,6 +72,12 @@
                 100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-500) 45%,transparent); }
             }
             .theme-card:hover { animation: card-glow 3s ease-in-out infinite; }
+            .theme-gradient-text { background: linear-gradient(135deg, var(--brand-500), var(--brand-accent, var(--brand-400))); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+            .theme-accent-text { color: var(--brand-accent, var(--brand-400)); }
+            .theme-tertiary-text { color: var(--glow-c, var(--brand-300)); }
+            .theme-accent-pill { background: color-mix(in srgb, var(--brand-accent, var(--brand-400)) 12%, transparent); color: var(--brand-accent, var(--brand-400)); border: 1px solid color-mix(in srgb, var(--brand-accent, var(--brand-400)) 28%, transparent); }
+            .theme-btn-gradient { background: linear-gradient(135deg, var(--brand-600), var(--brand-accent, var(--brand-500))); }
+            .theme-btn-gradient:hover { filter: brightness(1.12); }
         `;
         document.head.appendChild(style);
 
