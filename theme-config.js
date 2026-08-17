@@ -287,9 +287,10 @@ Object.keys(activeVariantVars).forEach(key => {
 });
 
 // 1b. CSS-VAR OVERRIDES FOR TAILWIND BRAND CLASSES
-// Tailwind CDN bakes static hex values at load time; these overrides
-// redirect every brand utility class to the live CSS var so theme
-// changes take effect instantly without re-generating Tailwind CSS.
+// Tailwind CDN injects CSS via MutationObserver as React renders new
+// class names, pushing our override earlier in cascade order.
+// Solution: keep our <style> pinned as the last child of <head> so it
+// always wins the cascade without needing !important fights.
 (function() {
     const shades = [50,100,200,300,400,500,600,700,800,900];
     const rules = [
@@ -314,6 +315,14 @@ Object.keys(activeVariantVars).forEach(key => {
     el.id = 'brand-var-overrides';
     el.textContent = css;
     document.head.appendChild(el);
+
+    // Pin override to last position whenever Tailwind CDN injects new styles.
+    new MutationObserver(function() {
+        const ov = document.getElementById('brand-var-overrides');
+        if (ov && ov !== document.head.lastElementChild) {
+            document.head.appendChild(ov);
+        }
+    }).observe(document.head, { childList: true });
 })();
 
 // 2. TAILWIND CONFIGURATION EXTENSION
@@ -379,6 +388,37 @@ window.tailwind.config = {
     let idx = CYCLE_KEYS.indexOf(window.LIVE_THEME);
     if (idx === -1) idx = 0;
 
+    // Theme debug badge
+    function ensureBadge() {
+        let badge = document.getElementById('theme-debug-badge');
+        if (!badge) {
+            badge = document.createElement('div');
+            badge.id = 'theme-debug-badge';
+            badge.style.cssText = [
+                'position:fixed', 'bottom:16px', 'right:16px', 'z-index:99999',
+                'background:rgba(0,0,0,0.8)', 'color:#fff', 'padding:7px 13px',
+                'border-radius:8px', 'font:700 13px/1.4 monospace',
+                'pointer-events:none', 'letter-spacing:0.03em',
+                'border:1px solid rgba(255,255,255,0.15)',
+                'backdrop-filter:blur(6px)'
+            ].join(';');
+            document.body.appendChild(badge);
+        }
+        return badge;
+    }
+
+    function updateBadge(name, num, total) {
+        const badge = ensureBadge();
+        badge.textContent = `Theme ${num}/${total}: ${name}`;
+        badge.style.borderColor = `var(--brand-400)`;
+        badge.style.boxShadow = `0 0 0 1px var(--brand-500),0 4px 12px rgba(0,0,0,0.4)`;
+    }
+
+    // Show initial badge after DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
+        updateBadge(CYCLE_KEYS[idx], idx + 1, CYCLE_KEYS.length);
+    });
+
     setInterval(function() {
         idx = (idx + 1) % CYCLE_KEYS.length;
         const next = CYCLE_KEYS[idx];
@@ -387,6 +427,8 @@ window.tailwind.config = {
         const colors = THEMES[next];
         const r = document.documentElement;
         Object.keys(colors).forEach(k => r.style.setProperty(`--brand-${k}`, colors[k]));
+
+        updateBadge(next, idx + 1, CYCLE_KEYS.length);
 
         const logoSrc = `assets/images/thedatapilot_logo_${next}.png`;
         const fallback = 'assets/images/thedatapilot_logo.png';
