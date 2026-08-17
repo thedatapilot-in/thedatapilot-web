@@ -286,6 +286,36 @@ Object.keys(activeVariantVars).forEach(key => {
     root.style.setProperty(key, activeVariantVars[key]);
 });
 
+// 1b. CSS-VAR OVERRIDES FOR TAILWIND BRAND CLASSES
+// Tailwind CDN bakes static hex values at load time; these overrides
+// redirect every brand utility class to the live CSS var so theme
+// changes take effect instantly without re-generating Tailwind CSS.
+(function() {
+    const shades = [50,100,200,300,400,500,600,700,800,900];
+    const rules = [
+        ['text','color'],
+        ['bg','background-color'],
+        ['border','border-color'],
+        ['ring','--tw-ring-color'],
+        ['fill','fill'],
+        ['from','--tw-gradient-from'],
+        ['to','--tw-gradient-to'],
+        ['via','--tw-gradient-stops'],
+    ];
+    let css = '';
+    shades.forEach(s => {
+        rules.forEach(([pfx, prop]) => {
+            css += `.${pfx}-brand-${s}{${prop}:var(--brand-${s})!important}`;
+            css += `.hover\\:${pfx}-brand-${s}:hover{${prop}:var(--brand-${s})!important}`;
+            css += `.focus\\:${pfx}-brand-${s}:focus{${prop}:var(--brand-${s})!important}`;
+        });
+    });
+    const el = document.createElement('style');
+    el.id = 'brand-var-overrides';
+    el.textContent = css;
+    document.head.appendChild(el);
+})();
+
 // 2. TAILWIND CONFIGURATION EXTENSION
 window.tailwind = window.tailwind || {};
 window.tailwind.config = {
@@ -358,12 +388,21 @@ window.tailwind.config = {
         const r = document.documentElement;
         Object.keys(colors).forEach(k => r.style.setProperty(`--brand-${k}`, colors[k]));
 
-        const link = document.querySelector("link[rel~='icon']");
-        if (link) {
-            const p = new Image();
-            p.onload = () => { link.href = `assets/images/thedatapilot_logo_${next}.png`; };
-            p.onerror = () => { link.href = 'assets/images/thedatapilot_logo.png'; };
-            p.src = `assets/images/thedatapilot_logo_${next}.png`;
-        }
+        const logoSrc = `assets/images/thedatapilot_logo_${next}.png`;
+        const fallback = 'assets/images/thedatapilot_logo.png';
+        const p = new Image();
+        p.onload = () => {
+            const link = document.querySelector("link[rel~='icon']");
+            if (link) link.href = logoSrc;
+            const navLogo = document.querySelector('nav img');
+            if (navLogo) navLogo.src = logoSrc;
+        };
+        p.onerror = () => {
+            const link = document.querySelector("link[rel~='icon']");
+            if (link) link.href = fallback;
+            const navLogo = document.querySelector('nav img');
+            if (navLogo) navLogo.src = fallback;
+        };
+        p.src = logoSrc;
     }, 10000);
 })();
