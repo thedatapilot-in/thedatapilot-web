@@ -1157,6 +1157,10 @@ const App = () => {
                                             <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-black/50 backdrop-blur text-brand-400 px-2 py-1 rounded border border-brand-500/30">
                                                 {String(idx + 1).padStart(2, '0')}
                                             </span>
+                                            {/* MasterStudy-style corner tag */}
+                                            <span className="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-widest theme-btn-gradient text-white px-2 py-1 rounded-full shadow-lg">
+                                                Live Project
+                                            </span>
                                         </div>
                                         <div className="p-4 md:p-5 relative z-10 theme-card flex-grow flex flex-col gap-2">
                                             <h4 className="font-bold theme-text-primary text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
