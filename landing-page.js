@@ -659,17 +659,6 @@ const App = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Predictive Navigation AI Toast
-    useEffect(() => {
-        let timer;
-        if (activeTab === 'projects') {
-            timer = setTimeout(() => {
-                triggerFeedback('success', "💡 AI Suggestion: Want to build projects like these? Check out our Eligibility Profiler.");
-            }, 4000);
-        }
-        return () => clearTimeout(timer);
-    }, [activeTab]);
-
     const triggerFeedback = (status, message) => {
         setFeedback({ show: true, status, message });
         setTimeout(() => setFeedback({ show: false, status: '', message: '' }), 5000);
@@ -875,7 +864,7 @@ const App = () => {
                                 href={`#${tab.id}`}
                                 className={`px-4 py-2 rounded-xl text-[14px] transition-all duration-200 font-bold ${
                                     isActive
-                                        ? 'bg-brand-500/15 text-brand-400 font-extrabold border border-brand-500/40 shadow-sm'
+                                        ? 'theme-accent-pill font-extrabold shadow-sm'
                                         : 'theme-text-muted hover:text-[var(--text-base)] hover:bg-[var(--bg-alt)] border border-transparent'
                                 }`}
                             >
@@ -917,11 +906,8 @@ const App = () => {
                                 <circle className="hero-chart-chip theme-mid-text" cx="150" cy="55" r="4" fill="currentColor" style={{animationDelay: '1.4s'}} />
                             </svg>
                         </div>
-                        <div className="flex items-center gap-4">
-                            <div className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
-                                {settings?.brand?.tagline || "Logic-First. AI-Fast."}
-                            </div>
-                            <img src="assets/images/pilot/hero.jpg" alt="" className="hidden sm:block w-14 h-14 rounded-full object-cover border-2 theme-border-strong shadow-md flex-shrink-0" onError={e => e.target.style.display='none'} />
+                        <div className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                            {settings?.brand?.tagline || "Logic-First. AI-Fast."}
                         </div>
                         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-[var(--text-base)] tracking-tight transition-all duration-300 hover:scale-[1.01] hover:drop-shadow-lg cursor-default">
                             Certification in <br/>
@@ -932,11 +918,14 @@ const App = () => {
                         <p className="text-sm md:text-base text-[var(--text-base)] opacity-70 max-w-2xl leading-relaxed mb-6 font-medium">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
-                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-[var(--text-base)] opacity-90 text-left">
-                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="theme-mid-text flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="theme-mid-text flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="theme-mid-text flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="theme-mid-text flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
+                        <div className="flex items-center gap-6">
+                            <div className="space-y-3 md:space-y-4 text-sm font-semibold text-[var(--text-base)] opacity-90 text-left flex-1">
+                                <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="theme-mid-text flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
+                                <div className="flex items-center space-x-3"><Icon name="video" size={18} className="theme-mid-text flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
+                                <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="theme-mid-text flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
+                                <div className="flex items-center space-x-3"><Icon name="award" size={18} className="theme-mid-text flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
+                            </div>
+                            <img src="assets/images/pilot/hero.jpg" alt="" className="hidden lg:block w-32 h-32 rounded-2xl object-cover object-top border-2 theme-border-strong shadow-lg flex-shrink-0" onError={e => e.target.style.display='none'} />
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
@@ -1180,7 +1169,7 @@ const App = () => {
                                 <TiltCard key={proj.id} className="col-span-1 group">
                                     <div className="h-full w-full theme-card rounded-2xl border theme-border overflow-hidden relative transition-all duration-300 hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 flex flex-col">
                                         <div className="h-32 md:h-40 theme-card flex items-center justify-center relative overflow-hidden">
-                                            <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700" onError={e => e.target.style.display='none'} />
+                                            <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" onError={e => e.target.style.display='none'} />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
                                             <Icon name="image" size={32} className="opacity-20 absolute" />
                                             {/* Project number badge on image */}
@@ -1222,19 +1211,19 @@ const App = () => {
                             {(media.videos || []).map((vid, i) => (
                                 <TiltCard key={i} className="group">
                                     <a href={vid.url || '#'} target="_blank" rel="noopener noreferrer" className="block aspect-video theme-card rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border theme-border hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/15 transition-all duration-300">
-                                        <img src={vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-85 group-hover:opacity-100" onError={e => e.target.style.display='none'} />
+                                        <img src={vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700 opacity-85 group-hover:opacity-100" onError={e => e.target.style.display='none'} />
                                         {/* Dark overlay for readability */}
                                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-300"></div>
                                         {/* Pulsing play button ring */}
                                         <div className="relative z-10 flex items-center justify-center">
-                                            <div className="absolute w-14 h-14 rounded-full bg-brand-500/30 animate-ping"></div>
-                                            <div className="w-12 h-12 rounded-full bg-brand-500/90 backdrop-blur flex items-center justify-center shadow-lg shadow-brand-500/50 group-hover:scale-110 transition-transform duration-300">
+                                            <div className="absolute w-14 h-14 rounded-full animate-ping" style={{background: 'color-mix(in srgb, var(--brand-mid) 30%, transparent)'}}></div>
+                                            <div className="w-12 h-12 rounded-full theme-btn-gradient backdrop-blur flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                                                 <Icon name="play" size={20} className="text-white ml-0.5" />
                                             </div>
                                         </div>
                                         {/* Title badge */}
-                                        <div className="absolute bottom-0 left-0 right-0 px-3 py-2.5 bg-gradient-to-t from-black/70 to-transparent">
-                                            <span className="theme-text-primary font-semibold text-[11px] uppercase tracking-wide line-clamp-2 leading-tight">{vid.title}</span>
+                                        <div className="absolute bottom-0 left-0 right-0 px-3 py-2.5 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                                            <span className="text-white font-semibold text-[11px] uppercase tracking-wide line-clamp-2 leading-tight">{vid.title}</span>
                                         </div>
                                     </a>
                                 </TiltCard>
