@@ -72,12 +72,12 @@
                 100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
             }
             .theme-card:hover { animation: card-glow 3s ease-in-out infinite; }
-            .theme-gradient-text { background: linear-gradient(120deg, var(--brand-500) 0%, var(--brand-500) 45%, var(--brand-accent, var(--brand-400)) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+            .theme-gradient-text { background: linear-gradient(90deg, var(--brand-500) 0%, var(--brand-accent, var(--brand-400)) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
             .theme-accent-text { color: var(--brand-accent, var(--brand-400)); }
             .theme-tertiary-text { color: var(--glow-c, var(--brand-300)); }
             .theme-mid-text { color: var(--brand-mid, var(--brand-500)); }
             .theme-accent-pill { background: color-mix(in srgb, var(--brand-mid, var(--brand-400)) 12%, transparent); color: var(--brand-mid, var(--brand-400)); border: 1px solid color-mix(in srgb, var(--brand-mid, var(--brand-400)) 28%, transparent); }
-            .theme-btn-gradient { background: linear-gradient(120deg, var(--brand-600) 0%, var(--brand-600) 45%, var(--brand-accent, var(--brand-500)) 100%); }
+            .theme-btn-gradient { background: linear-gradient(90deg, var(--brand-600) 0%, var(--brand-accent, var(--brand-500)) 100%); }
             .theme-btn-gradient:hover { filter: brightness(1.12); }
             @keyframes chart-bar-grow {
                 0%, 100% { transform: scaleY(0.3); }

@@ -342,7 +342,7 @@ window.Footer = () => {
                 {/* Brand & Social */}
                 <div className="space-y-6">
                     <div>
-                        <div className="font-extrabold text-2xl text-brand-400 mb-2">{settings?.brand?.name}</div>
+                        <div className="font-extrabold text-2xl theme-mid-text mb-2">{settings?.brand?.name}</div>
                         <p className="text-white/60 text-[13px] font-medium leading-relaxed max-w-xs">{settings?.ui?.footerDescription}</p>
                     </div>
                     
@@ -522,14 +522,20 @@ window.TypewriterText = ({ text }) => {
         let stretchVel = 0.0;
         let bubbleAngle = 0;
 
-        function getBrandRgb() {
-            const raw = getComputedStyle(document.documentElement)
-                .getPropertyValue('--brand-500').trim();
-            const hex = raw.startsWith('#') ? raw : '#84cc16';
+        function hexToRgbObj(hex, fallback) {
+            const h = (hex && hex.startsWith('#')) ? hex : fallback;
             return {
-                r: parseInt(hex.slice(1, 3), 16),
-                g: parseInt(hex.slice(3, 5), 16),
-                b: parseInt(hex.slice(5, 7), 16)
+                r: parseInt(h.slice(1, 3), 16),
+                g: parseInt(h.slice(3, 5), 16),
+                b: parseInt(h.slice(5, 7), 16)
+            };
+        }
+
+        function getBrandRgbPair() {
+            const cs = getComputedStyle(document.documentElement);
+            return {
+                from: hexToRgbObj(cs.getPropertyValue('--brand-500').trim(), '#84cc16'),
+                to: hexToRgbObj(cs.getPropertyValue('--brand-accent').trim(), '#84cc16')
             };
         }
 
@@ -552,7 +558,7 @@ window.TypewriterText = ({ text }) => {
             }
         }
 
-        let rgb = getBrandRgb();
+        let rgbPair = getBrandRgbPair();
 
         function tick() {
             // Deactivate after STILL_MS of no movement
@@ -575,7 +581,7 @@ window.TypewriterText = ({ text }) => {
             fadeIn += (fadeDest - fadeIn) * (cursorActive ? 0.045 : 0.028);
 
             ctx.clearRect(0, 0, W, H);
-            rgb = getBrandRgb();
+            rgbPair = getBrandRgbPair();
 
             if (fadeIn < 0.004) { requestAnimationFrame(tick); return; }
 
@@ -619,9 +625,15 @@ window.TypewriterText = ({ text }) => {
                 const alpha = (globalBase + proximity * fadeIn * 0.42) * frontFade;
 
                 if (alpha < 0.004) continue;
+                // Blend each dot's color across the grid left->right, blue->green,
+                // so the hover effect isn't uniformly one color.
+                const t = Math.max(0, Math.min(1, d.x / W));
+                const dr = Math.round(rgbPair.from.r + (rgbPair.to.r - rgbPair.from.r) * t);
+                const dg = Math.round(rgbPair.from.g + (rgbPair.to.g - rgbPair.from.g) * t);
+                const db = Math.round(rgbPair.from.b + (rgbPair.to.b - rgbPair.from.b) * t);
                 ctx.beginPath();
                 ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
+                ctx.fillStyle = `rgba(${dr},${dg},${db},${alpha})`;
                 ctx.fill();
             }
 
