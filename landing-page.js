@@ -898,28 +898,30 @@ const App = () => {
                     </div>
                 </div>
 
-                {/* Animated Data-Analytics Dashboard Motif — full-height background wash behind the entire left column, clear of the lead-capture form on the right */}
-                <div className="absolute left-0 top-0 w-[58%] h-full opacity-[0.14] pointer-events-none hidden md:block z-0">
-                    <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none">
-                        <g className="theme-mid-text" stroke="currentColor" strokeWidth="1" opacity="0.25">
-                            <line x1="10" y1="170" x2="310" y2="170" />
-                            <line x1="10" y1="10" x2="10" y2="170" />
-                        </g>
-                        <rect className="hero-chart-bar text-brand-500" x="30" y="90" width="24" height="80" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0s'}} />
-                        <rect className="hero-chart-bar theme-mid-text" x="70" y="60" width="24" height="110" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.3s'}} />
-                        <rect className="hero-chart-bar text-brand-500" x="110" y="100" width="24" height="70" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.6s'}} />
-                        <rect className="hero-chart-bar theme-mid-text" x="150" y="40" width="24" height="130" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.9s'}} />
-                        <rect className="hero-chart-bar text-brand-500" x="190" y="75" width="24" height="95" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '1.2s'}} />
-                        <path className="hero-chart-line theme-mid-text" d="M30 130 L70 95 L110 115 L150 55 L190 85 L230 45" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-                        <circle className="hero-chart-chip text-brand-400" cx="230" cy="45" r="5" fill="currentColor" style={{animationDelay: '0.5s'}} />
-                        <circle className="hero-chart-chip theme-mid-text" cx="150" cy="55" r="4" fill="currentColor" style={{animationDelay: '1.4s'}} />
-                    </svg>
-                </div>
-
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full relative z-10">
-                    <div className="space-y-6 md:space-y-8 text-left">
-                        <div className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
-                            {settings?.brand?.tagline || "Logic-First. AI-Fast."}
+                    <div className="relative space-y-6 md:space-y-8 text-left">
+                        {/* Animated Data-Analytics Dashboard Motif — background wash filling this column exactly, same margins as the text, clear of the lead-capture form in the other column */}
+                        <div className="absolute inset-0 opacity-[0.14] pointer-events-none hidden md:block -z-10">
+                            <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none">
+                                <g className="theme-mid-text" stroke="currentColor" strokeWidth="1" opacity="0.25">
+                                    <line x1="10" y1="170" x2="310" y2="170" />
+                                    <line x1="10" y1="10" x2="10" y2="170" />
+                                </g>
+                                <rect className="hero-chart-bar text-brand-500" x="30" y="90" width="24" height="80" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0s'}} />
+                                <rect className="hero-chart-bar theme-mid-text" x="70" y="60" width="24" height="110" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.3s'}} />
+                                <rect className="hero-chart-bar text-brand-500" x="110" y="100" width="24" height="70" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.6s'}} />
+                                <rect className="hero-chart-bar theme-mid-text" x="150" y="40" width="24" height="130" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.9s'}} />
+                                <rect className="hero-chart-bar text-brand-500" x="190" y="75" width="24" height="95" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '1.2s'}} />
+                                <path className="hero-chart-line theme-mid-text" d="M30 130 L70 95 L110 115 L150 55 L190 85 L230 45" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                                <circle className="hero-chart-chip text-brand-400" cx="230" cy="45" r="5" fill="currentColor" style={{animationDelay: '0.5s'}} />
+                                <circle className="hero-chart-chip theme-mid-text" cx="150" cy="55" r="4" fill="currentColor" style={{animationDelay: '1.4s'}} />
+                            </svg>
+                        </div>
+                        <div className="flex items-center gap-4">
+                            <div className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                                {settings?.brand?.tagline || "Logic-First. AI-Fast."}
+                            </div>
+                            <img src="assets/images/pilot/hero.jpg" alt="" className="hidden sm:block w-14 h-14 rounded-full object-cover border-2 theme-border-strong shadow-md flex-shrink-0" onError={e => e.target.style.display='none'} />
                         </div>
                         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-[var(--text-base)] tracking-tight transition-all duration-300 hover:scale-[1.01] hover:drop-shadow-lg cursor-default">
                             Certification in <br/>
@@ -1102,6 +1104,28 @@ const App = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Experimental: week-by-week progress toward Career Launch — evaluate visually, remove if it doesn't earn its space */}
+                    {(currentProgram.syllabus || []).length > 0 && (
+                        <div className="w-full max-w-7xl mx-auto mt-10 pt-8 border-t theme-border relative z-10">
+                            <span className="theme-mid-text font-bold uppercase text-[10px] tracking-widest block mb-4">16-Week Path to Career Launch</span>
+                            <div className="relative flex items-center justify-between">
+                                <div className="absolute left-0 right-0 top-1/2 h-0.5 theme-btn-gradient rounded-full" style={{transform: 'translateY(-50%)'}}></div>
+                                {(currentProgram.syllabus || []).map((mod, idx) => {
+                                    const totalModules = currentProgram.syllabus.length;
+                                    const approxWeek = Math.round(((idx + 1) / totalModules) * 16);
+                                    const isLast = idx === totalModules - 1;
+                                    return (
+                                        <div key={idx} className="relative flex flex-col items-center gap-1.5 z-10" style={{flex: '1 1 0'}}>
+                                            <div className={`w-3 h-3 rounded-full border-2 theme-border-strong ${isLast ? 'theme-btn-gradient border-transparent w-5 h-5' : 'bg-[var(--bg-alt)]'}`}></div>
+                                            <span className="text-[9px] font-bold theme-text-muted whitespace-nowrap">Wk {approxWeek}</span>
+                                            {isLast && <span className="text-[9px] font-black theme-mid-text uppercase tracking-wider whitespace-nowrap">Career Launch</span>}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
                 </section>
             </ScrollReveal>
 
@@ -1362,7 +1386,7 @@ const App = () => {
                             </div>
     
                             <TiltCard>
-                                <button className="w-full block bg-brand-500 hover:bg-brand-600 text-white py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl shadow-brand-500/40 hover:shadow-brand-500/60 active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
+                                <button className="w-full block bg-white theme-mid-text hover:brightness-95 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
                                     <Icon name="credit-card" size={18} className="flex-shrink-0" />
                                     <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
                                 </button>
