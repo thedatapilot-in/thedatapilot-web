@@ -224,7 +224,8 @@ const CountUpStat = ({ target, suffix = '', label }) => {
     );
 };
 
-const SHOW_TESTIMONIALS = false;
+const SHOW_TESTIMONIALS = false; // fabricated names/quotes — kept disabled, do not enable
+const SHOW_TRUST_STRIP = true; // honest, no-name credibility strip — real stat only
 
 const DUMMY_TESTIMONIALS = [
     {
@@ -629,7 +630,7 @@ const App = () => {
     useEffect(() => {
         const handleScroll = () => {
             const sections = ['about', 'syllabus', 'tools', 'projects', 'videos',
-                ...(SHOW_TESTIMONIALS ? ['testimonials'] : []),
+                ...(SHOW_TRUST_STRIP ? ['trust'] : []),
                 'eligibility', 'fees'];
             let current = 'about';
             for (const id of sections) {
@@ -1191,36 +1192,19 @@ const App = () => {
                 </section>
             </ScrollReveal>
 
-            {SHOW_TESTIMONIALS && (
+            {SHOW_TRUST_STRIP && (
                 <ScrollReveal delay={100}>
-                    <section id="testimonials" className={`${sectionClass} theme-bg-alt`}>
-                        <div className="w-full max-w-7xl mx-auto text-left">
-                            <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Student Outcomes</span>
-                            <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight mb-12">
-                                Real Students. Real Results.
-                            </h2>
-                            <div className="grid md:grid-cols-3 gap-6">
-                                {DUMMY_TESTIMONIALS.map((t, i) => (
-                                    <ScrollReveal key={i} delay={i * 120}>
-                                        <div className="theme-card border theme-border-strong rounded-[2rem] p-8 flex flex-col h-full border-l-4" style={{borderLeftColor: 'var(--brand-500)'}}>
-                                            <div className="flex items-center gap-4 mb-6">
-                                                <div className="w-12 h-12 rounded-full bg-brand-500/20 flex items-center justify-center flex-shrink-0">
-                                                    <span className="text-brand-400 font-extrabold text-sm">{t.initials}</span>
-                                                </div>
-                                                <div>
-                                                    <div className="font-bold theme-text-primary text-sm">{t.name}</div>
-                                                    <div className="text-[11px] text-brand-400 font-bold">{t.role}</div>
-                                                </div>
-                                            </div>
-                                            <p className="theme-text-secondary text-sm leading-relaxed flex-grow mb-5">"{t.quote}"</p>
-                                            <div className="flex items-center gap-2 pt-4 border-t theme-border">
-                                                <Icon name="arrow-right" size={12} className="text-brand-500 flex-shrink-0" />
-                                                <span className="text-[10px] font-bold theme-text-muted uppercase tracking-wider">Before: {t.before}</span>
-                                            </div>
-                                        </div>
-                                    </ScrollReveal>
-                                ))}
+                    <section id="trust" className={`${sectionClass} theme-bg-alt relative overflow-hidden justify-center`} style={{minHeight: 'auto', paddingTop: '3rem', paddingBottom: '3rem'}}>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[140px] opacity-[0.07] pointer-events-none"></div>
+                        <div className="w-full max-w-4xl mx-auto text-center relative z-10">
+                            <span className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Track Record</span>
+                            <div className="flex items-center justify-center gap-4">
+                                <span className="theme-gradient-text text-6xl md:text-7xl font-extrabold tracking-tight">100+</span>
+                                <span className="text-left theme-text-primary text-lg md:text-xl font-bold leading-tight max-w-[220px]">Students Mentored in Live Online Classes</span>
                             </div>
+                            <p className="theme-text-muted text-sm mt-6 max-w-xl mx-auto leading-relaxed">
+                                Before launching The Data Pilot, our mentors personally trained 100+ learners through live online cohorts — the same teaching approach now built into this program.
+                            </p>
                         </div>
                     </section>
                 </ScrollReveal>
