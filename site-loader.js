@@ -66,10 +66,10 @@
                 70% { transform: translate(7vw,-8vh) scale(0.9); }
             }
             @keyframes card-glow {
-                0%   { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-500) 45%,transparent); }
-                33%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 45%,transparent); }
-                66%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--glow-c,var(--brand-300)) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--glow-c,var(--brand-300)) 45%,transparent); }
-                100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-500) 45%,transparent); }
+                0%   { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
+                33%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 18%,transparent); }
+                66%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--glow-c,var(--brand-300)) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--glow-c,var(--brand-300)) 18%,transparent); }
+                100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
             }
             .theme-card:hover { animation: card-glow 3s ease-in-out infinite; }
             .theme-gradient-text { background: linear-gradient(135deg, var(--brand-500), var(--brand-accent, var(--brand-400))); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }

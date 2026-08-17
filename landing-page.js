@@ -409,7 +409,7 @@ const EligibilityChecker = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t theme-border">
                     <button type="button" onClick={reset}
-                        className="px-4 py-2.5 text-xs font-bold theme-text-muted hover:theme-text-primary uppercase tracking-widest border theme-border rounded-lg transition-all flex items-center justify-center gap-2">
+                        className="px-4 py-2.5 text-xs font-bold theme-text-muted hover:text-[var(--text-base)] uppercase tracking-widest border theme-border rounded-lg transition-all flex items-center justify-center gap-2">
                         <Icon name="rotate-ccw" size={13} /> Retake
                     </button>
                     <a href="#about"
@@ -424,7 +424,7 @@ const EligibilityChecker = () => {
     return (
         <div className="theme-card border theme-border-strong rounded-3xl p-5 md:p-7 relative overflow-hidden self-center w-full"
             style={{boxShadow: '0 0 0 1px color-mix(in srgb, var(--brand-500) 35%, transparent), 0 20px 40px -8px rgba(0,0,0,0.15)'}}>
-            <div className="absolute top-0 left-0 w-full h-1 bg-slate-800">
+            <div className="absolute top-0 left-0 w-full h-1 theme-border-strong" style={{backgroundColor: 'var(--border-strong)'}}>
                 <div className="h-full bg-gradient-to-r from-brand-500 to-brand-400 transition-all duration-500"
                     style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}></div>
             </div>
@@ -583,7 +583,7 @@ const EligibilityChecker = () => {
             <div className="mt-6 flex justify-between pt-5 border-t theme-border">
                 {step > 1
                     ? <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }}
-                        className="px-4 py-2.5 text-sm font-bold theme-text-muted hover:theme-text-primary transition-colors flex items-center gap-2">
+                        className="px-4 py-2.5 text-sm font-bold theme-text-muted hover:text-[var(--text-base)] transition-colors flex items-center gap-2">
                         <Icon name="arrow-left" size={15} /> Back
                       </button>
                     : <div></div>
@@ -850,7 +850,7 @@ const App = () => {
                 </div>
             )}
 
-            <div className="fixed top-20 left-0 right-0 w-full z-40 backdrop-blur-xl border-b border-slate-800/80 shadow-md hidden md:block py-2.5" style={{background: 'var(--nav-bg)'}}>
+            <div className="fixed top-20 left-0 right-0 w-full z-40 backdrop-blur-xl border-b theme-border-strong shadow-md hidden md:block py-2.5" style={{background: 'var(--nav-bg)'}}>
                 <div className="max-w-5xl mx-auto flex items-center justify-between px-4">
                     {[
                         { label: 'About', id: 'about' },
@@ -870,7 +870,7 @@ const App = () => {
                                 className={`px-4 py-2 rounded-xl text-[14px] transition-all duration-200 font-bold ${
                                     isActive
                                         ? 'bg-brand-500/15 text-brand-400 font-extrabold border border-brand-500/40 shadow-sm'
-                                        : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent'
+                                        : 'theme-text-muted hover:text-[var(--text-base)] hover:bg-[var(--bg-alt)] border border-transparent'
                                 }`}
                             >
                                 {tab.label}
@@ -883,9 +883,9 @@ const App = () => {
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
             <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation */}
-                <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-                    <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-brand-700 rounded-full mix-blend-screen filter blur-[100px] animate-pulse" style={{animationDelay: '2s'}}></div>
+                <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.12]">
+                    <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[120px] animate-pulse"></div>
+                    <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-brand-700 rounded-full mix-blend-multiply filter blur-[100px] animate-pulse" style={{animationDelay: '2s'}}></div>
                     {/* Rotating grid/node structure */}
                     <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10"
                          style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
@@ -989,7 +989,7 @@ const App = () => {
                     <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
                     <div className="w-full max-w-7xl mx-auto relative z-10">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 border-b border-slate-800/80 pb-4">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 border-b theme-border-strong pb-4">
                             <div>
                                 <span className="theme-accent-text font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
                                 <h2 className="text-3xl font-extrabold text-left theme-text-primary tracking-tight">Job-Ready Data Analytics Curriculum</h2>
@@ -1032,7 +1032,7 @@ const App = () => {
                                     <div key={idx} className="flex flex-col">
                                         <button 
                                             onClick={() => handleModuleToggle(idx)} 
-                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-400 text-white shadow-lg shadow-brand-500/30' : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-brand-500/40 hover:text-white'}`}
+                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-400 text-white shadow-lg shadow-brand-500/30' : 'theme-card theme-border theme-text-secondary hover:border-brand-500/40 hover:text-[var(--text-base)]'}`}
                                         >
                                             <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                             <Icon name="chevron-right" size={20} className={`transition-all duration-300 transform ${activeModuleIdx === idx ? 'rotate-90 opacity-100' : 'rotate-0 opacity-40 group-hover:opacity-70'}`} />
@@ -1040,7 +1040,7 @@ const App = () => {
     
                                         {/* MOBILE ACCORDION CONTENT */}
                                         <div className={`lg:hidden overflow-hidden transition-all duration-300 ${activeModuleIdx === idx ? 'max-h-[1200px] opacity-100 py-6' : 'max-h-0 opacity-0'}`}>
-                                            <div className="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 space-y-6">
+                                            <div className="theme-bg-alt rounded-2xl p-6 border theme-border space-y-6">
                                                 <div className="flex flex-col space-y-1">
                                                     <span className="text-brand-400 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
                                                     <div className="flex items-center gap-2 mt-2">
@@ -1064,12 +1064,12 @@ const App = () => {
                             </div>
     
                             {/* DESKTOP DETAIL VIEW */}
-                            <div className="hidden lg:flex lg:w-2/3 bg-slate-900/80 p-10 rounded-2xl border border-slate-800 flex-col shadow-2xl relative overflow-hidden group backdrop-blur-xl">
+                            <div className="hidden lg:flex lg:w-2/3 theme-bg-alt p-10 rounded-2xl border theme-border flex-col shadow-2xl relative overflow-hidden group backdrop-blur-xl">
                                 <div className="absolute top-[-50px] right-[-50px] w-48 h-48 bg-brand-500 rounded-full blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"></div>
 
                                 {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
                                     <>
-                                        <div className="mb-8 pb-6 border-b border-slate-800 flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
+                                        <div className="mb-8 pb-6 border-b theme-border flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
                                             <div className="space-y-1 text-left">
                                                 <span className="text-brand-400 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
                                                 <h3 className="text-2xl font-bold theme-text-primary mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
@@ -1085,7 +1085,7 @@ const App = () => {
                                             {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
                                                 <div key={i} className="flex items-start space-x-3 group/bullet">
                                                     <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
-                                                    <span className="text-[14px] font-medium theme-text-secondary group-hover/bullet:text-white transition-colors">{bullet}</span>
+                                                    <span className="text-[14px] font-medium theme-text-secondary group-hover/bullet:text-[var(--text-base)] transition-colors">{bullet}</span>
                                                 </div>
                                             ))}
                                         </div>
@@ -1102,8 +1102,8 @@ const App = () => {
             <ScrollReveal delay={100}>
                 <section id="tools" className={`${sectionClass} theme-bg relative overflow-hidden`}>
                     {/* Inner aurora glow — matches hero technique */}
-                    <div className="absolute top-[-15%] left-[-10%] w-[45vw] h-[45vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] opacity-[0.07] animate-pulse pointer-events-none"></div>
-                    <div className="absolute bottom-[-15%] right-[-10%] w-[35vw] h-[35vw] bg-brand-400 rounded-full mix-blend-screen filter blur-[100px] opacity-[0.05] animate-pulse pointer-events-none" style={{animationDelay:'3s'}}></div>
+                    <div className="absolute top-[-15%] left-[-10%] w-[45vw] h-[45vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.07] animate-pulse pointer-events-none"></div>
+                    <div className="absolute bottom-[-15%] right-[-10%] w-[35vw] h-[35vw] bg-brand-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-[0.05] animate-pulse pointer-events-none" style={{animationDelay:'3s'}}></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
                         <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Industry Stack</span>
                         <h2 className="text-3xl font-bold mb-16 theme-text-primary tracking-tight">Modern Industry Tool Stack</h2>
@@ -1136,7 +1136,7 @@ const App = () => {
             {/* PROJECTS SECTION - 2026 Tilt Grid */}
             <ScrollReveal>
                 <section id="projects" className={`${sectionClass} theme-bg-alt relative overflow-hidden`}>
-                    <div className="absolute top-[-10%] right-[-8%] w-[40vw] h-[40vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[130px] opacity-[0.06] animate-pulse pointer-events-none"></div>
+                    <div className="absolute top-[-10%] right-[-8%] w-[40vw] h-[40vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[130px] opacity-[0.06] animate-pulse pointer-events-none"></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
                         <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Hands-On Work</span>
                         <h2 className="text-3xl font-extrabold mb-8 md:mb-12 theme-text-primary tracking-tight flex items-center gap-3">
@@ -1184,7 +1184,7 @@ const App = () => {
 
             <ScrollReveal delay={100}>
                 <section id="videos" className={`${sectionClass} theme-bg relative overflow-hidden`}>
-                    <div className="absolute bottom-[-15%] left-[-8%] w-[40vw] h-[40vw] bg-brand-400 rounded-full mix-blend-screen filter blur-[120px] opacity-[0.06] animate-pulse pointer-events-none" style={{animationDelay:'1.5s'}}></div>
+                    <div className="absolute bottom-[-15%] left-[-8%] w-[40vw] h-[40vw] bg-brand-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.06] animate-pulse pointer-events-none" style={{animationDelay:'1.5s'}}></div>
                      <div className="w-full max-w-7xl mx-auto text-left relative z-10">
                         <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Watch & Learn</span>
                         <h2 className="text-3xl font-bold theme-text-primary tracking-tight mb-12">Program Overview & Demos</h2>
@@ -1217,7 +1217,7 @@ const App = () => {
             {SHOW_TRUST_STRIP && (
                 <ScrollReveal delay={100}>
                     <section id="trust" className={`${sectionClass} theme-bg-alt relative overflow-hidden justify-center`} style={{minHeight: 'auto', paddingTop: '3rem', paddingBottom: '3rem'}}>
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[140px] opacity-[0.07] pointer-events-none"></div>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[140px] opacity-[0.07] pointer-events-none"></div>
                         <div className="w-full max-w-4xl mx-auto text-center relative z-10">
                             <span className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Track Record</span>
                             <div className="flex items-center justify-center gap-4">
@@ -1305,9 +1305,9 @@ const App = () => {
                             </div>
                         </div>
     
-                        <div className="p-6 md:p-10 bg-secondary-900 text-white flex flex-col justify-center space-y-5 text-left">
+                        <div className="p-6 md:p-10 theme-btn-gradient text-white flex flex-col justify-center space-y-5 text-left">
                             <div className="space-y-1">
-                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-400">Program Fee</span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/80">Program Fee</span>
                                 <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentProgram.title}</h3>
                             </div>
     
@@ -1319,24 +1319,24 @@ const App = () => {
                                     
                                     {formData.discountApplied && (
                                         <div className="flex flex-wrap items-center gap-2">
-                                            <span className="theme-text-muted line-through text-xs md:text-sm font-medium whitespace-nowrap">
+                                            <span className="text-white/60 line-through text-xs md:text-sm font-medium whitespace-nowrap">
                                                 ₹{currentProgram.price?.toLocaleString()} /-
                                             </span>
-                                            <span className="text-brand-400 text-xs md:text-sm font-bold whitespace-nowrap">
+                                            <span className="text-white text-xs md:text-sm font-bold whitespace-nowrap">
                                                 - ₹{formData.discountAmount?.toLocaleString()} /-
                                             </span>
                                         </div>
                                     )}
                                 </div>
-                                <p className="theme-text-muted text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
+                                <p className="text-white/60 text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
                             </div>
-    
+
                             <div className="space-y-3">
-                                <div className="flex gap-2 p-1 theme-bg/5 border border-white/10 rounded-xl focus-within:border-brand-500 transition-all">
-                                    <input 
-                                        type="text" 
-                                        placeholder="Enter Coupon Code" 
-                                        className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:theme-text-secondary text-brand-400 min-w-0"
+                                <div className="flex gap-2 p-1 bg-white/10 border border-white/10 rounded-xl focus-within:border-white/40 transition-all">
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Coupon Code"
+                                        className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:text-white/50 text-white min-w-0"
                                         value={formData.couponCode}
                                         onChange={(e) => setFormData({...formData, couponCode: e.target.value})}
                                     />
@@ -1350,7 +1350,7 @@ const App = () => {
                                     </TiltCard>
                                 </div>
                                 {formData.discountApplied && (
-                                    <p className="text-[10px] text-brand-400 font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
+                                    <p className="text-[10px] text-white font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
                                         <Icon name="tag" size={10} /> Discount Applied Successfully
                                     </p>
                                 )}

@@ -170,7 +170,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
     };
 
     const activeItemClass = "theme-card/60 text-brand-700 border-l-4 border-brand-500";
-    const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:theme-bg";
+    const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:bg-[var(--bg-base)]";
 
     return (
         <nav className="fixed w-full z-50 theme-bg border-b theme-border h-20 flex items-center shadow-sm">
@@ -208,19 +208,19 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         {isDropdownOpen && programs && (
                             <div className="absolute top-full left-0 w-max min-w-[220px] max-w-xs z-[60] animate-in fade-in duration-200 pt-1">
                                 {/* Seamless edge-to-edge dropdown card */}
-                                <div className="border border-slate-700/80 shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl" style={{backgroundColor: 'var(--bg-base)'}}>
+                                <div className="border theme-border-strong shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl" style={{backgroundColor: 'var(--bg-base)'}}>
                                     {Object.entries(programs).map(([progId, prog]) => {
                                         const isSelected = progId === activeProgramId;
                                         return (
-                                            <button 
-                                                key={progId} 
-                                                onClick={() => { 
-                                                    if(onProgramChange) onProgramChange(progId); 
-                                                    else window.location.href=`index.html#about`; 
-                                                    setIsDropdownOpen(false); 
-                                                }} 
-                                                className={`w-full text-left px-4 py-3 hover:bg-slate-800/90 font-bold text-xs tracking-tight transition-colors ${
-                                                    isSelected ? 'text-brand-400 font-extrabold bg-slate-800/50' : 'text-slate-200'
+                                            <button
+                                                key={progId}
+                                                onClick={() => {
+                                                    if(onProgramChange) onProgramChange(progId);
+                                                    else window.location.href=`index.html#about`;
+                                                    setIsDropdownOpen(false);
+                                                }}
+                                                className={`w-full text-left px-4 py-3 hover:bg-[var(--bg-alt)] font-bold text-xs tracking-tight transition-colors ${
+                                                    isSelected ? 'text-brand-400 font-extrabold bg-[var(--bg-alt)]' : 'text-[var(--text-base)]'
                                                 }`}
                                             >
                                                 {prog.title}
@@ -264,7 +264,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                                 else window.location.href=`index.html#about`; 
                                                 setIsMenuOpen(false); 
                                             }} 
-                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'bg-brand-100/50 text-brand-700' : 'theme-text-muted hover:theme-bg'}`}
+                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'bg-brand-100/50 text-brand-700' : 'theme-text-muted hover:bg-[var(--bg-base)]'}`}
                                         >
                                             {prog.title}
                                         </button>
@@ -284,7 +284,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
             {isModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary-900/80 backdrop-blur-sm">
                     <div className="theme-bg w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-2xl">
-                        <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 theme-text-muted hover:theme-text-primary">
+                        <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 theme-text-muted hover:text-[var(--text-base)]">
                             <window.Icon name="x" size={24} />
                         </button>
                         <h3 className="font-bold text-2xl mb-2 theme-text-primary tracking-tight">{settings?.ui?.modalTitle}</h3>
