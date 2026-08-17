@@ -496,10 +496,10 @@ const EligibilityChecker = () => {
                             <div className="flex flex-wrap gap-2">
                                 {toolOptions.map(tool => (
                                     <button key={tool} type="button" onClick={(e) => handleToolToggle(e, tool)}
-                                        className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all border ${
+                                        className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all ${
                                             formData.tools.includes(tool)
-                                                ? 'theme-btn-gradient border-transparent text-white shadow-md'
-                                                : 'theme-card theme-border theme-text-secondary hover:border-brand-500/40'
+                                                ? 'theme-btn-gradient text-white shadow-md'
+                                                : 'theme-card border theme-border theme-text-secondary hover:border-brand-500/40'
                                         }`}>
                                         {tool}
                                     </button>
@@ -898,21 +898,21 @@ const App = () => {
                     </div>
                 </div>
 
-                {/* Animated Data-Analytics Dashboard Motif — decorative background behind left column only, clear of the lead-capture form */}
-                <div className="absolute left-[2%] lg:left-[4%] top-[16%] w-[38vw] max-w-[420px] min-w-[240px] opacity-[0.16] pointer-events-none hidden md:block z-0">
-                    <svg viewBox="0 0 320 200" className="w-full h-auto" fill="none">
-                        <g className="text-brand-500" stroke="currentColor" strokeWidth="1" opacity="0.25">
+                {/* Animated Data-Analytics Dashboard Motif — full-height background wash behind the entire left column, clear of the lead-capture form on the right */}
+                <div className="absolute left-0 top-0 w-[58%] h-full opacity-[0.14] pointer-events-none hidden md:block z-0">
+                    <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none">
+                        <g className="theme-mid-text" stroke="currentColor" strokeWidth="1" opacity="0.25">
                             <line x1="10" y1="170" x2="310" y2="170" />
                             <line x1="10" y1="10" x2="10" y2="170" />
                         </g>
                         <rect className="hero-chart-bar text-brand-500" x="30" y="90" width="24" height="80" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0s'}} />
-                        <rect className="hero-chart-bar theme-accent-text" x="70" y="60" width="24" height="110" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.3s'}} />
+                        <rect className="hero-chart-bar theme-mid-text" x="70" y="60" width="24" height="110" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.3s'}} />
                         <rect className="hero-chart-bar text-brand-500" x="110" y="100" width="24" height="70" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.6s'}} />
-                        <rect className="hero-chart-bar theme-accent-text" x="150" y="40" width="24" height="130" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.9s'}} />
+                        <rect className="hero-chart-bar theme-mid-text" x="150" y="40" width="24" height="130" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.9s'}} />
                         <rect className="hero-chart-bar text-brand-500" x="190" y="75" width="24" height="95" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '1.2s'}} />
-                        <path className="hero-chart-line theme-accent-text" d="M30 130 L70 95 L110 115 L150 55 L190 85 L230 45" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                        <path className="hero-chart-line theme-mid-text" d="M30 130 L70 95 L110 115 L150 55 L190 85 L230 45" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
                         <circle className="hero-chart-chip text-brand-400" cx="230" cy="45" r="5" fill="currentColor" style={{animationDelay: '0.5s'}} />
-                        <circle className="hero-chart-chip theme-accent-text" cx="150" cy="55" r="4" fill="currentColor" style={{animationDelay: '1.4s'}} />
+                        <circle className="hero-chart-chip theme-mid-text" cx="150" cy="55" r="4" fill="currentColor" style={{animationDelay: '1.4s'}} />
                     </svg>
                 </div>
 
@@ -943,7 +943,7 @@ const App = () => {
                                 </a>
                             </TiltCard>
                             <TiltCard>
-                                <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block w-full bg-[var(--surface-form)] border border-[var(--border-color)] text-[var(--text-base)] font-bold px-8 py-3.5 md:py-4 rounded uppercase tracking-widest text-sm text-center hover:border-brand-500 hover:text-brand-400 transition-all">
+                                <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="theme-mid-outline-btn block w-full font-bold px-8 py-3.5 md:py-4 rounded uppercase tracking-widest text-sm text-center transition-all">
                                     Download Brochure
                                 </a>
                             </TiltCard>
@@ -997,7 +997,7 @@ const App = () => {
                     <div className="w-full max-w-7xl mx-auto relative z-10">
                         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 border-b theme-border-strong pb-4">
                             <div>
-                                <span className="theme-accent-text font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
+                                <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
                                 <h2 className="text-3xl font-extrabold text-left theme-text-primary tracking-tight">Job-Ready Data Analytics Curriculum</h2>
                             </div>
                         </div>
@@ -1010,10 +1010,10 @@ const App = () => {
                                         onClick={() => handleModuleToggle(idx)}
                                         className="flex-shrink-0 flex flex-col items-center gap-1.5 group"
                                     >
-                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all ${
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${
                                             idx <= activeModuleIdx
-                                                ? 'theme-btn-gradient border-transparent text-white shadow-md'
-                                                : 'bg-transparent border-slate-400 text-slate-500 group-hover:border-brand-500/50'
+                                                ? 'theme-btn-gradient text-white shadow-md'
+                                                : 'bg-transparent border-2 border-slate-400 text-slate-500 group-hover:border-brand-500/50'
                                         }`}>
                                             {idx + 1}
                                         </div>
@@ -1038,7 +1038,7 @@ const App = () => {
                                     <div key={idx} className="flex flex-col">
                                         <button 
                                             onClick={() => handleModuleToggle(idx)} 
-                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'theme-btn-gradient border-transparent text-white shadow-lg' : 'theme-card theme-border theme-text-secondary hover:border-brand-500/40 hover:text-[var(--text-base)]'}`}
+                                            className={`p-6 text-left rounded-xl transition-all font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'theme-btn-gradient text-white shadow-lg' : 'theme-card border theme-border theme-text-secondary hover:border-brand-500/40 hover:text-[var(--text-base)]'}`}
                                         >
                                             <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                             <Icon name="chevron-right" size={20} className={`transition-all duration-300 transform ${activeModuleIdx === idx ? 'rotate-90 opacity-100' : 'rotate-0 opacity-40 group-hover:opacity-70'}`} />
@@ -1062,7 +1062,7 @@ const App = () => {
                                                         </div>
                                                     ))}
                                                 </div>
-                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 border border-brand-500/60 text-brand-400 py-3 rounded-lg text-xs font-bold uppercase tracking-widest cursor-pointer hover:bg-brand-500/10 transition-all"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
+                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="theme-mid-outline-btn w-full flex items-center justify-center space-x-2 py-3 rounded-lg text-xs font-bold uppercase tracking-widest cursor-pointer transition-all"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                             </div>
                                         </div>
                                     </div>
@@ -1084,7 +1084,7 @@ const App = () => {
                                                     <span className="text-xs font-bold theme-text-muted uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                                 </div>
                                             </div>
-                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block flex items-center space-x-2 border border-brand-500/60 text-brand-400 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-500/10 transition-all cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
+                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="theme-mid-outline-btn block flex items-center space-x-2 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start transition-all cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                         </div>
                                         
                                         <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
@@ -1111,13 +1111,13 @@ const App = () => {
                     <div className="absolute top-[-15%] left-[-10%] w-[45vw] h-[45vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.07] animate-pulse pointer-events-none"></div>
                     <div className="absolute bottom-[-15%] right-[-10%] w-[35vw] h-[35vw] bg-brand-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-[0.05] animate-pulse pointer-events-none" style={{animationDelay:'3s'}}></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Industry Stack</span>
+                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Industry Stack</span>
                         <h2 className="text-3xl font-bold mb-16 theme-text-primary tracking-tight">Modern Industry Tool Stack</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {tools.map((tool, i) => (
                             <ScrollReveal key={i} delay={i * 70}>
                             <TiltCard className="group h-full rounded-2xl">
-                                <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border theme-border shadow-sm rounded-2xl transition-all duration-300 h-full hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 relative overflow-hidden`}>
+                                <div className={`${tool.color} theme-mid-hover-border p-8 flex flex-col items-center justify-center space-y-4 border theme-border shadow-sm rounded-2xl transition-all duration-300 h-full hover:shadow-lg relative overflow-hidden`}>
                                     <div className="w-16 h-16 flex items-center justify-center relative z-10">
                                         <img
                                             src={tool.img}
@@ -1126,10 +1126,10 @@ const App = () => {
                                             onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }}
                                         />
                                     </div>
-                                    <span className="font-bold theme-text-secondary text-sm relative z-10 group-hover:text-brand-400 transition-colors duration-300">{tool.name}</span>
-                                    {/* Hover Glow */}
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-500/0 via-brand-500/10 to-brand-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
-                                    <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-brand-500 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+                                    <span className="font-bold theme-text-secondary text-sm relative z-10 group-hover:text-[var(--brand-mid)] transition-colors duration-300">{tool.name}</span>
+                                    {/* Hover Glow — now blue-to-green, was blue-only */}
+                                    <div className="absolute inset-0 theme-hover-glow opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+                                    <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none" style={{background: 'var(--brand-accent)'}}></div>
                                 </div>
                             </TiltCard>
                             </ScrollReveal>
@@ -1144,7 +1144,7 @@ const App = () => {
                 <section id="projects" className={`${sectionClass} theme-bg-alt relative overflow-hidden`}>
                     <div className="absolute top-[-10%] right-[-8%] w-[40vw] h-[40vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[130px] opacity-[0.06] animate-pulse pointer-events-none"></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Hands-On Work</span>
+                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Hands-On Work</span>
                         <h2 className="text-3xl font-extrabold mb-8 md:mb-12 theme-text-primary tracking-tight flex items-center gap-3">
                             <Icon name="layout-grid" size={32} className="text-brand-500" />
                             {PROJECT_COUNT}+ Real-Time Industry Projects
@@ -1192,7 +1192,7 @@ const App = () => {
                 <section id="videos" className={`${sectionClass} theme-bg relative overflow-hidden`}>
                     <div className="absolute bottom-[-15%] left-[-8%] w-[40vw] h-[40vw] bg-brand-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.06] animate-pulse pointer-events-none" style={{animationDelay:'1.5s'}}></div>
                      <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Watch & Learn</span>
+                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Watch & Learn</span>
                         <h2 className="text-3xl font-bold theme-text-primary tracking-tight mb-12">Program Overview & Demos</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {(media.videos || []).map((vid, i) => (
@@ -1294,7 +1294,7 @@ const App = () => {
             <ScrollReveal delay={100}>
                 <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-12 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
                     <div className="w-full max-w-5xl mx-auto text-left mb-4">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Certification Program</span>
+                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-2">Certification Program</span>
                         <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight">Program Fees</h2>
                     </div>
                     <div className="w-full max-w-5xl mx-auto theme-card rounded-[3rem] border theme-border overflow-hidden shadow-2xl grid md:grid-cols-2">

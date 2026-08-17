@@ -79,6 +79,10 @@
             .theme-accent-pill { background: color-mix(in srgb, var(--brand-mid, var(--brand-400)) 12%, transparent); color: var(--brand-mid, var(--brand-400)); border: 1px solid color-mix(in srgb, var(--brand-mid, var(--brand-400)) 28%, transparent); }
             .theme-btn-gradient { background: linear-gradient(90deg, var(--brand-600) 0%, var(--brand-accent, var(--brand-500)) 100%); }
             .theme-btn-gradient:hover { filter: brightness(1.12); }
+            .theme-mid-outline-btn { border: 2px solid var(--brand-mid); color: var(--brand-mid); background: color-mix(in srgb, var(--brand-mid) 4%, transparent); }
+            .theme-mid-outline-btn:hover { background: color-mix(in srgb, var(--brand-mid) 12%, transparent); }
+            .theme-hover-glow { background: linear-gradient(135deg, color-mix(in srgb, var(--brand-500) 12%, transparent), color-mix(in srgb, var(--brand-accent, var(--brand-400)) 10%, transparent)); }
+            .theme-mid-hover-border:hover { border-color: var(--brand-mid) !important; }
             @keyframes chart-bar-grow {
                 0%, 100% { transform: scaleY(0.3); }
                 50% { transform: scaleY(1); }
