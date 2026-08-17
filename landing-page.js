@@ -887,9 +887,27 @@ const App = () => {
                     <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
                     <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-brand-700 rounded-full mix-blend-screen filter blur-[100px] animate-pulse" style={{animationDelay: '2s'}}></div>
                     {/* Rotating grid/node structure */}
-                    <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10" 
+                    <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10"
                          style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
                     </div>
+                </div>
+
+                {/* Animated Data-Analytics Dashboard Motif — decorative, non-interactive */}
+                <div className="absolute right-[2%] top-[8%] w-[30vw] max-w-[380px] min-w-[220px] opacity-[0.35] pointer-events-none hidden md:block z-0">
+                    <svg viewBox="0 0 320 200" className="w-full h-auto" fill="none">
+                        <g className="text-brand-500" stroke="currentColor" strokeWidth="1" opacity="0.25">
+                            <line x1="10" y1="170" x2="310" y2="170" />
+                            <line x1="10" y1="10" x2="10" y2="170" />
+                        </g>
+                        <rect className="hero-chart-bar text-brand-500" x="30" y="90" width="24" height="80" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0s'}} />
+                        <rect className="hero-chart-bar theme-accent-text" x="70" y="60" width="24" height="110" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.3s'}} />
+                        <rect className="hero-chart-bar text-brand-500" x="110" y="100" width="24" height="70" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.6s'}} />
+                        <rect className="hero-chart-bar theme-accent-text" x="150" y="40" width="24" height="130" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.9s'}} />
+                        <rect className="hero-chart-bar text-brand-500" x="190" y="75" width="24" height="95" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '1.2s'}} />
+                        <path className="hero-chart-line theme-accent-text" d="M30 130 L70 95 L110 115 L150 55 L190 85 L230 45" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                        <circle className="hero-chart-chip text-brand-400" cx="230" cy="45" r="5" fill="currentColor" style={{animationDelay: '0.5s'}} />
+                        <circle className="hero-chart-chip theme-accent-text" cx="150" cy="55" r="4" fill="currentColor" style={{animationDelay: '1.4s'}} />
+                    </svg>
                 </div>
 
                 <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full relative z-10">
