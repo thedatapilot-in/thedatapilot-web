@@ -208,7 +208,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         {isDropdownOpen && programs && (
                             <div className="absolute top-full left-0 w-max min-w-[220px] max-w-xs z-[60] animate-in fade-in duration-200 pt-1">
                                 {/* Seamless edge-to-edge dropdown card */}
-                                <div className="bg-[#0f172a] border border-slate-700/80 shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl">
+                                <div className="border border-slate-700/80 shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl" style={{backgroundColor: 'var(--bg-base)'}}>
                                     {Object.entries(programs).map(([progId, prog]) => {
                                         const isSelected = progId === activeProgramId;
                                         return (

@@ -29,7 +29,7 @@ const InternalEmergencyUI = ({ errorMsg }) => (
                     <span style={{fontSize: '13px', fontWeight: '600', color: 'var(--brand-500)'}}>Logic-First. AI-Fast.</span>
                 </div>
             </div>
-            <div style={{backgroundColor: 'var(--brand-50)', padding: '30px', borderRadius: '40px', border: '1px solid var(--brand-200)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.05)'}}>
+            <div style={{backgroundColor: 'var(--surface-card)', padding: '30px', borderRadius: '40px', border: '1px solid var(--border-color)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.05)'}}>
                 <div style={{width: '100px', height: '80px', margin: '0 auto 32px auto', position: 'relative'}}>
                     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--brand-500)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{position: 'absolute', top: 0, left: 0}} className="gear-large">
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
@@ -38,8 +38,8 @@ const InternalEmergencyUI = ({ errorMsg }) => (
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
                     </svg>
                 </div>
-                <h2 style={{fontWeight: '800', fontSize: '24px', margin: '0 0 12px 0', color: 'var(--text-base)'}}>REACT EMERGENCY</h2>
-                <p style={{color: 'color-mix(in srgb, var(--text-base) 75%, transparent)', fontWeight: '500', marginBottom: '36px', lineHeight: '1.6', fontSize: '15px'}}>{errorMsg || "Connecting to logic engine..."}</p>
+                <h2 style={{fontWeight: '800', fontSize: '24px', margin: '0 0 12px 0', color: 'var(--text-base)'}}>System is temporarily down</h2>
+                <p style={{color: 'color-mix(in srgb, var(--text-base) 75%, transparent)', fontWeight: '500', marginBottom: '36px', lineHeight: '1.6', fontSize: '15px'}}>{errorMsg || "We are working on it and will be back online shortly."}</p>
                 <button onClick={() => window.location.reload()} style={{width: '100%', backgroundColor: 'var(--brand-500)', color: 'white', padding: '22px', borderRadius: '16px', fontWeight: '800', fontSize: '15px', textTransform: 'uppercase', letterSpacing: '0.1em', border: 'none', cursor: 'pointer', boxShadow: '0 10px 15px -3px color-mix(in srgb, var(--brand-500) 20%, transparent)'}}>Check Connection</button>
             </div>
             <p style={{marginTop: '18px', fontSize: '12px', fontWeight: '700', color: 'color-mix(in srgb, var(--text-base) 50%, transparent)', letterSpacing: '0.05em'}}>Commitment to world-class data services and mentorship</p>
