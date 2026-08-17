@@ -187,7 +187,136 @@ const THEMES = {
         50:  "#eef1ff", 100: "#dde4ff", 200: "#bbc8ff",
         300: "#8ca0ff", 400: "#4068f8", 500: "#2248e0",
         600: "#1836c8", 700: "#1228aa", 800: "#0e1e8a", 900: "#0a1668"
+    },
+
+    // ── WARM SPECTRUM ADDITIONS ──────────────────────────────────
+
+    // amber — electric warm amber. Radiant sun energy, data insight.
+    // Richer and more vibrant than legacy gold — pops vividly on dark navy.
+    amber: {
+        50:  "#fffbeb", 100: "#fef0c0", 200: "#fed880",
+        300: "#fcb830", 400: "#f99800", 500: "#e07c00",
+        600: "#c26000", 700: "#9e4c00", 800: "#7c3a02", 900: "#5e2c04"
+    },
+
+    // orange — electric vivid orange. Cloudflare / Figma brand energy.
+    // Pure vibrant orange — bold and unmistakable on dark backgrounds.
+    orange: {
+        50:  "#fff6f0", 100: "#ffe8d8", 200: "#ffccac",
+        300: "#ffa870", 400: "#ff7c30", 500: "#f05c00",
+        600: "#d04600", 700: "#a83600", 800: "#862800", 900: "#661e00"
+    },
+
+    // ruby — bright vivid scarlet. Energetic, striking, data-alert red.
+    // More electric than crimson — reads as urgency and precision on dark.
+    ruby: {
+        50:  "#fff0ef", 100: "#ffe0de", 200: "#ffb8b4",
+        300: "#ff8078", 400: "#ff3c34", 500: "#e81c18",
+        600: "#cc0808", 700: "#a80000", 800: "#880000", 900: "#6c0000"
+    },
+
+    // rose — vivid cool pink. Stripe / Loom-grade elegance on dark.
+    // Different from neonRose (neon magenta) — a true warm rose-red.
+    rose: {
+        50:  "#fff0f4", 100: "#ffd8e4", 200: "#ffb0c8",
+        300: "#ff78a4", 400: "#ff3068", 500: "#e8154e",
+        600: "#cc0038", 700: "#a8002c", 800: "#840020", 900: "#640018"
+    },
+
+    // fuchsia — electric magenta. Between neonRose and violet — vivid luxury.
+    // The loudest brand signal in the palette. Confident and unforgettable.
+    fuchsia: {
+        50:  "#fdf0ff", 100: "#fad0ff", 200: "#f5a0ff",
+        300: "#ec60ff", 400: "#e020ff", 500: "#cc00ef",
+        600: "#ac00cc", 700: "#8800a8", 800: "#680084", 900: "#4c0062"
+    },
+
+    // violet — rich deep violet. More serious and darker than volt's warm-electric.
+    // Conveys creativity, intelligence, and premium brand identity.
+    violet: {
+        50:  "#f4f0ff", 100: "#ebe0ff", 200: "#d8c4ff",
+        300: "#bc98ff", 400: "#9a60ff", 500: "#7c3aed",
+        600: "#6828d4", 700: "#5018b0", 800: "#3c1090", 900: "#2c0870"
+    },
+
+    // teal — electric blue-green. dbt / Metabase analytics clarity.
+    // Bridges cyan's brightness with nova's green — clean data energy.
+    teal: {
+        50:  "#edfcfa", 100: "#ccf8f2", 200: "#98f0e4",
+        300: "#54e0cc", 400: "#10cbb0", 500: "#00aa90",
+        600: "#008870", 700: "#006c58", 800: "#005244", 900: "#003c32"
+    },
+
+    // lime — electric yellow-green. Vercel / Next.js growth-tech energy.
+    // Vivid acid green — signals innovation, speed, and new capability.
+    lime: {
+        50:  "#f6ffe8", 100: "#e8ffc4", 200: "#d0ff88",
+        300: "#b2f840", 400: "#92e000", 500: "#72c000",
+        600: "#56a000", 700: "#408200", 800: "#306800", 900: "#225000"
+    },
+
+    // mint — fresh aquamarine. Clean, modern, refreshing on dark.
+    // Lighter and softer than teal — like a breath of data clarity.
+    mint: {
+        50:  "#edfff8", 100: "#d0ffee", 200: "#9fffd4",
+        300: "#5cf5b4", 400: "#1cdea8", 500: "#08c490",
+        600: "#04a474", 700: "#028460", 800: "#026048", 900: "#014836"
+    },
+
+    // indigo — electric deep indigo. Between aura's blue and volt's purple.
+    // A bespoke cool-to-violet hybrid — not the tired Tailwind indigo.
+    indigo: {
+        50:  "#eef0ff", 100: "#dde0ff", 200: "#bbc2ff",
+        300: "#8890ff", 400: "#4458ff", 500: "#2230e8",
+        600: "#1820cc", 700: "#1018a8", 800: "#0c1288", 900: "#080e68"
+    },
+
+    // ── MULTI-ACCENT SHOWCASE THEMES ────────────────────────────
+
+    // sunset — warm orange → rose gradient. Cinematic twilight energy.
+    // Primary brand in amber-orange, accent glows rose-red — pure drama.
+    sunset: {
+        50:  "#fff7f0", 100: "#ffecd8", 200: "#ffd4b0",
+        300: "#ffb070", 400: "#ff8030", 500: "#f06010",
+        600: "#d04800", 700: "#a83600", 800: "#862a00", 900: "#661e00"
+    },
+
+    // aurora — teal → violet gradient. Northern-lights intelligence.
+    // Teal primary conveys precision; violet accent adds mystique and depth.
+    aurora: {
+        50:  "#edfcfa", 100: "#ccf4ee", 200: "#9aeadc",
+        300: "#58d8c4", 400: "#14c0a8", 500: "#00a08c",
+        600: "#008072", 700: "#00645a", 800: "#004c44", 900: "#003830"
+    },
+
+    // neonGrid — lime → fuchsia gradient. Cyberpunk data terminal energy.
+    // High-voltage contrast: lime signals speed, fuchsia accent shocks.
+    neonGrid: {
+        50:  "#f4ffe8", 100: "#e6ffc0", 200: "#ccff80",
+        300: "#aaff30", 400: "#88e000", 500: "#68c000",
+        600: "#50a000", 700: "#3c8000", 800: "#2c6200", 900: "#1e4c00"
     }
+};
+
+// ============================================
+// ACCENT COLORS — secondary gradient end-stops
+// for multi-color and dual-tone themes.
+// Consumed as var(--brand-accent) in CSS utilities.
+// ============================================
+const THEME_ACCENTS = {
+    // Multi-accent showcase (dramatic dual-hue gradients)
+    sunset:   '#f43f5e',   // rose-red   — warm orange → cool pink
+    aurora:   '#8b5cf6',   // violet     — teal → mystical depth
+    neonGrid: '#d946ef',   // fuchsia    — lime → electric shock
+    // Single-hue hints (shifted hue for subtle gradients)
+    amber:    '#ff8000',
+    orange:   '#ff3c00',
+    fuchsia:  '#c026d3',
+    violet:   '#a855f7',
+    neonRose: '#c026d3',
+    lime:     '#a3e635',
+    teal:     '#2dd4bf',
+    mint:     '#34d399',
 };
 
 // ============================================
@@ -281,6 +410,10 @@ Object.keys(activeColors).forEach(key => {
     root.style.setProperty(`--brand-${key}`, activeColors[key]);
 });
 
+// Accent color for gradient utilities
+const accent = THEME_ACCENTS[window.LIVE_THEME] || activeColors['400'];
+root.style.setProperty('--brand-accent', accent);
+
 // Semantic Variables
 Object.keys(activeVariantVars).forEach(key => {
     root.style.setProperty(key, activeVariantVars[key]);
@@ -311,6 +444,11 @@ Object.keys(activeVariantVars).forEach(key => {
             css += `.focus\\:${pfx}-brand-${s}:focus{${prop}:var(--brand-${s})!important}`;
         });
     });
+    // Gradient utilities powered by --brand-accent
+    css += '.gradient-brand{background:linear-gradient(135deg,var(--brand-500),var(--brand-accent,var(--brand-400)))!important}';
+    css += '.gradient-brand-h{background:linear-gradient(90deg,var(--brand-500),var(--brand-accent,var(--brand-400)))!important}';
+    css += '.text-gradient-brand{background:linear-gradient(135deg,var(--brand-400),var(--brand-accent,var(--brand-300)));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}';
+    css += '.shadow-brand-accent{box-shadow:0 10px 24px -4px var(--brand-accent,var(--brand-500))!important}';
     const el = document.createElement('style');
     el.id = 'brand-var-overrides';
     el.textContent = css;
@@ -427,6 +565,10 @@ window.tailwind.config = {
         const colors = THEMES[next];
         const r = document.documentElement;
         Object.keys(colors).forEach(k => r.style.setProperty(`--brand-${k}`, colors[k]));
+
+        // Update accent for gradient utilities
+        const cycleAccent = THEME_ACCENTS[next] || colors['400'];
+        r.style.setProperty('--brand-accent', cycleAccent);
 
         updateBadge(next, idx + 1, CYCLE_KEYS.length);
 
