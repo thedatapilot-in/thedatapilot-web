@@ -879,15 +879,15 @@ const App = () => {
             <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-start pt-24 md:pt-36 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation — soft radial glow, not a solid blurred blob */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
-                    <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-500) 55%, transparent) 0%, transparent 70%)', filter: 'blur(40px)'}}></div>
-                    <div className="absolute bottom-[-15%] right-[-15%] w-[45vw] h-[45vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 55%, transparent) 0%, transparent 70%)', filter: 'blur(40px)', animationDelay: '2s'}}></div>
+                    <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, var(--brand-500) 0%, color-mix(in srgb, var(--brand-500) 40%, transparent) 40%, transparent 72%)', filter: 'blur(25px)'}}></div>
+                    <div className="absolute bottom-[-15%] right-[-15%] w-[45vw] h-[45vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, var(--brand-accent) 0%, color-mix(in srgb, var(--brand-accent) 40%, transparent) 40%, transparent 72%)', filter: 'blur(25px)', animationDelay: '2s'}}></div>
                     {/* Rotating grid/node structure */}
                     <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10"
                          style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full relative z-10">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-start w-full relative z-10">
                     <div className="relative space-y-6 md:space-y-8 text-left">
                         {/* Animated Data-Analytics Dashboard Motif — background wash filling this column exactly, same margins as the text, clear of the lead-capture form in the other column */}
                         <div className="absolute inset-0 opacity-[0.14] pointer-events-none hidden md:block -z-10">
@@ -1125,8 +1125,12 @@ const App = () => {
                                                 <stop offset="100%" stopColor="var(--brand-accent)" />
                                             </linearGradient>
                                         </defs>
+                                        <g stroke="var(--border-strong)" strokeWidth="1" opacity="0.6">
+                                            <line x1={X0} y1={YBASE} x2={X1} y2={YBASE} />
+                                            <line x1={X0} y1={YTOP - 4} x2={X0} y2={YBASE} />
+                                        </g>
                                         <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.12" />
-                                        <path d={stairPath} stroke="url(#careerLaunchGrad)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+                                        <path d={stairPath} stroke="url(#careerLaunchGrad)" strokeWidth="1.25" strokeLinejoin="round" strokeLinecap="round" />
                                         <circle r="4" fill="url(#careerLaunchGrad)">
                                             <animateMotion path={stairPath} dur="6s" repeatCount="indefinite" calcMode="linear" />
                                         </circle>
@@ -1135,10 +1139,10 @@ const App = () => {
                                             return <circle key={idx} cx={midXFor(idx)} cy={levelFor(idx)} r={isLast ? 5 : 3} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="1.5" />;
                                         })}
                                     </svg>
-                                    <div className="absolute" style={{ left: `${(X0 / VBW) * 100}%`, top: `${(levelFor(0) / VBH) * 100}%`, transform: 'translate(0, -16px)' }}>
-                                        <span className="theme-mid-text font-bold uppercase text-[9px] tracking-widest whitespace-nowrap">16-Wk Path</span>
+                                    <div className="absolute" style={{ left: '50%', top: 0, transform: 'translate(-50%, -18px)' }}>
+                                        <span className="theme-mid-text font-bold uppercase text-[9px] tracking-widest whitespace-nowrap">16-Week Path</span>
                                     </div>
-                                    <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -16px)' }}>
+                                    <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -26px)' }}>
                                         <span className="theme-mid-text font-black uppercase text-[10px] tracking-wider whitespace-nowrap">Career Launch</span>
                                     </div>
                                     {(currentProgram.syllabus || []).map((mod, idx) => (
