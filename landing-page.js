@@ -879,8 +879,8 @@ const App = () => {
             <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-start pt-24 md:pt-36 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation — soft radial glow, not a solid blurred blob */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
-                    <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, var(--brand-500) 0%, color-mix(in srgb, var(--brand-500) 40%, transparent) 40%, transparent 72%)', filter: 'blur(25px)'}}></div>
-                    <div className="absolute bottom-[-15%] right-[-15%] w-[45vw] h-[45vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, var(--brand-accent) 0%, color-mix(in srgb, var(--brand-accent) 40%, transparent) 40%, transparent 72%)', filter: 'blur(25px)', animationDelay: '2s'}}></div>
+                    <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-400) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)'}}></div>
+                    <div className="absolute bottom-[-15%] right-[-15%] w-[45vw] h-[45vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)', animationDelay: '2s'}}></div>
                     {/* Rotating grid/node structure */}
                     <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10"
                          style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
@@ -941,7 +941,7 @@ const App = () => {
                         </div>
                     </div>
                     
-                    <div className="flex flex-col gap-4 max-w-md ml-auto w-full">
+                    <div className="flex flex-col gap-4 max-w-md ml-auto w-full lg:mt-40">
                     <div className="bg-[var(--surface-form)] p-8 border border-[var(--border-color)] rounded-3xl w-full shadow-2xl backdrop-blur-md text-left mt-8 lg:mt-0 relative overflow-hidden group">
                         <div className="absolute top-[-50px] right-[-50px] w-32 h-32 bg-brand-500 rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"></div>
                         <div className="absolute bottom-[-50px] left-[-50px] w-32 h-32 bg-brand-300 rounded-full blur-[60px] opacity-10 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"></div>
@@ -1125,7 +1125,7 @@ const App = () => {
                                                 <stop offset="100%" stopColor="var(--brand-accent)" />
                                             </linearGradient>
                                         </defs>
-                                        <g stroke="var(--border-strong)" strokeWidth="1" opacity="0.6">
+                                        <g stroke="var(--border-strong)" strokeWidth="1.25" opacity="0.6">
                                             <line x1={X0} y1={YBASE} x2={X1} y2={YBASE} />
                                             <line x1={X0} y1={YTOP - 4} x2={X0} y2={YBASE} />
                                         </g>
