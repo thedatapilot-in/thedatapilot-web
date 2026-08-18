@@ -9,7 +9,7 @@
  */
 
 (function() {
-    const VERSION = "3.2.0";
+    const VERSION = "3.2.10";
     const path = window.location.pathname;
     
     // Page Route Detection
@@ -66,10 +66,51 @@
                 70% { transform: translate(7vw,-8vh) scale(0.9); }
             }
             @keyframes card-glow {
-                0%,100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 15%,transparent), 0 4px 20px -4px rgba(0,0,0,0.12); }
-                50%      { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 40%,transparent), 0 8px 30px -4px rgba(0,0,0,0.18); }
+                0%   { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
+                33%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 18%,transparent); }
+                66%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--glow-c,var(--brand-300)) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--glow-c,var(--brand-300)) 18%,transparent); }
+                100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
             }
-            .theme-card:hover { animation: card-glow 2.4s ease-in-out infinite; }
+            .theme-card:hover { animation: card-glow 3s ease-in-out infinite; }
+            .theme-gradient-text {
+                background: linear-gradient(90deg, var(--brand-500) 0%, var(--brand-accent, var(--brand-400)) 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                color: transparent;
+                /* Forces its own GPU compositing layer — works around a WebKit/mobile Safari bug
+                   where background-clip:text loses its paint (renders invisible/see-through)
+                   during rapid content changes, e.g. a typewriter effect adding characters. */
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                display: inline-block;
+            }
+            .theme-accent-text { color: var(--brand-accent, var(--brand-400)); }
+            .theme-tertiary-text { color: var(--glow-c, var(--brand-300)); }
+            .theme-mid-text { color: var(--brand-mid, var(--brand-500)); }
+            .theme-accent-pill { background: color-mix(in srgb, var(--brand-mid, var(--brand-400)) 12%, transparent); color: var(--brand-mid, var(--brand-400)); border: 1px solid color-mix(in srgb, var(--brand-mid, var(--brand-400)) 28%, transparent); }
+            .theme-btn-gradient { background: linear-gradient(90deg, var(--brand-600) 0%, var(--brand-accent, var(--brand-500)) 100%); }
+            .theme-btn-gradient:hover { filter: brightness(1.12); }
+            .theme-mid-outline-btn { border: 2px solid var(--brand-mid); color: var(--brand-mid); background: color-mix(in srgb, var(--brand-mid) 4%, transparent); }
+            .theme-mid-outline-btn:hover { background: color-mix(in srgb, var(--brand-mid) 12%, transparent); }
+            .theme-hover-glow { background: linear-gradient(135deg, color-mix(in srgb, var(--brand-500) 12%, transparent), color-mix(in srgb, var(--brand-accent, var(--brand-400)) 10%, transparent)); }
+            .theme-mid-hover-border:hover { border-color: var(--brand-mid) !important; }
+            .theme-mid-hover-text:hover { color: var(--brand-mid) !important; }
+            @keyframes chart-bar-grow {
+                0%, 100% { transform: scaleY(0.3); }
+                50% { transform: scaleY(1); }
+            }
+            @keyframes chart-line-draw {
+                0% { stroke-dashoffset: 240; }
+                60%, 100% { stroke-dashoffset: 0; }
+            }
+            @keyframes chart-chip-float {
+                0%, 100% { transform: translateY(0); opacity: 0.6; }
+                50% { transform: translateY(-10px); opacity: 1; }
+            }
+            .hero-chart-bar { transform-origin: bottom; animation: chart-bar-grow 6.5s ease-in-out infinite; }
+            .hero-chart-line { stroke-dasharray: 240; animation: chart-line-draw 6s ease-in-out infinite; }
+            .hero-chart-chip { animation: chart-chip-float 7s ease-in-out infinite; }
         `;
         document.head.appendChild(style);
 
@@ -80,32 +121,32 @@
                 // If React failed to mount after 10s, inject the Emergency UI
                 const emergencyDiv = document.createElement('div');
                 emergencyDiv.id = 'emergency-ui';
-                emergencyDiv.style.cssText = 'display: flex; height: 100vh; width: 100vw; flex-direction: column; align-items: center; justify-content: center; padding: 24px; background-color: #f8fafc; text-align: center; position: fixed; top: 0; left: 0; z-index: 9999;';
+                emergencyDiv.style.cssText = 'display: flex; height: 100vh; width: 100vw; flex-direction: column; align-items: center; justify-content: center; padding: 24px; background-color: var(--bg-base); text-align: center; position: fixed; top: 0; left: 0; z-index: 9999;';
                 emergencyDiv.innerHTML = `
                     <div style="max-width: 448px; width: 100%;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 28px;">
-                            <div style="width: 52px; height: 52px; background-color: #84cc16; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.2);">
+                            <div style="width: 52px; height: 52px; background-color: var(--brand-500); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--brand-500) 20%, transparent);">
                                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
                             </div>
                             <div style="display: flex; flex-direction: column; text-align: left; line-height: 1;">
-                                <span style="font-weight: 800; font-size: 22px; color: #0f172a; margin-bottom: 4px;">The Data Pilot</span>
-                                <span style="font-size: 13px; font-weight: 600; color: #84cc16;">Logic-First. AI-Fast.</span>
+                                <span style="font-weight: 800; font-size: 22px; color: var(--text-base); margin-bottom: 4px;">The Data Pilot</span>
+                                <span style="font-size: 13px; font-weight: 600; color: var(--brand-500);">Logic-First. AI-Fast.</span>
                             </div>
                         </div>
-                        <div style="background-color: white; padding: 30px; border-radius: 40px; border: 1px solid #e2e8f0; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);">
+                        <div style="background-color: var(--surface-card); padding: 30px; border-radius: 40px; border: 1px solid var(--border-color); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);">
                             <div style="width: 100px; height: 80px; margin: 0 auto 32px auto; position: relative;">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#84cc16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; top: 0; left: 0;" class="gear-large">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; top: 0; left: 0; stroke: var(--brand-500);" class="gear-large">
                                     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
                                 </svg>
-                                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#84cc16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; bottom: 0; right: 0;" class="gear-small">
+                                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; bottom: 0; right: 0; stroke: var(--brand-500);" class="gear-small">
                                     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
                                 </svg>
                             </div>
-                            <h2 style="font-weight: 800; font-size: 24px; margin: 0 0 12px 0; color: #0f172a;">System is temporarily down</h2>
-                            <p style="color: #64748b; font-weight: 500; margin-bottom: 36px; line-height: 1.6; font-size: 15px;">We are working on it and will be back online shortly.</p>
-                            <button onclick="window.location.reload(true)" style="width: 100%; background-color: #84cc16; color: white; padding: 22px; border-radius: 16px; font-weight: 800; font-size: 15px; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; box-shadow: 0 10px 15px -3px rgba(132, 204, 22, 0.3);">Check Connection</button>
+                            <h2 style="font-weight: 800; font-size: 24px; margin: 0 0 12px 0; color: var(--text-base);">System is temporarily down</h2>
+                            <p style="color: color-mix(in srgb, var(--text-base) 75%, transparent); font-weight: 500; margin-bottom: 36px; line-height: 1.6; font-size: 15px;">We are working on it and will be back online shortly.</p>
+                            <button onclick="window.location.reload(true)" style="width: 100%; background-color: var(--brand-500); color: white; padding: 22px; border-radius: 16px; font-weight: 800; font-size: 15px; text-transform: uppercase; letter-spacing: 0.1em; border: none; cursor: pointer; box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--brand-500) 30%, transparent);">Check Connection</button>
                         </div>
-                        <p style="margin-top: 18px; font-size: 12px; font-weight: 700; color: #94a3b8; letter-spacing: 0.05em;">Commitment to world-class data services and mentorship</p>
+                        <p style="margin-top: 18px; font-size: 12px; font-weight: 700; color: color-mix(in srgb, var(--text-base) 50%, transparent); letter-spacing: 0.05em;">Commitment to world-class data services and mentorship</p>
                     </div>
                 `;
                 document.body.appendChild(emergencyDiv);

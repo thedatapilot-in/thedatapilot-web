@@ -7,14 +7,14 @@
 const { useState, useEffect } = React;
 
 const InternalEmergencyUI = ({ errorMsg }) => (
-    <div style={{height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', backgroundColor: '#f8fafc', textAlign: 'center'}}>
+    <div style={{height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', backgroundColor: 'var(--bg-base)', textAlign: 'center'}}>
         <div style={{maxWidth: '448px', width: '100%'}}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '28px'}}>
                 <div style={{width: '52px', height: '52px', backgroundColor: 'var(--brand-500)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0}}>
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', lineHeight: '1'}}>
-                    <span style={{fontWeight: '800', fontSize: '22px', color: '#0f172a', marginBottom: '4px'}}>The Data Pilot</span>
+                    <span style={{fontWeight: '800', fontSize: '22px', color: 'var(--text-base)', marginBottom: '4px'}}>The Data Pilot</span>
                     <span style={{fontSize: '13px', fontWeight: '600', color: 'var(--brand-500)'}}>Logic-First. AI-Fast.</span>
                 </div>
             </div>
@@ -56,7 +56,7 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-center">
                     <window.ScrollReveal>
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Expert Services</span>
+                        <window.SectionEyebrow>Expert Services</window.SectionEyebrow>
                         <h1 className="text-4xl md:text-5xl font-extrabold theme-text-primary mb-4">Built for Corporate Teams</h1>
                         <p className="text-lg theme-text-muted font-medium leading-relaxed max-w-2xl mx-auto">
                             Professional consulting and training designed for high-level strategy and impact.
@@ -69,15 +69,13 @@ const App = () => {
                     {(services.items || []).map((service, idx) => (
                         <window.ScrollReveal key={service.id} delay={idx * 80}>
                             <window.TiltCard className="h-full">
-                                <div className="theme-card border theme-border-strong rounded-[2rem] p-8 flex flex-col h-full hover:shadow-2xl transition-all duration-300">
-                                    <div className="inline-block bg-brand-500 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest w-fit mb-6">
-                                        {service.category}
-                                    </div>
-                                    <h3 className="text-xl font-bold theme-text-primary mb-4">{service.title}</h3>
+                                <div className="theme-card border theme-border-strong rounded-[2rem] p-8 flex flex-col h-full hover:shadow-2xl transition-all duration-300 relative overflow-hidden">
+                                    <window.CardBadge className="absolute top-6 right-6">{service.category}</window.CardBadge>
+                                    <h3 className="text-xl font-bold theme-text-primary mb-4 pr-16">{service.title}</h3>
                                     <p className="theme-text-muted font-medium leading-relaxed mb-8 flex-grow">{service.description}</p>
-                                    <button className="w-full bg-brand-500 hover:bg-brand-600 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-colors mt-auto shadow-lg shadow-brand-500/20">
+                                    <window.GradientButton className="w-full py-4 rounded-xl text-xs uppercase tracking-widest mt-auto">
                                         {service.cta}
-                                    </button>
+                                    </window.GradientButton>
                                 </div>
                             </window.TiltCard>
                         </window.ScrollReveal>

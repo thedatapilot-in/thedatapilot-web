@@ -18,18 +18,18 @@ const PROJECT_COUNT = 6;
  * Fallback UI used if data fetching or React mounting fails.
  */
 const InternalEmergencyUI = ({ errorMsg }) => (
-    <div style={{height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', backgroundColor: '#f8fafc', textAlign: 'center'}}>
+    <div style={{height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px', backgroundColor: 'var(--bg-base)', textAlign: 'center'}}>
         <div style={{maxWidth: '448px', width: '100%'}}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '28px'}}>
-                <div style={{width: '52px', height: '52px', backgroundColor: 'var(--brand-500)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 15px -3px rgba(6, 182, 212, 0.2)'}}>
+                <div style={{width: '52px', height: '52px', backgroundColor: 'var(--brand-500)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 15px -3px color-mix(in srgb, var(--brand-500) 20%, transparent)'}}>
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column', textAlign: 'left', lineHeight: '1'}}>
-                    <span style={{fontWeight: '800', fontSize: '22px', color: '#0f172a', marginBottom: '4px'}}>The Data Pilot</span>
+                    <span style={{fontWeight: '800', fontSize: '22px', color: 'var(--text-base)', marginBottom: '4px'}}>The Data Pilot</span>
                     <span style={{fontSize: '13px', fontWeight: '600', color: 'var(--brand-500)'}}>Logic-First. AI-Fast.</span>
                 </div>
             </div>
-            <div style={{backgroundColor: 'var(--brand-50)', padding: '30px', borderRadius: '40px', border: '1px solid var(--brand-200)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.05)'}}>
+            <div style={{backgroundColor: 'var(--surface-card)', padding: '30px', borderRadius: '40px', border: '1px solid var(--border-color)', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.05)'}}>
                 <div style={{width: '100px', height: '80px', margin: '0 auto 32px auto', position: 'relative'}}>
                     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--brand-500)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{position: 'absolute', top: 0, left: 0}} className="gear-large">
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
@@ -38,11 +38,11 @@ const InternalEmergencyUI = ({ errorMsg }) => (
                         <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
                     </svg>
                 </div>
-                <h2 style={{fontWeight: '800', fontSize: '24px', margin: '0 0 12px 0', color: '#0f172a'}}>REACT EMERGENCY</h2>
-                <p style={{color: '#64748b', fontWeight: '500', marginBottom: '36px', lineHeight: '1.6', fontSize: '15px'}}>{errorMsg || "Connecting to logic engine..."}</p>
-                <button onClick={() => window.location.reload()} style={{width: '100%', backgroundColor: 'var(--brand-500)', color: 'white', padding: '22px', borderRadius: '16px', fontWeight: '800', fontSize: '15px', textTransform: 'uppercase', letterSpacing: '0.1em', border: 'none', cursor: 'pointer', boxShadow: '0 10px 15px -3px rgba(6, 182, 212, 0.2)'}}>Check Connection</button>
+                <h2 style={{fontWeight: '800', fontSize: '24px', margin: '0 0 12px 0', color: 'var(--text-base)'}}>System is temporarily down</h2>
+                <p style={{color: 'color-mix(in srgb, var(--text-base) 75%, transparent)', fontWeight: '500', marginBottom: '36px', lineHeight: '1.6', fontSize: '15px'}}>{errorMsg || "We are working on it and will be back online shortly."}</p>
+                <button onClick={() => window.location.reload()} style={{width: '100%', backgroundColor: 'var(--brand-500)', color: 'white', padding: '22px', borderRadius: '16px', fontWeight: '800', fontSize: '15px', textTransform: 'uppercase', letterSpacing: '0.1em', border: 'none', cursor: 'pointer', boxShadow: '0 10px 15px -3px color-mix(in srgb, var(--brand-500) 20%, transparent)'}}>Check Connection</button>
             </div>
-            <p style={{marginTop: '18px', fontSize: '12px', fontWeight: '700', color: '#94a3b8', letterSpacing: '0.05em'}}>Commitment to world-class data services and mentorship</p>
+            <p style={{marginTop: '18px', fontSize: '12px', fontWeight: '700', color: 'color-mix(in srgb, var(--text-base) 50%, transparent)', letterSpacing: '0.05em'}}>Commitment to world-class data services and mentorship</p>
         </div>
     </div>
 );
@@ -178,18 +178,21 @@ const CountDownStat = ({ from = 100, to, label }) => {
     }, [isVisible, from, to]);
 
     return (
-        <div ref={ref} className="text-center px-2">
-            <div className="text-xl md:text-3xl font-extrabold text-brand-400 tabular-nums whitespace-nowrap">
-                &lt;{count}
+        <div ref={ref} className="text-center px-1 py-3 overflow-hidden">
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-1 px-0.5">
+                <Icon name="users" size={11} className="theme-accent-text opacity-70 flex-shrink-0 hidden sm:inline-block" />
+                <div className="text-base sm:text-lg md:text-2xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
+                    <span className="text-[10px] sm:text-xs md:text-sm align-top mr-0.5 opacity-60">&lt;</span>{count}
+                </div>
             </div>
-            <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1">
+            <div className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest theme-text-muted leading-tight">
                 {label}
             </div>
         </div>
     );
 };
 
-const CountUpStat = ({ target, suffix = '', label }) => {
+const CountUpStat = ({ target, suffix = '', label, icon = 'trending-up' }) => {
     const [count, setCount] = useState(0);
     const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
     const started = React.useRef(false);
@@ -213,18 +216,22 @@ const CountUpStat = ({ target, suffix = '', label }) => {
     }, [isVisible, target]);
 
     return (
-        <div ref={ref} className="text-center px-2">
-            <div className="text-xl md:text-3xl font-extrabold text-brand-400 tabular-nums whitespace-nowrap">
-                {count}{suffix}
+        <div ref={ref} className="text-center px-1 py-3 overflow-hidden">
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-1 px-0.5">
+                <Icon name={icon} size={11} className="theme-accent-text opacity-70 flex-shrink-0 hidden sm:inline-block" />
+                <div className="text-base sm:text-lg md:text-2xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
+                    {count}{suffix}
+                </div>
             </div>
-            <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1">
+            <div className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1 leading-tight">
                 {label}
             </div>
         </div>
     );
 };
 
-const SHOW_TESTIMONIALS = false;
+const SHOW_TESTIMONIALS = false; // fabricated names/quotes — kept disabled, do not enable
+const SHOW_TRUST_STRIP = true; // honest, no-name credibility strip — real stat only
 
 const DUMMY_TESTIMONIALS = [
     {
@@ -365,7 +372,7 @@ const EligibilityChecker = () => {
     };
 
     const inputClass = "w-full p-3.5 border theme-border theme-card rounded-lg text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none font-medium transition-all theme-text-secondary";
-    const btnClass   = "bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-md flex items-center justify-center gap-2";
+    const btnClass   = "theme-btn-gradient text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-2";
 
     const step1Valid = formData.education && formData.experience && formData.field;
     const step2Valid = formData.tools.length > 0;
@@ -379,40 +386,40 @@ const EligibilityChecker = () => {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-600 via-brand-400 to-brand-500"></div>
                 <div className="flex items-start gap-4 mb-5">
                     <div className="w-11 h-11 bg-brand-500/15 rounded-xl flex items-center justify-center flex-shrink-0 border border-brand-500/20">
-                        <Icon name={data.icon} size={22} className="text-brand-400" />
+                        <Icon name={data.icon} size={22} className="theme-mid-text" />
                     </div>
                     <div>
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-0.5">{data.badge}</span>
+                        <span className="text-[9px] font-bold uppercase tracking-widest theme-mid-text block mb-0.5">{data.badge}</span>
                         <h2 className="text-lg font-extrabold theme-text-primary leading-tight">{data.title}</h2>
                     </div>
                 </div>
                 <div className="mb-3 p-4 rounded-xl bg-brand-500/5 border border-brand-500/15">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">What you bring</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest theme-mid-text block mb-1.5">What you bring</span>
                     <p className="text-[13px] theme-text-secondary leading-relaxed">{data.strength}</p>
                 </div>
                 <div className="mb-3 p-4 rounded-xl theme-card border theme-border">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">Where this program closes your gap</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest theme-mid-text block mb-1.5">Where this program closes your gap</span>
                     <p className="text-[13px] theme-text-secondary leading-relaxed">{data.gap}</p>
                 </div>
                 <div className="mb-3">
                     <span className="text-[9px] font-bold uppercase tracking-widest theme-text-muted block mb-2">Your critical modules</span>
                     <div className="flex flex-wrap gap-1.5">
                         {data.modules.map((m, i) => (
-                            <span key={i} className="text-[10px] font-bold uppercase tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/20 px-2.5 py-1 rounded-full">{m}</span>
+                            <span key={i} className="text-[10px] font-bold uppercase tracking-wider theme-accent-pill px-2.5 py-1 rounded-full">{m}</span>
                         ))}
                     </div>
                 </div>
                 <div className="mb-5 p-4 rounded-xl bg-brand-500/5 border border-brand-500/15">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">Projected outcome</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest theme-mid-text block mb-1.5">Projected outcome</span>
                     <p className="text-[13px] theme-text-secondary leading-relaxed">{data.outcome}</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t theme-border">
                     <button type="button" onClick={reset}
-                        className="px-4 py-2.5 text-xs font-bold theme-text-muted hover:theme-text-primary uppercase tracking-widest border theme-border rounded-lg transition-all flex items-center justify-center gap-2">
+                        className="px-4 py-2.5 text-xs font-bold theme-text-muted hover:text-[var(--text-base)] uppercase tracking-widest border theme-border rounded-lg transition-all flex items-center justify-center gap-2">
                         <Icon name="rotate-ccw" size={13} /> Retake
                     </button>
                     <a href="#about"
-                        className="flex-1 bg-brand-500 text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest hover:bg-brand-600 transition-all shadow-lg text-center">
+                        className="flex-1 theme-btn-gradient text-white px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-widest transition-all shadow-lg text-center">
                         Start Your Journey
                     </a>
                 </div>
@@ -423,13 +430,13 @@ const EligibilityChecker = () => {
     return (
         <div className="theme-card border theme-border-strong rounded-3xl p-5 md:p-7 relative overflow-hidden self-center w-full"
             style={{boxShadow: '0 0 0 1px color-mix(in srgb, var(--brand-500) 35%, transparent), 0 20px 40px -8px rgba(0,0,0,0.15)'}}>
-            <div className="absolute top-0 left-0 w-full h-1 bg-slate-800">
-                <div className="h-full bg-gradient-to-r from-brand-500 to-brand-400 transition-all duration-500"
+            <div className="absolute top-0 left-0 w-full h-1 theme-border-strong" style={{backgroundColor: 'var(--border-strong)'}}>
+                <div className="h-full theme-btn-gradient transition-all duration-500"
                     style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}></div>
             </div>
             <div className="mb-5 mt-1">
                 <div className="flex items-center justify-between mb-1">
-                    <span className="text-brand-500 font-bold uppercase tracking-widest text-[10px]">Step {step} of {TOTAL_STEPS}</span>
+                    <span className="theme-mid-text font-bold uppercase tracking-widest text-[10px]">Step {step} of {TOTAL_STEPS}</span>
                     <span className="text-[10px] theme-text-muted font-medium">{Math.round((step / TOTAL_STEPS) * 100)}% complete</span>
                 </div>
                 <h3 className="text-lg font-bold theme-text-primary">
@@ -485,14 +492,14 @@ const EligibilityChecker = () => {
                 {step === 2 && (
                     <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">Tools You Have Worked With <span className="text-brand-500 normal-case font-medium">(pick all that apply)</span></label>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">Tools You Have Worked With <span className="theme-mid-text normal-case font-medium">(pick all that apply)</span></label>
                             <div className="flex flex-wrap gap-2">
                                 {toolOptions.map(tool => (
                                     <button key={tool} type="button" onClick={(e) => handleToolToggle(e, tool)}
-                                        className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all border ${
+                                        className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all ${
                                             formData.tools.includes(tool)
-                                                ? 'bg-brand-500 border-brand-500 text-white shadow-md shadow-brand-500/20'
-                                                : 'theme-card theme-border theme-text-secondary hover:border-brand-500/40'
+                                                ? 'theme-btn-gradient text-white shadow-md'
+                                                : 'theme-card border theme-border theme-text-secondary hover:border-brand-500/40'
                                         }`}>
                                         {tool}
                                     </button>
@@ -502,7 +509,7 @@ const EligibilityChecker = () => {
                         <div>
                             <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3 flex justify-between">
                                 <span>Honest Self-Rating — Data & Analytics</span>
-                                <span className="text-brand-400 font-black">{formData.analyticalScore} / 10</span>
+                                <span className="theme-mid-text font-black">{formData.analyticalScore} / 10</span>
                             </label>
                             <input type="range" min="1" max="10" value={formData.analyticalScore}
                                 onChange={e => setFormData({...formData, analyticalScore: parseInt(e.target.value)})}
@@ -542,7 +549,7 @@ const EligibilityChecker = () => {
                                         onClick={(e) => { e.preventDefault(); setFormData({...formData, motivation: m}); }}
                                         className={`text-left px-4 py-2.5 rounded-lg text-xs font-bold transition-all border ${
                                             formData.motivation === m
-                                                ? 'bg-brand-500/10 border-brand-500/50 text-brand-400'
+                                                ? 'theme-accent-pill border-[var(--brand-mid)]'
                                                 : 'theme-card theme-border theme-text-secondary hover:border-brand-500/30'
                                         }`}>
                                         {m}
@@ -567,7 +574,7 @@ const EligibilityChecker = () => {
                                         onClick={(e) => { e.preventDefault(); setFormData({...formData, timeline: val}); }}
                                         className={`text-left px-3 py-3 rounded-xl text-xs font-bold transition-all border ${
                                             formData.timeline === val
-                                                ? 'bg-brand-500/10 border-brand-500/50 text-brand-400'
+                                                ? 'theme-accent-pill border-[var(--brand-mid)]'
                                                 : 'theme-card theme-border theme-text-secondary hover:border-brand-500/30'
                                         }`}>
                                         <span className="block font-black text-[11px] mb-0.5">{val}</span>
@@ -582,7 +589,7 @@ const EligibilityChecker = () => {
             <div className="mt-6 flex justify-between pt-5 border-t theme-border">
                 {step > 1
                     ? <button type="button" onClick={(e) => { e.preventDefault(); setStep(step - 1); }}
-                        className="px-4 py-2.5 text-sm font-bold theme-text-muted hover:theme-text-primary transition-colors flex items-center gap-2">
+                        className="px-4 py-2.5 text-sm font-bold theme-text-muted hover:text-[var(--text-base)] transition-colors flex items-center gap-2">
                         <Icon name="arrow-left" size={15} /> Back
                       </button>
                     : <div></div>
@@ -629,7 +636,7 @@ const App = () => {
     useEffect(() => {
         const handleScroll = () => {
             const sections = ['about', 'syllabus', 'tools', 'projects', 'videos',
-                ...(SHOW_TESTIMONIALS ? ['testimonials'] : []),
+                ...(SHOW_TRUST_STRIP ? ['trust'] : []),
                 'eligibility', 'fees'];
             let current = 'about';
             for (const id of sections) {
@@ -651,17 +658,6 @@ const App = () => {
         
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    // Predictive Navigation AI Toast
-    useEffect(() => {
-        let timer;
-        if (activeTab === 'projects') {
-            timer = setTimeout(() => {
-                triggerFeedback('success', "💡 AI Suggestion: Want to build projects like these? Check out our Eligibility Profiler.");
-            }, 4000);
-        }
-        return () => clearTimeout(timer);
-    }, [activeTab]);
 
     const triggerFeedback = (status, message) => {
         setFeedback({ show: true, status, message });
@@ -826,7 +822,7 @@ const App = () => {
     ];
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
-    const sectionClass = "snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b theme-border-strong";
+    const sectionClass = "min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b theme-border-strong";
 
     const handleModuleToggle = (idx) => {
         const isMobile = window.innerWidth < 1024;
@@ -843,13 +839,13 @@ const App = () => {
 
             {feedback.show && (
                 <div className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-4 rounded-2xl shadow-2xl animate-in slide-in-from-bottom-10 fade-in duration-300 ${feedback.status === 'success' ? 'bg-secondary-900 border-l-4 border-brand-500' : 'bg-rose-900 border-l-4 border-rose-400'}`}>
-                    <Icon name={feedback.status === 'success' ? 'check-circle' : 'alert-circle'} size={20} className={feedback.status === 'success' ? 'text-brand-400' : 'text-rose-300'} />
+                    <Icon name={feedback.status === 'success' ? 'check-circle' : 'alert-circle'} size={20} className={feedback.status === 'success' ? 'theme-mid-text' : 'text-rose-300'} />
                     <span className="text-white font-bold text-sm tracking-tight">{feedback.message}</span>
                     <button onClick={() => setFeedback({ ...feedback, show: false })} className="ml-4 text-white/50 hover:text-white"><Icon name="x" size={16} /></button>
                 </div>
             )}
 
-            <div className="fixed top-20 left-0 right-0 w-full z-40 bg-[#0f172a]/95 backdrop-blur-xl border-b border-slate-800/80 shadow-md hidden md:block py-2.5">
+            <div className="fixed top-20 left-0 right-0 w-full z-40 backdrop-blur-xl border-b theme-border-strong shadow-md hidden md:block py-2.5" style={{background: 'var(--nav-bg)'}}>
                 <div className="max-w-5xl mx-auto flex items-center justify-between px-4">
                     {[
                         { label: 'About', id: 'about' },
@@ -868,8 +864,8 @@ const App = () => {
                                 href={`#${tab.id}`}
                                 className={`px-4 py-2 rounded-xl text-[14px] transition-all duration-200 font-bold ${
                                     isActive
-                                        ? 'bg-brand-500/15 text-brand-400 font-extrabold border border-brand-500/40 shadow-sm'
-                                        : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent'
+                                        ? 'theme-accent-pill font-extrabold shadow-sm'
+                                        : 'theme-text-muted hover:text-[var(--text-base)] hover:bg-[var(--bg-alt)] border border-transparent'
                                 }`}
                             >
                                 {tab.label}
@@ -880,52 +876,78 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
-                {/* Dynamic Background Data-Node Animation */}
-                <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-                    <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] animate-pulse"></div>
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-brand-700 rounded-full mix-blend-screen filter blur-[100px] animate-pulse" style={{animationDelay: '2s'}}></div>
+            <header id="about" className="relative min-h-[100svh] flex flex-col justify-start pt-24 md:pt-36 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
+                {/* Dynamic Background Data-Node Animation — soft radial glow, not a solid blurred blob */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-400) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)'}}></div>
+                    <div className="absolute bottom-[-15%] right-[-15%] w-[45vw] h-[45vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)', animationDelay: '2s'}}></div>
                     {/* Rotating grid/node structure */}
-                    <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10" 
+                    <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10"
                          style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center w-full relative z-10">
-                    <div className="space-y-6 md:space-y-8 text-left">
-                        <div className="inline-block bg-brand-500/10 text-brand-400 border border-brand-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-brand-500/20">
+                <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-start w-full relative z-10">
+                    <div className="relative space-y-6 md:space-y-8 text-left">
+                        {/* Animated Data-Analytics Dashboard Motif — background wash filling this column exactly, same margins as the text, clear of the lead-capture form in the other column */}
+                        <div className="absolute inset-0 opacity-[0.14] pointer-events-none hidden md:block -z-10">
+                            <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" className="w-full h-full" fill="none">
+                                <g className="theme-mid-text" stroke="currentColor" strokeWidth="1" opacity="0.25">
+                                    <line x1="10" y1="170" x2="310" y2="170" />
+                                    <line x1="10" y1="10" x2="10" y2="170" />
+                                </g>
+                                <rect className="hero-chart-bar text-brand-500" x="30" y="90" width="24" height="80" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0s'}} />
+                                <rect className="hero-chart-bar theme-mid-text" x="70" y="60" width="24" height="110" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.3s'}} />
+                                <rect className="hero-chart-bar text-brand-500" x="110" y="100" width="24" height="70" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.6s'}} />
+                                <rect className="hero-chart-bar theme-mid-text" x="150" y="40" width="24" height="130" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '0.9s'}} />
+                                <rect className="hero-chart-bar text-brand-500" x="190" y="75" width="24" height="95" rx="4" fill="currentColor" opacity="0.7" style={{animationDelay: '1.2s'}} />
+                                <path className="hero-chart-line theme-mid-text" d="M30 130 L70 95 L110 115 L150 55 L190 85 L230 45" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+                                <circle className="hero-chart-chip text-brand-400" cx="230" cy="45" r="5" fill="currentColor" style={{animationDelay: '0.5s'}} />
+                                <circle className="hero-chart-chip theme-mid-text" cx="150" cy="55" r="4" fill="currentColor" style={{animationDelay: '1.4s'}} />
+                            </svg>
+                        </div>
+                        <div className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
                             {settings?.brand?.tagline || "Logic-First. AI-Fast."}
                         </div>
                         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-[var(--text-base)] tracking-tight transition-all duration-300 hover:scale-[1.01] hover:drop-shadow-lg cursor-default">
                             Certification in <br/>
-                            <span className="text-brand-500">
+                            <span className="theme-gradient-text">
                                 <TypewriterText text={currentProgram.title} />
                             </span>
                         </h1>
                         <p className="text-sm md:text-base text-[var(--text-base)] opacity-70 max-w-2xl leading-relaxed mb-6 font-medium">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
-                        <div className="space-y-3 md:space-y-4 text-sm font-semibold text-[var(--text-base)] opacity-90 text-left">
-                            <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="text-brand-400 flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="video" size={18} className="text-brand-400 flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="text-brand-400 flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
-                            <div className="flex items-center space-x-3"><Icon name="award" size={18} className="text-brand-400 flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
+                        <div className="flex items-center gap-2 lg:gap-4">
+                            <div className="space-y-3 md:space-y-4 text-sm font-semibold text-[var(--text-base)] opacity-90 text-left flex-1">
+                                <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="theme-mid-text flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
+                                <div className="flex items-center space-x-3"><Icon name="video" size={18} className="theme-mid-text flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
+                                <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="theme-mid-text flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
+                                <div className="flex items-center space-x-3"><Icon name="award" size={18} className="theme-mid-text flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
+                            </div>
+                            {/* Portrait — given atmosphere (ambient glow matching the hero's background lighting,
+                                a soft grounding shadow) so it reads as part of the scene, not a pasted-on sticker */}
+                            <div className="hidden lg:block relative flex-shrink-0 w-60 -my-6 -mr-4">
+                                <div className="absolute inset-0 scale-125" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-mid) 30%, transparent) 0%, transparent 70%)', filter: 'blur(28px)'}}></div>
+                                <img src="assets/images/pilot/hero.png" alt="" className="relative w-full h-auto object-contain" style={{filter: 'drop-shadow(0 18px 20px rgba(0,0,0,0.12))'}} onError={e => e.target.style.display='none'} />
+                                <div className="absolute bottom-[6%] left-1/2 -translate-x-1/2 w-[65%] h-5 rounded-full opacity-25" style={{background: 'radial-gradient(ellipse, var(--text-base) 0%, transparent 75%)', filter: 'blur(6px)'}}></div>
+                            </div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
-                                <a href="#syllabus" className="block w-full bg-brand-500 text-white px-8 py-3.5 md:py-4 rounded font-bold hover:bg-brand-600 transition-all text-sm uppercase tracking-widest text-center shadow-lg shadow-brand-500/40 hover:shadow-brand-500/60">
+                                <a href="#syllabus" className="block w-full theme-btn-gradient text-white px-8 py-3.5 md:py-4 rounded font-bold transition-all text-sm uppercase tracking-widest text-center shadow-lg">
                                     Explore Curriculum
                                 </a>
                             </TiltCard>
                             <TiltCard>
-                                <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block w-full bg-[var(--surface-form)] border border-[var(--border-color)] text-[var(--text-base)] font-bold px-8 py-3.5 md:py-4 rounded uppercase tracking-widest text-sm text-center hover:border-brand-500 hover:text-brand-400 transition-all">
+                                <a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="theme-mid-outline-btn block w-full font-bold px-8 py-3.5 md:py-4 rounded uppercase tracking-widest text-sm text-center transition-all">
                                     Download Brochure
                                 </a>
                             </TiltCard>
                         </div>
                     </div>
                     
-                    <div className="flex flex-col gap-4 max-w-md ml-auto w-full">
+                    <div className="flex flex-col gap-4 max-w-md ml-auto w-full lg:mt-[62px]">
                     <div className="bg-[var(--surface-form)] p-8 border border-[var(--border-color)] rounded-3xl w-full shadow-2xl backdrop-blur-md text-left mt-8 lg:mt-0 relative overflow-hidden group">
                         <div className="absolute top-[-50px] right-[-50px] w-32 h-32 bg-brand-500 rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"></div>
                         <div className="absolute bottom-[-50px] left-[-50px] w-32 h-32 bg-brand-300 rounded-full blur-[60px] opacity-10 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"></div>
@@ -940,21 +962,21 @@ const App = () => {
                             
                             <div className="pt-2">
                                 <TiltCard>
-                                    <button type="submit" disabled={isSubmitting} className="w-full block bg-gradient-to-r from-brand-600 to-brand-500 text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest hover:from-brand-500 hover:to-brand-400 transition-all shadow-lg shadow-brand-500/50 active:scale-95 disabled:opacity-50">
+                                    <button type="submit" disabled={isSubmitting} className="w-full block theme-btn-gradient text-white py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 disabled:opacity-50">
                                         {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Apply Now')}
                                     </button>
                                 </TiltCard>
                             </div>
                             
                             <p className="mt-4 text-[10px] text-[var(--text-base)] opacity-40 text-center leading-tight">
-                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-400">Privacy Policy</a>. Data is used only for your professional consultation.
+                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline theme-mid-hover-text">Privacy Policy</a>. Data is used only for your professional consultation.
                             </p>
                         </form>
                     </div>
-                    <div className="grid grid-cols-3 gap-0 py-4 border theme-border-strong rounded-2xl overflow-hidden">
+                    <div className="grid grid-cols-3 divide-x theme-border-strong border theme-border-strong rounded-2xl overflow-hidden theme-card">
                         <CountDownStat from={100} to={30} label="Seats Per Batch" />
-                        <CountUpStat target={16} suffix=" Weeks" label="Intensive Program" />
-                        <CountUpStat target={PROJECT_COUNT} suffix="+" label="Live Projects" />
+                        <CountUpStat target={16} suffix=" Weeks" label="Intensive Program" icon="calendar" />
+                        <CountUpStat target={PROJECT_COUNT} suffix="+" label="Live Projects" icon="layout-grid" />
                     </div>
                     </div>
                 </div>
@@ -970,9 +992,9 @@ const App = () => {
                     <div className="absolute top-1/4 right-0 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
                     <div className="w-full max-w-7xl mx-auto relative z-10">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 border-b border-slate-800/80 pb-4">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 border-b theme-border-strong pb-4">
                             <div>
-                                <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
+                                <window.SectionEyebrow className="text-xs block mb-1">Curriculum Architecture</window.SectionEyebrow>
                                 <h2 className="text-3xl font-extrabold text-left theme-text-primary tracking-tight">Job-Ready Data Analytics Curriculum</h2>
                             </div>
                         </div>
@@ -985,15 +1007,15 @@ const App = () => {
                                         onClick={() => handleModuleToggle(idx)}
                                         className="flex-shrink-0 flex flex-col items-center gap-1.5 group"
                                     >
-                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all ${
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${
                                             idx <= activeModuleIdx
-                                                ? 'bg-brand-500 border-brand-500 text-white shadow-md shadow-brand-500/30'
-                                                : 'bg-transparent border-slate-600 text-slate-500 group-hover:border-brand-500/50'
+                                                ? 'theme-btn-gradient text-white shadow-md'
+                                                : 'bg-transparent border-2 border-slate-400 text-slate-500 group-hover:border-brand-500/50'
                                         }`}>
                                             {idx + 1}
                                         </div>
                                         <span className={`text-[9px] font-bold uppercase tracking-wider transition-colors max-w-[64px] text-center leading-tight ${
-                                            idx === activeModuleIdx ? 'text-brand-400' : 'text-slate-500'
+                                            idx === activeModuleIdx ? 'theme-mid-text' : 'text-slate-500'
                                         }`}>
                                             {mod.shortLabel || mod.title.split(' ').slice(0, 2).join(' ')}
                                         </span>
@@ -1013,7 +1035,7 @@ const App = () => {
                                     <div key={idx} className="flex flex-col">
                                         <button 
                                             onClick={() => handleModuleToggle(idx)} 
-                                            className={`p-6 text-left rounded-xl transition-all border font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'bg-brand-500 border-brand-400 text-white shadow-lg shadow-brand-500/30' : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-brand-500/40 hover:text-white'}`}
+                                            className={`p-6 text-left rounded-xl transition-all font-semibold flex items-center justify-between group ${activeModuleIdx === idx ? 'theme-btn-gradient text-white shadow-lg' : 'theme-card border theme-border theme-text-secondary hover:border-brand-500/40 hover:text-[var(--text-base)]'}`}
                                         >
                                             <span className="text-md font-bold">{idx + 1}. {mod.title}</span>
                                             <Icon name="chevron-right" size={20} className={`transition-all duration-300 transform ${activeModuleIdx === idx ? 'rotate-90 opacity-100' : 'rotate-0 opacity-40 group-hover:opacity-70'}`} />
@@ -1021,23 +1043,23 @@ const App = () => {
     
                                         {/* MOBILE ACCORDION CONTENT */}
                                         <div className={`lg:hidden overflow-hidden transition-all duration-300 ${activeModuleIdx === idx ? 'max-h-[1200px] opacity-100 py-6' : 'max-h-0 opacity-0'}`}>
-                                            <div className="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 space-y-6">
+                                            <div className="theme-bg-alt rounded-2xl p-6 border theme-border space-y-6">
                                                 <div className="flex flex-col space-y-1">
-                                                    <span className="text-brand-400 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
+                                                    <span className="theme-mid-text font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
                                                     <div className="flex items-center gap-2 mt-2">
-                                                        <Icon name="play-circle" size={16} className="text-brand-400" />
+                                                        <Icon name="play-circle" size={16} className="theme-mid-text" />
                                                         <span className="text-[11px] font-bold theme-text-muted uppercase">Live: {mod.lectures} • {mod.hours} Hours</span>
                                                     </div>
                                                 </div>
                                                 <div className="space-y-3">
                                                     {(mod.content || []).map((bullet, i) => (
                                                         <div key={i} className="flex items-start space-x-3 text-left">
-                                                            <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
+                                                            <Icon name="check-circle" size={14} className="theme-mid-text mt-1 flex-shrink-0" />
                                                             <span className="text-sm font-medium theme-text-secondary leading-snug">{bullet}</span>
                                                         </div>
                                                     ))}
                                                 </div>
-                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="w-full flex items-center justify-center space-x-2 border border-brand-500/60 text-brand-400 py-3 rounded-lg text-xs font-bold uppercase tracking-widest cursor-pointer hover:bg-brand-500/10 transition-all"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
+                                                <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="theme-mid-outline-btn w-full flex items-center justify-center space-x-2 py-3 rounded-lg text-xs font-bold uppercase tracking-widest cursor-pointer transition-all"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                             </div>
                                         </div>
                                     </div>
@@ -1045,28 +1067,28 @@ const App = () => {
                             </div>
     
                             {/* DESKTOP DETAIL VIEW */}
-                            <div className="hidden lg:flex lg:w-2/3 bg-slate-900/80 p-10 rounded-2xl border border-slate-800 flex-col shadow-2xl relative overflow-hidden group backdrop-blur-xl">
+                            <div className="hidden lg:flex lg:w-2/3 theme-bg-alt p-10 rounded-2xl border theme-border flex-col shadow-2xl relative overflow-hidden group backdrop-blur-xl">
                                 <div className="absolute top-[-50px] right-[-50px] w-48 h-48 bg-brand-500 rounded-full blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"></div>
 
                                 {currentProgram.syllabus && currentProgram.syllabus[activeModuleIdx] ? (
                                     <>
-                                        <div className="mb-8 pb-6 border-b border-slate-800 flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
+                                        <div className="mb-8 pb-6 border-b theme-border flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
                                             <div className="space-y-1 text-left">
-                                                <span className="text-brand-400 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
+                                                <span className="theme-mid-text font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
                                                 <h3 className="text-2xl font-bold theme-text-primary mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
                                                 <div className="flex items-center gap-2 mt-2">
-                                                    <Icon name="play-circle" size={18} className="text-brand-400" />
+                                                    <Icon name="play-circle" size={18} className="theme-mid-text" />
                                                     <span className="text-xs font-bold theme-text-muted uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                                 </div>
                                             </div>
-                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="block flex items-center space-x-2 border border-brand-500/60 text-brand-400 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start hover:bg-brand-500/10 transition-all cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
+                                            <TiltCard><a href={window.SITE_DATA.media?.downloads?.brochure || "#"} className="theme-mid-outline-btn block flex items-center space-x-2 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest self-start transition-all cursor-pointer"><Icon name="download" size={14} /><span>Download Brochure</span></a></TiltCard>
                                         </div>
                                         
                                         <div className="grid md:grid-cols-2 gap-x-10 gap-y-4 text-left relative z-10">
                                             {(currentProgram.syllabus[activeModuleIdx].content || []).map((bullet, i) => (
                                                 <div key={i} className="flex items-start space-x-3 group/bullet">
-                                                    <Icon name="check-circle" size={14} className="text-brand-400 mt-1 flex-shrink-0" />
-                                                    <span className="text-[14px] font-medium theme-text-secondary group-hover/bullet:text-white transition-colors">{bullet}</span>
+                                                    <Icon name="check-circle" size={14} className="theme-mid-text mt-1 flex-shrink-0" />
+                                                    <span className="text-[14px] font-medium theme-text-secondary group-hover/bullet:text-[var(--text-base)] transition-colors">{bullet}</span>
                                                 </div>
                                             ))}
                                         </div>
@@ -1077,22 +1099,86 @@ const App = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Week-by-week staircase toward Career Launch. Fixed aspect-ratio (no preserveAspectRatio="none")
+                        so circles never get stretched into ellipses regardless of container width. Compact — no
+                        separate header row, the "16-Wk Path" / "Career Launch" labels live inside the chart itself. */}
+                    {(currentProgram.syllabus || []).length > 1 && (() => {
+                        const totalModules = currentProgram.syllabus.length;
+                        const VBW = 800, VBH = 60;
+                        const X0 = 14, X1 = 786, YBASE = 54, YBOTTOM = 46, YTOP = 8;
+                        const ease = (t) => t * t; // each step rises more than the last — accelerating, not linear
+                        const colW = (X1 - X0) / totalModules;
+                        const levelFor = (idx) => YBOTTOM + (YTOP - YBOTTOM) * ease(idx / (totalModules - 1));
+                        const midXFor = (idx) => X0 + idx * colW + colW / 2;
+                        const weekFor = (idx) => Math.round(1 + (idx / (totalModules - 1)) * 15);
+
+                        let stairPath = `M${X0},${levelFor(0)}`;
+                        for (let idx = 0; idx < totalModules; idx++) {
+                            const treadRightX = X0 + (idx + 1) * colW;
+                            stairPath += ` L${treadRightX},${levelFor(idx)}`;
+                            if (idx < totalModules - 1) stairPath += ` L${treadRightX},${levelFor(idx + 1)}`;
+                        }
+                        const areaPath = `${stairPath} L${X1},${YBASE} L${X0},${YBASE} Z`;
+
+                        return (
+                            <div className="w-full max-w-7xl mx-auto mt-8 pt-5 border-t theme-border relative z-10">
+                                <div className="relative w-full" style={{ aspectRatio: `${VBW} / ${VBH}` }}>
+                                    <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" fill="none">
+                                        <defs>
+                                            <linearGradient id="careerLaunchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stopColor="var(--brand-500)" />
+                                                <stop offset="100%" stopColor="var(--brand-accent)" />
+                                            </linearGradient>
+                                        </defs>
+                                        <g stroke="var(--border-strong)" strokeWidth="1.25" opacity="0.6">
+                                            <line x1={X0} y1={YBASE} x2={X1} y2={YBASE} />
+                                            <line x1={X0} y1={YTOP - 4} x2={X0} y2={YBASE} />
+                                        </g>
+                                        <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.12" />
+                                        <path d={stairPath} stroke="url(#careerLaunchGrad)" strokeWidth="1.25" strokeLinejoin="round" strokeLinecap="round" />
+                                        <circle r="4" fill="url(#careerLaunchGrad)">
+                                            <animateMotion path={stairPath} dur="6s" repeatCount="indefinite" calcMode="linear" />
+                                        </circle>
+                                        {(currentProgram.syllabus || []).map((mod, idx) => {
+                                            const isLast = idx === totalModules - 1;
+                                            return <circle key={idx} cx={midXFor(idx)} cy={levelFor(idx)} r={isLast ? 5 : 3} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="1.5" />;
+                                        })}
+                                    </svg>
+                                    <div className="absolute" style={{ left: '50%', top: 0, transform: 'translate(-50%, -18px)' }}>
+                                        <span className="theme-mid-text font-bold uppercase text-[9px] tracking-widest whitespace-nowrap">16-Week Path</span>
+                                    </div>
+                                    <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -26px)' }}>
+                                        <span className="theme-mid-text font-black uppercase text-[10px] tracking-wider whitespace-nowrap">Career Launch</span>
+                                    </div>
+                                    {(currentProgram.syllabus || []).map((mod, idx) => {
+                                        const isEndpoint = idx === 0 || idx === totalModules - 1;
+                                        return (
+                                            <div key={idx} className={`absolute ${isEndpoint ? '' : 'hidden sm:block'}`} style={{ left: `${(midXFor(idx) / VBW) * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
+                                                <span className="text-[8px] sm:text-[9px] font-bold theme-text-muted uppercase tracking-wider whitespace-nowrap">Week {weekFor(idx)}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        );
+                    })()}
                 </section>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
                 <section id="tools" className={`${sectionClass} theme-bg relative overflow-hidden`}>
                     {/* Inner aurora glow — matches hero technique */}
-                    <div className="absolute top-[-15%] left-[-10%] w-[45vw] h-[45vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[120px] opacity-[0.07] animate-pulse pointer-events-none"></div>
-                    <div className="absolute bottom-[-15%] right-[-10%] w-[35vw] h-[35vw] bg-brand-400 rounded-full mix-blend-screen filter blur-[100px] opacity-[0.05] animate-pulse pointer-events-none" style={{animationDelay:'3s'}}></div>
+                    <div className="absolute top-[-15%] left-[-10%] w-[45vw] h-[45vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.07] animate-pulse pointer-events-none"></div>
+                    <div className="absolute bottom-[-15%] right-[-10%] w-[35vw] h-[35vw] bg-brand-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-[0.05] animate-pulse pointer-events-none" style={{animationDelay:'3s'}}></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Industry Stack</span>
+                        <window.SectionEyebrow>Industry Stack</window.SectionEyebrow>
                         <h2 className="text-3xl font-bold mb-16 theme-text-primary tracking-tight">Modern Industry Tool Stack</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {tools.map((tool, i) => (
                             <ScrollReveal key={i} delay={i * 70}>
                             <TiltCard className="group h-full rounded-2xl">
-                                <div className={`${tool.color} p-8 flex flex-col items-center justify-center space-y-4 border theme-border shadow-sm rounded-2xl transition-all duration-300 h-full hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 relative overflow-hidden`}>
+                                <div className={`${tool.color} theme-mid-hover-border p-8 flex flex-col items-center justify-center space-y-4 border theme-border shadow-sm rounded-2xl transition-all duration-300 h-full hover:shadow-lg relative overflow-hidden`}>
                                     <div className="w-16 h-16 flex items-center justify-center relative z-10">
                                         <img
                                             src={tool.img}
@@ -1101,10 +1187,10 @@ const App = () => {
                                             onError={(e) => { e.target.src = 'https://cdn-icons-png.flaticon.com/512/2741/2741270.png'; }}
                                         />
                                     </div>
-                                    <span className="font-bold theme-text-secondary text-sm relative z-10 group-hover:text-brand-400 transition-colors duration-300">{tool.name}</span>
-                                    {/* Hover Glow */}
-                                    <div className="absolute inset-0 bg-gradient-to-tr from-brand-500/0 via-brand-500/10 to-brand-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
-                                    <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-brand-500 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none"></div>
+                                    <span className="font-bold theme-text-secondary text-sm relative z-10 group-hover:text-[var(--brand-mid)] transition-colors duration-300">{tool.name}</span>
+                                    {/* Hover Glow — now blue-to-green, was blue-only */}
+                                    <div className="absolute inset-0 theme-hover-glow opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"></div>
+                                    <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none" style={{background: 'var(--brand-accent)'}}></div>
                                 </div>
                             </TiltCard>
                             </ScrollReveal>
@@ -1117,9 +1203,9 @@ const App = () => {
             {/* PROJECTS SECTION - 2026 Tilt Grid */}
             <ScrollReveal>
                 <section id="projects" className={`${sectionClass} theme-bg-alt relative overflow-hidden`}>
-                    <div className="absolute top-[-10%] right-[-8%] w-[40vw] h-[40vw] bg-brand-500 rounded-full mix-blend-screen filter blur-[130px] opacity-[0.06] animate-pulse pointer-events-none"></div>
+                    <div className="absolute top-[-10%] right-[-8%] w-[40vw] h-[40vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[130px] opacity-[0.06] animate-pulse pointer-events-none"></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Hands-On Work</span>
+                        <window.SectionEyebrow>Hands-On Work</window.SectionEyebrow>
                         <h2 className="text-3xl font-extrabold mb-8 md:mb-12 theme-text-primary tracking-tight flex items-center gap-3">
                             <Icon name="layout-grid" size={32} className="text-brand-500" />
                             {PROJECT_COUNT}+ Real-Time Industry Projects
@@ -1131,13 +1217,15 @@ const App = () => {
                                 <TiltCard key={proj.id} className="col-span-1 group">
                                     <div className="h-full w-full theme-card rounded-2xl border theme-border overflow-hidden relative transition-all duration-300 hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 flex flex-col">
                                         <div className="h-32 md:h-40 theme-card flex items-center justify-center relative overflow-hidden">
-                                            <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700" onError={e => e.target.style.display='none'} />
+                                            <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" onError={e => e.target.style.display='none'} />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
                                             <Icon name="image" size={32} className="opacity-20 absolute" />
                                             {/* Project number badge on image */}
-                                            <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-black/50 backdrop-blur text-brand-400 px-2 py-1 rounded border border-brand-500/30">
+                                            <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-black/50 backdrop-blur theme-mid-text px-2 py-1 rounded border border-[var(--brand-mid)]">
                                                 {String(idx + 1).padStart(2, '0')}
                                             </span>
+                                            {/* MasterStudy-style corner tag */}
+                                            <window.CardBadge className="absolute top-3 right-3">Live Project</window.CardBadge>
                                         </div>
                                         <div className="p-4 md:p-5 relative z-10 theme-card flex-grow flex flex-col gap-2">
                                             <h4 className="font-bold theme-text-primary text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
@@ -1145,7 +1233,7 @@ const App = () => {
                                             {proj.tools && proj.tools.length > 0 && (
                                                 <div className="flex flex-wrap gap-1 mt-auto pt-1">
                                                     {proj.tools.map((t, ti) => (
-                                                        <span key={ti} className="text-[9px] font-bold uppercase tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/20 px-1.5 py-0.5 rounded">{t}</span>
+                                                        <span key={ti} className="text-[9px] font-bold uppercase tracking-wider theme-accent-pill px-1.5 py-0.5 rounded">{t}</span>
                                                     ))}
                                                 </div>
                                             )}
@@ -1161,27 +1249,27 @@ const App = () => {
 
             <ScrollReveal delay={100}>
                 <section id="videos" className={`${sectionClass} theme-bg relative overflow-hidden`}>
-                    <div className="absolute bottom-[-15%] left-[-8%] w-[40vw] h-[40vw] bg-brand-400 rounded-full mix-blend-screen filter blur-[120px] opacity-[0.06] animate-pulse pointer-events-none" style={{animationDelay:'1.5s'}}></div>
+                    <div className="absolute bottom-[-15%] left-[-8%] w-[40vw] h-[40vw] bg-brand-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.06] animate-pulse pointer-events-none" style={{animationDelay:'1.5s'}}></div>
                      <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Watch & Learn</span>
+                        <window.SectionEyebrow>Watch & Learn</window.SectionEyebrow>
                         <h2 className="text-3xl font-bold theme-text-primary tracking-tight mb-12">Program Overview & Demos</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {(media.videos || []).map((vid, i) => (
                                 <TiltCard key={i} className="group">
                                     <a href={vid.url || '#'} target="_blank" rel="noopener noreferrer" className="block aspect-video theme-card rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border theme-border hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/15 transition-all duration-300">
-                                        <img src={vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-85 group-hover:opacity-100" onError={e => e.target.style.display='none'} />
+                                        <img src={vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700 opacity-85 group-hover:opacity-100" onError={e => e.target.style.display='none'} />
                                         {/* Dark overlay for readability */}
                                         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-300"></div>
                                         {/* Pulsing play button ring */}
                                         <div className="relative z-10 flex items-center justify-center">
-                                            <div className="absolute w-14 h-14 rounded-full bg-brand-500/30 animate-ping"></div>
-                                            <div className="w-12 h-12 rounded-full bg-brand-500/90 backdrop-blur flex items-center justify-center shadow-lg shadow-brand-500/50 group-hover:scale-110 transition-transform duration-300">
+                                            <div className="absolute w-14 h-14 rounded-full animate-ping" style={{background: 'color-mix(in srgb, var(--brand-mid) 30%, transparent)'}}></div>
+                                            <div className="w-12 h-12 rounded-full theme-btn-gradient backdrop-blur flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                                                 <Icon name="play" size={20} className="text-white ml-0.5" />
                                             </div>
                                         </div>
                                         {/* Title badge */}
-                                        <div className="absolute bottom-0 left-0 right-0 px-3 py-2.5 bg-gradient-to-t from-black/70 to-transparent">
-                                            <span className="theme-text-primary font-semibold text-[11px] uppercase tracking-wide line-clamp-2 leading-tight">{vid.title}</span>
+                                        <div className="absolute bottom-0 left-0 right-0 px-3 py-2.5 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                                            <span className="text-white font-semibold text-[11px] uppercase tracking-wide line-clamp-2 leading-tight">{vid.title}</span>
                                         </div>
                                     </a>
                                 </TiltCard>
@@ -1191,43 +1279,26 @@ const App = () => {
                 </section>
             </ScrollReveal>
 
-            {SHOW_TESTIMONIALS && (
+            {SHOW_TRUST_STRIP && (
                 <ScrollReveal delay={100}>
-                    <section id="testimonials" className={`${sectionClass} theme-bg-alt`}>
-                        <div className="w-full max-w-7xl mx-auto text-left">
-                            <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Student Outcomes</span>
-                            <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight mb-12">
-                                Real Students. Real Results.
-                            </h2>
-                            <div className="grid md:grid-cols-3 gap-6">
-                                {DUMMY_TESTIMONIALS.map((t, i) => (
-                                    <ScrollReveal key={i} delay={i * 120}>
-                                        <div className="theme-card border theme-border-strong rounded-[2rem] p-8 flex flex-col h-full border-l-4" style={{borderLeftColor: 'var(--brand-500)'}}>
-                                            <div className="flex items-center gap-4 mb-6">
-                                                <div className="w-12 h-12 rounded-full bg-brand-500/20 flex items-center justify-center flex-shrink-0">
-                                                    <span className="text-brand-400 font-extrabold text-sm">{t.initials}</span>
-                                                </div>
-                                                <div>
-                                                    <div className="font-bold theme-text-primary text-sm">{t.name}</div>
-                                                    <div className="text-[11px] text-brand-400 font-bold">{t.role}</div>
-                                                </div>
-                                            </div>
-                                            <p className="theme-text-secondary text-sm leading-relaxed flex-grow mb-5">"{t.quote}"</p>
-                                            <div className="flex items-center gap-2 pt-4 border-t theme-border">
-                                                <Icon name="arrow-right" size={12} className="text-brand-500 flex-shrink-0" />
-                                                <span className="text-[10px] font-bold theme-text-muted uppercase tracking-wider">Before: {t.before}</span>
-                                            </div>
-                                        </div>
-                                    </ScrollReveal>
-                                ))}
+                    <section id="trust" className={`${sectionClass} theme-bg-alt relative overflow-hidden justify-center`} style={{minHeight: 'auto', paddingTop: '3rem', paddingBottom: '3rem'}}>
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[140px] opacity-[0.07] pointer-events-none"></div>
+                        <div className="w-full max-w-4xl mx-auto text-center relative z-10">
+                            <span className="inline-block theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6">Track Record</span>
+                            <div className="flex items-center justify-center gap-4">
+                                <span className="theme-gradient-text text-6xl md:text-7xl font-extrabold tracking-tight">100+</span>
+                                <span className="text-left theme-text-primary text-lg md:text-xl font-bold leading-tight max-w-[220px]">Students Mentored in Live Online Classes</span>
                             </div>
+                            <p className="theme-text-muted text-sm mt-6 max-w-xl mx-auto leading-relaxed">
+                                Before launching The Data Pilot, our mentors personally trained 100+ learners through live online cohorts — the same teaching approach now built into this program.
+                            </p>
                         </div>
                     </section>
                 </ScrollReveal>
             )}
 
             <ScrollReveal delay={100}>
-                <section id="eligibility" className="snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-10 px-6 border-b theme-border-strong scroll-mt-[80px] md:scroll-mt-[132px] theme-bg-alt relative overflow-hidden">
+                <section id="eligibility" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-10 px-6 border-b theme-border-strong scroll-mt-[80px] md:scroll-mt-[132px] theme-bg-alt relative overflow-hidden">
                     <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(ellipse 60% 80% at 10% 55%, var(--brand-500) 0%, transparent 60%)', opacity: 0.07}}></div>
                     <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(ellipse 40% 50% at 90% 40%, var(--brand-700) 0%, transparent 60%)', opacity: 0.04}}></div>
 
@@ -1235,12 +1306,12 @@ const App = () => {
 
                         {/* Left — Criteria */}
                         <div className="space-y-4 w-full self-center">
-                            <div className="inline-flex items-center bg-brand-500/10 text-brand-400 border border-brand-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+                            <div className="inline-flex items-center theme-accent-pill px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
                                 Candidate Profiling
                             </div>
                             <h2 className="text-2xl md:text-3xl font-extrabold theme-text-primary tracking-tight leading-tight">
                                 Who Is This<br />
-                                <span style={{color: 'var(--brand-500)'}}>Program For?</span>
+                                <span className="theme-gradient-text">Program For?</span>
                             </h2>
                             <p className="theme-text-muted font-medium leading-relaxed text-sm max-w-sm">
                                 Built for graduates, working professionals, and career-changers ready to enter data.
@@ -1261,8 +1332,7 @@ const App = () => {
                                                  borderLeftWidth: '3px',
                                                  borderLeftColor: 'var(--brand-500)'
                                              }}>
-                                            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 text-white font-black text-xs"
-                                                 style={{background: 'linear-gradient(135deg, var(--brand-500), var(--brand-600))'}}>
+                                            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5 text-white font-black text-xs theme-btn-gradient">
                                                 {i + 1}
                                             </div>
                                             <span className="text-sm font-semibold theme-text-secondary leading-snug pt-0.5">{text}</span>
@@ -1283,7 +1353,7 @@ const App = () => {
             <ScrollReveal delay={100}>
                 <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-12 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
                     <div className="w-full max-w-5xl mx-auto text-left mb-4">
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-2">Certification Program</span>
+                        <window.SectionEyebrow className="text-xs block mb-2">Certification Program</window.SectionEyebrow>
                         <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight">Program Fees</h2>
                     </div>
                     <div className="w-full max-w-5xl mx-auto theme-card rounded-[3rem] border theme-border overflow-hidden shadow-2xl grid md:grid-cols-2">
@@ -1292,16 +1362,16 @@ const App = () => {
                             <div className="space-y-3">
                                 {(currentProgram.highlights || []).map((t, i) => (
                                     <div key={i} className="flex items-center space-x-4">
-                                        <Icon name="check-circle" size={20} className="text-brand-500 flex-shrink-0" />
+                                        <Icon name="check-circle" size={20} className="theme-mid-text flex-shrink-0" />
                                         <span className="text-md font-bold theme-text-secondary">{t}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
     
-                        <div className="p-6 md:p-10 bg-secondary-900 text-white flex flex-col justify-center space-y-5 text-left">
+                        <div className="p-6 md:p-10 theme-btn-gradient text-white flex flex-col justify-center space-y-5 text-left">
                             <div className="space-y-1">
-                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-400">Program Fee</span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/80">Program Fee</span>
                                 <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{currentProgram.title}</h3>
                             </div>
     
@@ -1313,45 +1383,45 @@ const App = () => {
                                     
                                     {formData.discountApplied && (
                                         <div className="flex flex-wrap items-center gap-2">
-                                            <span className="theme-text-muted line-through text-xs md:text-sm font-medium whitespace-nowrap">
+                                            <span className="text-white/60 line-through text-xs md:text-sm font-medium whitespace-nowrap">
                                                 ₹{currentProgram.price?.toLocaleString()} /-
                                             </span>
-                                            <span className="text-brand-400 text-xs md:text-sm font-bold whitespace-nowrap">
+                                            <span className="text-white text-xs md:text-sm font-bold whitespace-nowrap">
                                                 - ₹{formData.discountAmount?.toLocaleString()} /-
                                             </span>
                                         </div>
                                     )}
                                 </div>
-                                <p className="theme-text-muted text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
+                                <p className="text-white/60 text-[10px] md:text-xs font-medium uppercase tracking-widest mt-1">Inclusive of all taxes</p>
                             </div>
-    
+
                             <div className="space-y-3">
-                                <div className="flex gap-2 p-1 theme-bg/5 border border-white/10 rounded-xl focus-within:border-brand-500 transition-all">
-                                    <input 
-                                        type="text" 
-                                        placeholder="Enter Coupon Code" 
-                                        className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:theme-text-secondary text-brand-400 min-w-0"
+                                <div className="flex gap-2 p-1 bg-white/10 border border-white/10 rounded-xl focus-within:border-white/40 transition-all">
+                                    <input
+                                        type="text"
+                                        placeholder="Enter Coupon Code"
+                                        className="bg-transparent flex-1 px-3 py-2 text-xs md:text-sm outline-none font-bold uppercase tracking-widest placeholder:text-white/50 text-white min-w-0"
                                         value={formData.couponCode}
                                         onChange={(e) => setFormData({...formData, couponCode: e.target.value})}
                                     />
                                     <TiltCard>
                                         <button 
                                             onClick={applyCoupon}
-                                            className="block bg-brand-500 hover:bg-brand-600 text-white px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
+                                            className="block bg-white theme-mid-text hover:brightness-95 px-4 md:px-5 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
                                         >
                                             Apply
                                         </button>
                                     </TiltCard>
                                 </div>
                                 {formData.discountApplied && (
-                                    <p className="text-[10px] text-brand-400 font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
+                                    <p className="text-[10px] text-white font-bold px-2 flex items-center gap-1 uppercase tracking-widest animate-pulse">
                                         <Icon name="tag" size={10} /> Discount Applied Successfully
                                     </p>
                                 )}
                             </div>
     
                             <TiltCard>
-                                <button className="w-full block bg-brand-500 hover:bg-brand-600 text-white py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl shadow-brand-500/40 hover:shadow-brand-500/60 active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
+                                <button className="w-full block bg-white theme-mid-text hover:brightness-95 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
                                     <Icon name="credit-card" size={18} className="flex-shrink-0" />
                                     <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
                                 </button>

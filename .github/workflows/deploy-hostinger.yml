@@ -42,6 +42,8 @@ jobs:
           username: ${{ secrets.HOSTINGER_FTP_USER }}
           password: ${{ secrets.HOSTINGER_FTP_PASS }}
           server-dir: ${{ steps.target.outputs.remote_dir }}
+          state-name: .ftp-state-${{ github.sha }}.json
+          timeout: 60000
           exclude: |
             **/.git*
             **/.git*/**

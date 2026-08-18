@@ -102,6 +102,31 @@ window.Icon = ({ name, size = 20, className = "" }) => {
     return <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
 };
 
+/**
+ * Centralized formatting components — defined once here (core-layout.js,
+ * loaded on every page), so every page's section labels/badges/CTAs stay
+ * visually identical automatically instead of each page re-implementing
+ * its own copy of the same className string.
+ */
+
+// Small uppercase eyebrow label above a section heading (e.g. "About Us", "Digital Products")
+// No default margin/size baked in — callers pass their own spacing via className since
+// this is reused in contexts needing different gaps (mb-1 vs mb-4) and Tailwind's CDN JIT
+// can't reliably resolve which of two conflicting margin classes wins.
+window.SectionEyebrow = ({ children, className = "text-xs block mb-3" }) => (
+    <span className={`theme-mid-text font-bold uppercase tracking-widest ${className}`}>{children}</span>
+);
+
+// Small rounded corner tag on a card (e.g. project/product/service cards)
+window.CardBadge = ({ children, className = "" }) => (
+    <span className={`inline-block theme-btn-gradient text-white text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-full shadow-lg ${className}`}>{children}</span>
+);
+
+// Primary gradient CTA button/link — matches the hero "Explore Curriculum" treatment
+window.GradientButton = ({ as: Tag = 'button', children, className = "", ...props }) => (
+    <Tag className={`theme-btn-gradient text-white font-bold transition-all shadow-lg active:scale-95 ${className}`} {...props}>{children}</Tag>
+);
+
 window.Navbar = ({ activeProgramId, onProgramChange }) => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
@@ -169,58 +194,57 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
         }
     };
 
-    const activeItemClass = "theme-card/60 text-brand-700 border-l-4 border-brand-500";
-    const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:theme-bg";
+    const activeItemClass = "theme-card/60 theme-mid-text border-l-4 border-[var(--brand-mid)]";
+    const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:bg-[var(--bg-base)]";
 
     return (
         <nav className="fixed w-full z-50 theme-bg border-b theme-border h-20 flex items-center shadow-sm">
             <div className="max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left">
                 <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => window.location.href = 'index.html'}>
                     <img src={`assets/images/thedatapilot_logo_${window.LIVE_THEME || 'crimson'}.png`} alt="" className="h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0" onError={e => { e.target.onerror=null; e.target.src='assets/images/thedatapilot_logo.png'; }} />
-                    <span className="font-bold text-[22px] text-brand-400 tracking-tight">{brand}</span>
+                    <span className="font-bold text-[22px] theme-mid-text tracking-tight">{brand}</span>
                 </div>
 
                 <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold theme-text-primary">
-                    <a href="products.html" className={`hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'text-brand-400' : 'theme-text-primary'}`}>Products</a>
-                    <a href="services.html" className={`hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'text-brand-400' : 'theme-text-primary'}`}>Services</a>
+                    <a href="products.html" className={`hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'theme-mid-text' : 'theme-text-primary'}`}>Products</a>
+                    <a href="services.html" className={`hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'theme-mid-text' : 'theme-text-primary'}`}>Services</a>
                     
-                    <div 
+                    <div
                         ref={dropdownRef}
-                        className="relative group py-2" 
-                        onMouseEnter={() => setIsDropdownOpen(true)} 
+                        className="relative group py-2"
                     >
-                        {/* The Trigger Button */}
-                        <button 
+                        {/* The Trigger Button — click to open/close only, no hover-open */}
+                        <button
                             onClick={(e) => {
                                 e.preventDefault();
-                                setIsDropdownOpen(true);
+                                setIsDropdownOpen(prev => !prev);
                             }}
-                            className={`flex items-center space-x-1 hover:text-brand-400 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'text-brand-400' : 'theme-text-primary'}`}
+                            className={`flex items-center space-x-1 hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'theme-mid-text' : 'theme-text-primary'}`}
                         >
                             <span>All Programs</span>
                             <window.Icon 
                                 name="chevron-down" 
                                 size={14} 
-                                className={isDropdownOpen ? 'rotate-180 transition-transform text-brand-400' : 'transition-transform text-slate-300'} 
+                                className={isDropdownOpen ? 'rotate-180 transition-transform theme-mid-text' : 'transition-transform text-slate-300'} 
                             />
                         </button>
                         
                         {isDropdownOpen && programs && (
                             <div className="absolute top-full left-0 w-max min-w-[220px] max-w-xs z-[60] animate-in fade-in duration-200 pt-1">
                                 {/* Seamless edge-to-edge dropdown card */}
-                                <div className="bg-[#0f172a] border border-slate-700/80 shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl">
+                                <div className="border theme-border-strong shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl" style={{backgroundColor: 'var(--bg-base)'}}>
                                     {Object.entries(programs).map(([progId, prog]) => {
                                         const isSelected = progId === activeProgramId;
                                         return (
-                                            <button 
-                                                key={progId} 
-                                                onClick={() => { 
-                                                    if(onProgramChange) onProgramChange(progId); 
-                                                    else window.location.href=`index.html#about`; 
-                                                    setIsDropdownOpen(false); 
-                                                }} 
-                                                className={`w-full text-left px-4 py-3 hover:bg-slate-800/90 font-bold text-xs tracking-tight transition-colors ${
-                                                    isSelected ? 'text-brand-400 font-extrabold bg-slate-800/50' : 'text-slate-200'
+                                            <button
+                                                key={progId}
+                                                onClick={() => {
+                                                    if(onProgramChange) onProgramChange(progId);
+                                                    else window.location.href=`index.html#about`;
+                                                    setIsDropdownOpen(false);
+                                                }}
+                                                className={`w-full text-left px-4 py-3 hover:bg-[var(--bg-alt)] font-bold text-xs tracking-tight transition-colors ${
+                                                    isSelected ? 'theme-mid-text font-extrabold bg-[var(--bg-alt)]' : 'text-[var(--text-base)]'
                                                 }`}
                                             >
                                                 {prog.title}
@@ -232,8 +256,8 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         )}
                     </div>
 
-                    <button onClick={() => setIsModalOpen(true)} className="text-brand-400 hover:text-brand-300 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
-                    <button onClick={() => setIsModalOpen(true)} className="bg-brand-500 text-white px-6 py-2.5 rounded-xl font-bold text-[17px] hover:bg-brand-400 transition-colors shadow-lg shadow-brand-500/20 active:scale-95 transition-transform tracking-tight">Join Program</button>
+                    <button onClick={() => setIsModalOpen(true)} className="theme-mid-text hover:brightness-90 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
+                    <button onClick={() => setIsModalOpen(true)} className="theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
                 </div>
 
                 <button className="lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -248,9 +272,8 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         <a href="services.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${isServicesPage ? activeItemClass : inactiveItemClass}`}>Services</a>
                         
                         <div className="space-y-4">
-                            <div className={`p-4 rounded-xl flex items-center justify-between transition-all ${isLandingPage ? activeItemClass : inactiveItemClass}`}>
+                            <div className={`p-4 rounded-xl transition-all ${isLandingPage ? activeItemClass : inactiveItemClass}`}>
                                 <span className="font-bold">All Programs</span>
-                                <window.Icon name="chevron-down" size={14} className={isLandingPage ? "text-brand-400" : "text-secondary-300"} />
                             </div>
                             
                             <div className="pl-6 space-y-3">
@@ -264,7 +287,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                                 else window.location.href=`index.html#about`; 
                                                 setIsMenuOpen(false); 
                                             }} 
-                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'bg-brand-100/50 text-brand-700' : 'theme-text-muted hover:theme-bg'}`}
+                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'theme-accent-pill' : 'theme-text-muted hover:bg-[var(--bg-base)]'}`}
                                         >
                                             {prog.title}
                                         </button>
@@ -274,8 +297,8 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         </div>
 
                         <div className="pt-4 border-t border-secondary-50 flex flex-col space-y-4">
-                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="text-brand-600 font-bold text-left px-2">Request Callback</button>
-                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="bg-brand-500 text-white py-5 rounded-2xl font-bold shadow-lg shadow-brand-500/20 text-center">Join Program</button>
+                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-mid-text font-bold text-left px-2 py-3">Request Callback</button>
+                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-btn-gradient text-white py-5 rounded-2xl font-bold shadow-lg text-center">Join Program</button>
                         </div>
                     </div>
                 </div>
@@ -284,7 +307,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
             {isModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary-900/80 backdrop-blur-sm">
                     <div className="theme-bg w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-2xl">
-                        <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 theme-text-muted hover:theme-text-primary">
+                        <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 p-3 theme-text-muted hover:text-[var(--text-base)]">
                             <window.Icon name="x" size={24} />
                         </button>
                         <h3 className="font-bold text-2xl mb-2 theme-text-primary tracking-tight">{settings?.ui?.modalTitle}</h3>
@@ -293,7 +316,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                             <input type="text" placeholder="Full Name" required value={modalFormData.full_name} onChange={e => setModalFormData({...modalFormData, full_name: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
                             <input type="email" placeholder="Email Address" required value={modalFormData.email} onChange={e => setModalFormData({...modalFormData, email: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
                             <input type="tel" placeholder="Mobile Number" required maxLength="10" value={modalFormData.phone} onChange={e => setModalFormData({...modalFormData, phone: e.target.value})} className="w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all" />
-                            <button type="submit" disabled={isSubmitting} className="w-full bg-brand-500 text-white py-5 rounded-xl font-bold uppercase tracking-widest shadow-lg hover:bg-brand-600 active:scale-95 transition-all disabled:opacity-50">
+                            <button type="submit" disabled={isSubmitting} className="w-full theme-btn-gradient text-white py-5 rounded-xl font-bold uppercase tracking-widest shadow-lg active:scale-95 transition-all disabled:opacity-50">
                                 {isSubmitting ? 'Processing...' : (settings?.labels?.applyButton || 'Submit Request')}
                             </button>
                         </form>
@@ -342,8 +365,8 @@ window.Footer = () => {
                 {/* Brand & Social */}
                 <div className="space-y-6">
                     <div>
-                        <div className="font-extrabold text-2xl text-brand-400 mb-2">{settings?.brand?.name}</div>
-                        <p className="theme-text-muted text-[13px] font-medium leading-relaxed max-w-xs">{settings?.ui?.footerDescription}</p>
+                        <div className="font-extrabold text-2xl theme-mid-text mb-2">{settings?.brand?.name}</div>
+                        <p className="text-white/60 text-[13px] font-medium leading-relaxed max-w-xs">{settings?.ui?.footerDescription}</p>
                     </div>
                     
                     <div className="flex items-center gap-3">
@@ -373,34 +396,34 @@ window.Footer = () => {
                 </div>
 
                 {/* Legal & Navigation - Unified Size */}
-                <div className="flex flex-col space-y-4 theme-text-muted">
-                    <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-40 mb-2">Legal & Navigation</h5>
+                <div className="flex flex-col space-y-4 text-white/60">
+                    <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2">Legal & Navigation</h5>
                     <div className="flex flex-col space-y-3 font-bold text-sm">
-                        <a href="about-us.html" className="hover:text-brand-400 transition-colors">About Us</a>
-                        <a href="privacy-policy.html" className="hover:text-brand-400 transition-colors">Privacy Policy</a>
-                        <a href="terms-and-conditions.html" className="hover:text-brand-400 transition-colors">Terms & Conditions</a>
-                        <a href="refund-policy.html" className="hover:text-brand-400 transition-colors">Refund Policy</a>
+                        <a href="about-us.html" className="theme-mid-hover-text transition-colors">About Us</a>
+                        <a href="privacy-policy.html" className="theme-mid-hover-text transition-colors">Privacy Policy</a>
+                        <a href="terms-and-conditions.html" className="theme-mid-hover-text transition-colors">Terms & Conditions</a>
+                        <a href="refund-policy.html" className="theme-mid-hover-text transition-colors">Refund Policy</a>
                     </div>
                 </div>
 
                 {/* Contact Section - Slightly smaller for professional hierarchy */}
-                <div className="space-y-4 theme-text-muted">
-                    <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-40 mb-2">Contact</h5>
+                <div className="space-y-4 text-white/60">
+                    <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2">Contact</h5>
                     <div className="space-y-5">
                         <div className="flex items-start gap-2.5">
-                            <window.Icon name="map-pin" size={14} className="text-brand-500 mt-1 flex-shrink-0 opacity-80"/> 
-                            <div className="text-[13px] theme-text-muted font-medium leading-relaxed">
+                            <window.Icon name="map-pin" size={14} className="theme-mid-text mt-1 flex-shrink-0 opacity-80"/>
+                            <div className="text-[13px] text-white/60 font-medium leading-relaxed">
                                 {(settings?.contact?.addressLines || []).map((line, idx) => (
                                     <div key={idx} className={idx === 0 ? "font-bold text-secondary-300" : ""}>{line}</div>
                                 ))}
                             </div>
                         </div>
                         <div className="text-[13px] font-bold flex items-center gap-2.5">
-                            <window.Icon name="mail" size={14} className="text-brand-500 opacity-80"/> 
-                            <span className="theme-text-muted">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 hover:text-brand-400 transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
+                            <window.Icon name="mail" size={14} className="theme-mid-text opacity-80"/>
+                            <span className="text-white/60">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 theme-mid-hover-text transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
                         </div>
                     </div>
-                    <div className="pt-8 text-[10px] font-black theme-text-secondary tracking-[0.4em] uppercase select-none">Logic-First. AI-Fast.</div>
+                    <div className="pt-8 text-[10px] font-black text-white/50 tracking-[0.4em] uppercase select-none">Logic-First. AI-Fast.</div>
                 </div>
             </div>
         </footer>
@@ -496,6 +519,9 @@ window.TypewriterText = ({ text }) => {
 // ============================================================
 (function initDotGridBackground() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Mouse-proximity effect never activates on touch devices (no mousemove) — skip the
+    // continuous per-frame rAF loop and grid canvas entirely rather than let it run inert.
+    if (window.matchMedia('(hover: none)').matches) return;
 
     function setup() {
         const canvas = document.createElement('canvas');
@@ -522,14 +548,20 @@ window.TypewriterText = ({ text }) => {
         let stretchVel = 0.0;
         let bubbleAngle = 0;
 
-        function getBrandRgb() {
-            const raw = getComputedStyle(document.documentElement)
-                .getPropertyValue('--brand-500').trim();
-            const hex = raw.startsWith('#') ? raw : '#84cc16';
+        function hexToRgbObj(hex, fallback) {
+            const h = (hex && hex.startsWith('#')) ? hex : fallback;
             return {
-                r: parseInt(hex.slice(1, 3), 16),
-                g: parseInt(hex.slice(3, 5), 16),
-                b: parseInt(hex.slice(5, 7), 16)
+                r: parseInt(h.slice(1, 3), 16),
+                g: parseInt(h.slice(3, 5), 16),
+                b: parseInt(h.slice(5, 7), 16)
+            };
+        }
+
+        function getBrandRgbPair() {
+            const cs = getComputedStyle(document.documentElement);
+            return {
+                from: hexToRgbObj(cs.getPropertyValue('--brand-500').trim(), '#84cc16'),
+                to: hexToRgbObj(cs.getPropertyValue('--brand-accent').trim(), '#84cc16')
             };
         }
 
@@ -552,7 +584,7 @@ window.TypewriterText = ({ text }) => {
             }
         }
 
-        let rgb = getBrandRgb();
+        let rgbPair = getBrandRgbPair();
 
         function tick() {
             // Deactivate after STILL_MS of no movement
@@ -575,7 +607,7 @@ window.TypewriterText = ({ text }) => {
             fadeIn += (fadeDest - fadeIn) * (cursorActive ? 0.045 : 0.028);
 
             ctx.clearRect(0, 0, W, H);
-            rgb = getBrandRgb();
+            rgbPair = getBrandRgbPair();
 
             if (fadeIn < 0.004) { requestAnimationFrame(tick); return; }
 
@@ -619,9 +651,15 @@ window.TypewriterText = ({ text }) => {
                 const alpha = (globalBase + proximity * fadeIn * 0.42) * frontFade;
 
                 if (alpha < 0.004) continue;
+                // Blend each dot's color across the grid left->right, blue->green,
+                // so the hover effect isn't uniformly one color.
+                const t = Math.max(0, Math.min(1, d.x / W));
+                const dr = Math.round(rgbPair.from.r + (rgbPair.to.r - rgbPair.from.r) * t);
+                const dg = Math.round(rgbPair.from.g + (rgbPair.to.g - rgbPair.from.g) * t);
+                const db = Math.round(rgbPair.from.b + (rgbPair.to.b - rgbPair.from.b) * t);
                 ctx.beginPath();
                 ctx.arc(d.x, d.y, r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${alpha})`;
+                ctx.fillStyle = `rgba(${dr},${dg},${db},${alpha})`;
                 ctx.fill();
             }
 
