@@ -988,7 +988,7 @@ const App = () => {
                     <div className="w-full max-w-7xl mx-auto relative z-10">
                         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 border-b theme-border-strong pb-4">
                             <div>
-                                <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-1">Curriculum Architecture</span>
+                                <window.SectionEyebrow className="text-xs block mb-1">Curriculum Architecture</window.SectionEyebrow>
                                 <h2 className="text-3xl font-extrabold text-left theme-text-primary tracking-tight">Job-Ready Data Analytics Curriculum</h2>
                             </div>
                         </div>
@@ -1157,7 +1157,7 @@ const App = () => {
                     <div className="absolute top-[-15%] left-[-10%] w-[45vw] h-[45vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.07] animate-pulse pointer-events-none"></div>
                     <div className="absolute bottom-[-15%] right-[-10%] w-[35vw] h-[35vw] bg-brand-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-[0.05] animate-pulse pointer-events-none" style={{animationDelay:'3s'}}></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Industry Stack</span>
+                        <window.SectionEyebrow>Industry Stack</window.SectionEyebrow>
                         <h2 className="text-3xl font-bold mb-16 theme-text-primary tracking-tight">Modern Industry Tool Stack</h2>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {tools.map((tool, i) => (
@@ -1190,7 +1190,7 @@ const App = () => {
                 <section id="projects" className={`${sectionClass} theme-bg-alt relative overflow-hidden`}>
                     <div className="absolute top-[-10%] right-[-8%] w-[40vw] h-[40vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[130px] opacity-[0.06] animate-pulse pointer-events-none"></div>
                     <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Hands-On Work</span>
+                        <window.SectionEyebrow>Hands-On Work</window.SectionEyebrow>
                         <h2 className="text-3xl font-extrabold mb-8 md:mb-12 theme-text-primary tracking-tight flex items-center gap-3">
                             <Icon name="layout-grid" size={32} className="text-brand-500" />
                             {PROJECT_COUNT}+ Real-Time Industry Projects
@@ -1210,9 +1210,7 @@ const App = () => {
                                                 {String(idx + 1).padStart(2, '0')}
                                             </span>
                                             {/* MasterStudy-style corner tag */}
-                                            <span className="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-widest theme-btn-gradient text-white px-2 py-1 rounded-full shadow-lg">
-                                                Live Project
-                                            </span>
+                                            <window.CardBadge className="absolute top-3 right-3">Live Project</window.CardBadge>
                                         </div>
                                         <div className="p-4 md:p-5 relative z-10 theme-card flex-grow flex flex-col gap-2">
                                             <h4 className="font-bold theme-text-primary text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
@@ -1238,7 +1236,7 @@ const App = () => {
                 <section id="videos" className={`${sectionClass} theme-bg relative overflow-hidden`}>
                     <div className="absolute bottom-[-15%] left-[-8%] w-[40vw] h-[40vw] bg-brand-400 rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.06] animate-pulse pointer-events-none" style={{animationDelay:'1.5s'}}></div>
                      <div className="w-full max-w-7xl mx-auto text-left relative z-10">
-                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Watch & Learn</span>
+                        <window.SectionEyebrow>Watch & Learn</window.SectionEyebrow>
                         <h2 className="text-3xl font-bold theme-text-primary tracking-tight mb-12">Program Overview & Demos</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                             {(media.videos || []).map((vid, i) => (
@@ -1340,7 +1338,7 @@ const App = () => {
             <ScrollReveal delay={100}>
                 <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-12 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
                     <div className="w-full max-w-5xl mx-auto text-left mb-4">
-                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-2">Certification Program</span>
+                        <window.SectionEyebrow className="text-xs block mb-2">Certification Program</window.SectionEyebrow>
                         <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight">Program Fees</h2>
                     </div>
                     <div className="w-full max-w-5xl mx-auto theme-card rounded-[3rem] border theme-border overflow-hidden shadow-2xl grid md:grid-cols-2">

@@ -93,7 +93,7 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-left">
                     <window.ScrollReveal>
-                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Legal</span>
+                        <window.SectionEyebrow>Legal</window.SectionEyebrow>
                         <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
                         <p className="theme-text-muted font-medium text-sm">{safeHeader.subtitle}</p>
                     </window.ScrollReveal>

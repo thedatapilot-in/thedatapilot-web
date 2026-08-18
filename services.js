@@ -56,7 +56,7 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-center">
                     <window.ScrollReveal>
-                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Expert Services</span>
+                        <window.SectionEyebrow>Expert Services</window.SectionEyebrow>
                         <h1 className="text-4xl md:text-5xl font-extrabold theme-text-primary mb-4">Built for Corporate Teams</h1>
                         <p className="text-lg theme-text-muted font-medium leading-relaxed max-w-2xl mx-auto">
                             Professional consulting and training designed for high-level strategy and impact.
@@ -69,15 +69,13 @@ const App = () => {
                     {(services.items || []).map((service, idx) => (
                         <window.ScrollReveal key={service.id} delay={idx * 80}>
                             <window.TiltCard className="h-full">
-                                <div className="theme-card border theme-border-strong rounded-[2rem] p-8 flex flex-col h-full hover:shadow-2xl transition-all duration-300">
-                                    <div className="inline-block theme-btn-gradient text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest w-fit mb-6">
-                                        {service.category}
-                                    </div>
-                                    <h3 className="text-xl font-bold theme-text-primary mb-4">{service.title}</h3>
+                                <div className="theme-card border theme-border-strong rounded-[2rem] p-8 flex flex-col h-full hover:shadow-2xl transition-all duration-300 relative overflow-hidden">
+                                    <window.CardBadge className="absolute top-6 right-6">{service.category}</window.CardBadge>
+                                    <h3 className="text-xl font-bold theme-text-primary mb-4 pr-16">{service.title}</h3>
                                     <p className="theme-text-muted font-medium leading-relaxed mb-8 flex-grow">{service.description}</p>
-                                    <button className="w-full theme-btn-gradient text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest transition-colors mt-auto shadow-lg">
+                                    <window.GradientButton className="w-full py-4 rounded-xl text-xs uppercase tracking-widest mt-auto">
                                         {service.cta}
-                                    </button>
+                                    </window.GradientButton>
                                 </div>
                             </window.TiltCard>
                         </window.ScrollReveal>

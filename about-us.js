@@ -99,7 +99,7 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-left">
                     <window.ScrollReveal>
-                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">About Us</span>
+                        <window.SectionEyebrow>About Us</window.SectionEyebrow>
                         <h1 className="text-4xl md:text-5xl font-extrabold theme-text-primary mb-3">{safeHeader.title}</h1>
                         <p className="theme-text-muted font-medium text-base">{safeHeader.subtitle}</p>
                     </window.ScrollReveal>
@@ -158,11 +158,11 @@ const App = () => {
                         {/* Call to Action Block */}
                         <window.ScrollReveal>
                             <div className="theme-card border theme-border-strong p-10 rounded-[2.5rem] mt-16 shadow-xl">
-                                <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">{safeCta.title}</span>
+                                <window.SectionEyebrow>{safeCta.title}</window.SectionEyebrow>
                                 <p className="theme-text-primary font-semibold text-xl mb-6">{safeCta.description}</p>
-                                <a href={safeCta.buttonLink} className="inline-block theme-btn-gradient text-white px-10 py-4 rounded-xl font-bold transition-all shadow-lg active:scale-95">
+                                <window.GradientButton as="a" href={safeCta.buttonLink} className="inline-block px-10 py-4 rounded-xl">
                                     {safeCta.buttonText}
-                                </a>
+                                </window.GradientButton>
                             </div>
                         </window.ScrollReveal>
                     </div>

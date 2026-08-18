@@ -102,6 +102,31 @@ window.Icon = ({ name, size = 20, className = "" }) => {
     return <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
 };
 
+/**
+ * Centralized formatting components — defined once here (core-layout.js,
+ * loaded on every page), so every page's section labels/badges/CTAs stay
+ * visually identical automatically instead of each page re-implementing
+ * its own copy of the same className string.
+ */
+
+// Small uppercase eyebrow label above a section heading (e.g. "About Us", "Digital Products")
+// No default margin/size baked in — callers pass their own spacing via className since
+// this is reused in contexts needing different gaps (mb-1 vs mb-4) and Tailwind's CDN JIT
+// can't reliably resolve which of two conflicting margin classes wins.
+window.SectionEyebrow = ({ children, className = "text-xs block mb-3" }) => (
+    <span className={`theme-mid-text font-bold uppercase tracking-widest ${className}`}>{children}</span>
+);
+
+// Small rounded corner tag on a card (e.g. project/product/service cards)
+window.CardBadge = ({ children, className = "" }) => (
+    <span className={`inline-block theme-btn-gradient text-white text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-full shadow-lg ${className}`}>{children}</span>
+);
+
+// Primary gradient CTA button/link — matches the hero "Explore Curriculum" treatment
+window.GradientButton = ({ as: Tag = 'button', children, className = "", ...props }) => (
+    <Tag className={`theme-btn-gradient text-white font-bold transition-all shadow-lg active:scale-95 ${className}`} {...props}>{children}</Tag>
+);
+
 window.Navbar = ({ activeProgramId, onProgramChange }) => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
