@@ -925,7 +925,7 @@ const App = () => {
                                 <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="theme-mid-text flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
                                 <div className="flex items-center space-x-3"><Icon name="award" size={18} className="theme-mid-text flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
                             </div>
-                            <img src="assets/images/pilot/hero.jpg" alt="" className="hidden lg:block w-32 h-32 rounded-2xl object-cover object-top border-2 theme-border-strong shadow-lg flex-shrink-0" onError={e => e.target.style.display='none'} />
+                            <img src="assets/images/pilot/hero.png" alt="" className="hidden lg:block w-36 h-auto object-contain flex-shrink-0" onError={e => e.target.style.display='none'} />
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
