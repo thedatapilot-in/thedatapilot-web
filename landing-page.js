@@ -179,13 +179,13 @@ const CountDownStat = ({ from = 100, to, label }) => {
 
     return (
         <div ref={ref} className="text-center px-1 py-3 overflow-hidden">
-            <div className="flex items-center justify-center gap-1 mb-1 px-1">
-                <Icon name="users" size={13} className="theme-accent-text opacity-70 flex-shrink-0" />
-                <div className="text-lg md:text-2xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
-                    <span className="text-xs md:text-sm align-top mr-0.5 opacity-60">&lt;</span>{count}
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-1 px-0.5">
+                <Icon name="users" size={11} className="theme-accent-text opacity-70 flex-shrink-0 hidden sm:inline-block" />
+                <div className="text-base sm:text-lg md:text-2xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
+                    <span className="text-[10px] sm:text-xs md:text-sm align-top mr-0.5 opacity-60">&lt;</span>{count}
                 </div>
             </div>
-            <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted">
+            <div className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest theme-text-muted leading-tight">
                 {label}
             </div>
         </div>
@@ -217,13 +217,13 @@ const CountUpStat = ({ target, suffix = '', label, icon = 'trending-up' }) => {
 
     return (
         <div ref={ref} className="text-center px-1 py-3 overflow-hidden">
-            <div className="flex items-center justify-center gap-1 mb-1 px-1">
-                <Icon name={icon} size={13} className="theme-accent-text opacity-70 flex-shrink-0" />
-                <div className="text-lg md:text-2xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
+            <div className="flex items-center justify-center gap-0.5 sm:gap-1 mb-1 px-0.5">
+                <Icon name={icon} size={11} className="theme-accent-text opacity-70 flex-shrink-0 hidden sm:inline-block" />
+                <div className="text-base sm:text-lg md:text-2xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
                     {count}{suffix}
                 </div>
             </div>
-            <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1">
+            <div className="text-[8px] sm:text-[10px] font-bold uppercase tracking-widest theme-text-muted mt-1 leading-tight">
                 {label}
             </div>
         </div>
@@ -1151,11 +1151,14 @@ const App = () => {
                                     <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -26px)' }}>
                                         <span className="theme-mid-text font-black uppercase text-[10px] tracking-wider whitespace-nowrap">Career Launch</span>
                                     </div>
-                                    {(currentProgram.syllabus || []).map((mod, idx) => (
-                                        <div key={idx} className="absolute" style={{ left: `${(midXFor(idx) / VBW) * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
-                                            <span className="text-[9px] font-bold theme-text-muted uppercase tracking-wider whitespace-nowrap">Week {weekFor(idx)}</span>
-                                        </div>
-                                    ))}
+                                    {(currentProgram.syllabus || []).map((mod, idx) => {
+                                        const isEndpoint = idx === 0 || idx === totalModules - 1;
+                                        return (
+                                            <div key={idx} className={`absolute ${isEndpoint ? '' : 'hidden sm:block'}`} style={{ left: `${(midXFor(idx) / VBW) * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
+                                                <span className="text-[8px] sm:text-[9px] font-bold theme-text-muted uppercase tracking-wider whitespace-nowrap">Week {weekFor(idx)}</span>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         );
@@ -1404,7 +1407,7 @@ const App = () => {
                                     <TiltCard>
                                         <button 
                                             onClick={applyCoupon}
-                                            className="block bg-white theme-mid-text hover:brightness-95 px-4 md:px-5 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
+                                            className="block bg-white theme-mid-text hover:brightness-95 px-4 md:px-5 py-3 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95 flex-shrink-0"
                                         >
                                             Apply
                                         </button>

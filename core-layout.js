@@ -272,9 +272,8 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         <a href="services.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${isServicesPage ? activeItemClass : inactiveItemClass}`}>Services</a>
                         
                         <div className="space-y-4">
-                            <div className={`p-4 rounded-xl flex items-center justify-between transition-all ${isLandingPage ? activeItemClass : inactiveItemClass}`}>
+                            <div className={`p-4 rounded-xl transition-all ${isLandingPage ? activeItemClass : inactiveItemClass}`}>
                                 <span className="font-bold">All Programs</span>
-                                <window.Icon name="chevron-down" size={14} className={isLandingPage ? "theme-mid-text" : "text-secondary-300"} />
                             </div>
                             
                             <div className="pl-6 space-y-3">
@@ -298,7 +297,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         </div>
 
                         <div className="pt-4 border-t border-secondary-50 flex flex-col space-y-4">
-                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-mid-text font-bold text-left px-2">Request Callback</button>
+                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-mid-text font-bold text-left px-2 py-3">Request Callback</button>
                             <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-btn-gradient text-white py-5 rounded-2xl font-bold shadow-lg text-center">Join Program</button>
                         </div>
                     </div>
@@ -308,7 +307,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
             {isModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary-900/80 backdrop-blur-sm">
                     <div className="theme-bg w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-2xl">
-                        <button onClick={() => setIsModalOpen(false)} className="absolute top-8 right-8 theme-text-muted hover:text-[var(--text-base)]">
+                        <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4 p-3 theme-text-muted hover:text-[var(--text-base)]">
                             <window.Icon name="x" size={24} />
                         </button>
                         <h3 className="font-bold text-2xl mb-2 theme-text-primary tracking-tight">{settings?.ui?.modalTitle}</h3>
@@ -520,6 +519,9 @@ window.TypewriterText = ({ text }) => {
 // ============================================================
 (function initDotGridBackground() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Mouse-proximity effect never activates on touch devices (no mousemove) — skip the
+    // continuous per-frame rAF loop and grid canvas entirely rather than let it run inert.
+    if (window.matchMedia('(hover: none)').matches) return;
 
     function setup() {
         const canvas = document.createElement('canvas');
