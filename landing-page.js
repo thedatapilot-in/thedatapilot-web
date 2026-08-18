@@ -918,14 +918,20 @@ const App = () => {
                         <p className="text-sm md:text-base text-[var(--text-base)] opacity-70 max-w-2xl leading-relaxed mb-6 font-medium">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
-                        <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-2 lg:gap-4">
                             <div className="space-y-3 md:space-y-4 text-sm font-semibold text-[var(--text-base)] opacity-90 text-left flex-1">
                                 <div className="flex items-center space-x-3"><Icon name="calendar" size={18} className="theme-mid-text flex-shrink-0" /><span>4-Month Intensive Zero-to-Job Career Program</span></div>
                                 <div className="flex items-center space-x-3"><Icon name="video" size={18} className="theme-mid-text flex-shrink-0" /><span>100% Live Instructor-Led Virtual Classrooms</span></div>
                                 <div className="flex items-center space-x-3"><Icon name="check-circle" size={18} className="theme-mid-text flex-shrink-0" /><span>Placement Assistance for All Eligible Candidates</span></div>
                                 <div className="flex items-center space-x-3"><Icon name="award" size={18} className="theme-mid-text flex-shrink-0" /><span>{PROJECT_COUNT}+ Industry-Grade Projects and Case Studies</span></div>
                             </div>
-                            <img src="assets/images/pilot/hero.png" alt="" className="hidden lg:block w-36 h-auto object-contain flex-shrink-0" onError={e => e.target.style.display='none'} />
+                            {/* Portrait — given atmosphere (ambient glow matching the hero's background lighting,
+                                a soft grounding shadow) so it reads as part of the scene, not a pasted-on sticker */}
+                            <div className="hidden lg:block relative flex-shrink-0 w-60 -my-6 -mr-4">
+                                <div className="absolute inset-0 scale-125" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-mid) 30%, transparent) 0%, transparent 70%)', filter: 'blur(28px)'}}></div>
+                                <img src="assets/images/pilot/hero.png" alt="" className="relative w-full h-auto object-contain" style={{filter: 'drop-shadow(0 18px 20px rgba(0,0,0,0.12))'}} onError={e => e.target.style.display='none'} />
+                                <div className="absolute bottom-[6%] left-1/2 -translate-x-1/2 w-[65%] h-5 rounded-full opacity-25" style={{background: 'radial-gradient(ellipse, var(--text-base) 0%, transparent 75%)', filter: 'blur(6px)'}}></div>
+                            </div>
                         </div>
                         <div className="pt-2 md:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
                             <TiltCard>
