@@ -209,16 +209,15 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     <a href="products.html" className={`hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'theme-mid-text' : 'theme-text-primary'}`}>Products</a>
                     <a href="services.html" className={`hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'theme-mid-text' : 'theme-text-primary'}`}>Services</a>
                     
-                    <div 
+                    <div
                         ref={dropdownRef}
-                        className="relative group py-2" 
-                        onMouseEnter={() => setIsDropdownOpen(true)} 
+                        className="relative group py-2"
                     >
-                        {/* The Trigger Button */}
-                        <button 
+                        {/* The Trigger Button — click to open/close only, no hover-open */}
+                        <button
                             onClick={(e) => {
                                 e.preventDefault();
-                                setIsDropdownOpen(true);
+                                setIsDropdownOpen(prev => !prev);
                             }}
                             className={`flex items-center space-x-1 hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'theme-mid-text' : 'theme-text-primary'}`}
                         >
