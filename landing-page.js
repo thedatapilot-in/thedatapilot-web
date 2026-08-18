@@ -822,7 +822,7 @@ const App = () => {
     ];
 
     // CENTRALIZED RULE FOR PERFECT ALIGNMENT: 
-    const sectionClass = "snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b theme-border-strong";
+    const sectionClass = "min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center scroll-mt-[80px] md:scroll-mt-[132px] py-16 md:py-20 px-6 border-b theme-border-strong";
 
     const handleModuleToggle = (idx) => {
         const isMobile = window.innerWidth < 1024;
@@ -876,7 +876,7 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-start pt-24 md:pt-36 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
+            <header id="about" className="relative min-h-[100svh] flex flex-col justify-start pt-24 md:pt-36 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation — soft radial glow, not a solid blurred blob */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
                     <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-400) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)'}}></div>
@@ -1289,7 +1289,7 @@ const App = () => {
             )}
 
             <ScrollReveal delay={100}>
-                <section id="eligibility" className="snap-start min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-10 px-6 border-b theme-border-strong scroll-mt-[80px] md:scroll-mt-[132px] theme-bg-alt relative overflow-hidden">
+                <section id="eligibility" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-10 px-6 border-b theme-border-strong scroll-mt-[80px] md:scroll-mt-[132px] theme-bg-alt relative overflow-hidden">
                     <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(ellipse 60% 80% at 10% 55%, var(--brand-500) 0%, transparent 60%)', opacity: 0.07}}></div>
                     <div className="absolute inset-0 pointer-events-none" style={{background: 'radial-gradient(ellipse 40% 50% at 90% 40%, var(--brand-700) 0%, transparent 60%)', opacity: 0.04}}></div>
 
