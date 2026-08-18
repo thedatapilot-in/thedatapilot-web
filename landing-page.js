@@ -386,31 +386,31 @@ const EligibilityChecker = () => {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-brand-600 via-brand-400 to-brand-500"></div>
                 <div className="flex items-start gap-4 mb-5">
                     <div className="w-11 h-11 bg-brand-500/15 rounded-xl flex items-center justify-center flex-shrink-0 border border-brand-500/20">
-                        <Icon name={data.icon} size={22} className="text-brand-400" />
+                        <Icon name={data.icon} size={22} className="theme-mid-text" />
                     </div>
                     <div>
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-0.5">{data.badge}</span>
+                        <span className="text-[9px] font-bold uppercase tracking-widest theme-mid-text block mb-0.5">{data.badge}</span>
                         <h2 className="text-lg font-extrabold theme-text-primary leading-tight">{data.title}</h2>
                     </div>
                 </div>
                 <div className="mb-3 p-4 rounded-xl bg-brand-500/5 border border-brand-500/15">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">What you bring</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest theme-mid-text block mb-1.5">What you bring</span>
                     <p className="text-[13px] theme-text-secondary leading-relaxed">{data.strength}</p>
                 </div>
                 <div className="mb-3 p-4 rounded-xl theme-card border theme-border">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">Where this program closes your gap</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest theme-mid-text block mb-1.5">Where this program closes your gap</span>
                     <p className="text-[13px] theme-text-secondary leading-relaxed">{data.gap}</p>
                 </div>
                 <div className="mb-3">
                     <span className="text-[9px] font-bold uppercase tracking-widest theme-text-muted block mb-2">Your critical modules</span>
                     <div className="flex flex-wrap gap-1.5">
                         {data.modules.map((m, i) => (
-                            <span key={i} className="text-[10px] font-bold uppercase tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/20 px-2.5 py-1 rounded-full">{m}</span>
+                            <span key={i} className="text-[10px] font-bold uppercase tracking-wider theme-accent-pill px-2.5 py-1 rounded-full">{m}</span>
                         ))}
                     </div>
                 </div>
                 <div className="mb-5 p-4 rounded-xl bg-brand-500/5 border border-brand-500/15">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-brand-400 block mb-1.5">Projected outcome</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest theme-mid-text block mb-1.5">Projected outcome</span>
                     <p className="text-[13px] theme-text-secondary leading-relaxed">{data.outcome}</p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t theme-border">
@@ -492,7 +492,7 @@ const EligibilityChecker = () => {
                 {step === 2 && (
                     <div className="space-y-6 animate-in slide-in-from-right-8 duration-300">
                         <div>
-                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">Tools You Have Worked With <span className="text-brand-500 normal-case font-medium">(pick all that apply)</span></label>
+                            <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3">Tools You Have Worked With <span className="theme-mid-text normal-case font-medium">(pick all that apply)</span></label>
                             <div className="flex flex-wrap gap-2">
                                 {toolOptions.map(tool => (
                                     <button key={tool} type="button" onClick={(e) => handleToolToggle(e, tool)}
@@ -509,7 +509,7 @@ const EligibilityChecker = () => {
                         <div>
                             <label className="block text-xs font-bold theme-text-muted uppercase tracking-wider mb-3 flex justify-between">
                                 <span>Honest Self-Rating — Data & Analytics</span>
-                                <span className="text-brand-400 font-black">{formData.analyticalScore} / 10</span>
+                                <span className="theme-mid-text font-black">{formData.analyticalScore} / 10</span>
                             </label>
                             <input type="range" min="1" max="10" value={formData.analyticalScore}
                                 onChange={e => setFormData({...formData, analyticalScore: parseInt(e.target.value)})}
@@ -549,7 +549,7 @@ const EligibilityChecker = () => {
                                         onClick={(e) => { e.preventDefault(); setFormData({...formData, motivation: m}); }}
                                         className={`text-left px-4 py-2.5 rounded-lg text-xs font-bold transition-all border ${
                                             formData.motivation === m
-                                                ? 'bg-brand-500/10 border-brand-500/50 text-brand-400'
+                                                ? 'theme-accent-pill border-[var(--brand-mid)]'
                                                 : 'theme-card theme-border theme-text-secondary hover:border-brand-500/30'
                                         }`}>
                                         {m}
@@ -574,7 +574,7 @@ const EligibilityChecker = () => {
                                         onClick={(e) => { e.preventDefault(); setFormData({...formData, timeline: val}); }}
                                         className={`text-left px-3 py-3 rounded-xl text-xs font-bold transition-all border ${
                                             formData.timeline === val
-                                                ? 'bg-brand-500/10 border-brand-500/50 text-brand-400'
+                                                ? 'theme-accent-pill border-[var(--brand-mid)]'
                                                 : 'theme-card theme-border theme-text-secondary hover:border-brand-500/30'
                                         }`}>
                                         <span className="block font-black text-[11px] mb-0.5">{val}</span>
@@ -839,7 +839,7 @@ const App = () => {
 
             {feedback.show && (
                 <div className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 px-6 py-4 rounded-2xl shadow-2xl animate-in slide-in-from-bottom-10 fade-in duration-300 ${feedback.status === 'success' ? 'bg-secondary-900 border-l-4 border-brand-500' : 'bg-rose-900 border-l-4 border-rose-400'}`}>
-                    <Icon name={feedback.status === 'success' ? 'check-circle' : 'alert-circle'} size={20} className={feedback.status === 'success' ? 'text-brand-400' : 'text-rose-300'} />
+                    <Icon name={feedback.status === 'success' ? 'check-circle' : 'alert-circle'} size={20} className={feedback.status === 'success' ? 'theme-mid-text' : 'text-rose-300'} />
                     <span className="text-white font-bold text-sm tracking-tight">{feedback.message}</span>
                     <button onClick={() => setFeedback({ ...feedback, show: false })} className="ml-4 text-white/50 hover:text-white"><Icon name="x" size={16} /></button>
                 </div>
@@ -963,7 +963,7 @@ const App = () => {
                             </div>
                             
                             <p className="mt-4 text-[10px] text-[var(--text-base)] opacity-40 text-center leading-tight">
-                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline hover:text-brand-400">Privacy Policy</a>. Data is used only for your professional consultation.
+                                By applying, you agree to our <a href="privacy-policy.html" target="_blank" className="underline theme-mid-hover-text">Privacy Policy</a>. Data is used only for your professional consultation.
                             </p>
                         </form>
                     </div>
@@ -1009,7 +1009,7 @@ const App = () => {
                                             {idx + 1}
                                         </div>
                                         <span className={`text-[9px] font-bold uppercase tracking-wider transition-colors max-w-[64px] text-center leading-tight ${
-                                            idx === activeModuleIdx ? 'text-brand-400' : 'text-slate-500'
+                                            idx === activeModuleIdx ? 'theme-mid-text' : 'text-slate-500'
                                         }`}>
                                             {mod.shortLabel || mod.title.split(' ').slice(0, 2).join(' ')}
                                         </span>
@@ -1039,9 +1039,9 @@ const App = () => {
                                         <div className={`lg:hidden overflow-hidden transition-all duration-300 ${activeModuleIdx === idx ? 'max-h-[1200px] opacity-100 py-6' : 'max-h-0 opacity-0'}`}>
                                             <div className="theme-bg-alt rounded-2xl p-6 border theme-border space-y-6">
                                                 <div className="flex flex-col space-y-1">
-                                                    <span className="text-brand-400 font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
+                                                    <span className="theme-mid-text font-bold uppercase text-[10px] tracking-widest">Module 0{idx + 1} Details</span>
                                                     <div className="flex items-center gap-2 mt-2">
-                                                        <Icon name="play-circle" size={16} className="text-brand-400" />
+                                                        <Icon name="play-circle" size={16} className="theme-mid-text" />
                                                         <span className="text-[11px] font-bold theme-text-muted uppercase">Live: {mod.lectures} • {mod.hours} Hours</span>
                                                     </div>
                                                 </div>
@@ -1068,10 +1068,10 @@ const App = () => {
                                     <>
                                         <div className="mb-8 pb-6 border-b theme-border flex flex-col md:flex-row md:items-start justify-between gap-4 relative z-10">
                                             <div className="space-y-1 text-left">
-                                                <span className="text-brand-400 font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
+                                                <span className="theme-mid-text font-bold uppercase text-[11px] tracking-widest">Module 0{activeModuleIdx + 1}</span>
                                                 <h3 className="text-2xl font-bold theme-text-primary mt-1">{currentProgram.syllabus[activeModuleIdx].title}</h3>
                                                 <div className="flex items-center gap-2 mt-2">
-                                                    <Icon name="play-circle" size={18} className="text-brand-400" />
+                                                    <Icon name="play-circle" size={18} className="theme-mid-text" />
                                                     <span className="text-xs font-bold theme-text-muted uppercase tracking-tighter">Live Lectures: {currentProgram.syllabus[activeModuleIdx].lectures} • Total: {currentProgram.syllabus[activeModuleIdx].hours} Hours</span>
                                                 </div>
                                             </div>
@@ -1206,7 +1206,7 @@ const App = () => {
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
                                             <Icon name="image" size={32} className="opacity-20 absolute" />
                                             {/* Project number badge on image */}
-                                            <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-black/50 backdrop-blur text-brand-400 px-2 py-1 rounded border border-brand-500/30">
+                                            <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-black/50 backdrop-blur theme-mid-text px-2 py-1 rounded border border-[var(--brand-mid)]">
                                                 {String(idx + 1).padStart(2, '0')}
                                             </span>
                                             {/* MasterStudy-style corner tag */}
@@ -1220,7 +1220,7 @@ const App = () => {
                                             {proj.tools && proj.tools.length > 0 && (
                                                 <div className="flex flex-wrap gap-1 mt-auto pt-1">
                                                     {proj.tools.map((t, ti) => (
-                                                        <span key={ti} className="text-[9px] font-bold uppercase tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/20 px-1.5 py-0.5 rounded">{t}</span>
+                                                        <span key={ti} className="text-[9px] font-bold uppercase tracking-wider theme-accent-pill px-1.5 py-0.5 rounded">{t}</span>
                                                     ))}
                                                 </div>
                                             )}

@@ -99,7 +99,7 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-left">
                     <window.ScrollReveal>
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">About Us</span>
+                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">About Us</span>
                         <h1 className="text-4xl md:text-5xl font-extrabold theme-text-primary mb-3">{safeHeader.title}</h1>
                         <p className="theme-text-muted font-medium text-base">{safeHeader.subtitle}</p>
                     </window.ScrollReveal>
@@ -136,7 +136,7 @@ const App = () => {
                                             {safeMethodology.points.map((point, idx) => (
                                                 <window.ScrollReveal key={idx} delay={idx * 60}>
                                                     <li className="flex items-start gap-3">
-                                                        <Icon name="check-circle" size={18} className="text-brand-500 mt-1 flex-shrink-0" />
+                                                        <Icon name="check-circle" size={18} className="theme-mid-text mt-1 flex-shrink-0" />
                                                         <span className="text-lg leading-snug"><strong>{point.title}:</strong> {point.description}</span>
                                                     </li>
                                                 </window.ScrollReveal>
@@ -158,9 +158,9 @@ const App = () => {
                         {/* Call to Action Block */}
                         <window.ScrollReveal>
                             <div className="theme-card border theme-border-strong p-10 rounded-[2.5rem] mt-16 shadow-xl">
-                                <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">{safeCta.title}</span>
+                                <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">{safeCta.title}</span>
                                 <p className="theme-text-primary font-semibold text-xl mb-6">{safeCta.description}</p>
-                                <a href={safeCta.buttonLink} className="inline-block bg-brand-500 hover:bg-brand-600 text-white px-10 py-4 rounded-xl font-bold transition-all shadow-lg shadow-brand-500/30 active:scale-95">
+                                <a href={safeCta.buttonLink} className="inline-block theme-btn-gradient text-white px-10 py-4 rounded-xl font-bold transition-all shadow-lg active:scale-95">
                                     {safeCta.buttonText}
                                 </a>
                             </div>

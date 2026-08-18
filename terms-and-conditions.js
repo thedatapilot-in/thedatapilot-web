@@ -93,7 +93,7 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-left">
                     <window.ScrollReveal>
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Legal</span>
+                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Legal</span>
                         <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
                         <p className="theme-text-muted font-medium text-sm">{safeHeader.subtitle}</p>
                     </window.ScrollReveal>
@@ -124,11 +124,11 @@ const App = () => {
                                     {section.title.toLowerCase().includes('contact') && (
                                         <ul className="space-y-3 mt-4">
                                             <li className="flex items-center gap-3 font-semibold theme-text-primary">
-                                                <Icon name="mail" size={18} className="text-brand-500" /> 
+                                                <Icon name="mail" size={18} className="theme-mid-text" /> 
                                                 <span>{contactEmail}</span>
                                             </li>
                                             <li className="flex items-center gap-3 font-semibold theme-text-primary">
-                                                <Icon name="map-pin" size={18} className="text-brand-500" /> 
+                                                <Icon name="map-pin" size={18} className="theme-mid-text" /> 
                                                 <span>{businessAddress}</span>
                                             </li>
                                         </ul>

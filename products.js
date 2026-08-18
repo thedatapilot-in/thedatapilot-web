@@ -56,7 +56,7 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-center">
                     <window.ScrollReveal>
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Digital Products</span>
+                        <span className="theme-mid-text font-bold uppercase text-xs tracking-widest block mb-3">Digital Products</span>
                         <h1 className="text-4xl md:text-5xl font-extrabold theme-text-primary mb-4">Logic-Ready Templates</h1>
                         <p className="text-lg theme-text-muted font-medium leading-relaxed max-w-2xl mx-auto">
                             Automated scripts and frameworks to accelerate your daily data workflows.
@@ -70,14 +70,14 @@ const App = () => {
                         <window.ScrollReveal key={product.id} delay={idx * 80}>
                             <window.TiltCard className="h-full">
                                 <div className="theme-card border theme-border-strong rounded-3xl p-8 flex flex-col h-full hover:shadow-2xl transition-all duration-300">
-                                    <div className="inline-block bg-brand-500/10 text-brand-400 px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest w-fit mb-5 border border-brand-500/20">
+                                    <div className="inline-block theme-accent-pill rounded-lg text-[10px] font-black uppercase tracking-widest w-fit mb-5">
                                         {product.type}
                                     </div>
                                     <h3 className="text-xl font-bold theme-text-primary mb-3">{product.title}</h3>
                                     <p className="text-sm theme-text-muted font-medium leading-relaxed flex-grow mb-6">{product.description}</p>
                                     <div className="pt-5 border-t theme-border flex items-center justify-between mt-auto">
                                         <span className="text-2xl font-black theme-text-primary">{product.currency}{product.price}</span>
-                                        <button className="bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors shadow-lg shadow-brand-500/20">
+                                        <button className="theme-btn-gradient text-white px-6 py-3 rounded-xl font-bold text-sm transition-colors shadow-lg">
                                             Get Access
                                         </button>
                                     </div>

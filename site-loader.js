@@ -83,6 +83,7 @@
             .theme-mid-outline-btn:hover { background: color-mix(in srgb, var(--brand-mid) 12%, transparent); }
             .theme-hover-glow { background: linear-gradient(135deg, color-mix(in srgb, var(--brand-500) 12%, transparent), color-mix(in srgb, var(--brand-accent, var(--brand-400)) 10%, transparent)); }
             .theme-mid-hover-border:hover { border-color: var(--brand-mid) !important; }
+            .theme-mid-hover-text:hover { color: var(--brand-mid) !important; }
             @keyframes chart-bar-grow {
                 0%, 100% { transform: scaleY(0.3); }
                 50% { transform: scaleY(1); }

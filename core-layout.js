@@ -169,7 +169,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
         }
     };
 
-    const activeItemClass = "theme-card/60 text-brand-700 border-l-4 border-brand-500";
+    const activeItemClass = "theme-card/60 theme-mid-text border-l-4 border-[var(--brand-mid)]";
     const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:bg-[var(--bg-base)]";
 
     return (
@@ -201,7 +201,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                             <window.Icon 
                                 name="chevron-down" 
                                 size={14} 
-                                className={isDropdownOpen ? 'rotate-180 transition-transform text-brand-400' : 'transition-transform text-slate-300'} 
+                                className={isDropdownOpen ? 'rotate-180 transition-transform theme-mid-text' : 'transition-transform text-slate-300'} 
                             />
                         </button>
                         
@@ -220,7 +220,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                                     setIsDropdownOpen(false);
                                                 }}
                                                 className={`w-full text-left px-4 py-3 hover:bg-[var(--bg-alt)] font-bold text-xs tracking-tight transition-colors ${
-                                                    isSelected ? 'text-brand-400 font-extrabold bg-[var(--bg-alt)]' : 'text-[var(--text-base)]'
+                                                    isSelected ? 'theme-mid-text font-extrabold bg-[var(--bg-alt)]' : 'text-[var(--text-base)]'
                                                 }`}
                                             >
                                                 {prog.title}
@@ -250,7 +250,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         <div className="space-y-4">
                             <div className={`p-4 rounded-xl flex items-center justify-between transition-all ${isLandingPage ? activeItemClass : inactiveItemClass}`}>
                                 <span className="font-bold">All Programs</span>
-                                <window.Icon name="chevron-down" size={14} className={isLandingPage ? "text-brand-400" : "text-secondary-300"} />
+                                <window.Icon name="chevron-down" size={14} className={isLandingPage ? "theme-mid-text" : "text-secondary-300"} />
                             </div>
                             
                             <div className="pl-6 space-y-3">
@@ -264,7 +264,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                                                 else window.location.href=`index.html#about`; 
                                                 setIsMenuOpen(false); 
                                             }} 
-                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'bg-brand-100/50 text-brand-700' : 'theme-text-muted hover:bg-[var(--bg-base)]'}`}
+                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'theme-accent-pill' : 'theme-text-muted hover:bg-[var(--bg-base)]'}`}
                                         >
                                             {prog.title}
                                         </button>
@@ -376,10 +376,10 @@ window.Footer = () => {
                 <div className="flex flex-col space-y-4 text-white/60">
                     <h5 className="text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2">Legal & Navigation</h5>
                     <div className="flex flex-col space-y-3 font-bold text-sm">
-                        <a href="about-us.html" className="hover:text-brand-400 transition-colors">About Us</a>
-                        <a href="privacy-policy.html" className="hover:text-brand-400 transition-colors">Privacy Policy</a>
-                        <a href="terms-and-conditions.html" className="hover:text-brand-400 transition-colors">Terms & Conditions</a>
-                        <a href="refund-policy.html" className="hover:text-brand-400 transition-colors">Refund Policy</a>
+                        <a href="about-us.html" className="theme-mid-hover-text transition-colors">About Us</a>
+                        <a href="privacy-policy.html" className="theme-mid-hover-text transition-colors">Privacy Policy</a>
+                        <a href="terms-and-conditions.html" className="theme-mid-hover-text transition-colors">Terms & Conditions</a>
+                        <a href="refund-policy.html" className="theme-mid-hover-text transition-colors">Refund Policy</a>
                     </div>
                 </div>
 
@@ -397,7 +397,7 @@ window.Footer = () => {
                         </div>
                         <div className="text-[13px] font-bold flex items-center gap-2.5">
                             <window.Icon name="mail" size={14} className="theme-mid-text opacity-80"/>
-                            <span className="text-white/60">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 hover:text-brand-400 transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
+                            <span className="text-white/60">Email: <a href={`mailto:${settings?.contact?.infoEmail}`} className="text-secondary-300 theme-mid-hover-text transition-colors font-bold underline underline-offset-4 decoration-white/10">{settings?.contact?.infoEmail}</a></span>
                         </div>
                     </div>
                     <div className="pt-8 text-[10px] font-black text-white/50 tracking-[0.4em] uppercase select-none">Logic-First. AI-Fast.</div>
