@@ -9,7 +9,7 @@
  */
 
 (function() {
-    const VERSION = "3.2.9";
+    const VERSION = "3.2.10";
     const path = window.location.pathname;
     
     // Page Route Detection
@@ -72,7 +72,19 @@
                 100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
             }
             .theme-card:hover { animation: card-glow 3s ease-in-out infinite; }
-            .theme-gradient-text { background: linear-gradient(90deg, var(--brand-500) 0%, var(--brand-accent, var(--brand-400)) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+            .theme-gradient-text {
+                background: linear-gradient(90deg, var(--brand-500) 0%, var(--brand-accent, var(--brand-400)) 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                color: transparent;
+                /* Forces its own GPU compositing layer — works around a WebKit/mobile Safari bug
+                   where background-clip:text loses its paint (renders invisible/see-through)
+                   during rapid content changes, e.g. a typewriter effect adding characters. */
+                -webkit-transform: translateZ(0);
+                transform: translateZ(0);
+                display: inline-block;
+            }
             .theme-accent-text { color: var(--brand-accent, var(--brand-400)); }
             .theme-tertiary-text { color: var(--glow-c, var(--brand-300)); }
             .theme-mid-text { color: var(--brand-mid, var(--brand-500)); }
