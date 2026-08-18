@@ -876,11 +876,11 @@ const App = () => {
             </div>
 
             {/* About header stays 100svh because it sits visually AT the top of the page under the transparent nav */}
-            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-center pt-28 md:pt-48 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
-                {/* Dynamic Background Data-Node Animation */}
-                <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.12]">
-                    <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-brand-500 rounded-full mix-blend-multiply filter blur-[120px] animate-pulse"></div>
-                    <div className="absolute bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-brand-700 rounded-full mix-blend-multiply filter blur-[100px] animate-pulse" style={{animationDelay: '2s'}}></div>
+            <header id="about" className="relative snap-start min-h-[100svh] flex flex-col justify-start pt-24 md:pt-36 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
+                {/* Dynamic Background Data-Node Animation — soft radial glow, not a solid blurred blob */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                    <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-500) 55%, transparent) 0%, transparent 70%)', filter: 'blur(40px)'}}></div>
+                    <div className="absolute bottom-[-15%] right-[-15%] w-[45vw] h-[45vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 55%, transparent) 0%, transparent 70%)', filter: 'blur(40px)', animationDelay: '2s'}}></div>
                     {/* Rotating grid/node structure */}
                     <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10"
                          style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
@@ -1094,27 +1094,31 @@ const App = () => {
                         </div>
                     </div>
 
-                    {/* Week-by-week rising trend toward Career Launch — HTML labels (matches site type scale exactly), SVG used only for the curve/area/dots */}
+                    {/* Week-by-week staircase toward Career Launch. Fixed aspect-ratio (no preserveAspectRatio="none")
+                        so circles never get stretched into ellipses regardless of container width. Compact — no
+                        separate header row, the "16-Wk Path" / "Career Launch" labels live inside the chart itself. */}
                     {(currentProgram.syllabus || []).length > 1 && (() => {
                         const totalModules = currentProgram.syllabus.length;
-                        const X0 = 20, X1 = 780, YBOTTOM = 100, YTOP = 16;
-                        const ease = (t) => t * t; // gradual, accelerating rise — not linear
-                        const pointFor = (idx) => {
-                            const t = idx / (totalModules - 1);
-                            return { t, x: X0 + t * (X1 - X0), y: YBOTTOM + (YTOP - YBOTTOM) * ease(t), week: Math.round(1 + t * 15) };
-                        };
-                        const SAMPLES = 48;
-                        const curvePoints = Array.from({ length: SAMPLES + 1 }, (_, i) => {
-                            const t = i / SAMPLES;
-                            return `${X0 + t * (X1 - X0)},${YBOTTOM + (YTOP - YBOTTOM) * ease(t)}`;
-                        });
-                        const linePath = `M${curvePoints.join(' L')}`;
-                        const areaPath = `${linePath} L${X1},118 L${X0},118 Z`;
+                        const VBW = 800, VBH = 60;
+                        const X0 = 14, X1 = 786, YBASE = 54, YBOTTOM = 46, YTOP = 8;
+                        const ease = (t) => t * t; // each step rises more than the last — accelerating, not linear
+                        const colW = (X1 - X0) / totalModules;
+                        const levelFor = (idx) => YBOTTOM + (YTOP - YBOTTOM) * ease(idx / (totalModules - 1));
+                        const midXFor = (idx) => X0 + idx * colW + colW / 2;
+                        const weekFor = (idx) => Math.round(1 + (idx / (totalModules - 1)) * 15);
+
+                        let stairPath = `M${X0},${levelFor(0)}`;
+                        for (let idx = 0; idx < totalModules; idx++) {
+                            const treadRightX = X0 + (idx + 1) * colW;
+                            stairPath += ` L${treadRightX},${levelFor(idx)}`;
+                            if (idx < totalModules - 1) stairPath += ` L${treadRightX},${levelFor(idx + 1)}`;
+                        }
+                        const areaPath = `${stairPath} L${X1},${YBASE} L${X0},${YBASE} Z`;
+
                         return (
-                            <div className="w-full max-w-7xl mx-auto mt-10 pt-8 border-t theme-border relative z-10">
-                                <span className="theme-mid-text font-bold uppercase text-[10px] tracking-widest block mb-4">16-Week Path to Career Launch</span>
-                                <div className="relative w-full" style={{height: '118px'}}>
-                                    <svg viewBox="0 0 800 118" preserveAspectRatio="none" className="absolute inset-0 w-full h-full" fill="none">
+                            <div className="w-full max-w-7xl mx-auto mt-8 pt-5 border-t theme-border relative z-10">
+                                <div className="relative w-full" style={{ aspectRatio: `${VBW} / ${VBH}` }}>
+                                    <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" fill="none">
                                         <defs>
                                             <linearGradient id="careerLaunchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                                                 <stop offset="0%" stopColor="var(--brand-500)" />
@@ -1122,28 +1126,26 @@ const App = () => {
                                             </linearGradient>
                                         </defs>
                                         <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.12" />
-                                        <path d={linePath} stroke="url(#careerLaunchGrad)" strokeWidth="2.5" strokeLinecap="round" />
-                                        <circle r="5" fill="url(#careerLaunchGrad)">
-                                            <animateMotion path={linePath} dur="5s" repeatCount="indefinite" />
+                                        <path d={stairPath} stroke="url(#careerLaunchGrad)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+                                        <circle r="4" fill="url(#careerLaunchGrad)">
+                                            <animateMotion path={stairPath} dur="6s" repeatCount="indefinite" calcMode="linear" />
                                         </circle>
                                         {(currentProgram.syllabus || []).map((mod, idx) => {
-                                            const { x, y } = pointFor(idx);
                                             const isLast = idx === totalModules - 1;
-                                            return <circle key={idx} cx={x} cy={y} r={isLast ? 6 : 3.5} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="2" />;
+                                            return <circle key={idx} cx={midXFor(idx)} cy={levelFor(idx)} r={isLast ? 5 : 3} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="1.5" />;
                                         })}
                                     </svg>
-                                    {(currentProgram.syllabus || []).map((mod, idx) => {
-                                        const { t, week } = pointFor(idx);
-                                        const isLast = idx === totalModules - 1;
-                                        return (
-                                            <div key={idx} className="absolute" style={{ left: `${t * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
-                                                <span className="text-[10px] font-bold theme-text-muted uppercase tracking-wider whitespace-nowrap">Wk {week}</span>
-                                            </div>
-                                        );
-                                    })}
-                                    <div className="absolute" style={{ left: `${pointFor(totalModules - 1).t * 100}%`, top: `${(pointFor(totalModules - 1).y / 118) * 100}%`, transform: 'translate(-100%, -22px)' }}>
-                                        <span className="theme-mid-text font-black uppercase text-[11px] tracking-wider whitespace-nowrap">Career Launch</span>
+                                    <div className="absolute" style={{ left: `${(X0 / VBW) * 100}%`, top: `${(levelFor(0) / VBH) * 100}%`, transform: 'translate(0, -16px)' }}>
+                                        <span className="theme-mid-text font-bold uppercase text-[9px] tracking-widest whitespace-nowrap">16-Wk Path</span>
                                     </div>
+                                    <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -16px)' }}>
+                                        <span className="theme-mid-text font-black uppercase text-[10px] tracking-wider whitespace-nowrap">Career Launch</span>
+                                    </div>
+                                    {(currentProgram.syllabus || []).map((mod, idx) => (
+                                        <div key={idx} className="absolute" style={{ left: `${(midXFor(idx) / VBW) * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
+                                            <span className="text-[9px] font-bold theme-text-muted uppercase tracking-wider whitespace-nowrap">Week {weekFor(idx)}</span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         );
