@@ -941,7 +941,7 @@ const App = () => {
                         </div>
                     </div>
                     
-                    <div className="flex flex-col gap-4 max-w-md ml-auto w-full lg:mt-40">
+                    <div className="flex flex-col gap-4 max-w-md ml-auto w-full lg:mt-[62px]">
                     <div className="bg-[var(--surface-form)] p-8 border border-[var(--border-color)] rounded-3xl w-full shadow-2xl backdrop-blur-md text-left mt-8 lg:mt-0 relative overflow-hidden group">
                         <div className="absolute top-[-50px] right-[-50px] w-32 h-32 bg-brand-500 rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity duration-700 pointer-events-none"></div>
                         <div className="absolute bottom-[-50px] left-[-50px] w-32 h-32 bg-brand-300 rounded-full blur-[60px] opacity-10 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none"></div>
