@@ -86,7 +86,7 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-left">
                     <window.ScrollReveal>
-                        <span className="text-brand-400 font-bold uppercase text-xs tracking-widest block mb-3">Legal</span>
+                        <window.SectionEyebrow>Legal</window.SectionEyebrow>
                         <h1 className="text-4xl font-extrabold theme-text-primary mb-2">{safeHeader.title}</h1>
                         <p className="theme-text-muted font-medium text-sm">{safeHeader.subtitle}</p>
                     </window.ScrollReveal>
@@ -125,8 +125,8 @@ const App = () => {
                                 <h2 className="text-xl font-bold theme-text-primary mb-3 tracking-tight">Contact Support</h2>
                                 <p className="mb-4">If you have any questions regarding our refund terms, please reach out to our admissions team:</p>
                                 <div className="flex items-center gap-3 font-semibold theme-text-primary">
-                                    <Icon name="mail" size={18} className="text-brand-500" /> 
-                                    <a href={`mailto:${contactEmail}`} className="text-brand-600 hover:underline">{contactEmail}</a>
+                                    <Icon name="mail" size={18} className="theme-mid-text" /> 
+                                    <a href={`mailto:${contactEmail}`} className="theme-mid-text hover:underline">{contactEmail}</a>
                                 </div>
                             </div>
                         </div>

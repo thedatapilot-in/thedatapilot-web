@@ -178,7 +178,7 @@ const THEME_ACCENTS = {
     amber:      '#0ea5e9',   // sky blue   — amber → cool sky
     teal:       '#a855f7',   // violet     — teal → deep violet
     nova:       '#8b5cf6',   // violet     — emerald → deep violet
-    cobalt:     '#06b6d4',   // cyan       — navy → electric sky
+    cobalt:     '#22c55e',   // green      — MasterStudy-style blue+green pairing (pinned light theme)
     midnight:   '#10b981',   // emerald    — deep navy → vivid green
     plasma:     '#a855f7',   // violet     — royal blue → violet
     arctic:     '#f43f5e',   // rose       — ice blue → warm rose
@@ -207,8 +207,9 @@ const THEME_GLOW_C = {
 // ============================================
 // CONFIGURATION: GLOBAL ACTIVE STATE
 // ============================================
-window.LIVE_THEME = 'prismatic'; // Start on first multi-glow theme — showcases 3-color hover effect immediately
-window.ACTIVE_VARIANT = 'cyberDark'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
+window.LIVE_THEME = 'cobalt'; // Pinned — closest existing brand-500 to the MasterStudy reference blue
+window.ACTIVE_VARIANT = 'light'; // Choose: light, cyberDark, glassmorphism, depth3D, minimal, midnight
+window.THEME_CYCLE_ENABLED = false; // Light-theme pivot: one fixed brand color, no auto-rotation
 
 const THEME_VARIANTS = {
     light: {
@@ -298,6 +299,11 @@ Object.keys(activeColors).forEach(key => {
 // Accent color for gradient utilities
 const accent = THEME_ACCENTS[window.LIVE_THEME] || activeColors['400'];
 root.style.setProperty('--brand-accent', accent);
+
+// Fixed solid middle blue-green tone — for small elements (pills, icons, badges)
+// where a gradient clip doesn't read well at small sizes. Gradients stay
+// reserved for large display text and buttons.
+root.style.setProperty('--brand-mid', '#0891B2');
 
 // Third glow color for multi-color hover animation
 const glowC = THEME_GLOW_C[window.LIVE_THEME] || activeColors['300'];
@@ -411,6 +417,8 @@ window.tailwind.config = {
 // AUTO THEME CYCLER — rotates every 10s
 // ============================================
 (function() {
+    if (window.THEME_CYCLE_ENABLED === false) return; // pinned theme — no auto-rotation, no debug badge
+
     const CYCLE_KEYS = Object.keys(THEMES);
     let idx = CYCLE_KEYS.indexOf(window.LIVE_THEME);
     if (idx === -1) idx = 0;

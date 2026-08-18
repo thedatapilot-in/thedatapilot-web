@@ -66,18 +66,39 @@
                 70% { transform: translate(7vw,-8vh) scale(0.9); }
             }
             @keyframes card-glow {
-                0%   { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-500) 45%,transparent); }
-                33%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 45%,transparent); }
-                66%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--glow-c,var(--brand-300)) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--glow-c,var(--brand-300)) 45%,transparent); }
-                100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 20%,transparent), 0 8px 32px -4px color-mix(in srgb,var(--brand-500) 45%,transparent); }
+                0%   { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
+                33%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-accent,var(--brand-400)) 18%,transparent); }
+                66%  { box-shadow: 0 0 0 1px color-mix(in srgb,var(--glow-c,var(--brand-300)) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--glow-c,var(--brand-300)) 18%,transparent); }
+                100% { box-shadow: 0 0 0 1px color-mix(in srgb,var(--brand-500) 12%,transparent), 0 8px 24px -6px color-mix(in srgb,var(--brand-500) 18%,transparent); }
             }
             .theme-card:hover { animation: card-glow 3s ease-in-out infinite; }
-            .theme-gradient-text { background: linear-gradient(135deg, var(--brand-500), var(--brand-accent, var(--brand-400))); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+            .theme-gradient-text { background: linear-gradient(90deg, var(--brand-500) 0%, var(--brand-accent, var(--brand-400)) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
             .theme-accent-text { color: var(--brand-accent, var(--brand-400)); }
             .theme-tertiary-text { color: var(--glow-c, var(--brand-300)); }
-            .theme-accent-pill { background: color-mix(in srgb, var(--brand-accent, var(--brand-400)) 12%, transparent); color: var(--brand-accent, var(--brand-400)); border: 1px solid color-mix(in srgb, var(--brand-accent, var(--brand-400)) 28%, transparent); }
-            .theme-btn-gradient { background: linear-gradient(135deg, var(--brand-600), var(--brand-accent, var(--brand-500))); }
+            .theme-mid-text { color: var(--brand-mid, var(--brand-500)); }
+            .theme-accent-pill { background: color-mix(in srgb, var(--brand-mid, var(--brand-400)) 12%, transparent); color: var(--brand-mid, var(--brand-400)); border: 1px solid color-mix(in srgb, var(--brand-mid, var(--brand-400)) 28%, transparent); }
+            .theme-btn-gradient { background: linear-gradient(90deg, var(--brand-600) 0%, var(--brand-accent, var(--brand-500)) 100%); }
             .theme-btn-gradient:hover { filter: brightness(1.12); }
+            .theme-mid-outline-btn { border: 2px solid var(--brand-mid); color: var(--brand-mid); background: color-mix(in srgb, var(--brand-mid) 4%, transparent); }
+            .theme-mid-outline-btn:hover { background: color-mix(in srgb, var(--brand-mid) 12%, transparent); }
+            .theme-hover-glow { background: linear-gradient(135deg, color-mix(in srgb, var(--brand-500) 12%, transparent), color-mix(in srgb, var(--brand-accent, var(--brand-400)) 10%, transparent)); }
+            .theme-mid-hover-border:hover { border-color: var(--brand-mid) !important; }
+            .theme-mid-hover-text:hover { color: var(--brand-mid) !important; }
+            @keyframes chart-bar-grow {
+                0%, 100% { transform: scaleY(0.3); }
+                50% { transform: scaleY(1); }
+            }
+            @keyframes chart-line-draw {
+                0% { stroke-dashoffset: 240; }
+                60%, 100% { stroke-dashoffset: 0; }
+            }
+            @keyframes chart-chip-float {
+                0%, 100% { transform: translateY(0); opacity: 0.6; }
+                50% { transform: translateY(-10px); opacity: 1; }
+            }
+            .hero-chart-bar { transform-origin: bottom; animation: chart-bar-grow 6.5s ease-in-out infinite; }
+            .hero-chart-line { stroke-dasharray: 240; animation: chart-line-draw 6s ease-in-out infinite; }
+            .hero-chart-chip { animation: chart-chip-float 7s ease-in-out infinite; }
         `;
         document.head.appendChild(style);
 
