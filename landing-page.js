@@ -178,11 +178,11 @@ const CountDownStat = ({ from = 100, to, label }) => {
     }, [isVisible, from, to]);
 
     return (
-        <div ref={ref} className="text-center px-2 py-3">
-            <div className="flex items-center justify-center gap-2 mb-1">
-                <Icon name="users" size={14} className="theme-accent-text opacity-70" />
-                <div className="text-xl md:text-3xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
-                    <span className="text-sm md:text-base align-top mr-0.5 opacity-60">&lt;</span>{count}
+        <div ref={ref} className="text-center px-1 py-3 overflow-hidden">
+            <div className="flex items-center justify-center gap-1 mb-1 px-1">
+                <Icon name="users" size={13} className="theme-accent-text opacity-70 flex-shrink-0" />
+                <div className="text-lg md:text-2xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
+                    <span className="text-xs md:text-sm align-top mr-0.5 opacity-60">&lt;</span>{count}
                 </div>
             </div>
             <div className="text-[10px] font-bold uppercase tracking-widest theme-text-muted">
@@ -216,10 +216,10 @@ const CountUpStat = ({ target, suffix = '', label, icon = 'trending-up' }) => {
     }, [isVisible, target]);
 
     return (
-        <div ref={ref} className="text-center px-2 py-3">
-            <div className="flex items-center justify-center gap-2 mb-1">
-                <Icon name={icon} size={14} className="theme-accent-text opacity-70" />
-                <div className="text-xl md:text-3xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
+        <div ref={ref} className="text-center px-1 py-3 overflow-hidden">
+            <div className="flex items-center justify-center gap-1 mb-1 px-1">
+                <Icon name={icon} size={13} className="theme-accent-text opacity-70 flex-shrink-0" />
+                <div className="text-lg md:text-2xl font-extrabold theme-gradient-text tabular-nums whitespace-nowrap">
                     {count}{suffix}
                 </div>
             </div>
