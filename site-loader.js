@@ -9,7 +9,7 @@
  */
 
 (function() {
-    const VERSION = "3.2.11";
+    const VERSION = "3.2.12";
     const path = window.location.pathname;
     
     // Page Route Detection
@@ -111,6 +111,13 @@
             .hero-chart-bar { transform-origin: bottom; animation: chart-bar-grow 6.5s ease-in-out infinite; }
             .hero-chart-line { stroke-dasharray: 240; animation: chart-line-draw 6s ease-in-out infinite; }
             .hero-chart-chip { animation: chart-chip-float 7s ease-in-out infinite; }
+            @keyframes launch-callout-glow {
+                0%   { opacity: 0; text-shadow: 0 0 0 transparent; transform: translateY(3px); color: var(--brand-mid); }
+                20%  { opacity: 1; text-shadow: 0 0 10px var(--brand-mid); transform: translateY(0); color: var(--brand-mid); }
+                70%  { opacity: 1; text-shadow: 0 0 10px var(--brand-mid); color: var(--brand-mid); }
+                100% { opacity: 0; text-shadow: 0 0 0 transparent; color: var(--brand-mid); }
+            }
+            .theme-launch-callout { display: inline-block; animation-name: launch-callout-glow; animation-timing-function: ease-in-out; animation-fill-mode: both; }
         `;
         document.head.appendChild(style);
 

@@ -611,6 +611,107 @@ const EligibilityChecker = () => {
         </div>
     );
 };
+
+/**
+ * CareerLaunchChart — staircase toward Career Launch, one tread per module.
+ * A dot travels the path (slowed to 8s/lap) while a single label cycles
+ * through each module's name with a glow-in/fade-out, ending on
+ * "Career Launched" before looping back to the first module.
+ */
+const CareerLaunchChart = ({ syllabus }) => {
+    const { useState, useEffect } = React;
+    const totalModules = (syllabus || []).length;
+    const [activeIdx, setActiveIdx] = useState(0); // 0..totalModules-1 = module index, totalModules = "Career Launched"
+
+    useEffect(() => {
+        if (totalModules < 2) return;
+        setActiveIdx(0);
+        const SEGMENT_MS = 8000 / totalModules;
+        const HOLD_LAUNCHED_MS = 2000;
+        let idx = 0;
+        let timer;
+        const scheduleNext = (delay) => {
+            timer = setTimeout(() => {
+                idx = idx >= totalModules ? 0 : idx + 1;
+                setActiveIdx(idx);
+                scheduleNext(idx === totalModules ? HOLD_LAUNCHED_MS : SEGMENT_MS);
+            }, delay);
+        };
+        scheduleNext(SEGMENT_MS);
+        return () => clearTimeout(timer);
+    }, [totalModules]);
+
+    if (totalModules < 2) return null;
+
+    const VBW = 800, VBH = 46;
+    const X0 = 14, X1 = 786, YBASE = 40, YBOTTOM = 32, YTOP = 8;
+    const ease = (t) => t * t;
+    const colW = (X1 - X0) / totalModules;
+    const levelFor = (idx) => YBOTTOM + (YTOP - YBOTTOM) * ease(idx / (totalModules - 1));
+    const midXFor = (idx) => X0 + idx * colW + colW / 2;
+    const weekFor = (idx) => Math.round(1 + (idx / (totalModules - 1)) * 15);
+
+    let stairPath = `M${X0},${levelFor(0)}`;
+    for (let idx = 0; idx < totalModules; idx++) {
+        const treadRightX = X0 + (idx + 1) * colW;
+        stairPath += ` L${treadRightX},${levelFor(idx)}`;
+        if (idx < totalModules - 1) stairPath += ` L${treadRightX},${levelFor(idx + 1)}`;
+    }
+    const areaPath = `${stairPath} L${X1},${YBASE} L${X0},${YBASE} Z`;
+    const SEGMENT_MS = 8000 / totalModules;
+    const isLaunched = activeIdx >= totalModules;
+    const activeLabel = isLaunched ? 'Career Launched' : ((syllabus[activeIdx] || {}).shortLabel || (syllabus[activeIdx] || {}).title || '');
+
+    return (
+        <div className="w-full max-w-7xl mx-auto mt-6 pt-4 border-t theme-border relative z-10">
+            <div className="relative w-full" style={{ aspectRatio: `${VBW} / ${VBH}` }}>
+                <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" fill="none">
+                    <defs>
+                        <linearGradient id="careerLaunchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="var(--brand-500)" />
+                            <stop offset="100%" stopColor="var(--brand-accent)" />
+                        </linearGradient>
+                    </defs>
+                    <g stroke="var(--border-strong)" strokeWidth="1.25" opacity="0.6">
+                        <line x1={X0} y1={YBASE} x2={X1} y2={YBASE} />
+                        <line x1={X0} y1={YTOP - 4} x2={X0} y2={YBASE} />
+                    </g>
+                    <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.12" />
+                    <path d={stairPath} stroke="url(#careerLaunchGrad)" strokeWidth="1.25" strokeLinejoin="round" strokeLinecap="round" />
+                    <circle r="3.5" fill="url(#careerLaunchGrad)">
+                        <animateMotion path={stairPath} dur="8s" repeatCount="indefinite" calcMode="linear" />
+                    </circle>
+                    {syllabus.map((mod, idx) => {
+                        const isLast = idx === totalModules - 1;
+                        return <circle key={idx} cx={midXFor(idx)} cy={levelFor(idx)} r={isLast ? 4 : 2.5} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="1.25" />;
+                    })}
+                </svg>
+                <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -22px)' }}>
+                    <span className="theme-mid-text font-black text-[10px] tracking-wider whitespace-nowrap">Career Launch</span>
+                </div>
+                {syllabus.map((mod, idx) => {
+                    const isEndpoint = idx === 0 || idx === totalModules - 1;
+                    return (
+                        <div key={idx} className={`absolute ${isEndpoint ? '' : 'hidden sm:block'}`} style={{ left: `${(midXFor(idx) / VBW) * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
+                            <span className="text-[8px] sm:text-[9px] font-bold theme-text-muted tracking-wider whitespace-nowrap">Week {weekFor(idx)}</span>
+                        </div>
+                    );
+                })}
+                {/* Cycling module-name callout — glows in, holds, fades out as the dot passes each step */}
+                <div className="absolute left-1/2 -translate-x-1/2" style={{ top: '-4px' }}>
+                    <span
+                        key={activeIdx}
+                        className="theme-launch-callout text-[10px] sm:text-xs font-bold whitespace-nowrap"
+                        style={{ animationDuration: `${isLaunched ? 2000 : SEGMENT_MS}ms` }}
+                    >
+                        {activeLabel}
+                    </span>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const App = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
@@ -1100,69 +1201,7 @@ const App = () => {
                         </div>
                     </div>
 
-                    {/* Week-by-week staircase toward Career Launch. Fixed aspect-ratio (no preserveAspectRatio="none")
-                        so circles never get stretched into ellipses regardless of container width. Compact — no
-                        separate header row, the "16-Wk Path" / "Career Launch" labels live inside the chart itself. */}
-                    {(currentProgram.syllabus || []).length > 1 && (() => {
-                        const totalModules = currentProgram.syllabus.length;
-                        const VBW = 800, VBH = 60;
-                        const X0 = 14, X1 = 786, YBASE = 54, YBOTTOM = 46, YTOP = 8;
-                        const ease = (t) => t * t; // each step rises more than the last — accelerating, not linear
-                        const colW = (X1 - X0) / totalModules;
-                        const levelFor = (idx) => YBOTTOM + (YTOP - YBOTTOM) * ease(idx / (totalModules - 1));
-                        const midXFor = (idx) => X0 + idx * colW + colW / 2;
-                        const weekFor = (idx) => Math.round(1 + (idx / (totalModules - 1)) * 15);
-
-                        let stairPath = `M${X0},${levelFor(0)}`;
-                        for (let idx = 0; idx < totalModules; idx++) {
-                            const treadRightX = X0 + (idx + 1) * colW;
-                            stairPath += ` L${treadRightX},${levelFor(idx)}`;
-                            if (idx < totalModules - 1) stairPath += ` L${treadRightX},${levelFor(idx + 1)}`;
-                        }
-                        const areaPath = `${stairPath} L${X1},${YBASE} L${X0},${YBASE} Z`;
-
-                        return (
-                            <div className="w-full max-w-7xl mx-auto mt-8 pt-5 border-t theme-border relative z-10">
-                                <div className="relative w-full" style={{ aspectRatio: `${VBW} / ${VBH}` }}>
-                                    <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" fill="none">
-                                        <defs>
-                                            <linearGradient id="careerLaunchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                <stop offset="0%" stopColor="var(--brand-500)" />
-                                                <stop offset="100%" stopColor="var(--brand-accent)" />
-                                            </linearGradient>
-                                        </defs>
-                                        <g stroke="var(--border-strong)" strokeWidth="1.25" opacity="0.6">
-                                            <line x1={X0} y1={YBASE} x2={X1} y2={YBASE} />
-                                            <line x1={X0} y1={YTOP - 4} x2={X0} y2={YBASE} />
-                                        </g>
-                                        <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.12" />
-                                        <path d={stairPath} stroke="url(#careerLaunchGrad)" strokeWidth="1.25" strokeLinejoin="round" strokeLinecap="round" />
-                                        <circle r="4" fill="url(#careerLaunchGrad)">
-                                            <animateMotion path={stairPath} dur="6s" repeatCount="indefinite" calcMode="linear" />
-                                        </circle>
-                                        {(currentProgram.syllabus || []).map((mod, idx) => {
-                                            const isLast = idx === totalModules - 1;
-                                            return <circle key={idx} cx={midXFor(idx)} cy={levelFor(idx)} r={isLast ? 5 : 3} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="1.5" />;
-                                        })}
-                                    </svg>
-                                    <div className="absolute" style={{ left: '50%', top: 0, transform: 'translate(-50%, -18px)' }}>
-                                        <span className="theme-mid-text font-bold uppercase text-[9px] tracking-widest whitespace-nowrap">16-Week Path</span>
-                                    </div>
-                                    <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -26px)' }}>
-                                        <span className="theme-mid-text font-black uppercase text-[10px] tracking-wider whitespace-nowrap">Career Launch</span>
-                                    </div>
-                                    {(currentProgram.syllabus || []).map((mod, idx) => {
-                                        const isEndpoint = idx === 0 || idx === totalModules - 1;
-                                        return (
-                                            <div key={idx} className={`absolute ${isEndpoint ? '' : 'hidden sm:block'}`} style={{ left: `${(midXFor(idx) / VBW) * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
-                                                <span className="text-[8px] sm:text-[9px] font-bold theme-text-muted uppercase tracking-wider whitespace-nowrap">Week {weekFor(idx)}</span>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        );
-                    })()}
+                    <CareerLaunchChart syllabus={currentProgram.syllabus} />
                 </section>
             </ScrollReveal>
 
