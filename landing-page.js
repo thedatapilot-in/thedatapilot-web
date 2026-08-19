@@ -879,8 +879,8 @@ const App = () => {
             <header id="about" className="relative min-h-[100svh] flex flex-col justify-start pt-24 md:pt-36 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation — soft radial glow, not a solid blurred blob */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
-                    <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-400) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)'}}></div>
-                    <div className="absolute bottom-[-15%] right-[-15%] w-[45vw] h-[45vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)', animationDelay: '2s'}}></div>
+                    <div className="absolute top-[-25%] left-[-25%] w-[40vw] h-[40vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-400) 18%, white) 0%, transparent 70%)', filter: 'blur(30px)'}}></div>
+                    <div className="absolute bottom-[-20%] right-[-20%] w-[34vw] h-[34vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 18%, white) 0%, transparent 70%)', filter: 'blur(30px)', animationDelay: '2s'}}></div>
                     {/* Rotating grid/node structure */}
                     <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10"
                          style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
@@ -915,7 +915,7 @@ const App = () => {
                                 <TypewriterText text={currentProgram.title} />
                             </span>
                         </h1>
-                        <p className="text-sm md:text-base text-[var(--text-base)] opacity-70 max-w-2xl leading-relaxed mb-6 font-medium">
+                        <p className="text-sm md:text-base text-[var(--text-base)] opacity-90 max-w-2xl leading-relaxed mb-6 font-medium">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
                         <div className="flex items-center gap-2 lg:gap-4">
