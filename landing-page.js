@@ -900,13 +900,8 @@ const App = () => {
 
     const initiateRazorpayPayment = async (customer = formData) => {
         let payableAmount = parseFloat(customer.customAmount);
-        if (isNaN(payableAmount) || payableAmount <= 0) {
-            payableAmount = (formData.discountApplied && formData.finalPrice > 0)
-                ? formData.finalPrice
-                : (currentProgram.price || 40000);
-        }
-        if (payableAmount < 1) {
-            triggerFeedback('error', 'Minimum payment amount is ₹1.');
+        if (isNaN(payableAmount) || payableAmount < 1) {
+            triggerFeedback('error', 'Please enter a valid amount of at least ₹1.');
             return;
         }
 
@@ -988,6 +983,13 @@ const App = () => {
     };
 
     const handlePaymentClick = () => {
+        const defaultAmount = String((formData.discountApplied && formData.finalPrice > 0)
+            ? formData.finalPrice
+            : (currentProgram.price || 40000));
+        setFormData(prev => ({
+            ...prev,
+            customAmount: prev.customAmount !== '' ? prev.customAmount : defaultAmount
+        }));
         setCheckoutModalOpen(true);
     };
 
@@ -1624,8 +1626,8 @@ const App = () => {
                                     min="1"
                                     step="any"
                                     required 
-                                    placeholder="Enter amount to pay"
-                                    value={formData.customAmount !== '' ? formData.customAmount : (formData.discountApplied ? formData.finalPrice : (currentProgram.price || 40000))}
+                                    placeholder="Enter amount (e.g. 1)"
+                                    value={formData.customAmount}
                                     onChange={(e) => setFormData({...formData, customAmount: e.target.value})}
                                     className="w-full p-2.5 text-xl font-black theme-text-primary bg-white/10 border theme-border rounded-xl outline-none focus:border-brand-500 transition-all placeholder:text-white/30"
                                 />
@@ -1678,7 +1680,7 @@ const App = () => {
                                     className="w-full theme-btn-gradient text-white py-4 rounded-xl font-black text-xs md:text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                                 >
                                     <Icon name="lock" size={16} />
-                                    <span>Proceed to Pay ₹{(parseFloat(formData.customAmount !== '' ? formData.customAmount : (formData.discountApplied ? formData.finalPrice : (currentProgram.price || 40000))) || 1).toLocaleString()}</span>
+                                    <span>Proceed to Pay {formData.customAmount ? `₹${Number(formData.customAmount).toLocaleString()}` : ''}</span>
                                 </button>
                             </div>
 
