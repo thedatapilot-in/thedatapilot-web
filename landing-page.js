@@ -1613,55 +1613,22 @@ const App = () => {
                             </div>
                         </div>
 
-                        <div className="p-3.5 mb-4 rounded-2xl bg-brand-500/10 border border-brand-500/20 space-y-2">
-                            <div className="flex items-center justify-between">
-                                <span className="text-xs font-bold theme-text-secondary uppercase tracking-wider">Amount to Pay (₹)</span>
-                                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                                    Flexible Testing
-                                </span>
-                            </div>
+                        <div className="p-3.5 mb-4 rounded-2xl bg-brand-500/10 border border-brand-500/20">
+                            <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-secondary mb-1.5">
+                                Total Payable (₹) *
+                            </label>
                             <div className="flex items-center gap-2">
                                 <span className="text-xl font-black theme-text-primary">₹</span>
                                 <input 
                                     type="number" 
                                     min="1"
-                                    step="1"
+                                    step="any"
                                     required 
+                                    placeholder="Enter amount to pay"
                                     value={formData.customAmount !== '' ? formData.customAmount : (formData.discountApplied ? formData.finalPrice : (currentProgram.price || 40000))}
                                     onChange={(e) => setFormData({...formData, customAmount: e.target.value})}
-                                    className="w-full p-2 text-lg font-black theme-text-primary bg-white/10 border theme-border rounded-xl outline-none focus:border-brand-500 transition-all"
+                                    className="w-full p-2.5 text-xl font-black theme-text-primary bg-white/10 border theme-border rounded-xl outline-none focus:border-brand-500 transition-all placeholder:text-white/30"
                                 />
-                            </div>
-                            <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                                <span className="text-[10px] theme-text-muted font-bold uppercase tracking-wider mr-1">Quick Test:</span>
-                                <button 
-                                    type="button" 
-                                    onClick={() => setFormData({...formData, customAmount: '1'})}
-                                    className={`px-2 py-0.5 text-[11px] font-bold rounded-lg transition-all cursor-pointer ${formData.customAmount === '1' ? 'bg-brand-500 text-white' : 'bg-white/10 hover:bg-white/20 theme-text-primary border theme-border'}`}
-                                >
-                                    ₹1
-                                </button>
-                                <button 
-                                    type="button" 
-                                    onClick={() => setFormData({...formData, customAmount: '2'})}
-                                    className={`px-2 py-0.5 text-[11px] font-bold rounded-lg transition-all cursor-pointer ${formData.customAmount === '2' ? 'bg-brand-500 text-white' : 'bg-white/10 hover:bg-white/20 theme-text-primary border theme-border'}`}
-                                >
-                                    ₹2
-                                </button>
-                                <button 
-                                    type="button" 
-                                    onClick={() => setFormData({...formData, customAmount: '5'})}
-                                    className={`px-2 py-0.5 text-[11px] font-bold rounded-lg transition-all cursor-pointer ${formData.customAmount === '5' ? 'bg-brand-500 text-white' : 'bg-white/10 hover:bg-white/20 theme-text-primary border theme-border'}`}
-                                >
-                                    ₹5
-                                </button>
-                                <button 
-                                    type="button" 
-                                    onClick={() => setFormData({...formData, customAmount: String(formData.discountApplied ? formData.finalPrice : (currentProgram.price || 40000))})}
-                                    className="ml-auto text-[10px] font-bold theme-mid-text hover:underline cursor-pointer"
-                                >
-                                    Reset Fee
-                                </button>
                             </div>
                         </div>
 
