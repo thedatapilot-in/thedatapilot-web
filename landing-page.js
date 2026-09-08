@@ -924,7 +924,7 @@ const App = () => {
             currency: "INR",
             name: "The Data Pilot",
             description: `${currentProgram.title} Admission`,
-            image: "assets/images/thedatapilot_logo.png",
+            image: "https://thedatapilot.in/assets/images/thedatapilot_logo_cobalt.png",
             prefill: {
                 name: customer.full_name || '',
                 email: customer.email || '',
