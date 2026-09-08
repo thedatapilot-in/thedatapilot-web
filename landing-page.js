@@ -731,6 +731,10 @@ const App = () => {
         finalPrice: 0 
     });
     
+    const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
+    const [paymentProcessing, setPaymentProcessing] = useState(false);
+    const [paymentSuccess, setPaymentSuccess] = useState(null);
+    
     const [feedback, setFeedback] = useState({ show: false, status: '', message: '' });
     const [activeTab, setActiveTab] = useState('about');
 
@@ -878,6 +882,110 @@ const App = () => {
     const { settings, programs, media } = window.SITE_DATA;
     const currentProgram = (programs && programs[activeProgramId]) ? programs[activeProgramId] : { title: 'Loading...', syllabus: [], eligibility: [], highlights: [], price: 0 };
     const { Navbar, Footer, Icon } = window;
+
+    const RAZORPAY_KEY_ID = "rzp_live_TZXbhC3V2JjMUU";
+
+    const loadRazorpaySDK = () => {
+        return new Promise((resolve) => {
+            if (window.Razorpay) return resolve(true);
+            const script = document.createElement('script');
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.async = true;
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.head.appendChild(script);
+        });
+    };
+
+    const initiateRazorpayPayment = async (customer = formData) => {
+        const payableAmount = (formData.discountApplied && formData.finalPrice > 0)
+            ? formData.finalPrice
+            : (currentProgram.price || 40000);
+
+        setPaymentProcessing(true);
+        const isSDKReady = await loadRazorpaySDK();
+        if (!isSDKReady || !window.Razorpay) {
+            setPaymentProcessing(false);
+            triggerFeedback('error', 'Payment gateway failed to load. Please check your internet or adblocker.');
+            return;
+        }
+
+        const options = {
+            key: RAZORPAY_KEY_ID,
+            amount: Math.round(payableAmount * 100),
+            currency: "INR",
+            name: "The Data Pilot",
+            description: `${currentProgram.title} Admission`,
+            image: "assets/images/thedatapilot_logo.png",
+            prefill: {
+                name: customer.full_name || '',
+                email: customer.email || '',
+                contact: customer.phone || ''
+            },
+            notes: {
+                program_id: currentProgram.id || activeProgramId,
+                program_name: currentProgram.title,
+                coupon_applied: formData.discountApplied ? (formData.couponCode || 'PROMO') : 'NONE',
+                final_amount: String(payableAmount)
+            },
+            theme: {
+                color: "#0284c7"
+            },
+            handler: async function (response) {
+                setPaymentProcessing(false);
+                setCheckoutModalOpen(false);
+
+                // Sync with leads database and admissions email
+                try {
+                    const payData = new FormData();
+                    payData.append('full_name', customer.full_name || 'Enrolled Student');
+                    payData.append('email', customer.email || '');
+                    payData.append('phone', customer.phone || '');
+                    payData.append('program_id', currentProgram.id || activeProgramId);
+                    payData.append('payment_id', response.razorpay_payment_id);
+                    payData.append('amount_paid', String(payableAmount));
+                    payData.append('utm_source', 'razorpay_checkout');
+                    payData.append('source_url', window.location.href);
+                    await fetch('submit.php', { method: 'POST', body: payData });
+                } catch (err) {
+                    console.error("Could not sync payment record:", err);
+                }
+
+                setPaymentSuccess({
+                    paymentId: response.razorpay_payment_id,
+                    amount: payableAmount,
+                    programTitle: currentProgram.title,
+                    studentName: customer.full_name || 'Student'
+                });
+                triggerFeedback('success', `Payment of ₹${payableAmount.toLocaleString()} received!`);
+            },
+            modal: {
+                ondismiss: function () {
+                    setPaymentProcessing(false);
+                }
+            }
+        };
+
+        try {
+            const rzp = new window.Razorpay(options);
+            rzp.on('payment.failed', function (resp) {
+                setPaymentProcessing(false);
+                triggerFeedback('error', resp.error?.description || 'Payment was not completed.');
+            });
+            rzp.open();
+        } catch (err) {
+            setPaymentProcessing(false);
+            triggerFeedback('error', 'Error launching payment window.');
+        }
+    };
+
+    const handlePaymentClick = () => {
+        if (formData.full_name?.trim() && formData.email?.trim() && formData.phone?.trim()) {
+            initiateRazorpayPayment(formData);
+        } else {
+            setCheckoutModalOpen(true);
+        }
+    };
 
     const tools = [
         { 
@@ -1460,15 +1568,158 @@ const App = () => {
                             </div>
     
                             <TiltCard>
-                                <button className="w-full block bg-white theme-mid-text hover:brightness-95 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
-                                    <Icon name="credit-card" size={18} className="flex-shrink-0" />
-                                    <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
+                                <button 
+                                    onClick={handlePaymentClick}
+                                    disabled={paymentProcessing}
+                                    className="w-full block bg-white theme-mid-text hover:brightness-95 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3 cursor-pointer disabled:opacity-75"
+                                >
+                                    <Icon name={paymentProcessing ? "loader" : "credit-card"} size={18} className={`flex-shrink-0 ${paymentProcessing ? 'animate-spin' : ''}`} />
+                                    <span className="text-center">
+                                        {paymentProcessing 
+                                            ? "Connecting to Razorpay..." 
+                                            : `Make Payment ₹${(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-`
+                                        }
+                                    </span>
                                 </button>
                             </TiltCard>
                         </div>
                     </div>
                 </section>
             </ScrollReveal>
+
+            {/* CHECKOUT DETAILS MODAL */}
+            {checkoutModalOpen && (
+                <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative text-left">
+                        <button 
+                            onClick={() => setCheckoutModalOpen(false)}
+                            className="absolute top-5 right-5 text-zinc-400 hover:text-zinc-200 p-2 transition-colors rounded-full hover:bg-white/10"
+                            aria-label="Close"
+                        >
+                            <Icon name="x" size={20} />
+                        </button>
+
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400 flex-shrink-0">
+                                <Icon name="shield-check" size={22} />
+                            </div>
+                            <div>
+                                <h3 className="text-lg md:text-xl font-black theme-text-primary tracking-tight">Complete Enrollment</h3>
+                                <p className="text-xs theme-text-muted">{currentProgram.title}</p>
+                            </div>
+                        </div>
+
+                        <div className="p-3.5 mb-5 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-between">
+                            <span className="text-xs font-bold theme-text-secondary uppercase tracking-wider">Total Payable</span>
+                            <span className="text-lg font-black theme-text-primary">
+                                ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-
+                            </span>
+                        </div>
+
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            setCheckoutModalOpen(false);
+                            initiateRazorpayPayment(formData);
+                        }} className="space-y-3.5">
+                            <div>
+                                <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-muted mb-1.5">Full Name *</label>
+                                <input 
+                                    type="text" 
+                                    required 
+                                    placeholder="e.g. John Doe"
+                                    value={formData.full_name}
+                                    onChange={(e) => setFormData({...formData, full_name: e.target.value})}
+                                    className="w-full p-3.5 border theme-border bg-white/5 theme-text-primary rounded-xl text-sm outline-none focus:border-brand-500 font-medium transition-all"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-muted mb-1.5">Email Address (for Receipt & Access) *</label>
+                                <input 
+                                    type="email" 
+                                    required 
+                                    placeholder="e.g. student@gmail.com"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                    className="w-full p-3.5 border theme-border bg-white/5 theme-text-primary rounded-xl text-sm outline-none focus:border-brand-500 font-medium transition-all"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-muted mb-1.5">WhatsApp / Contact Mobile *</label>
+                                <input 
+                                    type="tel" 
+                                    required 
+                                    maxLength="10"
+                                    placeholder="10-digit Mobile Number"
+                                    value={formData.phone}
+                                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                                    className="w-full p-3.5 border theme-border bg-white/5 theme-text-primary rounded-xl text-sm outline-none focus:border-brand-500 font-medium transition-all"
+                                />
+                            </div>
+
+                            <div className="pt-2">
+                                <button 
+                                    type="submit"
+                                    className="w-full theme-btn-gradient text-white py-4 rounded-xl font-black text-xs md:text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                                >
+                                    <Icon name="lock" size={16} />
+                                    <span>Proceed to Secure Payment</span>
+                                </button>
+                            </div>
+
+                            <div className="flex items-center justify-center gap-2 pt-2 text-[10px] theme-text-muted">
+                                <Icon name="check-circle" size={12} className="text-emerald-500" />
+                                <span>256-Bit SSL Encrypted • Powered by Razorpay</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* PAYMENT SUCCESS CELEBRATION MODAL */}
+            {paymentSuccess && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="theme-card border border-emerald-500/40 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative text-center">
+                        <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 mx-auto flex items-center justify-center text-emerald-400 mb-4 shadow-lg shadow-emerald-500/20">
+                            <Icon name="check" size={36} />
+                        </div>
+
+                        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 inline-block mb-2">
+                            Payment Confirmed
+                        </span>
+
+                        <h3 className="text-2xl font-black theme-text-primary mb-1 tracking-tight">Admission Successful!</h3>
+                        <p className="text-xs theme-text-secondary font-medium mb-6">
+                            Welcome aboard, <span className="font-bold theme-text-primary">{paymentSuccess.studentName}</span>!
+                        </p>
+
+                        <div className="bg-white/5 border theme-border rounded-2xl p-4 text-left space-y-2 mb-6">
+                            <div className="flex justify-between items-center text-xs">
+                                <span className="theme-text-muted font-medium">Program</span>
+                                <span className="theme-text-primary font-bold">{paymentSuccess.programTitle}</span>
+                            </div>
+                            <div className="flex justify-between items-center text-xs">
+                                <span className="theme-text-muted font-medium">Amount Paid</span>
+                                <span className="theme-text-primary font-black text-sm">₹{paymentSuccess.amount?.toLocaleString()} /-</span>
+                            </div>
+                            <div className="flex justify-between items-center text-xs pt-2 border-t theme-border">
+                                <span className="theme-text-muted font-medium">Payment ID</span>
+                                <span className="font-mono text-[11px] theme-mid-text font-bold select-all">{paymentSuccess.paymentId}</span>
+                            </div>
+                        </div>
+
+                        <p className="text-xs theme-text-muted font-medium leading-relaxed mb-6">
+                            A receipt and onboarding instructions have been sent to your email. Our admissions coordinator will reach out within 24 hours.
+                        </p>
+
+                        <button 
+                            onClick={() => setPaymentSuccess(null)}
+                            className="w-full theme-btn-gradient text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-lg active:scale-95 cursor-pointer"
+                        >
+                            Done
+                        </button>
+                    </div>
+                </div>
+            )}
 
             <Footer />
         </div>

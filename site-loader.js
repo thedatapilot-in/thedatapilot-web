@@ -186,6 +186,14 @@
 
     // STEP 2: Let Babel handle the custom React files
     function injectReactApps() {
+        // Asynchronously preload Razorpay checkout script (non-blocking)
+        if (!window.Razorpay) {
+            const rzp = document.createElement('script');
+            rzp.src = "https://checkout.razorpay.com/v1/checkout.js";
+            rzp.async = true;
+            document.head.appendChild(rzp);
+        }
+
         // Always load the core engine first
         const engine = document.createElement('script');
         engine.type = "text/babel";
@@ -216,8 +224,16 @@
         }
     }
 
+    // STEP 3: Site-wide support chat widget (plain JS, no React dependency)
+    function injectChatWidget() {
+        const widget = document.createElement('script');
+        widget.src = `chat-widget.js?v=${VERSION}`;
+        document.head.appendChild(widget);
+    }
+
     // Initialize Boot Sequence
     setupGlobalWatchdogAndStyles();
+    injectChatWidget();
     injectLibraries(coreLibs)
         .then(() => {
             injectReactApps();
