@@ -611,6 +611,107 @@ const EligibilityChecker = () => {
         </div>
     );
 };
+
+/**
+ * CareerLaunchChart — staircase toward Career Launch, one tread per module.
+ * A dot travels the path (slowed to 8s/lap) while a single label cycles
+ * through each module's name with a glow-in/fade-out, ending on
+ * "Career Launched" before looping back to the first module.
+ */
+const CareerLaunchChart = ({ syllabus }) => {
+    const { useState, useEffect } = React;
+    const totalModules = (syllabus || []).length;
+    const [activeIdx, setActiveIdx] = useState(0); // 0..totalModules-1 = module index, totalModules = "Career Launched"
+
+    useEffect(() => {
+        if (totalModules < 2) return;
+        setActiveIdx(0);
+        const SEGMENT_MS = 8000 / totalModules;
+        const HOLD_LAUNCHED_MS = 2000;
+        let idx = 0;
+        let timer;
+        const scheduleNext = (delay) => {
+            timer = setTimeout(() => {
+                idx = idx >= totalModules ? 0 : idx + 1;
+                setActiveIdx(idx);
+                scheduleNext(idx === totalModules ? HOLD_LAUNCHED_MS : SEGMENT_MS);
+            }, delay);
+        };
+        scheduleNext(SEGMENT_MS);
+        return () => clearTimeout(timer);
+    }, [totalModules]);
+
+    if (totalModules < 2) return null;
+
+    const VBW = 800, VBH = 46;
+    const X0 = 14, X1 = 786, YBASE = 40, YBOTTOM = 32, YTOP = 8;
+    const ease = (t) => t * t;
+    const colW = (X1 - X0) / totalModules;
+    const levelFor = (idx) => YBOTTOM + (YTOP - YBOTTOM) * ease(idx / (totalModules - 1));
+    const midXFor = (idx) => X0 + idx * colW + colW / 2;
+    const weekFor = (idx) => Math.round(1 + (idx / (totalModules - 1)) * 15);
+
+    let stairPath = `M${X0},${levelFor(0)}`;
+    for (let idx = 0; idx < totalModules; idx++) {
+        const treadRightX = X0 + (idx + 1) * colW;
+        stairPath += ` L${treadRightX},${levelFor(idx)}`;
+        if (idx < totalModules - 1) stairPath += ` L${treadRightX},${levelFor(idx + 1)}`;
+    }
+    const areaPath = `${stairPath} L${X1},${YBASE} L${X0},${YBASE} Z`;
+    const SEGMENT_MS = 8000 / totalModules;
+    const isLaunched = activeIdx >= totalModules;
+    const activeLabel = isLaunched ? 'Career Launched' : ((syllabus[activeIdx] || {}).shortLabel || (syllabus[activeIdx] || {}).title || '');
+
+    return (
+        <div className="w-full max-w-7xl mx-auto mt-6 pt-4 border-t theme-border relative z-10">
+            <div className="relative w-full" style={{ aspectRatio: `${VBW} / ${VBH}` }}>
+                <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" fill="none">
+                    <defs>
+                        <linearGradient id="careerLaunchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stopColor="var(--brand-500)" />
+                            <stop offset="100%" stopColor="var(--brand-accent)" />
+                        </linearGradient>
+                    </defs>
+                    <g stroke="var(--border-strong)" strokeWidth="1.25" opacity="0.6">
+                        <line x1={X0} y1={YBASE} x2={X1} y2={YBASE} />
+                        <line x1={X0} y1={YTOP - 4} x2={X0} y2={YBASE} />
+                    </g>
+                    <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.12" />
+                    <path d={stairPath} stroke="url(#careerLaunchGrad)" strokeWidth="1.25" strokeLinejoin="round" strokeLinecap="round" />
+                    <circle r="3.5" fill="url(#careerLaunchGrad)">
+                        <animateMotion path={stairPath} dur="8s" repeatCount="indefinite" calcMode="linear" />
+                    </circle>
+                    {syllabus.map((mod, idx) => {
+                        const isLast = idx === totalModules - 1;
+                        return <circle key={idx} cx={midXFor(idx)} cy={levelFor(idx)} r={isLast ? 4 : 2.5} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="1.25" />;
+                    })}
+                </svg>
+                <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -22px)' }}>
+                    <span className="theme-mid-text font-black text-[10px] tracking-wider whitespace-nowrap">Career Launch</span>
+                </div>
+                {syllabus.map((mod, idx) => {
+                    const isEndpoint = idx === 0 || idx === totalModules - 1;
+                    return (
+                        <div key={idx} className={`absolute ${isEndpoint ? '' : 'hidden sm:block'}`} style={{ left: `${(midXFor(idx) / VBW) * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
+                            <span className="text-[8px] sm:text-[9px] font-bold theme-text-muted tracking-wider whitespace-nowrap">Week {weekFor(idx)}</span>
+                        </div>
+                    );
+                })}
+                {/* Cycling module-name callout — glows in, holds, fades out as the dot passes each step */}
+                <div className="absolute left-1/2 -translate-x-1/2" style={{ top: '-4px' }}>
+                    <span
+                        key={activeIdx}
+                        className="theme-launch-callout text-[10px] sm:text-xs font-bold whitespace-nowrap"
+                        style={{ animationDuration: `${isLaunched ? 2000 : SEGMENT_MS}ms` }}
+                    >
+                        {activeLabel}
+                    </span>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const App = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
@@ -627,8 +728,13 @@ const App = () => {
         couponCode: '', 
         discountApplied: false, 
         discountAmount: 0,
-        finalPrice: 0 
+        finalPrice: 0,
+        customAmount: '' 
     });
+    
+    const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
+    const [paymentProcessing, setPaymentProcessing] = useState(false);
+    const [paymentSuccess, setPaymentSuccess] = useState(null);
     
     const [feedback, setFeedback] = useState({ show: false, status: '', message: '' });
     const [activeTab, setActiveTab] = useState('about');
@@ -778,6 +884,115 @@ const App = () => {
     const currentProgram = (programs && programs[activeProgramId]) ? programs[activeProgramId] : { title: 'Loading...', syllabus: [], eligibility: [], highlights: [], price: 0 };
     const { Navbar, Footer, Icon } = window;
 
+    const RAZORPAY_KEY_ID = "rzp_live_TZXbhC3V2JjMUU";
+
+    const loadRazorpaySDK = () => {
+        return new Promise((resolve) => {
+            if (window.Razorpay) return resolve(true);
+            const script = document.createElement('script');
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            script.async = true;
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.head.appendChild(script);
+        });
+    };
+
+    const initiateRazorpayPayment = async (customer = formData) => {
+        let payableAmount = parseFloat(customer.customAmount);
+        if (isNaN(payableAmount) || payableAmount < 1) {
+            triggerFeedback('error', 'Please enter a valid amount of at least ₹1.');
+            return;
+        }
+
+        setPaymentProcessing(true);
+        const isSDKReady = await loadRazorpaySDK();
+        if (!isSDKReady || !window.Razorpay) {
+            setPaymentProcessing(false);
+            triggerFeedback('error', 'Payment gateway failed to load. Please check your internet or adblocker.');
+            return;
+        }
+
+        const options = {
+            key: RAZORPAY_KEY_ID,
+            amount: Math.round(payableAmount * 100),
+            currency: "INR",
+            name: "The Data Pilot",
+            description: `${currentProgram.title} Admission`,
+            image: "https://thedatapilot.in/assets/images/thedatapilot_logo_cobalt.png",
+            prefill: {
+                name: customer.full_name || '',
+                email: customer.email || '',
+                contact: customer.phone || ''
+            },
+            notes: {
+                program_id: currentProgram.id || activeProgramId,
+                program_name: currentProgram.title,
+                coupon_applied: formData.discountApplied ? (formData.couponCode || 'PROMO') : 'NONE',
+                final_amount: String(payableAmount)
+            },
+            theme: {
+                color: "#0284c7"
+            },
+            handler: async function (response) {
+                setPaymentProcessing(false);
+                setCheckoutModalOpen(false);
+
+                // Sync with leads database and admissions email
+                try {
+                    const payData = new FormData();
+                    payData.append('full_name', customer.full_name || 'Enrolled Student');
+                    payData.append('email', customer.email || '');
+                    payData.append('phone', customer.phone || '');
+                    payData.append('program_id', currentProgram.id || activeProgramId);
+                    payData.append('payment_id', response.razorpay_payment_id);
+                    payData.append('amount_paid', String(payableAmount));
+                    payData.append('utm_source', 'razorpay_checkout');
+                    payData.append('source_url', window.location.href);
+                    await fetch('submit.php', { method: 'POST', body: payData });
+                } catch (err) {
+                    console.error("Could not sync payment record:", err);
+                }
+
+                setPaymentSuccess({
+                    paymentId: response.razorpay_payment_id,
+                    amount: payableAmount,
+                    programTitle: currentProgram.title,
+                    studentName: customer.full_name || 'Student'
+                });
+                triggerFeedback('success', `Payment of ₹${payableAmount.toLocaleString()} received!`);
+            },
+            modal: {
+                ondismiss: function () {
+                    setPaymentProcessing(false);
+                }
+            }
+        };
+
+        try {
+            const rzp = new window.Razorpay(options);
+            rzp.on('payment.failed', function (resp) {
+                setPaymentProcessing(false);
+                triggerFeedback('error', resp.error?.description || 'Payment was not completed.');
+            });
+            rzp.open();
+        } catch (err) {
+            setPaymentProcessing(false);
+            triggerFeedback('error', 'Error launching payment window.');
+        }
+    };
+
+    const handlePaymentClick = () => {
+        const defaultAmount = String((formData.discountApplied && formData.finalPrice > 0)
+            ? formData.finalPrice
+            : (currentProgram.price || 40000));
+        setFormData(prev => ({
+            ...prev,
+            customAmount: prev.customAmount !== '' ? prev.customAmount : defaultAmount
+        }));
+        setCheckoutModalOpen(true);
+    };
+
     const tools = [
         { 
             name: 'PostgreSQL', 
@@ -879,8 +1094,8 @@ const App = () => {
             <header id="about" className="relative min-h-[100svh] flex flex-col justify-start pt-24 md:pt-36 pb-16 md:pb-24 px-6 scroll-mt-[80px] md:scroll-mt-[132px] overflow-hidden">
                 {/* Dynamic Background Data-Node Animation — soft radial glow, not a solid blurred blob */}
                 <div className="absolute inset-0 z-0 pointer-events-none">
-                    <div className="absolute top-[-15%] left-[-15%] w-[55vw] h-[55vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-400) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)'}}></div>
-                    <div className="absolute bottom-[-15%] right-[-15%] w-[45vw] h-[45vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 22%, white) 0%, transparent 70%)', filter: 'blur(30px)', animationDelay: '2s'}}></div>
+                    <div className="absolute top-[-25%] left-[-25%] w-[40vw] h-[40vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-400) 18%, white) 0%, transparent 70%)', filter: 'blur(30px)'}}></div>
+                    <div className="absolute bottom-[-20%] right-[-20%] w-[34vw] h-[34vw] rounded-full animate-pulse" style={{background: 'radial-gradient(circle, color-mix(in srgb, var(--brand-accent) 18%, white) 0%, transparent 70%)', filter: 'blur(30px)', animationDelay: '2s'}}></div>
                     {/* Rotating grid/node structure */}
                     <div className="absolute inset-0 w-[200%] h-[200%] translate-x-[-25%] translate-y-[-25%] gear-large opacity-10"
                          style={{backgroundImage: 'radial-gradient(circle at 2px 2px, var(--brand-500) 1px, transparent 0)', backgroundSize: '40px 40px'}}>
@@ -915,7 +1130,7 @@ const App = () => {
                                 <TypewriterText text={currentProgram.title} />
                             </span>
                         </h1>
-                        <p className="text-sm md:text-base text-[var(--text-base)] opacity-70 max-w-2xl leading-relaxed mb-6 font-medium">
+                        <p className="text-sm md:text-base text-[var(--text-base)] opacity-90 max-w-2xl leading-relaxed mb-6 font-medium">
                             {currentProgram.description ||settings?.seo?.metaDescription}
                         </p>
                         <div className="flex items-center gap-2 lg:gap-4">
@@ -1100,69 +1315,7 @@ const App = () => {
                         </div>
                     </div>
 
-                    {/* Week-by-week staircase toward Career Launch. Fixed aspect-ratio (no preserveAspectRatio="none")
-                        so circles never get stretched into ellipses regardless of container width. Compact — no
-                        separate header row, the "16-Wk Path" / "Career Launch" labels live inside the chart itself. */}
-                    {(currentProgram.syllabus || []).length > 1 && (() => {
-                        const totalModules = currentProgram.syllabus.length;
-                        const VBW = 800, VBH = 60;
-                        const X0 = 14, X1 = 786, YBASE = 54, YBOTTOM = 46, YTOP = 8;
-                        const ease = (t) => t * t; // each step rises more than the last — accelerating, not linear
-                        const colW = (X1 - X0) / totalModules;
-                        const levelFor = (idx) => YBOTTOM + (YTOP - YBOTTOM) * ease(idx / (totalModules - 1));
-                        const midXFor = (idx) => X0 + idx * colW + colW / 2;
-                        const weekFor = (idx) => Math.round(1 + (idx / (totalModules - 1)) * 15);
-
-                        let stairPath = `M${X0},${levelFor(0)}`;
-                        for (let idx = 0; idx < totalModules; idx++) {
-                            const treadRightX = X0 + (idx + 1) * colW;
-                            stairPath += ` L${treadRightX},${levelFor(idx)}`;
-                            if (idx < totalModules - 1) stairPath += ` L${treadRightX},${levelFor(idx + 1)}`;
-                        }
-                        const areaPath = `${stairPath} L${X1},${YBASE} L${X0},${YBASE} Z`;
-
-                        return (
-                            <div className="w-full max-w-7xl mx-auto mt-8 pt-5 border-t theme-border relative z-10">
-                                <div className="relative w-full" style={{ aspectRatio: `${VBW} / ${VBH}` }}>
-                                    <svg viewBox={`0 0 ${VBW} ${VBH}`} className="absolute inset-0 w-full h-full" fill="none">
-                                        <defs>
-                                            <linearGradient id="careerLaunchGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                <stop offset="0%" stopColor="var(--brand-500)" />
-                                                <stop offset="100%" stopColor="var(--brand-accent)" />
-                                            </linearGradient>
-                                        </defs>
-                                        <g stroke="var(--border-strong)" strokeWidth="1.25" opacity="0.6">
-                                            <line x1={X0} y1={YBASE} x2={X1} y2={YBASE} />
-                                            <line x1={X0} y1={YTOP - 4} x2={X0} y2={YBASE} />
-                                        </g>
-                                        <path d={areaPath} fill="url(#careerLaunchGrad)" opacity="0.12" />
-                                        <path d={stairPath} stroke="url(#careerLaunchGrad)" strokeWidth="1.25" strokeLinejoin="round" strokeLinecap="round" />
-                                        <circle r="4" fill="url(#careerLaunchGrad)">
-                                            <animateMotion path={stairPath} dur="6s" repeatCount="indefinite" calcMode="linear" />
-                                        </circle>
-                                        {(currentProgram.syllabus || []).map((mod, idx) => {
-                                            const isLast = idx === totalModules - 1;
-                                            return <circle key={idx} cx={midXFor(idx)} cy={levelFor(idx)} r={isLast ? 5 : 3} fill={isLast ? 'var(--brand-accent)' : 'var(--brand-mid)'} stroke="var(--bg-base)" strokeWidth="1.5" />;
-                                        })}
-                                    </svg>
-                                    <div className="absolute" style={{ left: '50%', top: 0, transform: 'translate(-50%, -18px)' }}>
-                                        <span className="theme-mid-text font-bold uppercase text-[9px] tracking-widest whitespace-nowrap">16-Week Path</span>
-                                    </div>
-                                    <div className="absolute" style={{ left: `${(midXFor(totalModules - 1) / VBW) * 100}%`, top: `${(levelFor(totalModules - 1) / VBH) * 100}%`, transform: 'translate(-100%, -26px)' }}>
-                                        <span className="theme-mid-text font-black uppercase text-[10px] tracking-wider whitespace-nowrap">Career Launch</span>
-                                    </div>
-                                    {(currentProgram.syllabus || []).map((mod, idx) => {
-                                        const isEndpoint = idx === 0 || idx === totalModules - 1;
-                                        return (
-                                            <div key={idx} className={`absolute ${isEndpoint ? '' : 'hidden sm:block'}`} style={{ left: `${(midXFor(idx) / VBW) * 100}%`, top: '100%', transform: 'translate(-50%, 4px)' }}>
-                                                <span className="text-[8px] sm:text-[9px] font-bold theme-text-muted uppercase tracking-wider whitespace-nowrap">Week {weekFor(idx)}</span>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        );
-                    })()}
+                    <CareerLaunchChart syllabus={currentProgram.syllabus} />
                 </section>
             </ScrollReveal>
 
@@ -1421,15 +1574,170 @@ const App = () => {
                             </div>
     
                             <TiltCard>
-                                <button className="w-full block bg-white theme-mid-text hover:brightness-95 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3">
-                                    <Icon name="credit-card" size={18} className="flex-shrink-0" />
-                                    <span className="text-center">Make Payment ₹{(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-</span>
+                                <button 
+                                    onClick={handlePaymentClick}
+                                    disabled={paymentProcessing}
+                                    className="w-full block bg-white theme-mid-text hover:brightness-95 py-4 md:py-5 rounded-2xl font-black uppercase tracking-widest text-[11px] md:text-sm shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 md:gap-3 cursor-pointer disabled:opacity-75"
+                                >
+                                    <Icon name={paymentProcessing ? "loader" : "credit-card"} size={18} className={`flex-shrink-0 ${paymentProcessing ? 'animate-spin' : ''}`} />
+                                    <span className="text-center">
+                                        {paymentProcessing 
+                                            ? "Connecting to Razorpay..." 
+                                            : `Make Payment ₹${(formData.discountApplied ? formData.finalPrice : currentProgram.price)?.toLocaleString()} /-`
+                                        }
+                                    </span>
                                 </button>
                             </TiltCard>
                         </div>
                     </div>
                 </section>
             </ScrollReveal>
+
+            {/* CHECKOUT DETAILS MODAL */}
+            {checkoutModalOpen && (
+                <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative text-left">
+                        <button 
+                            onClick={() => setCheckoutModalOpen(false)}
+                            className="absolute top-5 right-5 text-zinc-400 hover:text-zinc-200 p-2 transition-colors rounded-full hover:bg-white/10"
+                            aria-label="Close"
+                        >
+                            <Icon name="x" size={20} />
+                        </button>
+
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 rounded-xl bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400 flex-shrink-0">
+                                <Icon name="shield-check" size={22} />
+                            </div>
+                            <div>
+                                <h3 className="text-lg md:text-xl font-black theme-text-primary tracking-tight">Complete Enrollment</h3>
+                                <p className="text-xs theme-text-muted">{currentProgram.title}</p>
+                            </div>
+                        </div>
+
+                        <div className="p-3.5 mb-4 rounded-2xl bg-brand-500/10 border border-brand-500/20">
+                            <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-secondary mb-1.5">
+                                Total Payable (₹) *
+                            </label>
+                            <div className="flex items-center gap-2">
+                                <span className="text-xl font-black theme-text-primary">₹</span>
+                                <input 
+                                    type="number" 
+                                    min="1"
+                                    step="any"
+                                    required 
+                                    placeholder="Enter amount (e.g. 1)"
+                                    value={formData.customAmount}
+                                    onChange={(e) => setFormData({...formData, customAmount: e.target.value})}
+                                    className="w-full p-2.5 text-xl font-black theme-text-primary bg-white/10 border theme-border rounded-xl outline-none focus:border-brand-500 transition-all placeholder:text-white/30"
+                                />
+                            </div>
+                        </div>
+
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            setCheckoutModalOpen(false);
+                            initiateRazorpayPayment(formData);
+                        }} className="space-y-3.5">
+                            <div>
+                                <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-muted mb-1.5">Full Name *</label>
+                                <input 
+                                    type="text" 
+                                    required 
+                                    placeholder="e.g. John Doe"
+                                    value={formData.full_name}
+                                    onChange={(e) => setFormData({...formData, full_name: e.target.value})}
+                                    className="w-full p-3.5 border theme-border bg-white/5 theme-text-primary rounded-xl text-sm outline-none focus:border-brand-500 font-medium transition-all"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-muted mb-1.5">Email Address (for Receipt & Access) *</label>
+                                <input 
+                                    type="email" 
+                                    required 
+                                    placeholder="e.g. student@gmail.com"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                    className="w-full p-3.5 border theme-border bg-white/5 theme-text-primary rounded-xl text-sm outline-none focus:border-brand-500 font-medium transition-all"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-muted mb-1.5">WhatsApp / Contact Mobile *</label>
+                                <input 
+                                    type="tel" 
+                                    required 
+                                    maxLength="10"
+                                    placeholder="10-digit Mobile Number"
+                                    value={formData.phone}
+                                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                                    className="w-full p-3.5 border theme-border bg-white/5 theme-text-primary rounded-xl text-sm outline-none focus:border-brand-500 font-medium transition-all"
+                                />
+                            </div>
+
+                            <div className="pt-2">
+                                <button 
+                                    type="submit"
+                                    className="w-full theme-btn-gradient text-white py-4 rounded-xl font-black text-xs md:text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                                >
+                                    <Icon name="lock" size={16} />
+                                    <span>Proceed to Pay {formData.customAmount ? `₹${Number(formData.customAmount).toLocaleString()}` : ''}</span>
+                                </button>
+                            </div>
+
+                            <div className="flex items-center justify-center gap-2 pt-2 text-[10px] theme-text-muted">
+                                <Icon name="check-circle" size={12} className="text-emerald-500" />
+                                <span>256-Bit SSL Encrypted • Powered by Razorpay</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            )}
+
+            {/* PAYMENT SUCCESS CELEBRATION MODAL */}
+            {paymentSuccess && (
+                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="theme-card border border-emerald-500/40 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative text-center">
+                        <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 mx-auto flex items-center justify-center text-emerald-400 mb-4 shadow-lg shadow-emerald-500/20">
+                            <Icon name="check" size={36} />
+                        </div>
+
+                        <span className="text-[10px] font-black uppercase tracking-[0.25em] text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20 inline-block mb-2">
+                            Payment Confirmed
+                        </span>
+
+                        <h3 className="text-2xl font-black theme-text-primary mb-1 tracking-tight">Admission Successful!</h3>
+                        <p className="text-xs theme-text-secondary font-medium mb-6">
+                            Welcome aboard, <span className="font-bold theme-text-primary">{paymentSuccess.studentName}</span>!
+                        </p>
+
+                        <div className="bg-white/5 border theme-border rounded-2xl p-4 text-left space-y-2 mb-6">
+                            <div className="flex justify-between items-center text-xs">
+                                <span className="theme-text-muted font-medium">Program</span>
+                                <span className="theme-text-primary font-bold">{paymentSuccess.programTitle}</span>
+                            </div>
+                            <div className="flex justify-between items-center text-xs">
+                                <span className="theme-text-muted font-medium">Amount Paid</span>
+                                <span className="theme-text-primary font-black text-sm">₹{paymentSuccess.amount?.toLocaleString()} /-</span>
+                            </div>
+                            <div className="flex justify-between items-center text-xs pt-2 border-t theme-border">
+                                <span className="theme-text-muted font-medium">Payment ID</span>
+                                <span className="font-mono text-[11px] theme-mid-text font-bold select-all">{paymentSuccess.paymentId}</span>
+                            </div>
+                        </div>
+
+                        <p className="text-xs theme-text-muted font-medium leading-relaxed mb-6">
+                            A receipt and onboarding instructions have been sent to your email. Our admissions coordinator will reach out within 24 hours.
+                        </p>
+
+                        <button 
+                            onClick={() => setPaymentSuccess(null)}
+                            className="w-full theme-btn-gradient text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-widest transition-all shadow-lg active:scale-95 cursor-pointer"
+                        >
+                            Done
+                        </button>
+                    </div>
+                </div>
+            )}
 
             <Footer />
         </div>

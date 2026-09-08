@@ -1,5 +1,8 @@
 node_modules/
 
+# Admin panel credentials (real DB creds + admin password hash)
+admin/config.php
+
 # AI Agent & Workflow Folders (Local Only)
 .agents/
 workstreams/

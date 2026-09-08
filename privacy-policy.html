@@ -7,13 +7,82 @@
   <title>Privacy Policy | The Data Pilot</title>
   
   <!-- THE BOOTLOADER: Manages React, Tailwind, Global Styles, and Fallbacks -->
-    <!-- NATIVE TAILWIND CONFIGURATION -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="theme-config.js?v=3.2.10"></script>
-  <script src="site-loader.js?v=3.2.10"></script>
+  <script src="theme-config.js?v=3.2.12"></script>
+  <script src="site-loader.js?v=3.2.12"></script>
 </head>
-<body class="theme-bg">
-  <!-- React App mounts here -->
-  <div id="root"></div>
+<body class="theme-bg bg-[#0f172a] text-slate-200 antialiased font-sans">
+  <!-- React App mounts here with complete static semantic fallback for compliance bots and crawlers -->
+  <div id="root">
+    <header class="pt-32 pb-12 px-6 border-b border-slate-800 bg-[#0b1120]">
+      <div class="max-w-4xl mx-auto text-left">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-400 block mb-2">Privacy & Data Governance</span>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2">Privacy Policy</h1>
+        <p class="text-slate-400 text-sm font-medium">Last Updated & Effective Date: September 2026 | The Data Pilot (thedatapilot.in)</p>
+      </div>
+    </header>
+
+    <main class="py-12 px-6 max-w-4xl mx-auto text-left text-slate-300 space-y-8 leading-relaxed">
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white tracking-tight">1. Introduction & Scope</h2>
+        <p><strong>The Data Pilot</strong> ("we", "us", or "our"), operating via <a href="https://www.thedatapilot.in" class="text-sky-400 hover:underline">https://www.thedatapilot.in</a>, is dedicated to safeguarding your personal data and privacy. This Privacy Policy details how we collect, process, store, and protect your information in compliance with the <strong>Information Technology Act, 2000</strong>, the <strong>Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011</strong>, and applicable international data standards.</p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white tracking-tight">2. Information We Collect</h2>
+        <p>We collect only the information necessary to evaluate your admission eligibility, process your enrollments, deliver course materials, and provide placement assistance:</p>
+        <ul class="list-disc pl-6 space-y-1.5 text-slate-300">
+          <li><strong>Personal Contact Data:</strong> Full name, email address, WhatsApp/mobile number, city/state, and educational or professional background provided through consultation forms.</li>
+          <li><strong>Transaction & Billing Identifiers:</strong> Razorpay payment order IDs, transaction reference IDs, dates, and amounts paid. <em>(Note: We do NOT store sensitive financial credentials like raw credit/debit card numbers, CVVs, or UPI MPINs; these are processed directly by our regulated payment aggregator).</em></li>
+          <li><strong>Technical & Analytical Insights:</strong> Browser type, device category, IP address, and referral sources to optimize website responsiveness and performance.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white tracking-tight">3. How We Use Your Information</h2>
+        <p>Your data is processed strictly for legitimate educational, academic, and administrative purposes:</p>
+        <ul class="list-disc pl-6 space-y-1.5 text-slate-300">
+          <li>Processing course admissions, batch onboarding, and issuance of certificates.</li>
+          <li>Delivering live lecture access links, class recordings, datasets, and curriculum updates.</li>
+          <li>Providing personalized career mentorship, resume evaluations, and interview preparation.</li>
+          <li>Dispatching official admission payment receipts and transaction acknowledgments.</li>
+          <li>Complying with statutory accounting and taxation audits.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white tracking-tight">4. Third-Party Payment Gateway Integration (Razorpay)</h2>
+        <p>All online financial transactions on <strong>thedatapilot.in</strong> are routed through our authorized payment partner, <strong>Razorpay Software Private Limited</strong> ("Razorpay").</p>
+        <ul class="list-disc pl-6 space-y-1.5 text-slate-300">
+          <li>When you make a payment, your payment details (cards, netbanking credentials, UPI handles) are encrypted and handled directly by Razorpay under strict <strong>PCI-DSS (Payment Card Industry Data Security Standard) Level 1</strong> compliance.</li>
+          <li>The Data Pilot receives only transaction status updates, amounts, and unique transaction reference codes to confirm your admission.</li>
+          <li>For more details on Razorpay’s security infrastructure and privacy practices, please review the <a href="https://razorpay.com/privacy/" target="_blank" rel="noopener" class="text-sky-400 hover:underline">Razorpay Privacy Policy</a>.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white tracking-tight">5. Data Protection, Security & No-Sale Guarantee</h2>
+        <p>We deploy robust SSL/TLS 256-bit encryption for all data transmissions. We maintain strict role-based internal access controls ensuring that only authorized admissions personnel can access candidate profiles. <strong>We do not sell, rent, or trade your personal information to third-party telemarketers or advertisers under any circumstances.</strong></p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-xl font-bold text-white tracking-tight">6. Data Retention & Your Rights</h2>
+        <p>We retain student records for the duration of the course enrollment and career support lifecycle, or as required by law for financial accounting records. You have the right to request access to your personal data, seek corrections to inaccurate contact information, or request account data erasure by writing to our compliance team.</p>
+      </section>
+
+      <section class="space-y-3 border-t border-slate-800 pt-6">
+        <h2 class="text-xl font-bold text-white tracking-tight">7. Grievance Officer & Contact Details</h2>
+        <p>In accordance with the <strong>Information Technology Act 2000</strong> and the rules made thereunder, the name and contact details of the designated <strong>Grievance Officer</strong> for The Data Pilot are provided below:</p>
+        <div class="bg-slate-800/60 p-4 rounded-xl border border-slate-700 space-y-1 text-sm">
+          <p><strong>Designation:</strong> Grievance & Compliance Officer</p>
+          <p><strong>Platform / Entity:</strong> The Data Pilot</p>
+          <p><strong>Official Website:</strong> <a href="https://www.thedatapilot.in" class="text-sky-400 hover:underline">https://www.thedatapilot.in</a></p>
+          <p><strong>Email:</strong> <a href="mailto:admissions@thedatapilot.in" class="text-sky-400 hover:underline">admissions@thedatapilot.in</a> / <a href="mailto:info@thedatapilot.in" class="text-sky-400 hover:underline">info@thedatapilot.in</a></p>
+          <p><strong>Contact Number:</strong> +91 88253 89945</p>
+          <p><strong>Address:</strong> Ranchi, Jharkhand, 834001, India</p>
+        </div>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
