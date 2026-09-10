@@ -56,6 +56,10 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-center">
                     <window.ScrollReveal>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-3">
+                            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                            Catalog In Progress • Launching Soon
+                        </div>
                         <window.SectionEyebrow>Digital Products</window.SectionEyebrow>
                         <h1 className="text-4xl md:text-5xl font-extrabold theme-text-primary mb-4">Logic-Ready Templates</h1>
                         <p className="text-lg theme-text-muted font-medium leading-relaxed max-w-2xl mx-auto">
@@ -75,9 +79,9 @@ const App = () => {
                                     <p className="text-sm theme-text-muted font-medium leading-relaxed flex-grow mb-6">{product.description}</p>
                                     <div className="pt-5 border-t theme-border flex items-center justify-between mt-auto">
                                         <span className="text-2xl font-black theme-text-primary">{product.currency}{product.price}</span>
-                                        <window.GradientButton className="px-6 py-3 rounded-xl text-sm">
-                                            Get Access
-                                        </window.GradientButton>
+                                        <button disabled className="px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest bg-white/10 text-white/50 cursor-not-allowed border border-white/10 select-none">
+                                            In Progress
+                                        </button>
                                     </div>
                                 </div>
                             </window.TiltCard>

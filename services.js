@@ -56,6 +56,10 @@ const App = () => {
             <header className="pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong">
                 <div className="max-w-4xl mx-auto text-center">
                     <window.ScrollReveal>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-3">
+                            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                            Services In Development • Bookings Opening Soon
+                        </div>
                         <window.SectionEyebrow>Expert Services</window.SectionEyebrow>
                         <h1 className="text-4xl md:text-5xl font-extrabold theme-text-primary mb-4">Built for Corporate Teams</h1>
                         <p className="text-lg theme-text-muted font-medium leading-relaxed max-w-2xl mx-auto">
@@ -73,9 +77,9 @@ const App = () => {
                                     <window.CardBadge className="absolute top-6 right-6">{service.category}</window.CardBadge>
                                     <h3 className="text-xl font-bold theme-text-primary mb-4 pr-16">{service.title}</h3>
                                     <p className="theme-text-muted font-medium leading-relaxed mb-8 flex-grow">{service.description}</p>
-                                    <window.GradientButton className="w-full py-4 rounded-xl text-xs uppercase tracking-widest mt-auto">
-                                        {service.cta}
-                                    </window.GradientButton>
+                                    <button disabled className="w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest mt-auto bg-white/10 text-white/50 cursor-not-allowed border border-white/10 select-none">
+                                        In Progress
+                                    </button>
                                 </div>
                             </window.TiltCard>
                         </window.ScrollReveal>

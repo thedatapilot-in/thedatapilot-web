@@ -206,55 +206,18 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                 </div>
 
                 <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold theme-text-primary">
-                    <a href="products.html" className={`hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isProductsPage ? 'theme-mid-text' : 'theme-text-primary'}`}>Products</a>
-                    <a href="services.html" className={`hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isServicesPage ? 'theme-mid-text' : 'theme-text-primary'}`}>Services</a>
+                    <span className="flex items-center gap-1.5 font-bold text-[17px] tracking-tight text-slate-400/60 cursor-not-allowed select-none">
+                        Products
+                        <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">Soon</span>
+                    </span>
+                    <span className="flex items-center gap-1.5 font-bold text-[17px] tracking-tight text-slate-400/60 cursor-not-allowed select-none">
+                        Services
+                        <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">Soon</span>
+                    </span>
                     
-                    <div
-                        ref={dropdownRef}
-                        className="relative group py-2"
-                    >
-                        {/* The Trigger Button — click to open/close only, no hover-open */}
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setIsDropdownOpen(prev => !prev);
-                            }}
-                            className={`flex items-center space-x-1 hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'theme-mid-text' : 'theme-text-primary'}`}
-                        >
-                            <span>All Programs</span>
-                            <window.Icon 
-                                name="chevron-down" 
-                                size={14} 
-                                className={isDropdownOpen ? 'rotate-180 transition-transform theme-mid-text' : 'transition-transform text-slate-300'} 
-                            />
-                        </button>
-                        
-                        {isDropdownOpen && programs && (
-                            <div className="absolute top-full left-0 w-max min-w-[220px] max-w-xs z-[60] animate-in fade-in duration-200 pt-1">
-                                {/* Seamless edge-to-edge dropdown card */}
-                                <div className="border theme-border-strong shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl" style={{backgroundColor: 'var(--bg-base)'}}>
-                                    {Object.entries(programs).map(([progId, prog]) => {
-                                        const isSelected = progId === activeProgramId;
-                                        return (
-                                            <button
-                                                key={progId}
-                                                onClick={() => {
-                                                    if(onProgramChange) onProgramChange(progId);
-                                                    else window.location.href=`index.html#about`;
-                                                    setIsDropdownOpen(false);
-                                                }}
-                                                className={`w-full text-left px-4 py-3 hover:bg-[var(--bg-alt)] font-bold text-xs tracking-tight transition-colors ${
-                                                    isSelected ? 'theme-mid-text font-extrabold bg-[var(--bg-alt)]' : 'text-[var(--text-base)]'
-                                                }`}
-                                            >
-                                                {prog.title}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        )}
-                    </div>
+                    <a href="index.html#syllabus" className="hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight theme-text-primary">
+                        Curriculum
+                    </a>
 
                     <button onClick={() => setIsModalOpen(true)} className="theme-mid-text hover:brightness-90 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
                     <button onClick={() => setIsModalOpen(true)} className="theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
@@ -268,33 +231,17 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
             {isMenuOpen && (
                 <div className="lg:hidden absolute top-20 left-0 w-full theme-bg border-b theme-border shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]">
                     <div className="flex flex-col space-y-4 text-sm font-bold">
-                        <a href="products.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${isProductsPage ? activeItemClass : inactiveItemClass}`}>Products</a>
-                        <a href="services.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${isServicesPage ? activeItemClass : inactiveItemClass}`}>Services</a>
-                        
-                        <div className="space-y-4">
-                            <div className={`p-4 rounded-xl transition-all ${isLandingPage ? activeItemClass : inactiveItemClass}`}>
-                                <span className="font-bold">All Programs</span>
-                            </div>
-                            
-                            <div className="pl-6 space-y-3">
-                                {programs && Object.entries(programs).map(([progId, prog]) => {
-                                    const isCourseActive = isLandingPage && progId === activeProgramId;
-                                    return (
-                                        <button 
-                                            key={progId} 
-                                            onClick={() => { 
-                                                if(onProgramChange) onProgramChange(progId); 
-                                                else window.location.href=`index.html#about`; 
-                                                setIsMenuOpen(false); 
-                                            }} 
-                                            className={`block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'theme-accent-pill' : 'theme-text-muted hover:bg-[var(--bg-base)]'}`}
-                                        >
-                                            {prog.title}
-                                        </button>
-                                    );
-                                })}
-                            </div>
+                        <div className="flex items-center justify-between p-4 rounded-xl opacity-60 cursor-not-allowed select-none">
+                            <span>Products</span>
+                            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">In Progress</span>
                         </div>
+                        <div className="flex items-center justify-between p-4 rounded-xl opacity-60 cursor-not-allowed select-none">
+                            <span>Services</span>
+                            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400">In Progress</span>
+                        </div>
+                        <a href="index.html#syllabus" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${inactiveItemClass}`}>
+                            Curriculum
+                        </a>
 
                         <div className="pt-4 border-t border-secondary-50 flex flex-col space-y-4">
                             <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-mid-text font-bold text-left px-2 py-3">Request Callback</button>
