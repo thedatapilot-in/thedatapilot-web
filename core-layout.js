@@ -218,6 +218,10 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     <a href="index.html#syllabus" className="hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight theme-text-primary">
                         Curriculum
                     </a>
+                    <a href="salary-calculator.html" className="hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight flex items-center gap-1.5 theme-mid-text">
+                        <span>Salary Calc</span>
+                        <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30">Free</span>
+                    </a>
 
                     <button onClick={() => setIsModalOpen(true)} className="theme-mid-text hover:brightness-90 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
                     <button onClick={() => setIsModalOpen(true)} className="theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
@@ -241,6 +245,10 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                         </div>
                         <a href="index.html#syllabus" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all ${inactiveItemClass}`}>
                             Curriculum
+                        </a>
+                        <a href="salary-calculator.html" onClick={() => setIsMenuOpen(false)} className={`p-4 rounded-xl transition-all flex items-center justify-between theme-accent-pill font-bold`}>
+                            <span>Salary Hike Calculator</span>
+                            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-400">Free</span>
                         </a>
 
                         <div className="pt-4 border-t border-secondary-50 flex flex-col space-y-4">
