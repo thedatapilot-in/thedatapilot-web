@@ -56,6 +56,7 @@ const App = () => {
     const [leadForm, setLeadForm] = useState({ name: "", email: "", phone: "" });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [sidePromoVisible, setSidePromoVisible] = useState(true);
 
     useEffect(() => {
         const handleSync = () => {
@@ -456,6 +457,50 @@ const App = () => {
                                 </button>
                             </div>
                         )}
+                    </div>
+                </div>
+            )}
+
+            {/* FLOATING MARKETING POPUP ON THE SIDE */}
+            {sidePromoVisible && (
+                <div className="fixed bottom-6 right-6 z-40 max-w-sm w-full p-1 animate-in slide-in-from-bottom-5 duration-500">
+                    <div className="theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95">
+                        <button 
+                            onClick={() => setSidePromoVisible(false)}
+                            className="absolute top-3 right-3 text-slate-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
+                            aria-label="Dismiss banner"
+                        >
+                            <Icon name="x" size={16} />
+                        </button>
+
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-400">The Data Pilot Official Cohort</span>
+                        </div>
+
+                        <h4 className="text-sm md:text-base font-extrabold text-white mb-1.5 leading-snug">
+                            Ready to unlock this package in 16 weeks?
+                        </h4>
+                        
+                        <p className="text-xs text-slate-300 font-medium mb-3.5 leading-relaxed">
+                            Join live cohorts in SQL, Power BI, Python & GenAI with 1-on-1 industry mentorship.
+                        </p>
+
+                        <div className="flex items-center gap-2">
+                            <a 
+                                href="index.html#about" 
+                                className="flex-1 theme-btn-gradient text-white text-center py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg active:scale-95 transition-all flex items-center justify-center gap-1.5"
+                            >
+                                <span>Visit Official Website</span>
+                                <Icon name="arrow-right" size={14} />
+                            </a>
+                            <button
+                                onClick={() => setIsModalOpen(true)}
+                                className="px-3 py-2.5 rounded-xl border border-white/20 hover:bg-white/10 text-white text-xs font-bold transition-all"
+                            >
+                                Inquire
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
