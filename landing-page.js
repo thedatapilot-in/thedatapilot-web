@@ -728,8 +728,7 @@ const App = () => {
         couponCode: '', 
         discountApplied: false, 
         discountAmount: 0,
-        finalPrice: 0,
-        customAmount: '' 
+        finalPrice: 0
     });
     
     const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
@@ -899,9 +898,11 @@ const App = () => {
     };
 
     const initiateRazorpayPayment = async (customer = formData) => {
-        let payableAmount = parseFloat(customer.customAmount);
+        const payableAmount = (formData.discountApplied && formData.finalPrice > 0)
+            ? formData.finalPrice
+            : (currentProgram.price || 40000);
         if (isNaN(payableAmount) || payableAmount < 1) {
-            triggerFeedback('error', 'Please enter a valid amount of at least ₹1.');
+            triggerFeedback('error', 'Please enter a valid enrollment amount.');
             return;
         }
 
@@ -983,13 +984,6 @@ const App = () => {
     };
 
     const handlePaymentClick = () => {
-        const defaultAmount = String((formData.discountApplied && formData.finalPrice > 0)
-            ? formData.finalPrice
-            : (currentProgram.price || 40000));
-        setFormData(prev => ({
-            ...prev,
-            customAmount: prev.customAmount !== '' ? prev.customAmount : defaultAmount
-        }));
         setCheckoutModalOpen(true);
     };
 
@@ -1615,22 +1609,20 @@ const App = () => {
                             </div>
                         </div>
 
-                        <div className="p-3.5 mb-4 rounded-2xl bg-brand-500/10 border border-brand-500/20">
-                            <label className="block text-[11px] font-bold uppercase tracking-wider theme-text-secondary mb-1.5">
-                                Total Payable (₹) *
-                            </label>
-                            <div className="flex items-center gap-2">
-                                <span className="text-xl font-black theme-text-primary">₹</span>
-                                <input 
-                                    type="number" 
-                                    min="1"
-                                    step="any"
-                                    required 
-                                    placeholder="Enter amount (e.g. 1)"
-                                    value={formData.customAmount}
-                                    onChange={(e) => setFormData({...formData, customAmount: e.target.value})}
-                                    className="w-full p-2.5 text-xl font-black theme-text-primary bg-white/10 border theme-border rounded-xl outline-none focus:border-brand-500 transition-all placeholder:text-white/30"
-                                />
+                        <div className="p-4 mb-4 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-between">
+                            <div>
+                                <span className="block text-[11px] font-bold uppercase tracking-wider theme-text-secondary mb-0.5">
+                                    Total Payable
+                                </span>
+                                <span className="text-xs theme-text-muted">
+                                    {formData.discountApplied ? `Discount Applied (${formData.couponCode || 'PROMO'})` : 'Standard Enrollment Fee'}
+                                </span>
+                            </div>
+                            <div className="text-right">
+                                <span className="text-2xl font-black theme-text-primary tracking-tight">
+                                    ₹{(formData.discountApplied && formData.finalPrice > 0 ? formData.finalPrice : (currentProgram.price || 40000)).toLocaleString()}
+                                </span>
+                                <span className="text-[10px] theme-text-muted block">INR (All-inclusive)</span>
                             </div>
                         </div>
 
@@ -1676,11 +1668,12 @@ const App = () => {
 
                             <div className="pt-2">
                                 <button 
-                                    type="submit"
-                                    className="w-full theme-btn-gradient text-white py-4 rounded-xl font-black text-xs md:text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                                    type="submit" 
+                                    disabled={paymentProcessing}
+                                    className="w-full theme-btn-gradient text-white py-4 rounded-xl font-black text-xs md:text-sm uppercase tracking-widest transition-all shadow-lg active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75"
                                 >
                                     <Icon name="lock" size={16} />
-                                    <span>Proceed to Pay {formData.customAmount ? `₹${Number(formData.customAmount).toLocaleString()}` : ''}</span>
+                                    <span>Proceed to Secure Payment</span>
                                 </button>
                             </div>
 
