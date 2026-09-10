@@ -20,6 +20,7 @@
     const isRefundPage = path.endsWith('refund-policy.html');
     const isProductsPage = path.endsWith('products.html');
     const isServicesPage = path.endsWith('services.html');
+    const isSalaryCalcPage = path.endsWith('salary-calculator.html');
 
     // --- CENTRALIZED WATCHDOG & EMERGENCY UI ---
     // Increased from 3000 to 10000 to handle slower 4G/mobile latencies
@@ -209,6 +210,7 @@
         else if (isRefundPage) pageSrc = `refund-policy.js?v=${VERSION}`;
         else if (isProductsPage) pageSrc = `products.js?v=${VERSION}`;
         else if (isServicesPage) pageSrc = `services.js?v=${VERSION}`;
+        else if (isSalaryCalcPage) pageSrc = `salary-calculator.js?v=${VERSION}`;
 
         // Inject the page logic if a valid route was found
         if (pageSrc) {
