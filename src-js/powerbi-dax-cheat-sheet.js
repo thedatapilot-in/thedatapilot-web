@@ -1,4 +1,13 @@
 const PowerBIDaxCheatSheet = () => {
+    const [isReady, setIsReady] = React.useState(window.SITE_DATA?.isLoaded);
+
+    React.useEffect(() => {
+        const handleEngineReady = () => setIsReady(true);
+        window.addEventListener('engineReady', handleEngineReady);
+        return () => window.removeEventListener('engineReady', handleEngineReady);
+    }, []);
+
+    if (!isReady) return <div className="min-h-screen theme-bg flex items-center justify-center"><div className="w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div></div>;
     return (
         <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col relative">
             <window.Navbar />

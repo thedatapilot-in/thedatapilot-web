@@ -11,6 +11,15 @@ const ResumeEvaluator = () => {
     const [resumeText, setResumeText] = useState('');
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [results, setResults] = useState(null);
+    const [isReady, setIsReady] = useState(window.SITE_DATA?.isLoaded);
+
+    useEffect(() => {
+        const handleEngineReady = () => setIsReady(true);
+        window.addEventListener('engineReady', handleEngineReady);
+        return () => window.removeEventListener('engineReady', handleEngineReady);
+    }, []);
+
+    if (!isReady) return <div className="min-h-screen theme-bg flex items-center justify-center"><div className="w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div></div>;
 
     const handleAnalyze = () => {
         if (!resumeText.trim()) return;
@@ -54,7 +63,7 @@ const ResumeEvaluator = () => {
         <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col">
             <window.Navbar />
 
-            <main className="flex-grow max-w-4xl mx-auto w-full px-6 py-12 flex flex-col gap-8">
+            <main className="flex-grow max-w-4xl mx-auto w-full px-6 pt-32 pb-24 flex flex-col gap-8">
                 <div className="text-center space-y-4">
                     <h1 className="text-4xl md:text-5xl font-black tracking-tight">
                         Does your resume <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-400">pass the ATS?</span>
