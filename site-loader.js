@@ -9,7 +9,7 @@
  */
 
 (function() {
-    const VERSION = "3.2.13";
+    const VERSION = "3.2.14";
     const path = window.location.pathname;
     
     // Page Route Detection
@@ -201,6 +201,7 @@
         const engine = document.createElement('script');
         engine.type = "application/javascript";
         engine.src = `dist-js/core-layout.js?v=${VERSION}`;
+        engine.async = false;
         document.head.appendChild(engine);
 
         // Determine which specific page logic to load
@@ -224,6 +225,7 @@
             const page = document.createElement('script');
             page.type = "application/javascript";
             page.src = pageSrc;
+            page.async = false;
             document.head.appendChild(page);
         }
     }
