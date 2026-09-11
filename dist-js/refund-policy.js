@@ -1,0 +1,272 @@
+/**
+ * THE DATA PILOT - REFUND POLICY COMPONENT (refund-policy.js)
+ * ---------------------------------------------------------
+ * Logic for the Refund Policy page.
+ * DATA INTEGRITY: Content strictly pulled from settings.json.
+ * OPTIMIZATION: Removed redundant internal watchdog (now handled by site-loader.js).
+ * ---------------------------------------------------------
+ */
+
+const {
+  useState,
+  useEffect
+} = React;
+
+/**
+ * Navigation-Friendly Emergency UI (LOCKED DESIGN & WORDING)
+ */
+const InternalEmergencyUI = () => /*#__PURE__*/React.createElement("div", {
+  style: {
+    height: '100vh',
+    width: '100vw',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '24px',
+    backgroundColor: 'var(--bg-base)',
+    textAlign: 'center'
+  }
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    maxWidth: '448px',
+    width: '100%'
+  }
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '12px',
+    marginBottom: '28px'
+  }
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    width: '52px',
+    height: '52px',
+    backgroundColor: 'var(--brand-500)',
+    borderRadius: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+    boxShadow: '0 10px 15px -3px color-mix(in srgb, var(--brand-500) 20%, transparent)'
+  }
+}, /*#__PURE__*/React.createElement("svg", {
+  width: "28",
+  height: "28",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "white",
+  strokeWidth: "2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"
+}))), /*#__PURE__*/React.createElement("div", {
+  style: {
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'left',
+    lineHeight: '1'
+  }
+}, /*#__PURE__*/React.createElement("span", {
+  style: {
+    fontWeight: '800',
+    fontSize: '22px',
+    color: 'var(--text-base)',
+    marginBottom: '4px'
+  }
+}, "The Data Pilot"), /*#__PURE__*/React.createElement("span", {
+  style: {
+    fontSize: '13px',
+    fontWeight: '600',
+    color: 'var(--brand-500)'
+  }
+}, "Logic-First. AI-Fast."))), /*#__PURE__*/React.createElement("div", {
+  style: {
+    backgroundColor: 'var(--surface-card)',
+    padding: '30px',
+    borderRadius: '40px',
+    border: '1px solid var(--border-color)',
+    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.05)'
+  }
+}, /*#__PURE__*/React.createElement("div", {
+  style: {
+    width: '100px',
+    height: '80px',
+    margin: '0 auto 32px auto',
+    position: 'relative'
+  }
+}, /*#__PURE__*/React.createElement("svg", {
+  width: "64",
+  height: "64",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "var(--brand-500)",
+  strokeWidth: "1.5",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  style: {
+    position: 'absolute',
+    top: 0,
+    left: 0
+  },
+  className: "gear-large"
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+}), /*#__PURE__*/React.createElement("circle", {
+  cx: "12",
+  cy: "12",
+  r: "3"
+})), /*#__PURE__*/React.createElement("svg", {
+  width: "42",
+  height: "42",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "var(--brand-500)",
+  strokeWidth: "1.5",
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  style: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0
+  },
+  className: "gear-small"
+}, /*#__PURE__*/React.createElement("path", {
+  d: "M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+}), /*#__PURE__*/React.createElement("circle", {
+  cx: "12",
+  cy: "12",
+  r: "3"
+}))), /*#__PURE__*/React.createElement("h2", {
+  style: {
+    fontWeight: '800',
+    fontSize: '24px',
+    margin: '0 0 12px 0',
+    color: 'var(--text-base)'
+  }
+}, "System is temporarily down"), /*#__PURE__*/React.createElement("p", {
+  style: {
+    color: 'color-mix(in srgb, var(--text-base) 75%, transparent)',
+    fontWeight: '500',
+    marginBottom: '36px',
+    lineHeight: '1.6',
+    fontSize: '15px'
+  }
+}, "We are working on it and will be back online shortly."), /*#__PURE__*/React.createElement("button", {
+  onClick: () => window.location.reload(true),
+  style: {
+    width: '100%',
+    backgroundColor: 'var(--brand-500)',
+    color: 'white',
+    padding: '22px',
+    borderRadius: '16px',
+    fontWeight: '800',
+    fontSize: '15px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+    border: 'none',
+    cursor: 'pointer',
+    boxShadow: '0 10px 15px -3px color-mix(in srgb, var(--brand-500) 30%, transparent)'
+  }
+}, "Check Connection")), /*#__PURE__*/React.createElement("p", {
+  style: {
+    marginTop: '18px',
+    fontSize: '12px',
+    fontWeight: '700',
+    color: 'color-mix(in srgb, var(--text-base) 50%, transparent)',
+    letterSpacing: '0.05em'
+  }
+}, "Commitment to world-class data services and mentorship")));
+const App = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  useEffect(() => {
+    const checkDataSync = () => {
+      if (window.SITE_DATA && window.SITE_DATA.isLoaded && window.Navbar && window.Footer) {
+        setIsLoaded(true);
+        setHasError(false);
+      } else if (window.SITE_DATA && window.SITE_DATA.error) {
+        setHasError(true);
+      }
+    };
+    window.addEventListener('siteDataLoaded', checkDataSync);
+    checkDataSync();
+    return () => {
+      window.removeEventListener('siteDataLoaded', checkDataSync);
+    };
+  }, []);
+  if (hasError) return /*#__PURE__*/React.createElement(InternalEmergencyUI, null);
+  if (!isLoaded) return null;
+  const {
+    Navbar,
+    Footer,
+    Icon
+  } = window;
+
+  // FETCHING DYNAMIC CONTENT FROM DATA VAULT
+  const refundData = window.SITE_DATA?.settings?.refundPolicy || {};
+  const contactEmail = window.SITE_DATA?.settings?.contact?.admissionsEmail || "admissions@thedatapilot.in";
+  const safeHeader = refundData.header || {
+    title: "Refund Policy",
+    subtitle: "Effective Date: March 20, 2026"
+  };
+  const safeIntro = refundData.intro || "";
+  const safeSections = refundData.sections || [];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "min-h-screen theme-text-primary theme-bg animate-in fade-in duration-700"
+  }, /*#__PURE__*/React.createElement(Navbar, null), /*#__PURE__*/React.createElement("header", {
+    className: "pt-40 pb-16 px-6 theme-bg-alt border-b theme-border-strong"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-4xl mx-auto text-left"
+  }, /*#__PURE__*/React.createElement(window.ScrollReveal, null, /*#__PURE__*/React.createElement(window.SectionEyebrow, null, "Legal"), /*#__PURE__*/React.createElement("h1", {
+    className: "text-4xl font-extrabold theme-text-primary mb-2"
+  }, safeHeader.title), /*#__PURE__*/React.createElement("p", {
+    className: "theme-text-muted font-medium text-sm"
+  }, safeHeader.subtitle)))), /*#__PURE__*/React.createElement("section", {
+    className: "py-12 px-6 text-left"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-4xl mx-auto"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "theme-text-secondary space-y-2 leading-relaxed"
+  }, /*#__PURE__*/React.createElement("p", {
+    className: "mb-6"
+  }, safeIntro), /*#__PURE__*/React.createElement("div", {
+    className: "policy-content space-y-8"
+  }, safeSections.map((section, idx) => {
+    const ListTag = section.ordered ? 'ol' : 'ul';
+    const listClass = section.ordered ? 'list-decimal' : 'list-disc';
+    return /*#__PURE__*/React.createElement("div", {
+      key: idx
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "text-xl font-bold theme-text-primary mb-3 tracking-tight"
+    }, section.title), /*#__PURE__*/React.createElement("p", {
+      className: section.list && section.list.length > 0 ? "mb-3" : ""
+    }, section.content), section.list && section.list.length > 0 && /*#__PURE__*/React.createElement(ListTag, {
+      className: `${listClass} pl-6 space-y-2`
+    }, section.list.map((item, i) => /*#__PURE__*/React.createElement("li", {
+      key: i
+    }, item))));
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "theme-bg p-8 rounded-3xl border theme-border mt-12"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "text-xl font-bold theme-text-primary mb-3 tracking-tight"
+  }, "Contact Support"), /*#__PURE__*/React.createElement("p", {
+    className: "mb-4"
+  }, "If you have any questions regarding our refund terms, please reach out to our admissions team:"), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-3 font-semibold theme-text-primary"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "mail",
+    size: 18,
+    className: "theme-mid-text"
+  }), /*#__PURE__*/React.createElement("a", {
+    href: `mailto:${contactEmail}`,
+    className: "theme-mid-text hover:underline"
+  }, contactEmail))))))), /*#__PURE__*/React.createElement(Footer, null));
+};
+if (!window._reactRoot) {
+  window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(/*#__PURE__*/React.createElement(App, null));

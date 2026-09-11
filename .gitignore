@@ -15,3 +15,5 @@ tmp_chrome_data/
 tmp_chrome_profile/
 BACKLOG.md
 CLAUDE.md
+
+node_modules/
