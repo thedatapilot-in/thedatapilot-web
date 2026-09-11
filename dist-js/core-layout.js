@@ -950,8 +950,8 @@ window.PageLayout = ({
   const [isReady, setIsReady] = React.useState(window.SITE_DATA?.isLoaded);
   React.useEffect(() => {
     const handleEngineReady = () => setIsReady(true);
-    window.addEventListener('engineReady', handleEngineReady);
-    return () => window.removeEventListener('engineReady', handleEngineReady);
+    window.addEventListener('siteDataLoaded', handleEngineReady);
+    return () => window.removeEventListener('siteDataLoaded', handleEngineReady);
   }, []);
   if (!isReady) {
     return /*#__PURE__*/React.createElement("div", {

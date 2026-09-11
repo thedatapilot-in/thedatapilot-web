@@ -803,8 +803,8 @@ window.PageLayout = ({ children, maxWidth = "max-w-4xl" }) => {
 
     React.useEffect(() => {
         const handleEngineReady = () => setIsReady(true);
-        window.addEventListener('engineReady', handleEngineReady);
-        return () => window.removeEventListener('engineReady', handleEngineReady);
+        window.addEventListener('siteDataLoaded', handleEngineReady);
+        return () => window.removeEventListener('siteDataLoaded', handleEngineReady);
     }, []);
 
     if (!isReady) {
