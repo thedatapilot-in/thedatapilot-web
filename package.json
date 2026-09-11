@@ -43,8 +43,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src-js -d dist-js --presets=@babel/preset-react",
-    "watch": "babel src-js -d dist-js --presets=@babel/preset-react -w"
+    "build": "babel src-js -d dist-js",
+    "watch": "babel src-js -d dist-js -w"
   },
   "repository": {
     "type": "git",

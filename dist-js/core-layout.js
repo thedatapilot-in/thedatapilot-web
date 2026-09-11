@@ -1,4 +1,3 @@
-import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 /**
  * THE DATA PILOT - MASTER ENGINE v2.0.40
  * ---------------------------------------------------------
@@ -95,14 +94,14 @@ window.Icon = ({
   React.useEffect(() => {
     if (window.lucide) window.lucide.createIcons();
   }, [name]);
-  return /*#__PURE__*/_jsxDEV("i", {
+  return /*#__PURE__*/React.createElement("i", {
     "data-lucide": name,
     className: className,
     style: {
       width: size,
       height: size
     }
-  }, void 0, false);
+  });
 };
 
 /**
@@ -119,19 +118,17 @@ window.Icon = ({
 window.SectionEyebrow = ({
   children,
   className = "text-xs block mb-3"
-}) => /*#__PURE__*/_jsxDEV("span", {
-  className: `theme-mid-text font-bold uppercase tracking-widest ${className}`,
-  children: children
-}, void 0, false);
+}) => /*#__PURE__*/React.createElement("span", {
+  className: `theme-mid-text font-bold uppercase tracking-widest ${className}`
+}, children);
 
 // Small rounded corner tag on a card (e.g. project/product/service cards)
 window.CardBadge = ({
   children,
   className = ""
-}) => /*#__PURE__*/_jsxDEV("span", {
-  className: `inline-block theme-btn-gradient text-white text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-full shadow-lg ${className}`,
-  children: children
-}, void 0, false);
+}) => /*#__PURE__*/React.createElement("span", {
+  className: `inline-block theme-btn-gradient text-white text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-full shadow-lg ${className}`
+}, children);
 
 // Primary gradient CTA button/link — matches the hero "Explore Curriculum" treatment
 window.GradientButton = ({
@@ -139,11 +136,10 @@ window.GradientButton = ({
   children,
   className = "",
   ...props
-}) => /*#__PURE__*/_jsxDEV(Tag, {
+}) => /*#__PURE__*/React.createElement(Tag, {
   className: `theme-btn-gradient text-white font-bold transition-all shadow-lg active:scale-95 ${className}`,
-  ...props,
-  children: children
-}, void 0, false);
+  ...props
+}, children);
 window.Navbar = ({
   activeProgramId,
   onProgramChange
@@ -233,218 +229,176 @@ window.Navbar = ({
   };
   const activeItemClass = "theme-card/60 theme-mid-text border-l-4 border-[var(--brand-mid)]";
   const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:bg-[var(--bg-base)]";
-  return /*#__PURE__*/_jsxDEV("nav", {
-    className: "fixed w-full z-50 theme-bg border-b theme-border h-20 flex items-center shadow-sm",
-    children: [/*#__PURE__*/_jsxDEV("div", {
-      className: "max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left",
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        className: "flex items-center gap-2 sm:gap-3 cursor-pointer",
-        onClick: () => window.location.href = 'index.html',
-        children: [/*#__PURE__*/_jsxDEV("img", {
-          src: `assets/images/thedatapilot_logo_${window.LIVE_THEME || 'crimson'}.png`,
-          alt: "",
-          className: "h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0",
-          onError: e => {
-            e.target.onerror = null;
-            e.target.src = 'assets/images/thedatapilot_logo.png';
-          }
-        }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-          className: "font-bold text-[22px] theme-mid-text tracking-tight",
-          children: brand
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-        className: "hidden lg:flex items-center space-x-8 text-sm font-semibold theme-text-primary",
-        children: [/*#__PURE__*/_jsxDEV("span", {
-          className: "flex items-center gap-1.5 font-bold text-[17px] tracking-tight text-slate-400/60 cursor-not-allowed select-none",
-          children: ["Products", /*#__PURE__*/_jsxDEV("span", {
-            className: "text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400",
-            children: "Soon"
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("span", {
-          className: "flex items-center gap-1.5 font-bold text-[17px] tracking-tight text-slate-400/60 cursor-not-allowed select-none",
-          children: ["Services", /*#__PURE__*/_jsxDEV("span", {
-            className: "text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400",
-            children: "Soon"
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          ref: dropdownRef,
-          className: "relative group py-2",
-          children: [/*#__PURE__*/_jsxDEV("button", {
-            onClick: e => {
-              e.preventDefault();
-              setIsDropdownOpen(prev => !prev);
-            },
-            className: `flex items-center space-x-1 hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'theme-mid-text' : 'theme-text-primary'}`,
-            children: [/*#__PURE__*/_jsxDEV("span", {
-              children: "All Programs"
-            }, void 0, false), /*#__PURE__*/_jsxDEV(window.Icon, {
-              name: "chevron-down",
-              size: 14,
-              className: isDropdownOpen ? 'rotate-180 transition-transform theme-mid-text' : 'transition-transform text-slate-300'
-            }, void 0, false)]
-          }, void 0, true), isDropdownOpen && programs && /*#__PURE__*/_jsxDEV("div", {
-            className: "absolute top-full left-0 w-max min-w-[220px] max-w-xs z-[60] animate-in fade-in duration-200 pt-1",
-            children: /*#__PURE__*/_jsxDEV("div", {
-              className: "border theme-border-strong shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl",
-              style: {
-                backgroundColor: 'var(--bg-base)'
-              },
-              children: Object.entries(programs).map(([progId, prog]) => {
-                const isSelected = progId === activeProgramId;
-                return /*#__PURE__*/_jsxDEV("button", {
-                  onClick: () => {
-                    if (onProgramChange) onProgramChange(progId);else window.location.href = `index.html#about`;
-                    setIsDropdownOpen(false);
-                  },
-                  className: `w-full text-left px-4 py-3 hover:bg-[var(--bg-alt)] font-bold text-xs tracking-tight transition-colors ${isSelected ? 'theme-mid-text font-extrabold bg-[var(--bg-alt)]' : 'text-[var(--text-base)]'}`,
-                  children: prog.title
-                }, progId, false);
-              })
-            }, void 0, false)
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-          onClick: () => setIsModalOpen(true),
-          className: "theme-mid-text hover:brightness-90 font-extrabold hover:underline text-[17px] tracking-tight",
-          children: "Request Callback"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-          onClick: () => setIsModalOpen(true),
-          className: "theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight",
-          children: "Join Program"
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-        className: "lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform",
-        onClick: () => setIsMenuOpen(!isMenuOpen),
-        children: /*#__PURE__*/_jsxDEV(window.Icon, {
-          name: isMenuOpen ? "x" : "menu",
-          size: 28
-        }, void 0, false)
-      }, void 0, false)]
-    }, void 0, true), isMenuOpen && /*#__PURE__*/_jsxDEV("div", {
-      className: "lg:hidden absolute top-20 left-0 w-full theme-bg border-b theme-border shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]",
-      children: /*#__PURE__*/_jsxDEV("div", {
-        className: "flex flex-col space-y-4 text-sm font-bold",
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          className: "flex items-center justify-between p-4 rounded-xl opacity-60 cursor-not-allowed select-none",
-          children: [/*#__PURE__*/_jsxDEV("span", {
-            children: "Products"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-            className: "text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400",
-            children: "In Progress"
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          className: "flex items-center justify-between p-4 rounded-xl opacity-60 cursor-not-allowed select-none",
-          children: [/*#__PURE__*/_jsxDEV("span", {
-            children: "Services"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-            className: "text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400",
-            children: "In Progress"
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          className: "space-y-4",
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            className: `p-4 rounded-xl flex items-center justify-between transition-all ${isLandingPage ? activeItemClass : inactiveItemClass}`,
-            children: [/*#__PURE__*/_jsxDEV("span", {
-              className: "font-bold",
-              children: "All Programs"
-            }, void 0, false), /*#__PURE__*/_jsxDEV(window.Icon, {
-              name: "chevron-down",
-              size: 14,
-              className: isLandingPage ? "theme-mid-text" : "text-secondary-300"
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-            className: "pl-6 space-y-3",
-            children: programs && Object.entries(programs).map(([progId, prog]) => {
-              const isCourseActive = isLandingPage && progId === activeProgramId;
-              return /*#__PURE__*/_jsxDEV("button", {
-                onClick: () => {
-                  if (onProgramChange) onProgramChange(progId);else window.location.href = `index.html#about`;
-                  setIsMenuOpen(false);
-                },
-                className: `block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'theme-accent-pill' : 'theme-text-muted hover:bg-[var(--bg-base)]'}`,
-                children: prog.title
-              }, progId, false);
-            })
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          className: "pt-4 border-t border-secondary-50 flex flex-col space-y-4",
-          children: [/*#__PURE__*/_jsxDEV("button", {
-            onClick: () => {
-              setIsModalOpen(true);
-              setIsMenuOpen(false);
-            },
-            className: "theme-mid-text font-bold text-left px-2 py-3",
-            children: "Request Callback"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-            onClick: () => {
-              setIsModalOpen(true);
-              setIsMenuOpen(false);
-            },
-            className: "theme-btn-gradient text-white py-5 rounded-2xl font-bold shadow-lg text-center",
-            children: "Join Program"
-          }, void 0, false)]
-        }, void 0, true)]
-      }, void 0, true)
-    }, void 0, false), isModalOpen && /*#__PURE__*/_jsxDEV("div", {
-      className: "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary-900/80 backdrop-blur-sm",
-      children: /*#__PURE__*/_jsxDEV("div", {
-        className: "theme-bg w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-2xl",
-        children: [/*#__PURE__*/_jsxDEV("button", {
-          onClick: () => setIsModalOpen(false),
-          className: "absolute top-4 right-4 p-3 theme-text-muted hover:text-[var(--text-base)]",
-          children: /*#__PURE__*/_jsxDEV(window.Icon, {
-            name: "x",
-            size: 24
-          }, void 0, false)
-        }, void 0, false), /*#__PURE__*/_jsxDEV("h3", {
-          className: "font-bold text-2xl mb-2 theme-text-primary tracking-tight",
-          children: settings?.ui?.modalTitle
-        }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-          className: "text-sm theme-text-muted mb-8 font-medium",
-          children: settings?.ui?.modalSubText
-        }, void 0, false), /*#__PURE__*/_jsxDEV("form", {
-          className: "space-y-4",
-          onSubmit: handleModalSubmit,
-          children: [/*#__PURE__*/_jsxDEV("input", {
-            type: "text",
-            placeholder: "Full Name",
-            required: true,
-            value: modalFormData.full_name,
-            onChange: e => setModalFormData({
-              ...modalFormData,
-              full_name: e.target.value
-            }),
-            className: "w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("input", {
-            type: "email",
-            placeholder: "Email Address",
-            required: true,
-            value: modalFormData.email,
-            onChange: e => setModalFormData({
-              ...modalFormData,
-              email: e.target.value
-            }),
-            className: "w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("input", {
-            type: "tel",
-            placeholder: "Mobile Number",
-            required: true,
-            maxLength: "10",
-            value: modalFormData.phone,
-            onChange: e => setModalFormData({
-              ...modalFormData,
-              phone: e.target.value
-            }),
-            className: "w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-            type: "submit",
-            disabled: isSubmitting,
-            className: "w-full theme-btn-gradient text-white py-5 rounded-xl font-bold uppercase tracking-widest shadow-lg active:scale-95 transition-all disabled:opacity-50",
-            children: isSubmitting ? 'Processing...' : settings?.labels?.applyButton || 'Submit Request'
-          }, void 0, false)]
-        }, void 0, true)]
-      }, void 0, true)
-    }, void 0, false)]
-  }, void 0, true);
+  return /*#__PURE__*/React.createElement("nav", {
+    className: "fixed w-full z-50 theme-bg border-b theme-border h-20 flex items-center shadow-sm"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 sm:gap-3 cursor-pointer",
+    onClick: () => window.location.href = 'index.html'
+  }, /*#__PURE__*/React.createElement("img", {
+    src: `assets/images/thedatapilot_logo_${window.LIVE_THEME || 'crimson'}.png`,
+    alt: "",
+    className: "h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0",
+    onError: e => {
+      e.target.onerror = null;
+      e.target.src = 'assets/images/thedatapilot_logo.png';
+    }
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "font-bold text-[22px] theme-mid-text tracking-tight"
+  }, brand)), /*#__PURE__*/React.createElement("div", {
+    className: "hidden lg:flex items-center space-x-8 text-sm font-semibold theme-text-primary"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "flex items-center gap-1.5 font-bold text-[17px] tracking-tight text-slate-400/60 cursor-not-allowed select-none"
+  }, "Products", /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400"
+  }, "Soon")), /*#__PURE__*/React.createElement("span", {
+    className: "flex items-center gap-1.5 font-bold text-[17px] tracking-tight text-slate-400/60 cursor-not-allowed select-none"
+  }, "Services", /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400"
+  }, "Soon")), /*#__PURE__*/React.createElement("div", {
+    ref: dropdownRef,
+    className: "relative group py-2"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: e => {
+      e.preventDefault();
+      setIsDropdownOpen(prev => !prev);
+    },
+    className: `flex items-center space-x-1 hover:brightness-90 transition-colors font-bold text-[17px] tracking-tight ${isLandingPage ? 'theme-mid-text' : 'theme-text-primary'}`
+  }, /*#__PURE__*/React.createElement("span", null, "All Programs"), /*#__PURE__*/React.createElement(window.Icon, {
+    name: "chevron-down",
+    size: 14,
+    className: isDropdownOpen ? 'rotate-180 transition-transform theme-mid-text' : 'transition-transform text-slate-300'
+  })), isDropdownOpen && programs && /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-full left-0 w-max min-w-[220px] max-w-xs z-[60] animate-in fade-in duration-200 pt-1"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "border theme-border-strong shadow-2xl rounded-xl overflow-hidden backdrop-blur-xl",
+    style: {
+      backgroundColor: 'var(--bg-base)'
+    }
+  }, Object.entries(programs).map(([progId, prog]) => {
+    const isSelected = progId === activeProgramId;
+    return /*#__PURE__*/React.createElement("button", {
+      key: progId,
+      onClick: () => {
+        if (onProgramChange) onProgramChange(progId);else window.location.href = `index.html#about`;
+        setIsDropdownOpen(false);
+      },
+      className: `w-full text-left px-4 py-3 hover:bg-[var(--bg-alt)] font-bold text-xs tracking-tight transition-colors ${isSelected ? 'theme-mid-text font-extrabold bg-[var(--bg-alt)]' : 'text-[var(--text-base)]'}`
+    }, prog.title);
+  })))), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setIsModalOpen(true),
+    className: "theme-mid-text hover:brightness-90 font-extrabold hover:underline text-[17px] tracking-tight"
+  }, "Request Callback"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setIsModalOpen(true),
+    className: "theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight"
+  }, "Join Program")), /*#__PURE__*/React.createElement("button", {
+    className: "lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform",
+    onClick: () => setIsMenuOpen(!isMenuOpen)
+  }, /*#__PURE__*/React.createElement(window.Icon, {
+    name: isMenuOpen ? "x" : "menu",
+    size: 28
+  }))), isMenuOpen && /*#__PURE__*/React.createElement("div", {
+    className: "lg:hidden absolute top-20 left-0 w-full theme-bg border-b theme-border shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col space-y-4 text-sm font-bold"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between p-4 rounded-xl opacity-60 cursor-not-allowed select-none"
+  }, /*#__PURE__*/React.createElement("span", null, "Products"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400"
+  }, "In Progress")), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center justify-between p-4 rounded-xl opacity-60 cursor-not-allowed select-none"
+  }, /*#__PURE__*/React.createElement("span", null, "Services"), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-400"
+  }, "In Progress")), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `p-4 rounded-xl flex items-center justify-between transition-all ${isLandingPage ? activeItemClass : inactiveItemClass}`
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "font-bold"
+  }, "All Programs"), /*#__PURE__*/React.createElement(window.Icon, {
+    name: "chevron-down",
+    size: 14,
+    className: isLandingPage ? "theme-mid-text" : "text-secondary-300"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "pl-6 space-y-3"
+  }, programs && Object.entries(programs).map(([progId, prog]) => {
+    const isCourseActive = isLandingPage && progId === activeProgramId;
+    return /*#__PURE__*/React.createElement("button", {
+      key: progId,
+      onClick: () => {
+        if (onProgramChange) onProgramChange(progId);else window.location.href = `index.html#about`;
+        setIsMenuOpen(false);
+      },
+      className: `block w-full text-left p-4 rounded-xl text-[13px] font-bold transition-all ${isCourseActive ? 'theme-accent-pill' : 'theme-text-muted hover:bg-[var(--bg-base)]'}`
+    }, prog.title);
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-4 border-t border-secondary-50 flex flex-col space-y-4"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setIsModalOpen(true);
+      setIsMenuOpen(false);
+    },
+    className: "theme-mid-text font-bold text-left px-2 py-3"
+  }, "Request Callback"), /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setIsModalOpen(true);
+      setIsMenuOpen(false);
+    },
+    className: "theme-btn-gradient text-white py-5 rounded-2xl font-bold shadow-lg text-center"
+  }, "Join Program")))), isModalOpen && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary-900/80 backdrop-blur-sm"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "theme-bg w-full max-w-lg rounded-[2.5rem] p-10 relative shadow-2xl"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setIsModalOpen(false),
+    className: "absolute top-4 right-4 p-3 theme-text-muted hover:text-[var(--text-base)]"
+  }, /*#__PURE__*/React.createElement(window.Icon, {
+    name: "x",
+    size: 24
+  })), /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold text-2xl mb-2 theme-text-primary tracking-tight"
+  }, settings?.ui?.modalTitle), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm theme-text-muted mb-8 font-medium"
+  }, settings?.ui?.modalSubText), /*#__PURE__*/React.createElement("form", {
+    className: "space-y-4",
+    onSubmit: handleModalSubmit
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    placeholder: "Full Name",
+    required: true,
+    value: modalFormData.full_name,
+    onChange: e => setModalFormData({
+      ...modalFormData,
+      full_name: e.target.value
+    }),
+    className: "w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "email",
+    placeholder: "Email Address",
+    required: true,
+    value: modalFormData.email,
+    onChange: e => setModalFormData({
+      ...modalFormData,
+      email: e.target.value
+    }),
+    className: "w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all"
+  }), /*#__PURE__*/React.createElement("input", {
+    type: "tel",
+    placeholder: "Mobile Number",
+    required: true,
+    maxLength: "10",
+    value: modalFormData.phone,
+    onChange: e => setModalFormData({
+      ...modalFormData,
+      phone: e.target.value
+    }),
+    className: "w-full p-4 border theme-border theme-bg rounded-xl outline-none focus:border-brand-500 text-sm font-medium transition-all"
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "submit",
+    disabled: isSubmitting,
+    className: "w-full theme-btn-gradient text-white py-5 rounded-xl font-bold uppercase tracking-widest shadow-lg active:scale-95 transition-all disabled:opacity-50"
+  }, isSubmitting ? 'Processing...' : settings?.labels?.applyButton || 'Submit Request')))));
 };
 window.Footer = () => {
   const {
@@ -465,7 +419,7 @@ window.Footer = () => {
   // Bypasses the external icon library entirely for social brands
   const renderSocialIcon = platform => {
     const p = platform.toLowerCase();
-    if (p === 'whatsapp') return /*#__PURE__*/_jsxDEV("svg", {
+    if (p === 'whatsapp') return /*#__PURE__*/React.createElement("svg", {
       width: "20",
       height: "20",
       viewBox: "0 0 24 24",
@@ -473,21 +427,19 @@ window.Footer = () => {
       stroke: "currentColor",
       strokeWidth: "2",
       strokeLinecap: "round",
-      strokeLinejoin: "round",
-      children: /*#__PURE__*/_jsxDEV("path", {
-        d: "M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
-      }, void 0, false)
-    }, void 0, false);
-    if (p === 'twitter' || p === 'x') return /*#__PURE__*/_jsxDEV("svg", {
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+    }));
+    if (p === 'twitter' || p === 'x') return /*#__PURE__*/React.createElement("svg", {
       width: "18",
       height: "18",
       viewBox: "0 0 24 24",
-      fill: "currentColor",
-      children: /*#__PURE__*/_jsxDEV("path", {
-        d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-      }, void 0, false)
-    }, void 0, false);
-    if (p === 'linkedin') return /*#__PURE__*/_jsxDEV("svg", {
+      fill: "currentColor"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+    }));
+    if (p === 'linkedin') return /*#__PURE__*/React.createElement("svg", {
       width: "20",
       height: "20",
       viewBox: "0 0 24 24",
@@ -495,21 +447,20 @@ window.Footer = () => {
       stroke: "currentColor",
       strokeWidth: "2",
       strokeLinecap: "round",
-      strokeLinejoin: "round",
-      children: [/*#__PURE__*/_jsxDEV("path", {
-        d: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-      }, void 0, false), /*#__PURE__*/_jsxDEV("rect", {
-        x: "2",
-        y: "9",
-        width: "4",
-        height: "12"
-      }, void 0, false), /*#__PURE__*/_jsxDEV("circle", {
-        cx: "4",
-        cy: "4",
-        r: "2"
-      }, void 0, false)]
-    }, void 0, true);
-    if (p === 'instagram') return /*#__PURE__*/_jsxDEV("svg", {
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+    }), /*#__PURE__*/React.createElement("rect", {
+      x: "2",
+      y: "9",
+      width: "4",
+      height: "12"
+    }), /*#__PURE__*/React.createElement("circle", {
+      cx: "4",
+      cy: "4",
+      r: "2"
+    }));
+    if (p === 'instagram') return /*#__PURE__*/React.createElement("svg", {
       width: "20",
       height: "20",
       viewBox: "0 0 24 24",
@@ -517,24 +468,23 @@ window.Footer = () => {
       stroke: "currentColor",
       strokeWidth: "2",
       strokeLinecap: "round",
-      strokeLinejoin: "round",
-      children: [/*#__PURE__*/_jsxDEV("rect", {
-        x: "2",
-        y: "2",
-        width: "20",
-        height: "20",
-        rx: "5",
-        ry: "5"
-      }, void 0, false), /*#__PURE__*/_jsxDEV("path", {
-        d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
-      }, void 0, false), /*#__PURE__*/_jsxDEV("line", {
-        x1: "17.5",
-        y1: "6.5",
-        x2: "17.51",
-        y2: "6.5"
-      }, void 0, false)]
-    }, void 0, true);
-    if (p === 'youtube') return /*#__PURE__*/_jsxDEV("svg", {
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("rect", {
+      x: "2",
+      y: "2",
+      width: "20",
+      height: "20",
+      rx: "5",
+      ry: "5"
+    }), /*#__PURE__*/React.createElement("path", {
+      d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+    }), /*#__PURE__*/React.createElement("line", {
+      x1: "17.5",
+      y1: "6.5",
+      x2: "17.51",
+      y2: "6.5"
+    }));
+    if (p === 'youtube') return /*#__PURE__*/React.createElement("svg", {
       width: "20",
       height: "20",
       viewBox: "0 0 24 24",
@@ -542,14 +492,13 @@ window.Footer = () => {
       stroke: "currentColor",
       strokeWidth: "2",
       strokeLinecap: "round",
-      strokeLinejoin: "round",
-      children: [/*#__PURE__*/_jsxDEV("path", {
-        d: "M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2C5.12 19.5 12 19.5 12 19.5s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"
-      }, void 0, false), /*#__PURE__*/_jsxDEV("polygon", {
-        points: "9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"
-      }, void 0, false)]
-    }, void 0, true);
-    if (p === 'facebook') return /*#__PURE__*/_jsxDEV("svg", {
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2C5.12 19.5 12 19.5 12 19.5s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"
+    }), /*#__PURE__*/React.createElement("polygon", {
+      points: "9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"
+    }));
+    if (p === 'facebook') return /*#__PURE__*/React.createElement("svg", {
       width: "20",
       height: "20",
       viewBox: "0 0 24 24",
@@ -557,119 +506,93 @@ window.Footer = () => {
       stroke: "currentColor",
       strokeWidth: "2",
       strokeLinecap: "round",
-      strokeLinejoin: "round",
-      children: /*#__PURE__*/_jsxDEV("path", {
-        d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-      }, void 0, false)
-    }, void 0, false);
-    return /*#__PURE__*/_jsxDEV(window.Icon, {
+      strokeLinejoin: "round"
+    }, /*#__PURE__*/React.createElement("path", {
+      d: "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+    }));
+    return /*#__PURE__*/React.createElement(window.Icon, {
       name: platform,
       size: 20
-    }, void 0, false);
+    });
   };
-  return /*#__PURE__*/_jsxDEV("footer", {
-    className: "py-20 bg-secondary-900 text-white px-6 text-left border-t border-white/5",
-    children: /*#__PURE__*/_jsxDEV("div", {
-      className: "max-w-7xl mx-auto grid md:grid-cols-3 gap-12",
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        className: "space-y-6",
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            className: "font-extrabold text-2xl theme-mid-text mb-2",
-            children: settings?.brand?.name
-          }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-            className: "text-white/60 text-[13px] font-medium leading-relaxed max-w-xs",
-            children: settings?.ui?.footerDescription
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          className: "flex items-center gap-3",
-          children: Object.entries(socialLinks).map(([platform, url]) => {
-            const isHovered = hoveredPlatform === platform;
-            return /*#__PURE__*/_jsxDEV("a", {
-              href: url,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              onMouseEnter: () => setHoveredPlatform(platform),
-              onMouseLeave: () => setHoveredPlatform(null),
-              className: "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group border",
-              style: {
-                backgroundColor: isHovered ? socialColors[platform] : 'rgba(30, 41, 59, 0.5)',
-                borderColor: isHovered ? socialColors[platform] : 'rgba(51, 65, 85, 0.5)'
-              },
-              children: /*#__PURE__*/_jsxDEV("div", {
-                className: `text-white transition-transform duration-300 ${isHovered ? 'scale-110' : 'scale-100'}`,
-                children: renderSocialIcon(platform)
-              }, void 0, false)
-            }, platform, false);
-          })
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-        className: "flex flex-col space-y-4 text-white/60",
-        children: [/*#__PURE__*/_jsxDEV("h5", {
-          className: "text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2",
-          children: "Legal & Navigation"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          className: "flex flex-col space-y-3 font-bold text-sm",
-          children: [/*#__PURE__*/_jsxDEV("a", {
-            href: "about-us.html",
-            className: "theme-mid-hover-text transition-colors",
-            children: "About Us"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("a", {
-            href: "privacy-policy.html",
-            className: "theme-mid-hover-text transition-colors",
-            children: "Privacy Policy"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("a", {
-            href: "terms-and-conditions.html",
-            className: "theme-mid-hover-text transition-colors",
-            children: "Terms & Conditions"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("a", {
-            href: "refund-policy.html",
-            className: "theme-mid-hover-text transition-colors",
-            children: "Refund Policy"
-          }, void 0, false)]
-        }, void 0, true)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-        className: "space-y-4 text-white/60",
-        children: [/*#__PURE__*/_jsxDEV("h5", {
-          className: "text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2",
-          children: "Contact"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          className: "space-y-5",
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            className: "flex items-start gap-2.5",
-            children: [/*#__PURE__*/_jsxDEV(window.Icon, {
-              name: "map-pin",
-              size: 14,
-              className: "theme-mid-text mt-1 flex-shrink-0 opacity-80"
-            }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-              className: "text-[13px] text-white/60 font-medium leading-relaxed",
-              children: (settings?.contact?.addressLines || []).map((line, idx) => /*#__PURE__*/_jsxDEV("div", {
-                className: idx === 0 ? "font-bold text-secondary-300" : "",
-                children: line
-              }, idx, false))
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-            className: "text-[13px] font-bold flex items-center gap-2.5",
-            children: [/*#__PURE__*/_jsxDEV(window.Icon, {
-              name: "mail",
-              size: 14,
-              className: "theme-mid-text opacity-80"
-            }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-              className: "text-white/60",
-              children: ["Email: ", /*#__PURE__*/_jsxDEV("a", {
-                href: `mailto:${settings?.contact?.infoEmail}`,
-                className: "text-secondary-300 theme-mid-hover-text transition-colors font-bold underline underline-offset-4 decoration-white/10",
-                children: settings?.contact?.infoEmail
-              }, void 0, false)]
-            }, void 0, true)]
-          }, void 0, true)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          className: "pt-8 text-[10px] font-black text-white/50 tracking-[0.4em] uppercase select-none",
-          children: "Logic-First. AI-Fast."
-        }, void 0, false)]
-      }, void 0, true)]
-    }, void 0, true)
-  }, void 0, false);
+  return /*#__PURE__*/React.createElement("footer", {
+    className: "py-20 bg-secondary-900 text-white px-6 text-left border-t border-white/5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-7xl mx-auto grid md:grid-cols-3 gap-12"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "space-y-6"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "font-extrabold text-2xl theme-mid-text mb-2"
+  }, settings?.brand?.name), /*#__PURE__*/React.createElement("p", {
+    className: "text-white/60 text-[13px] font-medium leading-relaxed max-w-xs"
+  }, settings?.ui?.footerDescription)), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-3"
+  }, Object.entries(socialLinks).map(([platform, url]) => {
+    const isHovered = hoveredPlatform === platform;
+    return /*#__PURE__*/React.createElement("a", {
+      key: platform,
+      href: url,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      onMouseEnter: () => setHoveredPlatform(platform),
+      onMouseLeave: () => setHoveredPlatform(null),
+      className: "w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group border",
+      style: {
+        backgroundColor: isHovered ? socialColors[platform] : 'rgba(30, 41, 59, 0.5)',
+        borderColor: isHovered ? socialColors[platform] : 'rgba(51, 65, 85, 0.5)'
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      className: `text-white transition-transform duration-300 ${isHovered ? 'scale-110' : 'scale-100'}`
+    }, renderSocialIcon(platform)));
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col space-y-4 text-white/60"
+  }, /*#__PURE__*/React.createElement("h5", {
+    className: "text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2"
+  }, "Legal & Navigation"), /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-col space-y-3 font-bold text-sm"
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "about-us.html",
+    className: "theme-mid-hover-text transition-colors"
+  }, "About Us"), /*#__PURE__*/React.createElement("a", {
+    href: "privacy-policy.html",
+    className: "theme-mid-hover-text transition-colors"
+  }, "Privacy Policy"), /*#__PURE__*/React.createElement("a", {
+    href: "terms-and-conditions.html",
+    className: "theme-mid-hover-text transition-colors"
+  }, "Terms & Conditions"), /*#__PURE__*/React.createElement("a", {
+    href: "refund-policy.html",
+    className: "theme-mid-hover-text transition-colors"
+  }, "Refund Policy"))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-4 text-white/60"
+  }, /*#__PURE__*/React.createElement("h5", {
+    className: "text-white text-[11px] font-bold tracking-widest uppercase opacity-60 mb-2"
+  }, "Contact"), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-5"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-start gap-2.5"
+  }, /*#__PURE__*/React.createElement(window.Icon, {
+    name: "map-pin",
+    size: 14,
+    className: "theme-mid-text mt-1 flex-shrink-0 opacity-80"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "text-[13px] text-white/60 font-medium leading-relaxed"
+  }, (settings?.contact?.addressLines || []).map((line, idx) => /*#__PURE__*/React.createElement("div", {
+    key: idx,
+    className: idx === 0 ? "font-bold text-secondary-300" : ""
+  }, line)))), /*#__PURE__*/React.createElement("div", {
+    className: "text-[13px] font-bold flex items-center gap-2.5"
+  }, /*#__PURE__*/React.createElement(window.Icon, {
+    name: "mail",
+    size: 14,
+    className: "theme-mid-text opacity-80"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-white/60"
+  }, "Email: ", /*#__PURE__*/React.createElement("a", {
+    href: `mailto:${settings?.contact?.infoEmail}`,
+    className: "text-secondary-300 theme-mid-hover-text transition-colors font-bold underline underline-offset-4 decoration-white/10"
+  }, settings?.contact?.infoEmail)))), /*#__PURE__*/React.createElement("div", {
+    className: "pt-8 text-[10px] font-black text-white/50 tracking-[0.4em] uppercase select-none"
+  }, "Logic-First. AI-Fast."))));
 };
 
 // ============================================================
@@ -701,14 +624,13 @@ window.ScrollReveal = ({
   const [ref, isVisible] = window.useIntersectionObserver({
     threshold: 0.1
   });
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
     ref: ref,
     className: `transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${className}`,
     style: {
       transitionDelay: `${delay}ms`
-    },
-    children: children
-  }, void 0, false);
+    }
+  }, children);
 };
 window.TiltCard = ({
   children,
@@ -732,14 +654,13 @@ window.TiltCard = ({
     transition: 'transform 0.5s ease-out',
     boxShadow: 'none'
   });
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
     ref: cardRef,
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
     className: `transition-all will-change-transform ${className}`,
-    style: style,
-    children: children
-  }, void 0, false);
+    style: style
+  }, children);
 };
 window.TypewriterText = ({
   text
@@ -759,12 +680,11 @@ window.TypewriterText = ({
     return () => clearInterval(timer);
   }, [text]);
   const isDone = displayedLength >= text.length;
-  return /*#__PURE__*/_jsxDEV("span", {
-    className: "inline-block relative",
-    children: [text.substring(0, displayedLength), !isDone && /*#__PURE__*/_jsxDEV("span", {
-      className: "absolute -right-2 top-1/2 -translate-y-1/2 w-[3px] h-[70%] bg-brand-500 animate-pulse"
-    }, void 0, false)]
-  }, void 0, true);
+  return /*#__PURE__*/React.createElement("span", {
+    className: "inline-block relative"
+  }, text.substring(0, displayedLength), !isDone && /*#__PURE__*/React.createElement("span", {
+    className: "absolute -right-2 top-1/2 -translate-y-1/2 w-[3px] h-[70%] bg-brand-500 animate-pulse"
+  }));
 };
 
 // ============================================================

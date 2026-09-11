@@ -1,4 +1,3 @@
-import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime";
 /**
  * THE DATA PILOT - DATA ANALYTICS RESOURCE HUB
  * File: data-hub.js
@@ -112,284 +111,217 @@ const App = () => {
     Icon,
     ScrollReveal
   } = window;
-  return /*#__PURE__*/_jsxDEV("div", {
-    className: "min-h-screen theme-text-primary animate-in fade-in duration-700",
-    children: [/*#__PURE__*/_jsxDEV(Navbar, {}, void 0, false), /*#__PURE__*/_jsxDEV("header", {
-      className: "pt-36 pb-12 px-6 theme-bg-alt border-b theme-border-strong text-center relative overflow-hidden",
-      children: /*#__PURE__*/_jsxDEV("div", {
-        className: "max-w-4xl mx-auto",
-        children: /*#__PURE__*/_jsxDEV(ScrollReveal, {
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            className: "inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4",
-            children: [/*#__PURE__*/_jsxDEV(Icon, {
-              name: "database",
-              size: 14,
-              className: "text-brand-400"
-            }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-              children: "100% Free Open-Source Resources"
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("h1", {
-            className: "text-3xl md:text-5xl font-black theme-text-primary tracking-tight mb-4",
-            children: ["The Ultimate ", /*#__PURE__*/_jsxDEV("span", {
-              className: "theme-mid-text",
-              children: "Data Hub"
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("p", {
-            className: "text-base md:text-lg theme-text-muted font-medium max-w-2xl mx-auto leading-relaxed",
-            children: "Supercharge your portfolio. Download free dummy datasets, professional Power BI dashboard templates, and advanced SQL/Python snippets used by top engineers."
-          }, void 0, false)]
-        }, void 0, true)
-      }, void 0, false)
-    }, void 0, false), /*#__PURE__*/_jsxDEV("main", {
-      className: "py-12 md:py-16 px-6 max-w-6xl mx-auto",
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        className: "flex flex-wrap items-center justify-center gap-3 mb-12",
-        children: [{
-          id: "datasets",
-          label: "Dummy Datasets",
-          icon: "table"
-        }, {
-          id: "dashboards",
-          label: "Dashboard Templates",
-          icon: "pie-chart"
-        }, {
-          id: "snippets",
-          label: "SQL & Python Snippets",
-          icon: "code"
-        }].map(tab => /*#__PURE__*/_jsxDEV("button", {
-          onClick: () => setActiveTab(tab.id),
-          className: `flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all ${activeTab === tab.id ? "bg-brand-500 text-white shadow-lg shadow-brand-500/30" : "bg-white/5 border border-white/10 theme-text-secondary hover:bg-white/10"}`,
-          children: [/*#__PURE__*/_jsxDEV(Icon, {
-            name: tab.icon,
-            size: 16
-          }, void 0, false), tab.label]
-        }, tab.id, true))
-      }, void 0, false), activeTab === "datasets" && /*#__PURE__*/_jsxDEV("div", {
-        className: "grid md:grid-cols-2 gap-6 animate-in slide-in-from-bottom-4 duration-500",
-        children: DATASETS.map(ds => /*#__PURE__*/_jsxDEV("div", {
-          className: "theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-xl flex flex-col hover:border-brand-500/50 transition-colors",
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            className: "flex items-start justify-between mb-4",
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              className: "w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400",
-              children: /*#__PURE__*/_jsxDEV(Icon, {
-                name: "file-text",
-                size: 24
-              }, void 0, false)
-            }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-              className: "text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 theme-text-muted uppercase tracking-wider",
-              children: [ds.format, " • ", ds.size]
-            }, void 0, true)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("h3", {
-            className: "text-xl font-bold theme-text-primary mb-2",
-            children: ds.title
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            className: "text-xs font-semibold theme-text-secondary mb-4 uppercase tracking-widest",
-            children: ds.category
-          }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-            className: "text-sm theme-text-muted mb-8 flex-1 leading-relaxed",
-            children: ds.desc
-          }, void 0, false), /*#__PURE__*/_jsxDEV("a", {
-            href: ds.link,
-            target: "_blank",
-            rel: "noopener noreferrer",
-            onClick: () => setDownloadIntercept(ds),
-            className: "w-full text-center py-3.5 rounded-xl border-2 border-brand-500/50 text-brand-400 font-bold text-sm uppercase tracking-widest hover:bg-brand-500/10 transition-colors flex items-center justify-center gap-2",
-            children: [/*#__PURE__*/_jsxDEV(Icon, {
-              name: "download",
-              size: 16
-            }, void 0, false), " Get Dataset"]
-          }, void 0, true)]
-        }, ds.id, true))
-      }, void 0, false), activeTab === "dashboards" && /*#__PURE__*/_jsxDEV("div", {
-        className: "grid md:grid-cols-2 gap-6 animate-in slide-in-from-bottom-4 duration-500",
-        children: DASHBOARDS.map(db => /*#__PURE__*/_jsxDEV("div", {
-          className: "theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-xl flex flex-col hover:border-brand-500/50 transition-colors",
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            className: "flex items-start justify-between mb-4",
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              className: "w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400",
-              children: /*#__PURE__*/_jsxDEV(Icon, {
-                name: "monitor",
-                size: 24
-              }, void 0, false)
-            }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-              className: "text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 theme-text-muted uppercase tracking-wider",
-              children: db.difficulty
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("h3", {
-            className: "text-xl font-bold theme-text-primary mb-2",
-            children: db.title
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            className: "text-xs font-semibold theme-text-secondary mb-4 uppercase tracking-widest",
-            children: db.tool
-          }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-            className: "text-sm theme-text-muted mb-8 flex-1 leading-relaxed",
-            children: db.desc
-          }, void 0, false), /*#__PURE__*/_jsxDEV("a", {
-            href: db.link,
-            target: "_blank",
-            rel: "noopener noreferrer",
-            onClick: () => setDownloadIntercept(db),
-            className: "w-full text-center py-3.5 rounded-xl border-2 border-brand-500/50 text-brand-400 font-bold text-sm uppercase tracking-widest hover:bg-brand-500/10 transition-colors flex items-center justify-center gap-2",
-            children: [/*#__PURE__*/_jsxDEV(Icon, {
-              name: "download",
-              size: 16
-            }, void 0, false), " Download Template"]
-          }, void 0, true)]
-        }, db.id, true))
-      }, void 0, false), activeTab === "snippets" && /*#__PURE__*/_jsxDEV("div", {
-        className: "grid md:grid-cols-2 gap-6 animate-in slide-in-from-bottom-4 duration-500",
-        children: SNIPPETS.map(snip => /*#__PURE__*/_jsxDEV("div", {
-          className: "theme-card border theme-border-strong rounded-3xl overflow-hidden shadow-xl flex flex-col",
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            className: "p-6 md:p-8 flex-1 border-b theme-border-strong",
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              className: "flex items-center gap-3 mb-4",
-              children: [/*#__PURE__*/_jsxDEV("div", {
-                className: "w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400",
-                children: /*#__PURE__*/_jsxDEV(Icon, {
-                  name: "terminal",
-                  size: 20
-                }, void 0, false)
-              }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                children: [/*#__PURE__*/_jsxDEV("h3", {
-                  className: "text-lg font-bold theme-text-primary leading-tight",
-                  children: snip.title
-                }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                  className: "text-[10px] font-bold theme-text-secondary uppercase tracking-widest",
-                  children: snip.language
-                }, void 0, false)]
-              }, void 0, true)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("p", {
-              className: "text-sm theme-text-muted leading-relaxed",
-              children: snip.desc
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-            className: "bg-[#0f172a] p-4 relative group",
-            children: [/*#__PURE__*/_jsxDEV("button", {
-              onClick: () => copyToClipboard(snip.code),
-              className: "absolute top-4 right-4 p-2 rounded-lg bg-white/10 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/20",
-              title: "Copy to clipboard",
-              children: /*#__PURE__*/_jsxDEV(Icon, {
-                name: "copy",
-                size: 16
-              }, void 0, false)
-            }, void 0, false), /*#__PURE__*/_jsxDEV("pre", {
-              className: "text-xs text-slate-300 overflow-x-auto p-2 custom-scrollbar",
-              children: /*#__PURE__*/_jsxDEV("code", {
-                children: snip.code
-              }, void 0, false)
-            }, void 0, false)]
-          }, void 0, true)]
-        }, snip.id, true))
-      }, void 0, false)]
-    }, void 0, true), sidePromoVisible && /*#__PURE__*/_jsxDEV("div", {
-      className: "fixed bottom-6 right-6 z-40 max-w-sm w-full p-1 animate-in slide-in-from-bottom-5 duration-500",
-      children: /*#__PURE__*/_jsxDEV("div", {
-        className: "theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95",
-        children: [/*#__PURE__*/_jsxDEV("button", {
-          onClick: () => setSidePromoVisible(false),
-          className: "absolute top-3 right-3 text-slate-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors",
-          "aria-label": "Dismiss banner",
-          children: /*#__PURE__*/_jsxDEV(Icon, {
-            name: "x",
-            size: 16
-          }, void 0, false)
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          className: "flex items-center gap-2 mb-2",
-          children: [/*#__PURE__*/_jsxDEV("span", {
-            className: "w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-            className: "text-[10px] font-extrabold uppercase tracking-widest text-brand-400",
-            children: "Master Data Analytics"
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("h4", {
-          className: "text-sm md:text-base font-extrabold text-white mb-1.5 leading-snug",
-          children: "Stop copying. Start building."
-        }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-          className: "text-xs text-slate-300 font-medium mb-3.5 leading-relaxed",
-          children: "Join our 16-week intensive cohort to learn how to architect these models and dashboards from scratch."
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          className: "flex items-center gap-2",
-          children: /*#__PURE__*/_jsxDEV("a", {
-            href: "index.html#about",
-            className: "flex-1 theme-btn-gradient text-white text-center py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg active:scale-95 transition-all flex items-center justify-center gap-1.5",
-            children: [/*#__PURE__*/_jsxDEV("span", {
-              children: "Explore Program"
-            }, void 0, false), /*#__PURE__*/_jsxDEV(Icon, {
-              name: "arrow-right",
-              size: 14
-            }, void 0, false)]
-          }, void 0, true)
-        }, void 0, false)]
-      }, void 0, true)
-    }, void 0, false), downloadIntercept && /*#__PURE__*/_jsxDEV("div", {
-      className: "fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0f172a]/80 backdrop-blur-sm animate-in fade-in duration-300",
-      children: /*#__PURE__*/_jsxDEV("div", {
-        className: "theme-card border theme-border-strong rounded-3xl p-8 max-w-lg w-full shadow-2xl relative text-center",
-        children: [/*#__PURE__*/_jsxDEV("button", {
-          onClick: () => setDownloadIntercept(null),
-          className: "absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 theme-text-secondary transition-colors",
-          children: /*#__PURE__*/_jsxDEV(Icon, {
-            name: "x",
-            size: 18
-          }, void 0, false)
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          className: "w-16 h-16 mx-auto bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mb-6",
-          children: /*#__PURE__*/_jsxDEV(Icon, {
-            name: "check-circle",
-            size: 32
-          }, void 0, false)
-        }, void 0, false), /*#__PURE__*/_jsxDEV("h2", {
-          className: "text-2xl font-black theme-text-primary mb-2",
-          children: "Downloading..."
-        }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-          className: "theme-text-muted mb-8 text-sm leading-relaxed",
-          children: "Your secure download has started. While you wait... did you know you can learn to architect these exact models from scratch?"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          className: "bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 text-left",
-          children: [/*#__PURE__*/_jsxDEV("h3", {
-            className: "font-bold theme-text-primary mb-2",
-            children: "The Data Pilot 16-Week Cohort"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("ul", {
-            className: "theme-text-secondary text-sm space-y-2 mb-4",
-            children: [/*#__PURE__*/_jsxDEV("li", {
-              className: "flex items-center gap-2",
-              children: [/*#__PURE__*/_jsxDEV(Icon, {
-                name: "check",
-                size: 14,
-                className: "text-brand-400"
-              }, void 0, false), " Live Mentorship & Portfolio Building"]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("li", {
-              className: "flex items-center gap-2",
-              children: [/*#__PURE__*/_jsxDEV(Icon, {
-                name: "check",
-                size: 14,
-                className: "text-brand-400"
-              }, void 0, false), " Advanced SQL, DAX, & Python"]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("li", {
-              className: "flex items-center gap-2",
-              children: [/*#__PURE__*/_jsxDEV(Icon, {
-                name: "check",
-                size: 14,
-                className: "text-brand-400"
-              }, void 0, false), " Real-world Business Domains"]
-            }, void 0, true)]
-          }, void 0, true)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("a", {
-          href: "index.html#about",
-          className: "w-full theme-btn-gradient text-white py-4 rounded-xl text-sm font-black uppercase tracking-widest shadow-lg hover:shadow-brand-500/25 active:scale-95 transition-all flex items-center justify-center gap-2",
-          children: ["Explore The Masterclass ", /*#__PURE__*/_jsxDEV(Icon, {
-            name: "arrow-right",
-            size: 16
-          }, void 0, false)]
-        }, void 0, true)]
-      }, void 0, true)
-    }, void 0, false), /*#__PURE__*/_jsxDEV(Footer, {}, void 0, false)]
-  }, void 0, true);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "min-h-screen theme-text-primary animate-in fade-in duration-700"
+  }, /*#__PURE__*/React.createElement(Navbar, null), /*#__PURE__*/React.createElement("header", {
+    className: "pt-36 pb-12 px-6 theme-bg-alt border-b theme-border-strong text-center relative overflow-hidden"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "max-w-4xl mx-auto"
+  }, /*#__PURE__*/React.createElement(ScrollReveal, null, /*#__PURE__*/React.createElement("div", {
+    className: "inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "database",
+    size: 14,
+    className: "text-brand-400"
+  }), /*#__PURE__*/React.createElement("span", null, "100% Free Open-Source Resources")), /*#__PURE__*/React.createElement("h1", {
+    className: "text-3xl md:text-5xl font-black theme-text-primary tracking-tight mb-4"
+  }, "The Ultimate ", /*#__PURE__*/React.createElement("span", {
+    className: "theme-mid-text"
+  }, "Data Hub")), /*#__PURE__*/React.createElement("p", {
+    className: "text-base md:text-lg theme-text-muted font-medium max-w-2xl mx-auto leading-relaxed"
+  }, "Supercharge your portfolio. Download free dummy datasets, professional Power BI dashboard templates, and advanced SQL/Python snippets used by top engineers.")))), /*#__PURE__*/React.createElement("main", {
+    className: "py-12 md:py-16 px-6 max-w-6xl mx-auto"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex flex-wrap items-center justify-center gap-3 mb-12"
+  }, [{
+    id: "datasets",
+    label: "Dummy Datasets",
+    icon: "table"
+  }, {
+    id: "dashboards",
+    label: "Dashboard Templates",
+    icon: "pie-chart"
+  }, {
+    id: "snippets",
+    label: "SQL & Python Snippets",
+    icon: "code"
+  }].map(tab => /*#__PURE__*/React.createElement("button", {
+    key: tab.id,
+    onClick: () => setActiveTab(tab.id),
+    className: `flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all ${activeTab === tab.id ? "bg-brand-500 text-white shadow-lg shadow-brand-500/30" : "bg-white/5 border border-white/10 theme-text-secondary hover:bg-white/10"}`
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: tab.icon,
+    size: 16
+  }), tab.label))), activeTab === "datasets" && /*#__PURE__*/React.createElement("div", {
+    className: "grid md:grid-cols-2 gap-6 animate-in slide-in-from-bottom-4 duration-500"
+  }, DATASETS.map(ds => /*#__PURE__*/React.createElement("div", {
+    key: ds.id,
+    className: "theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-xl flex flex-col hover:border-brand-500/50 transition-colors"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-start justify-between mb-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "file-text",
+    size: 24
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 theme-text-muted uppercase tracking-wider"
+  }, ds.format, " • ", ds.size)), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold theme-text-primary mb-2"
+  }, ds.title), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs font-semibold theme-text-secondary mb-4 uppercase tracking-widest"
+  }, ds.category), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm theme-text-muted mb-8 flex-1 leading-relaxed"
+  }, ds.desc), /*#__PURE__*/React.createElement("a", {
+    href: ds.link,
+    target: "_blank",
+    rel: "noopener noreferrer",
+    onClick: () => setDownloadIntercept(ds),
+    className: "w-full text-center py-3.5 rounded-xl border-2 border-brand-500/50 text-brand-400 font-bold text-sm uppercase tracking-widest hover:bg-brand-500/10 transition-colors flex items-center justify-center gap-2"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "download",
+    size: 16
+  }), " Get Dataset")))), activeTab === "dashboards" && /*#__PURE__*/React.createElement("div", {
+    className: "grid md:grid-cols-2 gap-6 animate-in slide-in-from-bottom-4 duration-500"
+  }, DASHBOARDS.map(db => /*#__PURE__*/React.createElement("div", {
+    key: db.id,
+    className: "theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-xl flex flex-col hover:border-brand-500/50 transition-colors"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-start justify-between mb-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "monitor",
+    size: 24
+  })), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-bold px-3 py-1 rounded-full bg-white/5 border border-white/10 theme-text-muted uppercase tracking-wider"
+  }, db.difficulty)), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold theme-text-primary mb-2"
+  }, db.title), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs font-semibold theme-text-secondary mb-4 uppercase tracking-widest"
+  }, db.tool), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm theme-text-muted mb-8 flex-1 leading-relaxed"
+  }, db.desc), /*#__PURE__*/React.createElement("a", {
+    href: db.link,
+    target: "_blank",
+    rel: "noopener noreferrer",
+    onClick: () => setDownloadIntercept(db),
+    className: "w-full text-center py-3.5 rounded-xl border-2 border-brand-500/50 text-brand-400 font-bold text-sm uppercase tracking-widest hover:bg-brand-500/10 transition-colors flex items-center justify-center gap-2"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "download",
+    size: 16
+  }), " Download Template")))), activeTab === "snippets" && /*#__PURE__*/React.createElement("div", {
+    className: "grid md:grid-cols-2 gap-6 animate-in slide-in-from-bottom-4 duration-500"
+  }, SNIPPETS.map(snip => /*#__PURE__*/React.createElement("div", {
+    key: snip.id,
+    className: "theme-card border theme-border-strong rounded-3xl overflow-hidden shadow-xl flex flex-col"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "p-6 md:p-8 flex-1 border-b theme-border-strong"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-3 mb-4"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "terminal",
+    size: 20
+  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h3", {
+    className: "text-lg font-bold theme-text-primary leading-tight"
+  }, snip.title), /*#__PURE__*/React.createElement("div", {
+    className: "text-[10px] font-bold theme-text-secondary uppercase tracking-widest"
+  }, snip.language))), /*#__PURE__*/React.createElement("p", {
+    className: "text-sm theme-text-muted leading-relaxed"
+  }, snip.desc)), /*#__PURE__*/React.createElement("div", {
+    className: "bg-[#0f172a] p-4 relative group"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => copyToClipboard(snip.code),
+    className: "absolute top-4 right-4 p-2 rounded-lg bg-white/10 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/20",
+    title: "Copy to clipboard"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "copy",
+    size: 16
+  })), /*#__PURE__*/React.createElement("pre", {
+    className: "text-xs text-slate-300 overflow-x-auto p-2 custom-scrollbar"
+  }, /*#__PURE__*/React.createElement("code", null, snip.code))))))), sidePromoVisible && /*#__PURE__*/React.createElement("div", {
+    className: "fixed bottom-6 right-6 z-40 max-w-sm w-full p-1 animate-in slide-in-from-bottom-5 duration-500"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setSidePromoVisible(false),
+    className: "absolute top-3 right-3 text-slate-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors",
+    "aria-label": "Dismiss banner"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "x",
+    size: 16
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2 mb-2"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "w-2 h-2 rounded-full bg-emerald-400 animate-pulse"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-extrabold uppercase tracking-widest text-brand-400"
+  }, "Master Data Analytics")), /*#__PURE__*/React.createElement("h4", {
+    className: "text-sm md:text-base font-extrabold text-white mb-1.5 leading-snug"
+  }, "Stop copying. Start building."), /*#__PURE__*/React.createElement("p", {
+    className: "text-xs text-slate-300 font-medium mb-3.5 leading-relaxed"
+  }, "Join our 16-week intensive cohort to learn how to architect these models and dashboards from scratch."), /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "index.html#about",
+    className: "flex-1 theme-btn-gradient text-white text-center py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider shadow-lg active:scale-95 transition-all flex items-center justify-center gap-1.5"
+  }, /*#__PURE__*/React.createElement("span", null, "Explore Program"), /*#__PURE__*/React.createElement(Icon, {
+    name: "arrow-right",
+    size: 14
+  }))))), downloadIntercept && /*#__PURE__*/React.createElement("div", {
+    className: "fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0f172a]/80 backdrop-blur-sm animate-in fade-in duration-300"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "theme-card border theme-border-strong rounded-3xl p-8 max-w-lg w-full shadow-2xl relative text-center"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setDownloadIntercept(null),
+    className: "absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 theme-text-secondary transition-colors"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "x",
+    size: 18
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "w-16 h-16 mx-auto bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mb-6"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check-circle",
+    size: 32
+  })), /*#__PURE__*/React.createElement("h2", {
+    className: "text-2xl font-black theme-text-primary mb-2"
+  }, "Downloading..."), /*#__PURE__*/React.createElement("p", {
+    className: "theme-text-muted mb-8 text-sm leading-relaxed"
+  }, "Your secure download has started. While you wait... did you know you can learn to architect these exact models from scratch?"), /*#__PURE__*/React.createElement("div", {
+    className: "bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 text-left"
+  }, /*#__PURE__*/React.createElement("h3", {
+    className: "font-bold theme-text-primary mb-2"
+  }, "The Data Pilot 16-Week Cohort"), /*#__PURE__*/React.createElement("ul", {
+    className: "theme-text-secondary text-sm space-y-2 mb-4"
+  }, /*#__PURE__*/React.createElement("li", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 14,
+    className: "text-brand-400"
+  }), " Live Mentorship & Portfolio Building"), /*#__PURE__*/React.createElement("li", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 14,
+    className: "text-brand-400"
+  }), " Advanced SQL, DAX, & Python"), /*#__PURE__*/React.createElement("li", {
+    className: "flex items-center gap-2"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    name: "check",
+    size: 14,
+    className: "text-brand-400"
+  }), " Real-world Business Domains"))), /*#__PURE__*/React.createElement("a", {
+    href: "index.html#about",
+    className: "w-full theme-btn-gradient text-white py-4 rounded-xl text-sm font-black uppercase tracking-widest shadow-lg hover:shadow-brand-500/25 active:scale-95 transition-all flex items-center justify-center gap-2"
+  }, "Explore The Masterclass ", /*#__PURE__*/React.createElement(Icon, {
+    name: "arrow-right",
+    size: 16
+  })))), /*#__PURE__*/React.createElement(Footer, null));
 };
 if (!window._reactRoot) {
   window._reactRoot = ReactDOM.createRoot(document.getElementById("root"));
 }
-window._reactRoot.render(/*#__PURE__*/_jsxDEV(App, {}, void 0, false));
+window._reactRoot.render(/*#__PURE__*/React.createElement(App, null));
