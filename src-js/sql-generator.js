@@ -65,15 +65,6 @@ const SqlGenerator = () => {
     const [isGenerating, setIsGenerating] = useState(false);
     const [result, setResult] = useState(null);
     const [showOptions, setShowOptions] = useState(true);
-    const [isReady, setIsReady] = useState(window.SITE_DATA?.isLoaded);
-
-    useEffect(() => {
-        const handleEngineReady = () => setIsReady(true);
-        window.addEventListener('engineReady', handleEngineReady);
-        return () => window.removeEventListener('engineReady', handleEngineReady);
-    }, []);
-
-    if (!isReady) return <div className="min-h-screen theme-bg flex items-center justify-center"><div className="w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div></div>;
 
     const handleGenerate = (text) => {
         const queryText = text || inputText;
@@ -94,10 +85,7 @@ const SqlGenerator = () => {
     };
 
     return (
-        <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col">
-            <window.Navbar />
-
-            <main className="flex-grow max-w-4xl mx-auto w-full px-6 pt-32 pb-24 flex flex-col gap-8">
+        <window.PageLayout maxWidth="max-w-4xl">
                 <div className="text-center space-y-4">
                     <h1 className="text-4xl md:text-5xl font-black tracking-tight">
                         Plain English to <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Advanced SQL</span>
@@ -191,14 +179,8 @@ const SqlGenerator = () => {
                         />
                     </div>
                 )}
-            </main>
-
-            <window.Footer />
-        </div>
+        </window.PageLayout>
     );
 };
 
-if (!window._reactRoot) {
-    window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
-}
-window._reactRoot.render(<SqlGenerator />);
+window.mountApp(<SqlGenerator />);

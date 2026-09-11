@@ -795,3 +795,42 @@ window.TypewriterText = ({ text }) => {
     if (document.body) setup();
     else document.addEventListener('DOMContentLoaded', setup);
 })();
+
+// --- INDUSTRY STANDARD: MASTER LAYOUT COMPONENT ---
+// Reusable layout wrapper that handles engineReady, Navbar, Footer, and standard padding.
+window.PageLayout = ({ children, maxWidth = "max-w-4xl" }) => {
+    const [isReady, setIsReady] = React.useState(window.SITE_DATA?.isLoaded);
+
+    React.useEffect(() => {
+        const handleEngineReady = () => setIsReady(true);
+        window.addEventListener('engineReady', handleEngineReady);
+        return () => window.removeEventListener('engineReady', handleEngineReady);
+    }, []);
+
+    if (!isReady) {
+        return (
+            <div className="min-h-screen theme-bg flex items-center justify-center">
+                <div className="w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col relative">
+            <window.Navbar />
+            <main className={`flex-grow ${maxWidth} mx-auto w-full px-6 pt-32 pb-24 flex flex-col gap-8 relative z-10`}>
+                {children}
+            </main>
+            <window.Footer />
+        </div>
+    );
+};
+
+// Standardized safe React mounting to prevent `Identifier 'root' has already been declared`
+window.mountApp = (AppComponent) => {
+    if (!window._reactRoot) {
+        window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+    }
+    window._reactRoot.render(AppComponent);
+};
+

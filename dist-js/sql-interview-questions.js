@@ -1,20 +1,6 @@
 const SqlInterviewQuestions = () => {
-  const [activeAccordion, setActiveAccordion] = React.useState(null);
-  const [isReady, setIsReady] = React.useState(window.SITE_DATA?.isLoaded);
-  React.useEffect(() => {
-    const handleEngineReady = () => setIsReady(true);
-    window.addEventListener('engineReady', handleEngineReady);
-    return () => window.removeEventListener('engineReady', handleEngineReady);
-  }, []);
-  if (!isReady) return /*#__PURE__*/React.createElement("div", {
-    className: "min-h-screen theme-bg flex items-center justify-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"
-  }));
-  return /*#__PURE__*/React.createElement("div", {
-    className: "min-h-screen theme-bg theme-text-primary font-sans flex flex-col relative"
-  }, /*#__PURE__*/React.createElement(window.Navbar, null), /*#__PURE__*/React.createElement("main", {
-    className: "flex-grow pt-32 pb-24 px-6 max-w-4xl mx-auto w-full space-y-16 relative z-10"
+  return /*#__PURE__*/React.createElement(window.PageLayout, {
+    maxWidth: "max-w-4xl"
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-center space-y-6"
   }, /*#__PURE__*/React.createElement(window.SectionEyebrow, {
@@ -102,9 +88,6 @@ DELETE FROM users WHERE id IN (
 );`))), /*#__PURE__*/React.createElement(window.GlobalCTABanner, {
     title: "Ready for the other 18 Advanced Questions?",
     subtitle: "Stop memorizing answers. Build the actual intuition for advanced SQL, query optimization, and ETL pipelines in our 16-Week Live Masterclass."
-  }))), /*#__PURE__*/React.createElement(window.Footer, null));
+  })));
 };
-if (!window._reactRoot) {
-  window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
-}
-window._reactRoot.render(/*#__PURE__*/React.createElement(SqlInterviewQuestions, null));
+window.mountApp(/*#__PURE__*/React.createElement(SqlInterviewQuestions, null));

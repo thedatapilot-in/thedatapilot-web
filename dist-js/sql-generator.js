@@ -62,17 +62,6 @@ const SqlGenerator = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [result, setResult] = useState(null);
   const [showOptions, setShowOptions] = useState(true);
-  const [isReady, setIsReady] = useState(window.SITE_DATA?.isLoaded);
-  useEffect(() => {
-    const handleEngineReady = () => setIsReady(true);
-    window.addEventListener('engineReady', handleEngineReady);
-    return () => window.removeEventListener('engineReady', handleEngineReady);
-  }, []);
-  if (!isReady) return /*#__PURE__*/React.createElement("div", {
-    className: "min-h-screen theme-bg flex items-center justify-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"
-  }));
   const handleGenerate = text => {
     const queryText = text || inputText;
     if (!queryText.trim()) return;
@@ -88,10 +77,8 @@ const SqlGenerator = () => {
       setIsGenerating(false);
     }, 1500);
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "min-h-screen theme-bg theme-text-primary font-sans flex flex-col"
-  }, /*#__PURE__*/React.createElement(window.Navbar, null), /*#__PURE__*/React.createElement("main", {
-    className: "flex-grow max-w-4xl mx-auto w-full px-6 pt-32 pb-24 flex flex-col gap-8"
+  return /*#__PURE__*/React.createElement(window.PageLayout, {
+    maxWidth: "max-w-4xl"
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-center space-y-4"
   }, /*#__PURE__*/React.createElement("h1", {
@@ -179,9 +166,6 @@ const SqlGenerator = () => {
   }, result.explanation)), /*#__PURE__*/React.createElement(window.GlobalCTABanner, {
     title: "Relying on AI for SQL is dangerous in interviews.",
     subtitle: "Top tier companies (Amazon, Deloitte) test you on live whiteboards without AI. Learn to write advanced Window Functions and CTEs from scratch in our Live Analytics Masterclass."
-  }))), /*#__PURE__*/React.createElement(window.Footer, null));
+  })));
 };
-if (!window._reactRoot) {
-  window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
-}
-window._reactRoot.render(/*#__PURE__*/React.createElement(SqlGenerator, null));
+window.mountApp(/*#__PURE__*/React.createElement(SqlGenerator, null));

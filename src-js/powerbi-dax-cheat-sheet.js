@@ -1,18 +1,6 @@
 const PowerBIDaxCheatSheet = () => {
-    const [isReady, setIsReady] = React.useState(window.SITE_DATA?.isLoaded);
-
-    React.useEffect(() => {
-        const handleEngineReady = () => setIsReady(true);
-        window.addEventListener('engineReady', handleEngineReady);
-        return () => window.removeEventListener('engineReady', handleEngineReady);
-    }, []);
-
-    if (!isReady) return <div className="min-h-screen theme-bg flex items-center justify-center"><div className="w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"></div></div>;
     return (
-        <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col relative">
-            <window.Navbar />
-
-            <main className="flex-grow pt-32 pb-24 px-6 max-w-4xl mx-auto w-full space-y-16 relative z-10">
+        <window.PageLayout maxWidth="max-w-4xl">
                 <div className="text-center space-y-6">
                     <window.SectionEyebrow className="mb-2 mx-auto justify-center flex">Masterclass Cheat Sheet</window.SectionEyebrow>
                     <h1 className="text-4xl md:text-5xl font-black tracking-tight theme-text-primary">
@@ -143,14 +131,8 @@ CALCULATE(
                         subtitle="Go beyond basic formulas. Learn advanced Star Schema Data Modeling, Evaluation Contexts, and Row-Level Security in our Augmented Data Analytics Masterclass."
                     />
                 </div>
-            </main>
-            
-            <window.Footer />
-        </div>
+        </window.PageLayout>
     );
 };
 
-if (!window._reactRoot) {
-    window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
-}
-window._reactRoot.render(<PowerBIDaxCheatSheet />);
+window.mountApp(<PowerBIDaxCheatSheet />);

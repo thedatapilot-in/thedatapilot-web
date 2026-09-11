@@ -19,17 +19,6 @@ const ResumeEvaluator = () => {
   const [resumeText, setResumeText] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [results, setResults] = useState(null);
-  const [isReady, setIsReady] = useState(window.SITE_DATA?.isLoaded);
-  useEffect(() => {
-    const handleEngineReady = () => setIsReady(true);
-    window.addEventListener('engineReady', handleEngineReady);
-    return () => window.removeEventListener('engineReady', handleEngineReady);
-  }, []);
-  if (!isReady) return /*#__PURE__*/React.createElement("div", {
-    className: "min-h-screen theme-bg flex items-center justify-center"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "w-12 h-12 border-4 border-brand-500/20 border-t-brand-500 rounded-full animate-spin"
-  }));
   const handleAnalyze = () => {
     if (!resumeText.trim()) return;
     setIsAnalyzing(true);
@@ -64,10 +53,8 @@ const ResumeEvaluator = () => {
       setIsAnalyzing(false);
     }, 1500);
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "min-h-screen theme-bg theme-text-primary font-sans flex flex-col"
-  }, /*#__PURE__*/React.createElement(window.Navbar, null), /*#__PURE__*/React.createElement("main", {
-    className: "flex-grow max-w-4xl mx-auto w-full px-6 pt-32 pb-24 flex flex-col gap-8"
+  return /*#__PURE__*/React.createElement(window.PageLayout, {
+    maxWidth: "max-w-4xl"
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-center space-y-4"
   }, /*#__PURE__*/React.createElement("h1", {
@@ -175,9 +162,6 @@ const ResumeEvaluator = () => {
   }, "None missing!")))))), /*#__PURE__*/React.createElement(window.GlobalCTABanner, {
     title: "Missing the required skills?",
     subtitle: "Don't just stuff keywords. Learn them practically. Join our 16-week live instructor-led Masterclass and build portfolio projects that actually prove your skills."
-  }))), /*#__PURE__*/React.createElement(window.Footer, null));
+  })));
 };
-if (!window._reactRoot) {
-  window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
-}
-window._reactRoot.render(/*#__PURE__*/React.createElement(ResumeEvaluator, null));
+window.mountApp(/*#__PURE__*/React.createElement(ResumeEvaluator, null));
