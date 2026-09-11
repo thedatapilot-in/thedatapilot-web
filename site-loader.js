@@ -13,15 +13,17 @@
     const path = window.location.pathname;
     
     // Page Route Detection
-    const isLandingPage = path.endsWith('index.html') || path === '/' || path.endsWith('/');
-    const isAboutPage = path.endsWith('about-us.html');
-    const isPrivacyPage = path.endsWith('privacy-policy.html');
-    const isTermsPage = path.endsWith('terms-and-conditions.html');
-    const isRefundPage = path.endsWith('refund-policy.html');
-    const isProductsPage = path.endsWith('products.html');
-    const isServicesPage = path.endsWith('services.html');
-    const isSalaryCalcPage = path.endsWith('salary-calculator.html');
-    const isDataHubPage = path.endsWith('data-hub.html');
+    const isLandingPage = path === '/' || path === '/index.html' || path.endsWith('/') || path.endsWith('index.html');
+    const isAboutUsPage = path.includes('/about-us') || path.endsWith('about-us.html');
+    const isProductsPage = path.includes('/products') || path.endsWith('products.html');
+    const isServicesPage = path.includes('/services') || path.endsWith('services.html');
+    const isPrivacyPolicyPage = path.includes('/privacy-policy') || path.endsWith('privacy-policy.html');
+    const isTermsAndConditionsPage = path.includes('/terms-and-conditions') || path.endsWith('terms-and-conditions.html');
+    const isRefundPolicyPage = path.includes('/refund-policy') || path.endsWith('refund-policy.html');
+    const isSalaryCalculatorPage = path.includes('/salary-calculator') || path.endsWith('salary-calculator.html');
+    const isResumeEvaluatorPage = path.includes('/resume-evaluator') || path.endsWith('resume-evaluator.html');
+    const isSqlGeneratorPage = path.includes('/sql-generator') || path.endsWith('sql-generator.html');
+    const isDataHubPage = path.includes('/data-hub') || path.endsWith('data-hub.html');
 
     // --- CENTRALIZED WATCHDOG & EMERGENCY UI ---
     // Increased from 3000 to 10000 to handle slower 4G/mobile latencies
@@ -211,7 +213,11 @@
         else if (isProductsPage) pageSrc = `dist-js/products.js?v=${VERSION}`;
         else if (isServicesPage) pageSrc = `dist-js/services.js?v=${VERSION}`;
         else if (isSalaryCalcPage) pageSrc = `dist-js/salary-calculator.js?v=${VERSION}`;
+        else if (isResumeEvaluatorPage) pageSrc = `dist-js/resume-evaluator.js?v=${VERSION}`;
+        else if (isSqlGeneratorPage) pageSrc = `dist-js/sql-generator.js?v=${VERSION}`;
         else if (isDataHubPage) pageSrc = `dist-js/data-hub.js?v=${VERSION}`;
+        else if (path.includes('/sql-interview-questions') || path.endsWith('sql-interview-questions.html')) pageSrc = `dist-js/sql-interview-questions.js?v=${VERSION}`;
+        else if (path.includes('/powerbi-dax-cheat-sheet') || path.endsWith('powerbi-dax-cheat-sheet.html')) pageSrc = `dist-js/powerbi-dax-cheat-sheet.js?v=${VERSION}`;
 
         // Inject the page logic if a valid route was found
         if (pageSrc) {
