@@ -79,23 +79,7 @@ const SqlGenerator = () => {
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "min-h-screen theme-bg theme-text-primary font-sans flex flex-col"
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "border-b theme-border bg-white/5 backdrop-blur-md sticky top-0 z-50"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
-  }, /*#__PURE__*/React.createElement("a", {
-    href: "/",
-    className: "flex items-center gap-3"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: "assets/images/thedatapilot_logo.png",
-    alt: "The Data Pilot",
-    className: "w-8 h-8 rounded-full shadow-lg"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600"
-  }, "The Data Pilot")), /*#__PURE__*/React.createElement("a", {
-    href: "/#curriculum",
-    className: "text-sm font-medium hover:text-indigo-400 transition-colors"
-  }, "Master SQL in 16 Weeks"))), /*#__PURE__*/React.createElement("main", {
+  }, /*#__PURE__*/React.createElement(window.Navbar, null), /*#__PURE__*/React.createElement("main", {
     className: "flex-grow max-w-4xl mx-auto w-full px-6 py-12 flex flex-col gap-8"
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-center space-y-4"
@@ -181,18 +165,12 @@ const SqlGenerator = () => {
     d: "M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
   })), "AI Explanation:"), /*#__PURE__*/React.createElement("p", {
     className: "theme-text-muted text-sm"
-  }, result.explanation)), /*#__PURE__*/React.createElement("div", {
-    className: "mt-8 bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-2xl p-6 text-center space-y-4"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-bold"
-  }, "Relying on AI for SQL is dangerous in interviews."), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted text-sm max-w-lg mx-auto"
-  }, "Top tier companies (Amazon, Deloitte) test you on live whiteboards without AI. Learn to write advanced Window Functions and CTEs from scratch in our Live Analytics Masterclass."), /*#__PURE__*/React.createElement("a", {
-    href: "/#curriculum",
-    className: "inline-block py-3 px-6 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all text-sm"
-  }, "Explore the 16-Week Curriculum")))), /*#__PURE__*/React.createElement("footer", {
-    className: "py-8 text-center theme-text-muted text-sm border-t theme-border mt-auto"
-  }, /*#__PURE__*/React.createElement("p", null, "© ", new Date().getFullYear(), " The Data Pilot. All rights reserved.")));
+  }, result.explanation)), /*#__PURE__*/React.createElement(window.GlobalCTABanner, {
+    title: "Relying on AI for SQL is dangerous in interviews.",
+    subtitle: "Top tier companies (Amazon, Deloitte) test you on live whiteboards without AI. Learn to write advanced Window Functions and CTEs from scratch in our Live Analytics Masterclass."
+  }))), /*#__PURE__*/React.createElement(window.Footer, null));
 };
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(/*#__PURE__*/React.createElement(SqlGenerator, null));
+if (!window._reactRoot) {
+  window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(/*#__PURE__*/React.createElement(SqlGenerator, null));

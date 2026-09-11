@@ -86,17 +86,7 @@ const SqlGenerator = () => {
 
     return (
         <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col">
-            <header className="border-b theme-border bg-white/5 backdrop-blur-md sticky top-0 z-50">
-                <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-                    <a href="/" className="flex items-center gap-3">
-                        <img src="assets/images/thedatapilot_logo.png" alt="The Data Pilot" className="w-8 h-8 rounded-full shadow-lg" />
-                        <span className="text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">
-                            The Data Pilot
-                        </span>
-                    </a>
-                    <a href="/#curriculum" className="text-sm font-medium hover:text-indigo-400 transition-colors">Master SQL in 16 Weeks</a>
-                </div>
-            </header>
+            <window.Navbar />
 
             <main className="flex-grow max-w-4xl mx-auto w-full px-6 py-12 flex flex-col gap-8">
                 <div className="text-center space-y-4">
@@ -186,25 +176,20 @@ const SqlGenerator = () => {
                         </div>
 
                         {/* Conversion Hook */}
-                        <div className="mt-8 bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-2xl p-6 text-center space-y-4">
-                            <h3 className="text-xl font-bold">Relying on AI for SQL is dangerous in interviews.</h3>
-                            <p className="theme-text-muted text-sm max-w-lg mx-auto">
-                                Top tier companies (Amazon, Deloitte) test you on live whiteboards without AI. Learn to write advanced Window Functions and CTEs from scratch in our Live Analytics Masterclass.
-                            </p>
-                            <a href="/#curriculum" className="inline-block py-3 px-6 bg-cyan-600 hover:bg-cyan-500 text-white font-bold rounded-lg shadow-[0_0_15px_rgba(6,182,212,0.3)] transition-all text-sm">
-                                Explore the 16-Week Curriculum
-                            </a>
-                        </div>
+                        <window.GlobalCTABanner 
+                            title="Relying on AI for SQL is dangerous in interviews." 
+                            subtitle="Top tier companies (Amazon, Deloitte) test you on live whiteboards without AI. Learn to write advanced Window Functions and CTEs from scratch in our Live Analytics Masterclass." 
+                        />
                     </div>
                 )}
             </main>
 
-            <footer className="py-8 text-center theme-text-muted text-sm border-t theme-border mt-auto">
-                <p>&copy; {new Date().getFullYear()} The Data Pilot. All rights reserved.</p>
-            </footer>
+            <window.Footer />
         </div>
     );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<SqlGenerator />);
+if (!window._reactRoot) {
+    window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(<SqlGenerator />);

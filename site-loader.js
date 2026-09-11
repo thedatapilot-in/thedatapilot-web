@@ -9,7 +9,7 @@
  */
 
 (function() {
-    const VERSION = "3.2.15";
+    const VERSION = "3.2.16";
     const path = window.location.pathname;
     
     // Page Route Detection

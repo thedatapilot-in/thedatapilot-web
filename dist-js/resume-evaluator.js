@@ -55,23 +55,7 @@ const ResumeEvaluator = () => {
   };
   return /*#__PURE__*/React.createElement("div", {
     className: "min-h-screen theme-bg theme-text-primary font-sans flex flex-col"
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "border-b theme-border bg-white/5 backdrop-blur-md sticky top-0 z-50"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
-  }, /*#__PURE__*/React.createElement("a", {
-    href: "/",
-    className: "flex items-center gap-3"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: "assets/images/thedatapilot_logo.png",
-    alt: "The Data Pilot",
-    className: "w-8 h-8 rounded-full shadow-lg"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600"
-  }, "The Data Pilot")), /*#__PURE__*/React.createElement("a", {
-    href: "/#curriculum",
-    className: "text-sm font-medium hover:text-indigo-400 transition-colors"
-  }, "View Program"))), /*#__PURE__*/React.createElement("main", {
+  }, /*#__PURE__*/React.createElement(window.Navbar, null), /*#__PURE__*/React.createElement("main", {
     className: "flex-grow max-w-4xl mx-auto w-full px-6 py-12 flex flex-col gap-8"
   }, /*#__PURE__*/React.createElement("div", {
     className: "text-center space-y-4"
@@ -177,18 +161,12 @@ const ResumeEvaluator = () => {
     className: "px-2 py-1 text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20 rounded-md line-through opacity-70"
   }, word)), results.missing[cat.category].length === 0 && /*#__PURE__*/React.createElement("span", {
     className: "text-xs theme-text-muted italic"
-  }, "None missing!")))))), /*#__PURE__*/React.createElement("div", {
-    className: "mt-12 bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-indigo-500/30 rounded-3xl p-8 text-center space-y-6"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-2xl md:text-3xl font-black"
-  }, "Missing the required skills?"), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted max-w-2xl mx-auto text-lg"
-  }, "Don't just stuff keywords. Learn them practically. Join our 16-week live instructor-led Masterclass and build portfolio projects that actually prove your skills."), /*#__PURE__*/React.createElement("a", {
-    href: "/#curriculum",
-    className: "inline-block py-4 px-8 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all"
-  }, "View Curriculum & Apply Now")))), /*#__PURE__*/React.createElement("footer", {
-    className: "py-8 text-center theme-text-muted text-sm border-t theme-border mt-auto"
-  }, /*#__PURE__*/React.createElement("p", null, "© ", new Date().getFullYear(), " The Data Pilot. All rights reserved.")));
+  }, "None missing!")))))), /*#__PURE__*/React.createElement(window.GlobalCTABanner, {
+    title: "Missing the required skills?",
+    subtitle: "Don't just stuff keywords. Learn them practically. Join our 16-week live instructor-led Masterclass and build portfolio projects that actually prove your skills."
+  }))), /*#__PURE__*/React.createElement(window.Footer, null));
 };
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(/*#__PURE__*/React.createElement(ResumeEvaluator, null));
+if (!window._reactRoot) {
+  window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(/*#__PURE__*/React.createElement(ResumeEvaluator, null));

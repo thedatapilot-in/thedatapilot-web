@@ -52,18 +52,7 @@ const ResumeEvaluator = () => {
 
     return (
         <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col">
-            {/* Minimal Header */}
-            <header className="border-b theme-border bg-white/5 backdrop-blur-md sticky top-0 z-50">
-                <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-                    <a href="/" className="flex items-center gap-3">
-                        <img src="assets/images/thedatapilot_logo.png" alt="The Data Pilot" className="w-8 h-8 rounded-full shadow-lg" />
-                        <span className="text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">
-                            The Data Pilot
-                        </span>
-                    </a>
-                    <a href="/#curriculum" className="text-sm font-medium hover:text-indigo-400 transition-colors">View Program</a>
-                </div>
-            </header>
+            <window.Navbar />
 
             <main className="flex-grow max-w-4xl mx-auto w-full px-6 py-12 flex flex-col gap-8">
                 <div className="text-center space-y-4">
@@ -169,26 +158,20 @@ const ResumeEvaluator = () => {
                         </div>
 
                         {/* Conversion Hook */}
-                        <div className="mt-12 bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-indigo-500/30 rounded-3xl p-8 text-center space-y-6">
-                            <h3 className="text-2xl md:text-3xl font-black">Missing the required skills?</h3>
-                            <p className="theme-text-muted max-w-2xl mx-auto text-lg">
-                                Don't just stuff keywords. Learn them practically. Join our 16-week live instructor-led Masterclass and build portfolio projects that actually prove your skills.
-                            </p>
-                            <a href="/#curriculum" className="inline-block py-4 px-8 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all">
-                                View Curriculum & Apply Now
-                            </a>
-                        </div>
+                        <window.GlobalCTABanner 
+                            title="Missing the required skills?" 
+                            subtitle="Don't just stuff keywords. Learn them practically. Join our 16-week live instructor-led Masterclass and build portfolio projects that actually prove your skills." 
+                        />
                     </div>
                 )}
             </main>
 
-            {/* Simple Footer */}
-            <footer className="py-8 text-center theme-text-muted text-sm border-t theme-border mt-auto">
-                <p>&copy; {new Date().getFullYear()} The Data Pilot. All rights reserved.</p>
-            </footer>
+            <window.Footer />
         </div>
     );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<ResumeEvaluator />);
+if (!window._reactRoot) {
+    window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(<ResumeEvaluator />);
