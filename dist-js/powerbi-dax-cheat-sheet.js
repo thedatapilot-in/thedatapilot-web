@@ -1,124 +1,142 @@
 const PowerBIDaxCheatSheet = () => {
   return /*#__PURE__*/React.createElement("div", {
-    className: "min-h-screen theme-bg theme-text-primary font-sans flex flex-col"
-  }, /*#__PURE__*/React.createElement("header", {
-    className: "border-b theme-border bg-white/5 backdrop-blur-md sticky top-0 z-50"
+    className: "min-h-screen theme-bg theme-text-primary font-sans flex flex-col relative"
+  }, /*#__PURE__*/React.createElement(window.Navbar, null), /*#__PURE__*/React.createElement("main", {
+    className: "flex-grow pt-32 pb-24 px-6 max-w-4xl mx-auto w-full space-y-16 relative z-10"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
-  }, /*#__PURE__*/React.createElement("a", {
-    href: "/",
-    className: "flex items-center gap-3"
-  }, /*#__PURE__*/React.createElement("img", {
-    src: "assets/images/thedatapilot_logo.png",
-    alt: "The Data Pilot",
-    className: "w-8 h-8 rounded-full shadow-lg"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600"
-  }, "The Data Pilot")), /*#__PURE__*/React.createElement("a", {
-    href: "/#curriculum",
-    className: "text-sm font-medium hover:text-indigo-400 transition-colors"
-  }, "Master Power BI"))), /*#__PURE__*/React.createElement("main", {
-    className: "flex-grow max-w-4xl mx-auto w-full px-6 py-12 space-y-12"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "text-center space-y-4"
-  }, /*#__PURE__*/React.createElement("h1", {
-    className: "text-4xl md:text-5xl font-black tracking-tight"
+    className: "text-center space-y-6"
+  }, /*#__PURE__*/React.createElement(window.SectionEyebrow, {
+    className: "mb-2 mx-auto justify-center flex"
+  }, "Masterclass Cheat Sheet"), /*#__PURE__*/React.createElement("h1", {
+    className: "text-4xl md:text-5xl font-black tracking-tight theme-text-primary"
   }, "Power BI DAX Formula Cheat Sheet"), /*#__PURE__*/React.createElement("p", {
-    className: "text-lg theme-text-muted"
+    className: "text-lg theme-text-muted max-w-2xl mx-auto leading-relaxed"
   }, "The ultimate reference guide for Data Analysis Expressions (DAX) used in Power BI, Analysis Services, and Power Pivot. Master these 10 formulas to pass any technical round.")), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-12 animate-fade-in-up"
+    className: "space-y-16"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "space-y-6"
+    className: "space-y-8"
   }, /*#__PURE__*/React.createElement("h2", {
-    className: "text-3xl font-black border-b-2 theme-border pb-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500"
-  }, "Aggregation Functions"), /*#__PURE__*/React.createElement("section", {
-    className: "theme-card p-6 rounded-2xl border theme-border space-y-4"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-bold"
-  }, "1. SUM vs SUMX"), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted text-sm md:text-base leading-relaxed"
-  }, "`SUM` simply adds up all the values in a single column. `SUMX` is an iterator function that evaluates an expression for every row in a table, and then sums the results. Use `SUMX` when you need row-by-row calculations (like Price * Quantity) before summing."), /*#__PURE__*/React.createElement("pre", {
-    className: "bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-yellow-300 overflow-x-auto"
+    className: "text-3xl font-black border-b-2 border-brand-500/20 pb-4 theme-text-primary"
+  }, "1. Aggregation Functions"), /*#__PURE__*/React.createElement("section", {
+    className: "theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 left-0 w-1 h-full bg-brand-500"
+  }), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold mb-4"
+  }, "SUM vs SUMX"), /*#__PURE__*/React.createElement("p", {
+    className: "theme-text-muted text-[15px] leading-relaxed mb-6"
+  }, "`SUM` simply adds up all the values in a single column. `SUMX` is an iterator function that evaluates an expression for every row in a table, and then sums the results. Use `SUMX` when you need row-by-row calculations (like Price * Quantity) before summing."), /*#__PURE__*/React.createElement("div", {
+    className: "bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto"
+  }, /*#__PURE__*/React.createElement("pre", {
+    className: "font-mono text-[13px] text-yellow-300"
   }, `-- Basic column sum
 Total Quantity = SUM(Sales[Quantity])
 
 -- Iterating row by row
-Total Revenue = SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])`))), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-6"
+Total Revenue = SUMX(Sales, Sales[Quantity] * Sales[UnitPrice])`)))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-8"
   }, /*#__PURE__*/React.createElement("h2", {
-    className: "text-3xl font-black border-b-2 theme-border pb-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500"
-  }, "Filter Context Modifiers"), /*#__PURE__*/React.createElement("section", {
-    className: "theme-card p-6 rounded-2xl border theme-border space-y-4"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-bold"
-  }, "2. CALCULATE"), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted text-sm md:text-base leading-relaxed"
-  }, "The most important function in DAX. It evaluates an expression in a context that is modified by the specified filters. If you don't understand `CALCULATE`, you don't understand DAX."), /*#__PURE__*/React.createElement("pre", {
-    className: "bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-yellow-300 overflow-x-auto"
+    className: "text-3xl font-black border-b-2 border-brand-500/20 pb-4 theme-text-primary"
+  }, "2. Filter Context Modifiers"), /*#__PURE__*/React.createElement("section", {
+    className: "theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 left-0 w-1 h-full bg-brand-500"
+  }), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold mb-4"
+  }, "CALCULATE"), /*#__PURE__*/React.createElement("p", {
+    className: "theme-text-muted text-[15px] leading-relaxed mb-6"
+  }, "The most important function in DAX. It evaluates an expression in a context that is modified by the specified filters. If you don't understand `CALCULATE`, you don't understand DAX."), /*#__PURE__*/React.createElement("div", {
+    className: "bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto"
+  }, /*#__PURE__*/React.createElement("pre", {
+    className: "font-mono text-[13px] text-yellow-300"
   }, `Total Sales (USA) = 
 CALCULATE(
     [Total Sales], 
     Geography[Country] = "USA"
-)`)), /*#__PURE__*/React.createElement("section", {
-    className: "theme-card p-6 rounded-2xl border theme-border space-y-4"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-bold"
-  }, "3. FILTER"), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted text-sm md:text-base leading-relaxed"
-  }, "Returns a table that represents a subset of another table or expression. Usually used inside `CALCULATE` when you need complex filtering logic (like measures or multiple columns) that simple boolean filters cannot handle."), /*#__PURE__*/React.createElement("pre", {
-    className: "bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-yellow-300 overflow-x-auto"
+)`))), /*#__PURE__*/React.createElement("section", {
+    className: "theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 left-0 w-1 h-full bg-brand-500"
+  }), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold mb-4"
+  }, "FILTER"), /*#__PURE__*/React.createElement("p", {
+    className: "theme-text-muted text-[15px] leading-relaxed mb-6"
+  }, "Returns a table that represents a subset of another table or expression. Usually used inside `CALCULATE` when you need complex filtering logic (like measures or multiple columns) that simple boolean filters cannot handle."), /*#__PURE__*/React.createElement("div", {
+    className: "bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto"
+  }, /*#__PURE__*/React.createElement("pre", {
+    className: "font-mono text-[13px] text-yellow-300"
   }, `High Value Sales = 
 CALCULATE(
     [Total Sales],
     FILTER(Sales, Sales[Revenue] > 10000)
-)`)), /*#__PURE__*/React.createElement("section", {
-    className: "theme-card p-6 rounded-2xl border theme-border space-y-4"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-bold"
-  }, "4. ALL & ALLEXCEPT"), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted text-sm md:text-base leading-relaxed"
-  }, "`ALL` removes all filters from a table or column. It's crucial for calculating percentages of a grand total. `ALLEXCEPT` removes all filters except for those on specified columns."), /*#__PURE__*/React.createElement("pre", {
-    className: "bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-yellow-300 overflow-x-auto"
+)`))), /*#__PURE__*/React.createElement("section", {
+    className: "theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 left-0 w-1 h-full bg-brand-500"
+  }), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold mb-4"
+  }, "ALL & ALLEXCEPT"), /*#__PURE__*/React.createElement("p", {
+    className: "theme-text-muted text-[15px] leading-relaxed mb-6"
+  }, "`ALL` removes all filters from a table or column. It's crucial for calculating percentages of a grand total. `ALLEXCEPT` removes all filters except for those on specified columns."), /*#__PURE__*/React.createElement("div", {
+    className: "bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto"
+  }, /*#__PURE__*/React.createElement("pre", {
+    className: "font-mono text-[13px] text-yellow-300"
   }, `-- Ignores all slices and filters on the Sales table
 Grand Total Sales = CALCULATE([Total Sales], ALL(Sales))
 
 -- Calculate % of Total
-% of Total = DIVIDE([Total Sales], CALCULATE([Total Sales], ALL(Sales)))`))), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-6"
+% of Total = DIVIDE([Total Sales], CALCULATE([Total Sales], ALL(Sales)))`)))), /*#__PURE__*/React.createElement("div", {
+    className: "space-y-8"
   }, /*#__PURE__*/React.createElement("h2", {
-    className: "text-3xl font-black border-b-2 theme-border pb-2 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500"
-  }, "Time Intelligence"), /*#__PURE__*/React.createElement("section", {
-    className: "theme-card p-6 rounded-2xl border theme-border space-y-4"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-bold"
-  }, "5. SAMEPERIODLASTYEAR"), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted text-sm md:text-base leading-relaxed"
-  }, "Essential for Year-over-Year (YoY) growth calculations. It requires a dedicated Date table marked as a Date Table in your model."), /*#__PURE__*/React.createElement("pre", {
-    className: "bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-yellow-300 overflow-x-auto"
+    className: "text-3xl font-black border-b-2 border-brand-500/20 pb-4 theme-text-primary"
+  }, "3. Time Intelligence"), /*#__PURE__*/React.createElement("section", {
+    className: "theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 left-0 w-1 h-full bg-brand-500"
+  }), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold mb-4"
+  }, "SAMEPERIODLASTYEAR"), /*#__PURE__*/React.createElement("p", {
+    className: "theme-text-muted text-[15px] leading-relaxed mb-6"
+  }, "Essential for Year-over-Year (YoY) growth calculations. It requires a dedicated Date table marked as a Date Table in your model."), /*#__PURE__*/React.createElement("div", {
+    className: "bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto"
+  }, /*#__PURE__*/React.createElement("pre", {
+    className: "font-mono text-[13px] text-yellow-300"
   }, `Sales Last Year = 
 CALCULATE(
     [Total Sales], 
     SAMEPERIODLASTYEAR('Date'[Date])
-)`)), /*#__PURE__*/React.createElement("section", {
-    className: "theme-card p-6 rounded-2xl border theme-border space-y-4"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-xl font-bold"
-  }, "6. TOTALYTD"), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted text-sm md:text-base leading-relaxed"
-  }, "Evaluates the year-to-date value of the expression in the current context. Also requires a Date table."), /*#__PURE__*/React.createElement("pre", {
-    className: "bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-yellow-300 overflow-x-auto"
-  }, `YTD Sales = TOTALYTD([Total Sales], 'Date'[Date])`))), /*#__PURE__*/React.createElement("div", {
-    className: "bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-indigo-500/30 rounded-3xl p-8 text-center space-y-6"
-  }, /*#__PURE__*/React.createElement("h3", {
-    className: "text-2xl font-black"
+)`))), /*#__PURE__*/React.createElement("section", {
+    className: "theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 left-0 w-1 h-full bg-brand-500"
+  }), /*#__PURE__*/React.createElement("h3", {
+    className: "text-xl font-bold mb-4"
+  }, "TOTALYTD"), /*#__PURE__*/React.createElement("p", {
+    className: "theme-text-muted text-[15px] leading-relaxed mb-6"
+  }, "Evaluates the year-to-date value of the expression in the current context. Also requires a Date table."), /*#__PURE__*/React.createElement("div", {
+    className: "bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto"
+  }, /*#__PURE__*/React.createElement("pre", {
+    className: "font-mono text-[13px] text-yellow-300"
+  }, `YTD Sales = TOTALYTD([Total Sales], 'Date'[Date])`)))), /*#__PURE__*/React.createElement("div", {
+    className: "mt-16 p-10 sm:p-14 rounded-[2.5rem] relative overflow-hidden bg-gradient-to-br from-brand-900/40 via-secondary-900/40 to-brand-900/20 border border-brand-500/20 shadow-2xl group"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "absolute top-0 right-0 w-64 h-64 bg-brand-500/20 blur-[100px] rounded-full pointer-events-none group-hover:bg-brand-500/30 transition-colors duration-1000"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "absolute bottom-0 left-0 w-64 h-64 bg-brand-accent/20 blur-[100px] rounded-full pointer-events-none group-hover:bg-brand-accent/30 transition-colors duration-1000"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "relative z-10 text-center space-y-6"
+  }, /*#__PURE__*/React.createElement(window.CardBadge, {
+    className: "mb-2"
+  }, "Augmented Data Analytics"), /*#__PURE__*/React.createElement("h3", {
+    className: "text-3xl md:text-4xl font-black tracking-tight text-white"
   }, "DAX is easy to learn, but hard to master."), /*#__PURE__*/React.createElement("p", {
-    className: "theme-text-muted text-lg"
-  }, "Go beyond basic formulas. Learn advanced Star Schema Data Modeling, Evaluation Contexts, and Row-Level Security in our Augmented Data Analytics Masterclass."), /*#__PURE__*/React.createElement("a", {
-    href: "/#curriculum",
-    className: "inline-block py-4 px-8 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition-all shadow-[0_0_20px_rgba(79,70,229,0.3)]"
-  }, "View The Data Pilot Curriculum")))), /*#__PURE__*/React.createElement("footer", {
-    className: "py-8 text-center theme-text-muted text-sm border-t theme-border mt-auto"
-  }, /*#__PURE__*/React.createElement("p", null, "© ", new Date().getFullYear(), " The Data Pilot. All rights reserved.")));
+    className: "text-lg text-white/70 max-w-2xl mx-auto leading-relaxed"
+  }, "Go beyond basic formulas. Learn advanced Star Schema Data Modeling, Evaluation Contexts, and Row-Level Security in our Augmented Data Analytics Masterclass."), /*#__PURE__*/React.createElement("div", {
+    className: "pt-6"
+  }, /*#__PURE__*/React.createElement(window.GradientButton, {
+    onClick: () => window.location.href = 'index.html#curriculum',
+    className: "px-10 py-5 rounded-2xl text-[17px]"
+  }, "View The Data Pilot Curriculum")))))), /*#__PURE__*/React.createElement(window.Footer, null));
 };
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(/*#__PURE__*/React.createElement(PowerBIDaxCheatSheet, null));

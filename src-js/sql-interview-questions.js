@@ -1,89 +1,93 @@
 const SqlInterviewQuestions = () => {
     return (
-        <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col">
-            <header className="border-b theme-border bg-white/5 backdrop-blur-md sticky top-0 z-50">
-                <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-                    <a href="/" className="flex items-center gap-3">
-                        <img src="assets/images/thedatapilot_logo.png" alt="The Data Pilot" className="w-8 h-8 rounded-full shadow-lg" />
-                        <span className="text-xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-600">
-                            The Data Pilot
-                        </span>
-                    </a>
-                    <a href="/#curriculum" className="text-sm font-medium hover:text-indigo-400 transition-colors">Master SQL in 16 Weeks</a>
-                </div>
-            </header>
+        <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col relative">
+            <window.Navbar />
 
-            <main className="flex-grow max-w-4xl mx-auto w-full px-6 py-12 space-y-12">
-                <div className="text-center space-y-4">
-                    <h1 className="text-4xl md:text-5xl font-black tracking-tight">
+            <main className="flex-grow pt-32 pb-24 px-6 max-w-4xl mx-auto w-full space-y-16 relative z-10">
+                <div className="text-center space-y-6">
+                    <window.SectionEyebrow className="mb-2 mx-auto justify-center flex">Interview Prep Guide</window.SectionEyebrow>
+                    <h1 className="text-4xl md:text-5xl font-black tracking-tight theme-text-primary">
                         Top 25 SQL Interview Questions (2026 Edition)
                     </h1>
-                    <p className="text-lg theme-text-muted">
+                    <p className="text-lg theme-text-muted max-w-2xl mx-auto leading-relaxed">
                         A comprehensive guide to cracking the technical SQL round at top Indian analytics firms like Deloitte, TCS, and Fractal.
                     </p>
                 </div>
 
-                <div className="space-y-12 animate-fade-in-up">
-                    
+                <div className="space-y-12">
                     {/* Q1 */}
-                    <section className="theme-card p-6 rounded-2xl border theme-border space-y-4">
-                        <h2 className="text-xl font-bold">1. The Difference Between RANK(), DENSE_RANK(), and ROW_NUMBER()</h2>
-                        <p className="theme-text-muted text-sm md:text-base leading-relaxed">
+                    <section className="theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+                        <h2 className="text-2xl font-bold mb-4">1. The Difference Between RANK(), DENSE_RANK(), and ROW_NUMBER()</h2>
+                        <p className="theme-text-muted text-[15px] leading-relaxed mb-6">
                             This is the most frequently asked question. `ROW_NUMBER()` assigns a unique sequential integer to rows. `RANK()` provides the same rank for ties but skips the next rank. `DENSE_RANK()` provides the same rank for ties and does not skip the next rank.
                         </p>
-                        <pre className="bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-cyan-300 overflow-x-auto">
-                            SELECT name, salary, DENSE_RANK() OVER(ORDER BY salary DESC) as rnk FROM employees;
-                        </pre>
+                        <div className="bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto">
+                            <pre className="font-mono text-[13px] text-cyan-300">
+{`SELECT name, salary, DENSE_RANK() OVER(ORDER BY salary DESC) as rnk FROM employees;`}
+                            </pre>
+                        </div>
                     </section>
 
                     {/* Q2 */}
-                    <section className="theme-card p-6 rounded-2xl border theme-border space-y-4">
-                        <h2 className="text-xl font-bold">2. Find the Second Highest Salary (Without LIMIT)</h2>
-                        <p className="theme-text-muted text-sm md:text-base leading-relaxed">
+                    <section className="theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+                        <h2 className="text-2xl font-bold mb-4">2. Find the Second Highest Salary (Without LIMIT)</h2>
+                        <p className="theme-text-muted text-[15px] leading-relaxed mb-6">
                             Interviewers want to see if you know how to use subqueries or window functions instead of just `ORDER BY DESC LIMIT 1 OFFSET 1`.
                         </p>
-                        <pre className="bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-cyan-300 overflow-x-auto">
-                            SELECT MAX(salary) FROM employees WHERE salary &lt; (SELECT MAX(salary) FROM employees);
-                        </pre>
+                        <div className="bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto">
+                            <pre className="font-mono text-[13px] text-cyan-300">
+{`SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees);`}
+                            </pre>
+                        </div>
                     </section>
 
                     {/* Q3 */}
-                    <section className="theme-card p-6 rounded-2xl border theme-border space-y-4">
-                        <h2 className="text-xl font-bold">3. What is a CTE (Common Table Expression)?</h2>
-                        <p className="theme-text-muted text-sm md:text-base leading-relaxed">
+                    <section className="theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+                        <h2 className="text-2xl font-bold mb-4">3. What is a CTE (Common Table Expression)?</h2>
+                        <p className="theme-text-muted text-[15px] leading-relaxed mb-6">
                             A CTE provides a temporary result set that you can reference within another SELECT, INSERT, UPDATE, or DELETE statement. It drastically improves query readability and allows recursive queries.
                         </p>
-                        <pre className="bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-cyan-300 overflow-x-auto">
+                        <div className="bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto">
+                            <pre className="font-mono text-[13px] text-cyan-300">
 {`WITH DepartmentAvg AS (
     SELECT dept_id, AVG(salary) as avg_sal FROM employees GROUP BY dept_id
 )
 SELECT e.name, e.salary, d.avg_sal 
 FROM employees e JOIN DepartmentAvg d ON e.dept_id = d.dept_id
 WHERE e.salary > d.avg_sal;`}
-                        </pre>
+                            </pre>
+                        </div>
                     </section>
 
                     {/* Q4 */}
-                    <section className="theme-card p-6 rounded-2xl border theme-border space-y-4">
-                        <h2 className="text-xl font-bold">4. How do you find duplicate records in a table?</h2>
-                        <p className="theme-text-muted text-sm md:text-base leading-relaxed">
+                    <section className="theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+                        <h2 className="text-2xl font-bold mb-4">4. How do you find duplicate records in a table?</h2>
+                        <p className="theme-text-muted text-[15px] leading-relaxed mb-6">
                             You group by the columns that should be unique and use the `HAVING` clause to filter groups with a count greater than 1.
                         </p>
-                        <pre className="bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-cyan-300 overflow-x-auto">
+                        <div className="bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto">
+                            <pre className="font-mono text-[13px] text-cyan-300">
 {`SELECT email, COUNT(*) 
 FROM users 
 GROUP BY email 
 HAVING COUNT(*) > 1;`}
-                        </pre>
+                            </pre>
+                        </div>
                     </section>
                     
                     {/* Q5 */}
-                    <section className="theme-card p-6 rounded-2xl border theme-border space-y-4">
-                        <h2 className="text-xl font-bold">5. Delete duplicate rows but keep the latest one</h2>
-                        <p className="theme-text-muted text-sm md:text-base leading-relaxed">
+                    <section className="theme-card p-8 rounded-3xl border theme-border shadow-theme relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+                        <h2 className="text-2xl font-bold mb-4">5. Delete duplicate rows but keep the latest one</h2>
+                        <p className="theme-text-muted text-[15px] leading-relaxed mb-6">
                             This is an advanced question that requires using a CTE with `ROW_NUMBER()` to assign a unique ID to duplicates, and then deleting where the row number is greater than 1.
                         </p>
-                        <pre className="bg-black/30 p-4 rounded-xl border theme-border font-mono text-sm text-cyan-300 overflow-x-auto">
+                        <div className="bg-[#0f172a] rounded-xl border border-slate-700/50 p-5 overflow-x-auto">
+                            <pre className="font-mono text-[13px] text-cyan-300">
 {`WITH RankedDuplicates AS (
     SELECT id, ROW_NUMBER() OVER(PARTITION BY email ORDER BY created_at DESC) as rn
     FROM users
@@ -91,40 +95,32 @@ HAVING COUNT(*) > 1;`}
 DELETE FROM users WHERE id IN (
     SELECT id FROM RankedDuplicates WHERE rn > 1
 );`}
-                        </pre>
-                    </section>
-                    
-                    {/* Q6 */}
-                    <section className="theme-card p-6 rounded-2xl border theme-border space-y-4">
-                        <h2 className="text-xl font-bold">6. Difference between WHERE and HAVING?</h2>
-                        <p className="theme-text-muted text-sm md:text-base leading-relaxed">
-                            `WHERE` filters rows before any grouping or aggregations take place. `HAVING` filters the grouped result set after the `GROUP BY` clause is applied. You cannot use aggregate functions (like SUM or COUNT) in a WHERE clause.
-                        </p>
-                    </section>
-                    
-                    {/* Q7 */}
-                    <section className="theme-card p-6 rounded-2xl border theme-border space-y-4">
-                        <h2 className="text-xl font-bold">7. LEFT JOIN vs INNER JOIN vs FULL OUTER JOIN</h2>
-                        <p className="theme-text-muted text-sm md:text-base leading-relaxed">
-                            `INNER JOIN` returns only rows with a match in both tables. `LEFT JOIN` returns all rows from the left table, and matching rows from the right (filling with NULLs if no match). `FULL OUTER JOIN` returns all rows from both tables, filling with NULLs where there are no matches.
-                        </p>
+                            </pre>
+                        </div>
                     </section>
 
-                    <div className="bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border border-indigo-500/30 rounded-3xl p-8 text-center space-y-6">
-                        <h3 className="text-2xl font-black">Ready for the other 18 Advanced Questions?</h3>
-                        <p className="theme-text-muted text-lg">
-                            Stop memorizing answers. Build the actual intuition for advanced SQL, query optimization, and ETL pipelines in our 16-Week Live Masterclass.
-                        </p>
-                        <a href="/#curriculum" className="inline-block py-4 px-8 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow-[0_0_20px_rgba(79,70,229,0.3)] transition-all">
-                            View The Data Pilot Curriculum
-                        </a>
+                    {/* CTA Banner */}
+                    <div className="mt-16 p-10 sm:p-14 rounded-[2.5rem] relative overflow-hidden bg-gradient-to-br from-brand-900/40 via-secondary-900/40 to-brand-900/20 border border-brand-500/20 shadow-2xl group">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500/20 blur-[100px] rounded-full pointer-events-none group-hover:bg-brand-500/30 transition-colors duration-1000"></div>
+                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-accent/20 blur-[100px] rounded-full pointer-events-none group-hover:bg-brand-accent/30 transition-colors duration-1000"></div>
+                        
+                        <div className="relative z-10 text-center space-y-6">
+                            <window.CardBadge className="mb-2">Augmented Data Analytics</window.CardBadge>
+                            <h3 className="text-3xl md:text-4xl font-black tracking-tight text-white">Ready for the other 18 Advanced Questions?</h3>
+                            <p className="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+                                Stop memorizing answers. Build the actual intuition for advanced SQL, query optimization, and ETL pipelines in our 16-Week Live Masterclass.
+                            </p>
+                            <div className="pt-6">
+                                <window.GradientButton onClick={() => window.location.href = 'index.html#curriculum'} className="px-10 py-5 rounded-2xl text-[17px]">
+                                    View The Data Pilot Curriculum
+                                </window.GradientButton>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
             
-            <footer className="py-8 text-center theme-text-muted text-sm border-t theme-border mt-auto">
-                <p>&copy; {new Date().getFullYear()} The Data Pilot. All rights reserved.</p>
-            </footer>
+            <window.Footer />
         </div>
     );
 };
