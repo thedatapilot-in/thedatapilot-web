@@ -155,5 +155,7 @@ CALCULATE(
     );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<PowerBIDaxCheatSheet />);
+if (!window._reactRoot) {
+    window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(<PowerBIDaxCheatSheet />);

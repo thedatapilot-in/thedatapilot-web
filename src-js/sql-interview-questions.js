@@ -125,5 +125,7 @@ DELETE FROM users WHERE id IN (
     );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<SqlInterviewQuestions />);
+if (!window._reactRoot) {
+    window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(<SqlInterviewQuestions />);

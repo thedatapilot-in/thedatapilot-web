@@ -138,5 +138,7 @@ CALCULATE(
     className: "px-10 py-5 rounded-2xl text-[17px]"
   }, "View The Data Pilot Curriculum")))))), /*#__PURE__*/React.createElement(window.Footer, null));
 };
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(/*#__PURE__*/React.createElement(PowerBIDaxCheatSheet, null));
+if (!window._reactRoot) {
+  window._reactRoot = ReactDOM.createRoot(document.getElementById('root'));
+}
+window._reactRoot.render(/*#__PURE__*/React.createElement(PowerBIDaxCheatSheet, null));
