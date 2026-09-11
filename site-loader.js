@@ -9,7 +9,7 @@
  */
 
 (function() {
-    const VERSION = "3.2.14";
+    const VERSION = "3.2.15";
     const path = window.location.pathname;
     
     // Page Route Detection
@@ -207,13 +207,13 @@
         // Determine which specific page logic to load
         let pageSrc = '';
         if (isLandingPage) pageSrc = `dist-js/landing-page.js?v=${VERSION}`;
-        else if (isAboutPage) pageSrc = `dist-js/about-us.js?v=${VERSION}`; 
-        else if (isPrivacyPage) pageSrc = `dist-js/privacy-policy.js?v=${VERSION}`;
-        else if (isTermsPage) pageSrc = `dist-js/terms-and-conditions.js?v=${VERSION}`;
-        else if (isRefundPage) pageSrc = `dist-js/refund-policy.js?v=${VERSION}`;
+        else if (isAboutUsPage) pageSrc = `dist-js/about-us.js?v=${VERSION}`; 
+        else if (isPrivacyPolicyPage) pageSrc = `dist-js/privacy-policy.js?v=${VERSION}`;
+        else if (isTermsAndConditionsPage) pageSrc = `dist-js/terms-and-conditions.js?v=${VERSION}`;
+        else if (isRefundPolicyPage) pageSrc = `dist-js/refund-policy.js?v=${VERSION}`;
         else if (isProductsPage) pageSrc = `dist-js/products.js?v=${VERSION}`;
         else if (isServicesPage) pageSrc = `dist-js/services.js?v=${VERSION}`;
-        else if (isSalaryCalcPage) pageSrc = `dist-js/salary-calculator.js?v=${VERSION}`;
+        else if (isSalaryCalculatorPage) pageSrc = `dist-js/salary-calculator.js?v=${VERSION}`;
         else if (isResumeEvaluatorPage) pageSrc = `dist-js/resume-evaluator.js?v=${VERSION}`;
         else if (isSqlGeneratorPage) pageSrc = `dist-js/sql-generator.js?v=${VERSION}`;
         else if (isDataHubPage) pageSrc = `dist-js/data-hub.js?v=${VERSION}`;
