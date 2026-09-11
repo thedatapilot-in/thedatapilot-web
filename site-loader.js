@@ -21,6 +21,7 @@
     const isProductsPage = path.endsWith('products.html');
     const isServicesPage = path.endsWith('services.html');
     const isSalaryCalcPage = path.endsWith('salary-calculator.html');
+    const isDataHubPage = path.endsWith('data-hub.html');
 
     // --- CENTRALIZED WATCHDOG & EMERGENCY UI ---
     // Increased from 3000 to 10000 to handle slower 4G/mobile latencies
@@ -166,7 +167,6 @@
     const coreLibs = [
                 { src: "https://unpkg.com/react@18/umd/react.production.min.js", id: "lib-react" },
         { src: "https://unpkg.com/react-dom@18/umd/react-dom.production.min.js", id: "lib-react-dom" },
-        { src: "https://unpkg.com/@babel/standalone/babel.min.js", id: "lib-babel" },
         { src: "https://unpkg.com/lucide@latest", id: "lib-lucide" }
     ];
 
@@ -197,32 +197,28 @@
 
         // Always load the core engine first
         const engine = document.createElement('script');
-        engine.type = "text/babel";
-        engine.src = `core-layout.js?v=${VERSION}`;
+        engine.type = "application/javascript";
+        engine.src = `dist-js/core-layout.js?v=${VERSION}`;
         document.head.appendChild(engine);
 
         // Determine which specific page logic to load
         let pageSrc = '';
-        if (isLandingPage) pageSrc = `landing-page.js?v=${VERSION}`;
-        else if (isAboutPage) pageSrc = `about-us.js?v=${VERSION}`; 
-        else if (isPrivacyPage) pageSrc = `privacy-policy.js?v=${VERSION}`;
-        else if (isTermsPage) pageSrc = `terms-and-conditions.js?v=${VERSION}`;
-        else if (isRefundPage) pageSrc = `refund-policy.js?v=${VERSION}`;
-        else if (isProductsPage) pageSrc = `products.js?v=${VERSION}`;
-        else if (isServicesPage) pageSrc = `services.js?v=${VERSION}`;
-        else if (isSalaryCalcPage) pageSrc = `salary-calculator.js?v=${VERSION}`;
+        if (isLandingPage) pageSrc = `dist-js/landing-page.js?v=${VERSION}`;
+        else if (isAboutPage) pageSrc = `dist-js/about-us.js?v=${VERSION}`; 
+        else if (isPrivacyPage) pageSrc = `dist-js/privacy-policy.js?v=${VERSION}`;
+        else if (isTermsPage) pageSrc = `dist-js/terms-and-conditions.js?v=${VERSION}`;
+        else if (isRefundPage) pageSrc = `dist-js/refund-policy.js?v=${VERSION}`;
+        else if (isProductsPage) pageSrc = `dist-js/products.js?v=${VERSION}`;
+        else if (isServicesPage) pageSrc = `dist-js/services.js?v=${VERSION}`;
+        else if (isSalaryCalcPage) pageSrc = `dist-js/salary-calculator.js?v=${VERSION}`;
+        else if (isDataHubPage) pageSrc = `dist-js/data-hub.js?v=${VERSION}`;
 
         // Inject the page logic if a valid route was found
         if (pageSrc) {
             const page = document.createElement('script');
-            page.type = "text/babel";
+            page.type = "application/javascript";
             page.src = pageSrc;
             document.head.appendChild(page);
-        }
-
-        // Force Babel Standalone to scan the DOM and compile
-        if (window.Babel) {
-            window.Babel.transformScriptTags();
         }
     }
 
