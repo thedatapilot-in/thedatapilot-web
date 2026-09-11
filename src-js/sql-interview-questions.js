@@ -99,24 +99,10 @@ DELETE FROM users WHERE id IN (
                         </div>
                     </section>
 
-                    {/* CTA Banner */}
-                    <div className="mt-16 p-10 sm:p-14 rounded-[2.5rem] relative overflow-hidden bg-gradient-to-br from-brand-900/40 via-secondary-900/40 to-brand-900/20 border border-brand-500/20 shadow-2xl group">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500/20 blur-[100px] rounded-full pointer-events-none group-hover:bg-brand-500/30 transition-colors duration-1000"></div>
-                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-accent/20 blur-[100px] rounded-full pointer-events-none group-hover:bg-brand-accent/30 transition-colors duration-1000"></div>
-                        
-                        <div className="relative z-10 text-center space-y-6">
-                            <window.CardBadge className="mb-2">Augmented Data Analytics</window.CardBadge>
-                            <h3 className="text-3xl md:text-4xl font-black tracking-tight text-white">Ready for the other 18 Advanced Questions?</h3>
-                            <p className="text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-                                Stop memorizing answers. Build the actual intuition for advanced SQL, query optimization, and ETL pipelines in our 16-Week Live Masterclass.
-                            </p>
-                            <div className="pt-6">
-                                <window.GradientButton onClick={() => window.location.href = 'index.html#curriculum'} className="px-10 py-5 rounded-2xl text-[17px]">
-                                    View The Data Pilot Curriculum
-                                </window.GradientButton>
-                            </div>
-                        </div>
-                    </div>
+                    <window.GlobalCTABanner 
+                        title="Ready for the other 18 Advanced Questions?"
+                        subtitle="Stop memorizing answers. Build the actual intuition for advanced SQL, query optimization, and ETL pipelines in our 16-Week Live Masterclass."
+                    />
                 </div>
             </main>
             
