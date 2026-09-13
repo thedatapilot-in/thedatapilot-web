@@ -43,7 +43,6 @@ jobs:
           password: ${{ secrets.HOSTINGER_FTP_PASS }}
           server-dir: ${{ steps.target.outputs.remote_dir }}
           state-name: .ftp-state-${{ github.sha }}.json
-          force-populate: true
           timeout: 60000
           exclude: |
             **/.git*
@@ -59,4 +58,3 @@ jobs:
             **/.agents/**
             **/scripts/**
             **/generate_logos.py
-            **/assets/images/**
