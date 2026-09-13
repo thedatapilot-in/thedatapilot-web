@@ -16,8 +16,42 @@
 
   <!-- Tailwind CSS & Engine Config -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="theme-config.js?v=3.2.18"></script>
-  <script src="site-loader.js?v=3.2.18"></script>
+  <script src="theme-config.js?v=3.2.19"></script>
+  <script src="site-loader.js?v=3.2.19"></script>
+  <style>
+    /* Cylindrical slider thumb styling */
+    input[type="range"].custom-salary-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      height: 8px;
+    }
+    input[type="range"].custom-salary-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 24px;
+      border-radius: 4px;
+      background: #0284c7;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      transition: transform 0.1s ease;
+    }
+    input[type="range"].custom-salary-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.1);
+    }
+    input[type="range"].custom-salary-slider::-moz-range-thumb {
+      width: 14px;
+      height: 24px;
+      border-radius: 4px;
+      background: #0284c7;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+  </style>
 </head>
 <body class="theme-bg">
   <!-- React App mounts here -->
