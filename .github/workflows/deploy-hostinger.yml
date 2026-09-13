@@ -42,32 +42,7 @@ jobs:
           username: ${{ secrets.HOSTINGER_FTP_USER }}
           password: ${{ secrets.HOSTINGER_FTP_PASS }}
           server-dir: ${{ steps.target.outputs.remote_dir }}
-          state-name: .ftp-state-${{ steps.target.outputs.env_label }}.json
-          timeout: 60000
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.DS_Store
-            **/cover image.png
-            **/chat-logs/**
-            **/knowledge-vault/**
-            **/workstreams/**
-            **/archive/**
-            **/logs/**
-            **/.agents/**
-            **/scripts/**
-            **/generate_logos.py
-
-      - name: Deploy via FTP → staging.thedatapilot.in (Subdomain Fallback)
-        if: github.ref_name == 'staging'
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.HOSTINGER_FTP_HOST }}
-          username: ${{ secrets.HOSTINGER_FTP_USER }}
-          password: ${{ secrets.HOSTINGER_FTP_PASS }}
-          server-dir: /public_html/staging.thedatapilot.in/
-          state-name: .ftp-state-staging-subdomain.json
+          state-name: .ftp-state-${{ github.sha }}.json
           timeout: 60000
           exclude: |
             **/.git*
