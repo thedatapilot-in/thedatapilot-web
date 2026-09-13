@@ -331,19 +331,19 @@ const App = () => {
                                     <span className="text-xs font-bold theme-mid-text">To Unlock ₹{calculation.projectedCTC} LPA</span>
                                 </div>
 
-                                <div className="space-y-2.5 min-h-[210px] flex flex-col justify-start">
+                                <div className="grid grid-cols-2 gap-2.5">
                                     {targetStackData.skills.map(skill => {
                                         const isAlreadyKnown = selectedRoleData.currentSkills.includes(skill);
                                         return (
-                                            <div key={skill} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 text-xs md:text-sm">
-                                                <span className="font-semibold theme-text-primary">{skill}</span>
+                                            <div key={skill} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 text-xs">
+                                                <span className="font-semibold theme-text-primary truncate mr-1">{skill}</span>
                                                 {isAlreadyKnown ? (
-                                                    <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1">
-                                                        <Icon name="check-circle" size={14} /> Acquired
+                                                    <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1 shrink-0">
+                                                        <Icon name="check-circle" size={13} /> Acquired
                                                     </span>
                                                 ) : (
-                                                    <span className="text-[11px] font-bold text-amber-400 flex items-center gap-1">
-                                                        <Icon name="alert-circle" size={14} /> Skill Gap • Needed
+                                                    <span className="text-[10px] font-bold text-amber-400 flex items-center gap-1 shrink-0">
+                                                        <Icon name="alert-circle" size={13} /> Needed
                                                     </span>
                                                 )}
                                             </div>

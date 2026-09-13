@@ -299,25 +299,25 @@ const App = () => {
   }, "Your Personalized Skills Gap"), /*#__PURE__*/React.createElement("span", {
     className: "text-xs font-bold theme-mid-text"
   }, "To Unlock ₹", calculation.projectedCTC, " LPA")), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2.5 min-h-[210px] flex flex-col justify-start"
+    className: "grid grid-cols-2 gap-2.5"
   }, targetStackData.skills.map(skill => {
     const isAlreadyKnown = selectedRoleData.currentSkills.includes(skill);
     return /*#__PURE__*/React.createElement("div", {
       key: skill,
-      className: "flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 text-xs md:text-sm"
+      className: "flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 text-xs"
     }, /*#__PURE__*/React.createElement("span", {
-      className: "font-semibold theme-text-primary"
+      className: "font-semibold theme-text-primary truncate mr-1"
     }, skill), isAlreadyKnown ? /*#__PURE__*/React.createElement("span", {
-      className: "text-[11px] font-bold text-emerald-400 flex items-center gap-1"
+      className: "text-[10px] font-bold text-emerald-400 flex items-center gap-1 shrink-0"
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "check-circle",
-      size: 14
+      size: 13
     }), " Acquired") : /*#__PURE__*/React.createElement("span", {
-      className: "text-[11px] font-bold text-amber-400 flex items-center gap-1"
+      className: "text-[10px] font-bold text-amber-400 flex items-center gap-1 shrink-0"
     }, /*#__PURE__*/React.createElement(Icon, {
       name: "alert-circle",
-      size: 14
-    }), " Skill Gap • Needed"));
+      size: 13
+    }), " Needed"));
   }))), /*#__PURE__*/React.createElement("div", {
     className: "pt-3 space-y-3"
   }, /*#__PURE__*/React.createElement("button", {
