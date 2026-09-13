@@ -136,21 +136,21 @@ const App = () => {
     const targetStackData = STACKS.find(s => s.id === targetStack) || STACKS[2];
 
     return (
-        <div className="min-h-screen theme-text-primary animate-in fade-in duration-700">
+        <div className="min-h-screen flex flex-col theme-text-primary animate-in fade-in duration-700">
             <Navbar />
 
             {/* HERO HEADER */}
-            <header className="pt-36 pb-12 px-6 theme-bg-alt border-b theme-border-strong text-center relative overflow-hidden">
-                <div className="max-w-4xl mx-auto">
+            <header className="pt-36 pb-12 px-4 sm:px-6 lg:px-8 theme-bg-alt border-b theme-border-strong text-center relative overflow-hidden">
+                <div className="max-w-7xl mx-auto">
                     <ScrollReveal>
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4">
                             <Icon name="sparkles" size={14} className="text-brand-400" />
                             <span>Official 2026 India Compensation Benchmark</span>
                         </div>
-                        <h1 className="text-3xl md:text-5xl font-black theme-text-primary tracking-tight mb-4">
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl font-black theme-text-primary tracking-tight mb-4">
                             Data Analyst Salary & <span className="theme-mid-text">Career Hike Calculator</span>
                         </h1>
-                        <p className="text-base md:text-lg theme-text-muted font-medium max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-base md:text-xl theme-text-muted font-medium max-w-3xl mx-auto leading-relaxed">
                             Discover your market value. Calculate your projected salary package, monthly take-home, and the exact skills required to unlock high-paying analytics roles.
                         </p>
                     </ScrollReveal>
@@ -158,19 +158,19 @@ const App = () => {
             </header>
 
             {/* CALCULATOR MAIN INTERACTIVE WORKSPACE */}
-            <main className="py-12 md:py-16 px-6 max-w-7xl mx-auto">
-                <div className="grid lg:grid-cols-12 gap-8 items-start">
+            <main className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-1 flex flex-col">
+                <div className="grid lg:grid-cols-12 gap-8 items-stretch flex-1">
                     
                     {/* LEFT COLUMN: INPUTS (7 COLS) */}
-                    <div className="lg:col-span-7 space-y-6">
-                        <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-xl space-y-6">
+                    <div className="lg:col-span-7 h-full">
+                        <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-xl flex flex-col justify-between h-full space-y-6">
                             
                             {/* 1. CURRENT ROLE */}
                             <div>
-                                <label className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2.5">
+                                <label className="block text-xs md:text-sm font-bold uppercase tracking-wider theme-text-secondary mb-3">
                                     Step 1: Select Your Current Background / Role
                                 </label>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     {ROLES.map(role => (
                                         <button
                                             key={role.id}
@@ -179,9 +179,9 @@ const App = () => {
                                                 setCurrentRole(role.id);
                                                 if (role.id === "fresher" && currentCTC > 2) setCurrentCTC(0);
                                             }}
-                                            className={`p-3.5 rounded-2xl text-left border text-xs font-bold transition-all flex items-center justify-between ${
+                                            className={`p-4 rounded-2xl text-left border text-xs md:text-sm font-bold transition-all flex items-center justify-between ${
                                                 currentRole === role.id 
-                                                    ? "border-brand-500 bg-brand-500/10 theme-mid-text shadow-sm" 
+                                                    ? "border-brand-500 bg-brand-500/10 theme-mid-text shadow-sm ring-1 ring-brand-500/30" 
                                                     : "border-white/5 bg-white/5 theme-text-muted hover:border-white/10"
                                             }`}
                                         >
@@ -193,12 +193,12 @@ const App = () => {
                             </div>
 
                             {/* 2. CURRENT CTC SLIDER */}
-                            <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                                <div className="flex items-center justify-between mb-2">
-                                    <label className="text-xs font-bold uppercase tracking-wider theme-text-secondary">
+                            <div className="p-5 rounded-2xl bg-white/5 border border-white/5">
+                                <div className="flex items-center justify-between mb-3">
+                                    <label className="text-xs md:text-sm font-bold uppercase tracking-wider theme-text-secondary">
                                         Step 2: Current Annual Salary (₹ LPA)
                                     </label>
-                                    <span className="text-xl font-black theme-mid-text">
+                                    <span className="text-xl md:text-2xl font-black theme-mid-text">
                                         {currentCTC === 0 ? "Fresher (₹0)" : `₹${currentCTC.toFixed(1)} LPA`}
                                     </span>
                                 </div>
@@ -209,9 +209,9 @@ const App = () => {
                                     step="0.5"
                                     value={currentCTC}
                                     onChange={(e) => setCurrentCTC(parseFloat(e.target.value))}
-                                    className="w-full accent-brand-500 cursor-pointer h-2 bg-white/10 rounded-lg appearance-none"
+                                    className="w-full accent-brand-500 cursor-pointer h-2.5 bg-white/10 rounded-lg appearance-none"
                                 />
-                                <div className="flex justify-between text-[10px] theme-text-muted font-bold mt-2">
+                                <div className="flex justify-between text-xs theme-text-muted font-bold mt-2.5">
                                     <span>Fresher / ₹0</span>
                                     <span>₹5 LPA</span>
                                     <span>₹10 LPA</span>
@@ -221,10 +221,10 @@ const App = () => {
 
                             {/* 3. EXPERIENCE */}
                             <div>
-                                <label className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2.5">
+                                <label className="block text-xs md:text-sm font-bold uppercase tracking-wider theme-text-secondary mb-3">
                                     Step 3: Total Work Experience
                                 </label>
-                                <div className="grid grid-cols-3 gap-2.5">
+                                <div className="grid grid-cols-3 gap-3">
                                     {[
                                         { id: "fresher", label: "Fresher (0 Yrs)" },
                                         { id: "1-3", label: "1 – 3 Years" },
@@ -234,9 +234,9 @@ const App = () => {
                                             key={item.id}
                                             type="button"
                                             onClick={() => setExperience(item.id)}
-                                            className={`py-3 px-2 rounded-xl text-center border text-xs font-bold transition-all ${
+                                            className={`py-3.5 px-3 rounded-xl text-center border text-xs md:text-sm font-bold transition-all ${
                                                 experience === item.id 
-                                                    ? "border-brand-500 bg-brand-500/10 theme-mid-text" 
+                                                    ? "border-brand-500 bg-brand-500/10 theme-mid-text ring-1 ring-brand-500/30" 
                                                     : "border-white/5 bg-white/5 theme-text-muted hover:border-white/10"
                                             }`}
                                         >
@@ -248,7 +248,7 @@ const App = () => {
 
                             {/* 4. TARGET TECH STACK */}
                             <div>
-                                <label className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2.5">
+                                <label className="block text-xs md:text-sm font-bold uppercase tracking-wider theme-text-secondary mb-3">
                                     Step 4: Choose Your Target Analytics Stack
                                 </label>
                                 <div className="space-y-3">
@@ -256,29 +256,29 @@ const App = () => {
                                         <div
                                             key={stack.id}
                                             onClick={() => setTargetStack(stack.id)}
-                                            className={`p-4 rounded-2xl border transition-all cursor-pointer relative ${
+                                            className={`p-4.5 rounded-2xl border transition-all cursor-pointer relative ${
                                                 targetStack === stack.id 
                                                     ? "border-brand-500 bg-brand-500/10 shadow-md ring-1 ring-brand-500/40" 
                                                     : "border-white/5 bg-white/5 hover:border-white/10"
                                             }`}
                                         >
-                                            <div className="flex items-center justify-between mb-1">
+                                            <div className="flex items-center justify-between mb-1.5">
                                                 <div className="flex items-center gap-2">
-                                                    <span className="font-extrabold text-sm md:text-base theme-text-primary">
+                                                    <span className="font-extrabold text-sm md:text-lg theme-text-primary">
                                                         {stack.title}
                                                     </span>
-                                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-500/20 theme-mid-text">
+                                                    <span className="text-[10px] md:text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-500/20 theme-mid-text">
                                                         {stack.badge}
                                                     </span>
                                                 </div>
-                                                <span className="text-xs font-black text-emerald-400">
+                                                <span className="text-xs md:text-sm font-black text-emerald-400">
                                                     Avg +{stack.avgHike}
                                                 </span>
                                             </div>
-                                            <p className="text-xs theme-text-muted font-medium mb-2">{stack.desc}</p>
-                                            <div className="flex flex-wrap gap-1.5">
+                                            <p className="text-xs md:text-sm theme-text-muted font-medium mb-2.5 leading-relaxed">{stack.desc}</p>
+                                            <div className="flex flex-wrap gap-2">
                                                 {stack.skills.map(sk => (
-                                                    <span key={sk} className="text-[10px] font-semibold px-2 py-0.5 rounded bg-white/5 theme-text-secondary border border-white/10">
+                                                    <span key={sk} className="text-[11px] font-semibold px-2.5 py-1 rounded-lg bg-white/5 theme-text-secondary border border-white/10">
                                                         {sk}
                                                     </span>
                                                 ))}
@@ -292,18 +292,18 @@ const App = () => {
                     </div>
 
                     {/* RIGHT COLUMN: REAL-TIME PROJECTION & SKILL GAP (5 COLS) */}
-                    <div className="lg:col-span-5 space-y-6">
-                        <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden bg-gradient-to-b from-brand-500/5 to-transparent">
+                    <div className="lg:col-span-5 h-full">
+                        <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden bg-gradient-to-b from-brand-500/5 to-transparent flex flex-col justify-between h-full space-y-6">
                             
                             <div className="text-center pb-6 border-b theme-border space-y-2">
-                                <span className="text-xs font-bold uppercase tracking-wider theme-text-muted">
+                                <span className="text-xs md:text-sm font-bold uppercase tracking-wider theme-text-muted">
                                     Projected Post-Transition Package
                                 </span>
-                                <div className="text-4xl md:text-5xl font-black theme-mid-text tracking-tight">
-                                    ₹{calculation.projectedCTC.toFixed(1)} <span className="text-2xl font-bold theme-text-muted">LPA</span>
+                                <div className="text-4xl md:text-5xl lg:text-6xl font-black theme-mid-text tracking-tight">
+                                    ₹{calculation.projectedCTC.toFixed(1)} <span className="text-2xl md:text-3xl font-bold theme-text-muted">LPA</span>
                                 </div>
-                                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-extrabold">
-                                    <Icon name="trending-up" size={14} />
+                                <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs md:text-sm font-extrabold">
+                                    <Icon name="trending-up" size={16} />
                                     <span>+{calculation.hikePercent}% Expected Hike</span>
                                 </div>
                             </div>
@@ -311,37 +311,37 @@ const App = () => {
                             {/* IN-HAND SALARY ESTIMATE */}
                             <div className="py-5 border-b theme-border flex items-center justify-between">
                                 <div>
-                                    <span className="text-xs font-bold uppercase tracking-wider theme-text-secondary block">Estimated In-Hand Salary</span>
-                                    <span className="text-[11px] theme-text-muted">Post Indian tax & PF take-home</span>
+                                    <span className="text-xs md:text-sm font-bold uppercase tracking-wider theme-text-secondary block">Estimated In-Hand Salary</span>
+                                    <span className="text-xs theme-text-muted">Post Indian tax & PF take-home</span>
                                 </div>
                                 <div className="text-right">
-                                    <span className="text-2xl font-black text-emerald-400">
+                                    <span className="text-2xl md:text-3xl font-black text-emerald-400">
                                         ₹{calculation.monthlyInHand.toLocaleString()}
                                     </span>
-                                    <span className="text-[10px] theme-text-muted block">/ month</span>
+                                    <span className="text-xs theme-text-muted block">/ month</span>
                                 </div>
                             </div>
 
                             {/* SKILL GAP AUDIT */}
-                            <div className="py-5 space-y-3">
+                            <div className="py-5 space-y-3.5 flex-1 flex flex-col justify-center">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-xs font-bold uppercase tracking-wider theme-text-secondary">Your Personalized Skills Gap</span>
-                                    <span className="text-[11px] font-bold theme-mid-text">To Unlock ₹{calculation.projectedCTC} LPA</span>
+                                    <span className="text-xs md:text-sm font-bold uppercase tracking-wider theme-text-secondary">Your Personalized Skills Gap</span>
+                                    <span className="text-xs font-bold theme-mid-text">To Unlock ₹{calculation.projectedCTC} LPA</span>
                                 </div>
 
-                                <div className="space-y-2">
+                                <div className="space-y-2.5">
                                     {targetStackData.skills.map(skill => {
                                         const isAlreadyKnown = selectedRoleData.currentSkills.includes(skill);
                                         return (
-                                            <div key={skill} className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 border border-white/5 text-xs">
+                                            <div key={skill} className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 text-xs md:text-sm">
                                                 <span className="font-semibold theme-text-primary">{skill}</span>
                                                 {isAlreadyKnown ? (
-                                                    <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">
-                                                        <Icon name="check-circle" size={12} /> Acquired
+                                                    <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1">
+                                                        <Icon name="check-circle" size={14} /> Acquired
                                                     </span>
                                                 ) : (
-                                                    <span className="text-[10px] font-bold text-amber-400 flex items-center gap-1">
-                                                        <Icon name="alert-circle" size={12} /> Skill Gap • Needed
+                                                    <span className="text-[11px] font-bold text-amber-400 flex items-center gap-1">
+                                                        <Icon name="alert-circle" size={14} /> Skill Gap • Needed
                                                     </span>
                                                 )}
                                             </div>
@@ -354,13 +354,13 @@ const App = () => {
                             <div className="pt-3 space-y-3">
                                 <button
                                     onClick={() => setIsModalOpen(true)}
-                                    className="w-full theme-btn-gradient text-white py-4 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                                    className="w-full theme-btn-gradient text-white py-4 md:py-4.5 rounded-2xl font-black text-xs md:text-sm uppercase tracking-widest shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
                                 >
-                                    <Icon name="zap" size={16} />
+                                    <Icon name="zap" size={18} />
                                     <span>Fast-Track This Hike in 16 Weeks</span>
                                 </button>
                                 
-                                <p className="text-[11px] text-center theme-text-muted">
+                                <p className="text-xs text-center theme-text-muted">
                                     Get personalized 1-on-1 career consultation & curriculum breakdown.
                                 </p>
                             </div>
