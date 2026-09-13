@@ -325,13 +325,13 @@ const App = () => {
                             </div>
 
                             {/* SKILL GAP AUDIT */}
-                            <div className="py-5 space-y-3.5 flex-1 flex flex-col justify-center">
+                            <div className="py-5 space-y-3.5 flex-1 flex flex-col justify-start">
                                 <div className="flex items-center justify-between">
                                     <span className="text-xs md:text-sm font-bold uppercase tracking-wider theme-text-secondary">Your Personalized Skills Gap</span>
                                     <span className="text-xs font-bold theme-mid-text">To Unlock ₹{calculation.projectedCTC} LPA</span>
                                 </div>
 
-                                <div className="space-y-2.5">
+                                <div className="space-y-2.5 min-h-[210px] flex flex-col justify-start">
                                     {targetStackData.skills.map(skill => {
                                         const isAlreadyKnown = selectedRoleData.currentSkills.includes(skill);
                                         return (

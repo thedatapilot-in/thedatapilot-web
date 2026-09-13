@@ -291,7 +291,7 @@ const App = () => {
   }, "₹", calculation.monthlyInHand.toLocaleString()), /*#__PURE__*/React.createElement("span", {
     className: "text-xs theme-text-muted block"
   }, "/ month"))), /*#__PURE__*/React.createElement("div", {
-    className: "py-5 space-y-3.5 flex-1 flex flex-col justify-center"
+    className: "py-5 space-y-3.5 flex-1 flex flex-col justify-start"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center justify-between"
   }, /*#__PURE__*/React.createElement("span", {
@@ -299,7 +299,7 @@ const App = () => {
   }, "Your Personalized Skills Gap"), /*#__PURE__*/React.createElement("span", {
     className: "text-xs font-bold theme-mid-text"
   }, "To Unlock ₹", calculation.projectedCTC, " LPA")), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2.5"
+    className: "space-y-2.5 min-h-[210px] flex flex-col justify-start"
   }, targetStackData.skills.map(skill => {
     const isAlreadyKnown = selectedRoleData.currentSkills.includes(skill);
     return /*#__PURE__*/React.createElement("div", {
