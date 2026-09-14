@@ -184,7 +184,7 @@ const App = () => {
     className: "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/30 shadow-sm"
   }, /*#__PURE__*/React.createElement("span", {
     className: "w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"
-  }), /*#__PURE__*/React.createElement("span", null, "BUILD v3.2.25"))), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", null, "BUILD v3.2.27"))), /*#__PURE__*/React.createElement("div", {
     className: "grid lg:grid-cols-12 gap-8 items-stretch flex-1"
   }, /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-7 flex flex-col h-full"
