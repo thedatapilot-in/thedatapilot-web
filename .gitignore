@@ -3,8 +3,9 @@ node_modules/
 # Admin panel credentials (real DB creds + admin password hash)
 admin/config.php
 
-# AI Agent & Workflow Folders (Local Only)
+# AI Agent & Workflow Folders (Local Only — not needed to serve the site)
 .agents/
+.claude/
 workstreams/
 knowledge-vault/
 chat-logs/
@@ -15,5 +16,9 @@ tmp_chrome_data/
 tmp_chrome_profile/
 BACKLOG.md
 CLAUDE.md
+
+# Scratch/temp files pasted at repo root during a session — never intended
+# for a commit, easy to sweep in accidentally with a broad `git add`
+scratch_*
 
 node_modules/
