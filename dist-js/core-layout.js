@@ -314,7 +314,7 @@ window.Navbar = ({
     className: "theme-mid-text hover:brightness-90 font-extrabold hover:underline text-[17px] tracking-tight"
   }, "Request Callback"), /*#__PURE__*/React.createElement("button", {
     onClick: () => setIsModalOpen(true),
-    className: "theme-mid-outline-btn px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight"
+    className: "theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight"
   }, "Join Program")), /*#__PURE__*/React.createElement("button", {
     className: "lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform",
     onClick: () => setIsMenuOpen(!isMenuOpen)
@@ -368,7 +368,7 @@ window.Navbar = ({
       setIsModalOpen(true);
       setIsMenuOpen(false);
     },
-    className: "theme-mid-outline-btn py-5 rounded-2xl font-bold shadow-lg text-center"
+    className: "theme-btn-gradient text-white py-5 rounded-2xl font-bold shadow-lg text-center"
   }, "Join Program")))), isModalOpen && /*#__PURE__*/React.createElement("div", {
     className: "fixed inset-0 z-[100] flex items-center justify-center p-4 bg-secondary-900/80 backdrop-blur-sm"
   }, /*#__PURE__*/React.createElement("div", {

@@ -283,7 +283,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     </div>
 
                     <button onClick={() => setIsModalOpen(true)} className="theme-mid-text hover:brightness-90 font-extrabold hover:underline text-[17px] tracking-tight">Request Callback</button>
-                    <button onClick={() => setIsModalOpen(true)} className="theme-mid-outline-btn px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
+                    <button onClick={() => setIsModalOpen(true)} className="theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
                 </div>
 
                 <button className="lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -330,7 +330,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
 
                         <div className="pt-4 border-t border-secondary-50 flex flex-col space-y-4">
                             <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-mid-text font-bold text-left px-2 py-3">Request Callback</button>
-                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-mid-outline-btn py-5 rounded-2xl font-bold shadow-lg text-center">Join Program</button>
+                            <button onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }} className="theme-btn-gradient text-white py-5 rounded-2xl font-bold shadow-lg text-center">Join Program</button>
                         </div>
                     </div>
                 </div>

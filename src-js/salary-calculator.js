@@ -124,12 +124,12 @@ const SalaryCalculator = () => {
                 Fixed position in the empty top padding band (below the
                 Navbar, above where PageLayout's content actually starts),
                 so it never takes space from or competes with the two cards. */}
-            <span className="fixed bottom-5 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>
+            <span className="fixed top-20 sm:top-24 right-3 z-30 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span>BUILD v3.2.32</span>
             </span>
 
-            <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch lg:h-[calc(100vh-8rem)] lg:max-h-[850px]">
+            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
 
                 {/* LEFT COLUMN: INPUT STUDIO (7 COLS) */}
                 <div className="lg:col-span-7 flex flex-col h-full">
@@ -214,7 +214,7 @@ const SalaryCalculator = () => {
                                         className={`py-2.5 px-2 rounded-lg text-center border text-xs sm:text-sm font-bold transition-all ${
                                             experience === item.id
                                                 ? "border-brand-500 bg-brand-500/10 theme-mid-text ring-1 ring-brand-500/30"
-                                                : "theme-border theme-text-primary bg-slate-50 dark:bg-slate-800/50 hover:border-brand-300"
+                                                : "theme-border theme-text-muted hover:border-brand-300"
                                         }`}
                                     >
                                         {item.label}
@@ -246,7 +246,7 @@ const SalaryCalculator = () => {
                                                     {stack.title}
                                                 </span>
                                                 <span className={`text-xs font-extrabold px-2 py-0.5 rounded-full ${
-                                                    isActive ? "bg-brand-500 text-white" : "theme-text-muted"
+                                                    isActive ? "bg-emerald-500 text-white" : "theme-text-muted"
                                                 }`}>
                                                     +{stack.avgHike}
                                                 </span>
@@ -291,34 +291,34 @@ const SalaryCalculator = () => {
                             {/* STEP: TARGET STACK */}
                             <div className="flex items-center justify-between p-3.5 rounded-xl border theme-border theme-bg-alt">
                                 <span className="text-sm font-bold theme-text-primary">{targetStackData.title}</span>
-                                <span className="text-sm font-extrabold text-brand-500">+{targetStackData.avgHike}</span>
+                                <span className="text-sm font-extrabold text-emerald-500">+{targetStackData.avgHike}</span>
                             </div>
                             <div className="flex justify-center text-brand-500">
                                 <Icon name="arrow-down" size={16} />
                             </div>
 
                             {/* OUTPUT: PROJECTED PACKAGE */}
-                            <div className="p-3 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-center space-y-0.5">
+                            <div className="p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-center space-y-1">
                                 <span className="block text-xs font-bold uppercase tracking-wider theme-mid-text">
                                     Projected Annual Package
                                 </span>
-                                <div className="text-3xl md:text-4xl font-black theme-text-primary tracking-tight">
+                                <div className="text-3xl md:text-4xl font-black theme-mid-text">
                                     ₹{calculation.projectedCTC.toFixed(1)} <span className="text-lg font-bold">LPA</span>
                                 </div>
-                                <div className="text-sm font-bold text-brand-500">
+                                <div className="text-sm font-bold text-emerald-500">
                                     Estimated In-Hand: ₹{calculation.monthlyInHand.toLocaleString()}/mo
                                 </div>
                             </div>
                         </div>
 
                         {/* STACK REQUIREMENTS */}
-                        <div className="mt-2 pt-2 border-t theme-border">
+                        <div className="mt-4 pt-4 border-t theme-border">
                             <span className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2.5 text-center">
                                 Stack Requirements to Unlock Package
                             </span>
                             <div className="grid grid-cols-2 gap-2">
                                 {targetStackData.skills.map(sk => (
-                                    <span key={sk} className="text-center text-[11px] font-semibold px-2 py-2 rounded-lg bg-brand-500/5 theme-text-primary border ring-1 ring-brand-500/30 theme-border">
+                                    <span key={sk} className="text-center text-[11px] font-semibold px-2 py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border">
                                         {sk}
                                     </span>
                                 ))}
@@ -428,14 +428,17 @@ const SalaryCalculator = () => {
                 </div>
             )}
 
-            {/* FLOATING MARKETING POPUP — Adjusted per user request to be 
-                visible on laptops (md:block) and responsive, allowing overlap 
-                or squeezing to keep it laptop compliant without disappearing. */}
+            {/* FLOATING MARKETING POPUP — only shown where there's genuine
+                margin outside the max-w-7xl content container to sit in
+                without overlapping it (roughly >=1600px viewports); width is
+                capped to that actual margin so it can never overlap the
+                calculator, height grows naturally as text wraps narrower. */}
             {sidePromoVisible && (
                 <div
-                    className="block fixed bottom-6 left-6 z-50 p-1 w-64 lg:w-72 animate-in slide-in-from-bottom-5 duration-500"
+                    className="hidden 2xl:block fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500"
+                    style={{ width: "min(20rem, calc((100vw - 80rem) / 2 - 1.5rem))" }}
                 >
-                    <div className="theme-card border-2 border-brand-500/50 rounded-3xl p-6 lg:p-7 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95">
+                    <div className="theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95">
                         <button
                             onClick={() => setSidePromoVisible(false)}
                             className="absolute top-3 right-3 text-slate-400 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
@@ -444,16 +447,16 @@ const SalaryCalculator = () => {
                             <Icon name="x" size={16} />
                         </button>
 
-                        <div className="flex items-center gap-2 mb-4">
-                            <span className="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                             <span className="text-[10px] font-extrabold uppercase tracking-widest text-brand-400">Live Cohort Batch</span>
                         </div>
 
-                        <h4 className="text-base md:text-lg font-extrabold text-white mb-3 leading-snug">
+                        <h4 className="text-sm md:text-base font-extrabold text-white mb-1.5 leading-snug">
                             Ready to transition to Data Analytics in 16 weeks?
                         </h4>
 
-                        <p className="text-xs lg:text-sm text-slate-300 font-medium mb-5 leading-relaxed">
+                        <p className="text-xs text-slate-300 font-medium mb-3.5 leading-relaxed">
                             Join live cohorts in SQL, Power BI, Python & GenAI with 1-on-1 industry mentorship.
                         </p>
 
