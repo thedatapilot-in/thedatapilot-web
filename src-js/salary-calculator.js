@@ -120,13 +120,14 @@ const SalaryCalculator = () => {
 
     return (
         <window.PageLayout maxWidth="max-w-7xl">
-            {/* TOP-RIGHT LIVE BUILD VERSION BADGE */}
-            <div className="flex justify-end mb-3">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>BUILD v3.2.30</span>
-                </span>
-            </div>
+            {/* Build badge — temporary, testing-only, removed before go-live.
+                Fixed position in the empty top padding band (below the
+                Navbar, above where PageLayout's content actually starts),
+                so it never takes space from or competes with the two cards. */}
+            <span className="fixed top-20 sm:top-24 right-3 z-30 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>BUILD v3.2.32</span>
+            </span>
 
             <div className="grid lg:grid-cols-12 gap-8 items-stretch">
 
@@ -427,9 +428,16 @@ const SalaryCalculator = () => {
                 </div>
             )}
 
-            {/* FLOATING MARKETING POPUP */}
+            {/* FLOATING MARKETING POPUP — only shown where there's genuine
+                margin outside the max-w-7xl content container to sit in
+                without overlapping it (roughly >=1600px viewports); width is
+                capped to that actual margin so it can never overlap the
+                calculator, height grows naturally as text wraps narrower. */}
             {sidePromoVisible && (
-                <div className="fixed bottom-6 left-6 z-40 max-w-sm w-full p-1 animate-in slide-in-from-bottom-5 duration-500">
+                <div
+                    className="hidden 2xl:block fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500"
+                    style={{ width: "min(20rem, calc((100vw - 80rem) / 2 - 1.5rem))" }}
+                >
                     <div className="theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95">
                         <button
                             onClick={() => setSidePromoVisible(false)}

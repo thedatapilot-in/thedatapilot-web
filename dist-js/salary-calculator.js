@@ -138,13 +138,11 @@ const SalaryCalculator = () => {
   const targetStackData = STACKS.find(s => s.id === targetStack) || STACKS[2];
   return /*#__PURE__*/React.createElement(window.PageLayout, {
     maxWidth: "max-w-7xl"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "flex justify-end mb-3"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm"
+    className: "fixed top-20 sm:top-24 right-3 z-30 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm"
   }, /*#__PURE__*/React.createElement("span", {
     className: "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
-  }), /*#__PURE__*/React.createElement("span", null, "BUILD v3.2.30"))), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", null, "BUILD v3.2.32")), /*#__PURE__*/React.createElement("div", {
     className: "grid lg:grid-cols-12 gap-8 items-stretch"
   }, /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-7 flex flex-col h-full"
@@ -381,7 +379,10 @@ const SalaryCalculator = () => {
     },
     className: "px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 theme-text-primary font-bold text-xs uppercase tracking-wider"
   }, "Close Window")))), sidePromoVisible && /*#__PURE__*/React.createElement("div", {
-    className: "fixed bottom-6 left-6 z-40 max-w-sm w-full p-1 animate-in slide-in-from-bottom-5 duration-500"
+    className: "hidden 2xl:block fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500",
+    style: {
+      width: "min(20rem, calc((100vw - 80rem) / 2 - 1.5rem))"
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95"
   }, /*#__PURE__*/React.createElement("button", {
