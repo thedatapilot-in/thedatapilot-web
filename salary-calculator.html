@@ -16,14 +16,20 @@
 
   <!-- Tailwind CSS & Engine Config -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="theme-config.js?v=3.2.16"></script>
-  <script src="site-loader.js?v=3.2.16"></script>
+  <script src="theme-config.js?v=3.2.28"></script>
+  <script src="site-loader.js?v=3.2.28"></script>
 </head>
 <body class="theme-bg">
   <!-- React App mounts here -->
   <div id="root">
     <!-- Static Fallback for Search Crawlers & Pre-renderers -->
-    <div class="max-w-4xl mx-auto px-6 py-24 text-left">
+    <div class="max-w-4xl mx-auto px-6 py-24 text-left relative">
+      <div class="absolute top-4 right-6">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/30 shadow-sm">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>BUILD v3.2.28</span>
+        </span>
+      </div>
       <h1 class="text-3xl font-extrabold theme-text-primary mb-4">Data Analyst Salary & Career Hike Calculator (India 2026)</h1>
       <p class="theme-text-muted mb-6">Calculate your projected salary hike, post-tax monthly in-hand income, and required tech stack gap for high-paying data roles in India.</p>
       <div class="theme-card p-6 rounded-2xl border theme-border space-y-4">

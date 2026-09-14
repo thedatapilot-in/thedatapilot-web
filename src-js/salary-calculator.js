@@ -165,7 +165,7 @@ const App = () => {
                     <div className="flex justify-end mb-3">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/30 shadow-sm">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span>BUILD v3.2.27</span>
+                            <span>BUILD v3.2.28</span>
                         </span>
                     </div>
 
