@@ -142,17 +142,17 @@ const App = () => {
                 <Navbar />
 
                 {/* HERO HEADER */}
-                <header className="pt-32 pb-8 md:pt-36 md:pb-10 px-4 sm:px-6 lg:px-8 theme-bg-alt border-b theme-border-strong text-center relative overflow-hidden">
-                    <div className="max-w-7xl mx-auto">
+                <header className="pt-32 pb-10 md:pt-44 md:pb-16 px-4 sm:px-6 lg:px-8 theme-bg-alt border-b theme-border-strong text-center relative overflow-hidden">
+                    <div className="max-w-[90rem] mx-auto">
                         <ScrollReveal>
-                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-3">
-                                <Icon name="sparkles" size={14} className="text-brand-400" />
+                            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest bg-brand-500/10 text-brand-400 border border-brand-500/20 mb-4 md:mb-6">
+                                <Icon name="sparkles" size={16} className="text-brand-400" />
                                 <span>Official 2026 India Compensation Benchmark</span>
                             </div>
-                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black theme-text-primary tracking-tight mb-3">
-                                Data Analyst Salary & <span className="theme-mid-text">Career Hike Calculator</span>
+                            <h1 className="text-4xl md:text-6xl lg:text-[5rem] font-black theme-text-primary tracking-tight mb-4 md:mb-6 leading-tight">
+                                Data Analyst Salary & <span className="theme-mid-text block md:inline mt-2 md:mt-0">Career Hike Calculator</span>
                             </h1>
-                            <p className="text-sm md:text-lg theme-text-muted font-medium max-w-3xl mx-auto leading-relaxed">
+                            <p className="text-sm md:text-xl theme-text-muted font-medium max-w-4xl mx-auto leading-relaxed">
                                 Discover your market value. Calculate your projected salary package, monthly take-home, and the exact skills required to unlock high-paying analytics roles.
                             </p>
                         </ScrollReveal>
@@ -160,20 +160,20 @@ const App = () => {
                 </header>
 
                 {/* CALCULATOR MAIN INTERACTIVE WORKSPACE */}
-                <main className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-1 flex flex-col relative">
+                <main className="py-8 md:py-16 px-4 sm:px-6 lg:px-8 max-w-[90rem] mx-auto w-full flex-1 flex flex-col relative">
                     {/* TOP-RIGHT LIVE BUILD VERSION BADGE */}
-                    <div className="flex justify-end mb-3">
+                    <div className="flex justify-end mb-4">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold tracking-wider bg-brand-500/10 text-brand-400 border border-brand-500/30 shadow-sm">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span>BUILD v3.2.25</span>
+                            <span>BUILD v3.2.26</span>
                         </span>
                     </div>
 
-                    <div className="grid lg:grid-cols-12 gap-8 items-stretch flex-1">
+                    <div className="grid lg:grid-cols-12 gap-8 items-stretch flex-1 min-h-[70vh]">
                         
                         {/* LEFT COLUMN: INPUTS (7 COLS) */}
                         <div className="lg:col-span-7 flex flex-col h-full">
-                            <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-xl flex flex-col justify-between h-full flex-1 space-y-6">
+                            <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-10 shadow-xl flex flex-col justify-between h-full flex-1 space-y-8">
                             
                             {/* 1. CURRENT ROLE */}
                             <div>
@@ -303,7 +303,7 @@ const App = () => {
 
                     {/* RIGHT COLUMN: REAL-TIME PROJECTION & SKILL GAP (5 COLS) */}
                     <div className="lg:col-span-5 flex flex-col h-full">
-                        <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden bg-gradient-to-b from-brand-500/5 to-transparent flex flex-col justify-between h-full flex-1 space-y-6">
+                        <div className="theme-card border theme-border-strong rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden bg-gradient-to-b from-brand-500/5 to-transparent flex flex-col justify-between h-full flex-1 space-y-8">
                             
                             <div className="text-center pb-6 border-b theme-border space-y-2">
                                 <span className="text-xs md:text-sm font-bold uppercase tracking-wider theme-text-muted">
