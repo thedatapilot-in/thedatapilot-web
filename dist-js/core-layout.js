@@ -253,12 +253,9 @@ window.Navbar = ({
   const activeItemClass = "theme-card/60 theme-mid-text border-l-4 border-[var(--brand-mid)]";
   const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:bg-[var(--bg-base)]";
   return /*#__PURE__*/React.createElement("nav", {
-    className: "fixed top-3 sm:top-5 left-3 right-3 sm:left-6 sm:right-6 max-w-6xl mx-auto z-50 backdrop-blur-xl border theme-border h-16 sm:h-20 flex items-center shadow-2xl rounded-2xl transition-all",
-    style: {
-      backgroundColor: 'color-mix(in srgb, var(--bg-base) 75%, transparent)'
-    }
+    className: "fixed w-full z-50 theme-bg border-b theme-border h-20 flex items-center shadow-sm"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "w-full mx-auto px-4 sm:px-6 flex justify-between items-center text-left"
+    className: "max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex items-center gap-2 sm:gap-3 cursor-pointer",
     onClick: () => window.location.href = 'index.html'
@@ -325,7 +322,7 @@ window.Navbar = ({
     name: isMenuOpen ? "x" : "menu",
     size: 28
   }))), isMenuOpen && /*#__PURE__*/React.createElement("div", {
-    className: "lg:hidden absolute top-20 sm:top-24 left-0 w-full theme-bg border theme-border shadow-2xl rounded-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-[60] overflow-y-auto max-h-[calc(100vh-120px)] mt-2"
+    className: "lg:hidden absolute top-20 left-0 w-full theme-bg border-b theme-border shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]"
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col space-y-4 text-sm font-bold"
   }, /*#__PURE__*/React.createElement("div", {
