@@ -218,8 +218,8 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
     const inactiveItemClass = "theme-text-secondary border-l-4 border-transparent hover:bg-[var(--bg-base)]";
 
     return (
-        <nav className="fixed w-full z-50 theme-bg border-b theme-border h-20 flex items-center shadow-sm">
-            <div className="max-w-7xl mx-auto px-6 w-full flex justify-between items-center text-left">
+        <nav className="fixed top-3 sm:top-5 left-3 right-3 sm:left-6 sm:right-6 max-w-6xl mx-auto z-50 backdrop-blur-xl border theme-border h-16 sm:h-20 flex items-center shadow-2xl rounded-2xl transition-all" style={{ backgroundColor: 'color-mix(in srgb, var(--bg-base) 75%, transparent)' }}>
+            <div className="w-full mx-auto px-4 sm:px-6 flex justify-between items-center text-left">
                 <div className="flex items-center gap-2 sm:gap-3 cursor-pointer" onClick={() => window.location.href = 'index.html'}>
                     <img src={`assets/images/thedatapilot_logo_${window.LIVE_THEME || 'crimson'}.png`} alt="" className="h-10 sm:h-12 w-auto max-h-12 object-contain object-left shrink-0" onError={e => { e.target.onerror=null; e.target.src='assets/images/thedatapilot_logo.png'; }} />
                     <span className="font-bold text-[22px] theme-mid-text tracking-tight">{brand}</span>
@@ -292,7 +292,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
             </div>
 
             {isMenuOpen && (
-                <div className="lg:hidden absolute top-20 left-0 w-full theme-bg border-b theme-border shadow-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-50 overflow-y-auto max-h-[calc(100vh-80px)]">
+                <div className="lg:hidden absolute top-20 sm:top-24 left-0 w-full theme-bg border theme-border shadow-2xl rounded-2xl py-8 px-6 animate-in slide-in-from-top duration-300 z-[60] overflow-y-auto max-h-[calc(100vh-120px)] mt-2">
                     <div className="flex flex-col space-y-4 text-sm font-bold">
                         <div className="flex items-center justify-between p-4 rounded-xl opacity-60 cursor-not-allowed select-none">
                             <span>Products</span>
