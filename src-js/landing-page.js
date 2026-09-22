@@ -1358,38 +1358,35 @@ const App = () => {
                             {PROJECT_COUNT}+ Real-Time Industry Projects
                         </h2>
 
-                        {/* Tile Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                            {(media.projects || []).slice(0, 6).map((proj, idx) => (
-                                <TiltCard key={proj.id} className="col-span-1 group">
-                                    <div className="h-full w-full theme-card rounded-2xl border theme-border overflow-hidden relative transition-all duration-300 hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/10 flex flex-col">
-                                        <div className="h-32 md:h-40 theme-card flex items-center justify-center relative overflow-hidden">
-                                            <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700" onError={e => e.target.style.display='none'} />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-                                            <Icon name="image" size={32} className="opacity-20 absolute" />
-                                            {/* Project number badge on image */}
-                                            <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-black/50 backdrop-blur theme-mid-text px-2 py-1 rounded border border-[var(--brand-mid)]">
-                                                {String(idx + 1).padStart(2, '0')}
-                                            </span>
-                                            {/* MasterStudy-style corner tag */}
-                                            <window.CardBadge className="absolute top-3 right-3">Live Project</window.CardBadge>
-                                        </div>
-                                        <div className="p-4 md:p-5 relative z-10 theme-card flex-grow flex flex-col gap-2">
-                                            <h4 className="font-bold theme-text-primary text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
-                                            {proj.description && <p className="text-[11px] theme-text-muted leading-snug line-clamp-2">{proj.description}</p>}
-                                            {proj.tools && proj.tools.length > 0 && (
-                                                <div className="flex flex-wrap gap-1 mt-auto pt-1">
-                                                    {proj.tools.map((t, ti) => (
-                                                        <span key={ti} className="text-[9px] font-bold uppercase tracking-wider theme-accent-pill px-1.5 py-0.5 rounded">{t}</span>
-                                                    ))}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="absolute inset-0 bg-gradient-to-br from-brand-500/0 via-brand-500/5 to-brand-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                        {/* 3D Cylinder Carousel for Projects */}
+                        <window.CylinderCarousel 
+                            items={(media.projects || []).slice(0, 6)}
+                            height={360}
+                            renderItem={(proj, idx, isFront) => (
+                                <div className={`h-full w-full theme-card rounded-2xl border ${isFront ? 'border-brand-500 shadow-brand-500/20 shadow-xl' : 'theme-border'} overflow-hidden relative transition-all duration-300 flex flex-col`}>
+                                    <div className="h-32 md:h-40 theme-card flex items-center justify-center relative overflow-hidden">
+                                        <img src={proj.img} alt={proj.title} className="absolute inset-0 w-full h-full object-cover object-top" onError={e => e.target.style.display='none'} />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
+                                        <Icon name="image" size={32} className="opacity-20 absolute" />
+                                        <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-black/50 backdrop-blur theme-mid-text px-2 py-1 rounded border border-[var(--brand-mid)]">
+                                            {String(idx + 1).padStart(2, '0')}
+                                        </span>
+                                        <window.CardBadge className="absolute top-3 right-3">Live Project</window.CardBadge>
                                     </div>
-                                </TiltCard>
-                            ))}
-                        </div>
+                                    <div className="p-4 md:p-5 relative z-10 theme-card flex-grow flex flex-col gap-2">
+                                        <h4 className="font-bold theme-text-primary text-[13px] md:text-sm tracking-tight line-clamp-2">{proj.title}</h4>
+                                        {proj.description && <p className="text-[11px] theme-text-muted leading-snug line-clamp-2">{proj.description}</p>}
+                                        {proj.tools && proj.tools.length > 0 && (
+                                            <div className="flex flex-wrap gap-1 mt-auto pt-1">
+                                                {proj.tools.map((t, ti) => (
+                                                    <span key={ti} className="text-[9px] font-bold uppercase tracking-wider theme-accent-pill px-1.5 py-0.5 rounded">{t}</span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        />
                     </div>
                 </section>
             </ScrollReveal>
@@ -1400,28 +1397,26 @@ const App = () => {
                      <div className="w-full max-w-7xl mx-auto text-left relative z-10">
                         <window.SectionEyebrow>Watch & Learn</window.SectionEyebrow>
                         <h2 className="text-3xl font-bold theme-text-primary tracking-tight mb-12">Program Overview & Demos</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {(media.videos || []).map((vid, i) => (
-                                <TiltCard key={i} className="group">
-                                    <a href={vid.url || '#'} target="_blank" rel="noopener noreferrer" className="block aspect-video theme-card rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border theme-border hover:border-brand-400 hover:shadow-lg hover:shadow-brand-500/15 transition-all duration-300">
-                                        <img src={vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-all duration-700 opacity-85 group-hover:opacity-100" onError={e => e.target.style.display='none'} />
-                                        {/* Dark overlay for readability */}
-                                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-300"></div>
-                                        {/* Pulsing play button ring */}
-                                        <div className="relative z-10 flex items-center justify-center">
-                                            <div className="absolute w-14 h-14 rounded-full animate-ping" style={{background: 'color-mix(in srgb, var(--brand-mid) 30%, transparent)'}}></div>
-                                            <div className="w-12 h-12 rounded-full theme-btn-gradient backdrop-blur flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                                <Icon name="play" size={20} className="text-white ml-0.5" />
-                                            </div>
+                        {/* 3D Cylinder Carousel for Videos */}
+                        <window.CylinderCarousel 
+                            items={(media.videos || [])}
+                            height={220}
+                            renderItem={(vid, idx, isFront) => (
+                                <a href={vid.url || '#'} target="_blank" rel="noopener noreferrer" className={`block w-full h-full theme-card rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border ${isFront ? 'border-brand-500 shadow-brand-500/20 shadow-xl' : 'theme-border'} transition-all duration-300`}>
+                                    <img src={vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover object-top opacity-85 transition-all duration-700" onError={e => e.target.style.display='none'} />
+                                    <div className="absolute inset-0 bg-black/30 transition-all duration-300"></div>
+                                    <div className="relative z-10 flex items-center justify-center">
+                                        <div className="absolute w-14 h-14 rounded-full animate-ping" style={{background: 'color-mix(in srgb, var(--brand-mid) 30%, transparent)'}}></div>
+                                        <div className="w-12 h-12 rounded-full theme-btn-gradient backdrop-blur flex items-center justify-center shadow-lg">
+                                            <Icon name="play" size={20} className="text-white ml-0.5" />
                                         </div>
-                                        {/* Title badge */}
-                                        <div className="absolute bottom-0 left-0 right-0 px-3 py-2.5 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
-                                            <span className="text-white font-semibold text-[11px] uppercase tracking-wide line-clamp-2 leading-tight">{vid.title}</span>
-                                        </div>
-                                    </a>
-                                </TiltCard>
-                            ))}
-                        </div>
+                                    </div>
+                                    <div className="absolute bottom-0 left-0 right-0 px-3 py-2.5 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+                                        <span className="text-white font-semibold text-[11px] uppercase tracking-wide line-clamp-2 leading-tight">{vid.title}</span>
+                                    </div>
+                                </a>
+                            )}
+                        />
                      </div>
                 </section>
             </ScrollReveal>

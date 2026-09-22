@@ -685,6 +685,80 @@ window.TiltCard = ({
     style: style
   }, children);
 };
+window.CylinderCarousel = ({
+  items,
+  renderItem,
+  height = 400
+}) => {
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const numItems = items.length;
+  if (numItems === 0) return null;
+  const cardWidth = 320;
+  const theta = 360 / numItems;
+  // R = (w/2) / tan(PI / N). Add padding.
+  const radius = Math.max(cardWidth / 2 / Math.tan(Math.PI / numItems) + 40, 250);
+  const next = () => setCurrentIndex(prev => prev + 1);
+  const prev = () => setCurrentIndex(prev => prev - 1);
+  const touchStartX = React.useRef(null);
+  const handleTouchStart = e => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = e => {
+    if (!touchStartX.current) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 50) next();else if (diff < -50) prev();
+    touchStartX.current = null;
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "w-full overflow-hidden py-10"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "relative w-full flex flex-col items-center select-none",
+    style: {
+      perspective: '1200px'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "relative flex items-center justify-center cursor-grab active:cursor-grabbing",
+    style: {
+      height: height + 'px',
+      width: cardWidth + 'px',
+      transformStyle: 'preserve-3d',
+      transition: 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
+      transform: `translateZ(${-radius}px) rotateY(${currentIndex * -theta}deg)`
+    },
+    onTouchStart: handleTouchStart,
+    onTouchEnd: handleTouchEnd
+  }, items.map((item, i) => {
+    const normalizedCurrent = (currentIndex % numItems + numItems) % numItems;
+    const diff = Math.abs(normalizedCurrent - i);
+    const distance = Math.min(diff, numItems - diff);
+    // Fade and scale back items slightly
+    const isFront = distance === 0;
+    const opacity = distance > Math.floor(numItems / 4) ? 0.3 : isFront ? 1 : 0.7;
+    return /*#__PURE__*/React.createElement("div", {
+      key: i,
+      className: `absolute top-0 left-0 w-full h-full transition-all duration-700 ${!isFront ? 'pointer-events-none' : ''}`,
+      style: {
+        transform: `rotateY(${i * theta}deg) translateZ(${radius}px)`,
+        opacity: opacity,
+        filter: isFront ? 'none' : 'blur(2px)'
+      }
+    }, renderItem(item, i, isFront));
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "mt-12 flex gap-6 z-20"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: prev,
+    className: "w-14 h-14 rounded-full theme-bg border-2 theme-border flex items-center justify-center shadow-xl hover:bg-brand-500 hover:text-white transition-all hover:scale-110"
+  }, /*#__PURE__*/React.createElement(window.Icon, {
+    name: "chevron-left",
+    size: 24
+  })), /*#__PURE__*/React.createElement("button", {
+    onClick: next,
+    className: "w-14 h-14 rounded-full theme-bg border-2 theme-border flex items-center justify-center shadow-xl hover:bg-brand-500 hover:text-white transition-all hover:scale-110"
+  }, /*#__PURE__*/React.createElement(window.Icon, {
+    name: "chevron-right",
+    size: 24
+  })))));
+};
 window.TypewriterText = ({
   text
 }) => {
