@@ -692,12 +692,18 @@ window.CylinderCarousel = ({
   itemWidth = 320
 }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
-  const numItems = items.length;
-  if (numItems === 0) return null;
+  if (!items || items.length === 0) return null;
+
+  // Force a gentler curve by artificially increasing the number of cylinder faces
+  let displayItems = [...items];
+  while (displayItems.length < 10) {
+    displayItems = [...displayItems, ...items];
+  }
+  const numItems = displayItems.length;
   const cardWidth = itemWidth;
   const theta = 360 / numItems;
   // R = (w/2) / tan(PI / N). Add padding.
-  const radius = Math.max(cardWidth / 2 / Math.tan(Math.PI / numItems) + 40, 250);
+  const radius = Math.max(cardWidth / 2 / Math.tan(Math.PI / numItems) + 60, 250);
   const next = () => setCurrentIndex(prev => prev + 1);
   const prev = () => setCurrentIndex(prev => prev - 1);
   const touchStartX = React.useRef(null);
@@ -715,7 +721,7 @@ window.CylinderCarousel = ({
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative w-full flex flex-col items-center select-none",
     style: {
-      perspective: '1200px'
+      perspective: '1600px'
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative flex items-center justify-center cursor-grab active:cursor-grabbing",
@@ -728,20 +734,20 @@ window.CylinderCarousel = ({
     },
     onTouchStart: handleTouchStart,
     onTouchEnd: handleTouchEnd
-  }, items.map((item, i) => {
+  }, displayItems.map((item, i) => {
     const normalizedCurrent = (currentIndex % numItems + numItems) % numItems;
     const diff = Math.abs(normalizedCurrent - i);
     const distance = Math.min(diff, numItems - diff);
     // Fade and scale back items slightly
     const isFront = distance === 0;
-    const opacity = distance > Math.floor(numItems / 4) ? 0.3 : isFront ? 1 : 0.7;
+    const opacity = distance > Math.floor(numItems / 4) ? 0.1 : isFront ? 1 : 0.6;
     return /*#__PURE__*/React.createElement("div", {
       key: i,
       className: `absolute top-0 left-0 w-full h-full transition-all duration-700 ${!isFront ? 'pointer-events-none' : ''}`,
       style: {
         transform: `rotateY(${i * theta}deg) translateZ(${radius}px)`,
         opacity: opacity,
-        filter: isFront ? 'none' : 'blur(2px)'
+        filter: isFront ? 'none' : 'blur(3px)'
       }
     }, renderItem(item, i, isFront));
   })), /*#__PURE__*/React.createElement("div", {

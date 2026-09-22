@@ -524,13 +524,19 @@ window.TiltCard = ({ children, className = "" }) => {
 
 window.CylinderCarousel = ({ items, renderItem, height = 400, itemWidth = 320 }) => {
     const [currentIndex, setCurrentIndex] = React.useState(0);
-    const numItems = items.length;
-    if (numItems === 0) return null;
+    if (!items || items.length === 0) return null;
 
+    // Force a gentler curve by artificially increasing the number of cylinder faces
+    let displayItems = [...items];
+    while (displayItems.length < 10) {
+        displayItems = [...displayItems, ...items];
+    }
+
+    const numItems = displayItems.length;
     const cardWidth = itemWidth;
     const theta = 360 / numItems;
     // R = (w/2) / tan(PI / N). Add padding.
-    const radius = Math.max((cardWidth / 2) / Math.tan(Math.PI / numItems) + 40, 250);
+    const radius = Math.max((cardWidth / 2) / Math.tan(Math.PI / numItems) + 60, 250);
 
     const next = () => setCurrentIndex(prev => prev + 1);
     const prev = () => setCurrentIndex(prev => prev - 1);
@@ -547,20 +553,20 @@ window.CylinderCarousel = ({ items, renderItem, height = 400, itemWidth = 320 })
 
     return (
         <div className="w-full overflow-hidden py-10">
-            <div className="relative w-full flex flex-col items-center select-none" style={{ perspective: '1200px' }}>
+            <div className="relative w-full flex flex-col items-center select-none" style={{ perspective: '1600px' }}>
                 <div 
                     className="relative flex items-center justify-center cursor-grab active:cursor-grabbing" 
                     style={{ height: height + 'px', width: cardWidth + 'px', transformStyle: 'preserve-3d', transition: 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)', transform: `translateZ(${-radius}px) rotateY(${currentIndex * -theta}deg)` }}
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
                 >
-                    {items.map((item, i) => {
+                    {displayItems.map((item, i) => {
                         const normalizedCurrent = ((currentIndex % numItems) + numItems) % numItems;
                         const diff = Math.abs(normalizedCurrent - i);
                         const distance = Math.min(diff, numItems - diff);
                         // Fade and scale back items slightly
                         const isFront = distance === 0;
-                        const opacity = distance > Math.floor(numItems / 4) ? 0.3 : (isFront ? 1 : 0.7);
+                        const opacity = distance > Math.floor(numItems / 4) ? 0.1 : (isFront ? 1 : 0.6);
 
                         return (
                             <div 
@@ -569,7 +575,7 @@ window.CylinderCarousel = ({ items, renderItem, height = 400, itemWidth = 320 })
                                 style={{ 
                                     transform: `rotateY(${i * theta}deg) translateZ(${radius}px)`,
                                     opacity: opacity,
-                                    filter: isFront ? 'none' : 'blur(2px)'
+                                    filter: isFront ? 'none' : 'blur(3px)'
                                 }}
                             >
                                 {renderItem(item, i, isFront)}
