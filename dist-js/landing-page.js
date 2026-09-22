@@ -1795,6 +1795,7 @@ const App = () => {
   }), PROJECT_COUNT, "+ Real-Time Industry Projects"), /*#__PURE__*/React.createElement(window.CylinderCarousel, {
     items: (media.projects || []).slice(0, 6),
     height: 360,
+    itemWidth: 480,
     renderItem: (proj, idx, isFront) => /*#__PURE__*/React.createElement("div", {
       className: `h-full w-full theme-card rounded-2xl border ${isFront ? 'border-brand-500 shadow-brand-500/20 shadow-xl' : 'theme-border'} overflow-hidden relative transition-all duration-300 flex flex-col`
     }, /*#__PURE__*/React.createElement("div", {
@@ -1842,7 +1843,8 @@ const App = () => {
     className: "text-3xl font-bold theme-text-primary tracking-tight mb-12"
   }, "Program Overview & Demos"), /*#__PURE__*/React.createElement(window.CylinderCarousel, {
     items: media.videos || [],
-    height: 220,
+    height: 270,
+    itemWidth: 480,
     renderItem: (vid, idx, isFront) => /*#__PURE__*/React.createElement("a", {
       href: vid.url || '#',
       target: "_blank",

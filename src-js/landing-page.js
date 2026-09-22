@@ -1362,6 +1362,7 @@ const App = () => {
                         <window.CylinderCarousel 
                             items={(media.projects || []).slice(0, 6)}
                             height={360}
+                            itemWidth={480}
                             renderItem={(proj, idx, isFront) => (
                                 <div className={`h-full w-full theme-card rounded-2xl border ${isFront ? 'border-brand-500 shadow-brand-500/20 shadow-xl' : 'theme-border'} overflow-hidden relative transition-all duration-300 flex flex-col`}>
                                     <div className="h-32 md:h-40 theme-card flex items-center justify-center relative overflow-hidden">
@@ -1400,7 +1401,8 @@ const App = () => {
                         {/* 3D Cylinder Carousel for Videos */}
                         <window.CylinderCarousel 
                             items={(media.videos || [])}
-                            height={220}
+                            height={270}
+                            itemWidth={480}
                             renderItem={(vid, idx, isFront) => (
                                 <a href={vid.url || '#'} target="_blank" rel="noopener noreferrer" className={`block w-full h-full theme-card rounded-xl flex items-center justify-center cursor-pointer relative overflow-hidden border ${isFront ? 'border-brand-500 shadow-brand-500/20 shadow-xl' : 'theme-border'} transition-all duration-300`}>
                                     <img src={vid.thumb || `https://img.youtube.com/vi/${vid.id}/maxresdefault.jpg`} alt={vid.title} className="absolute inset-0 w-full h-full object-cover object-top opacity-85 transition-all duration-700" onError={e => e.target.style.display='none'} />

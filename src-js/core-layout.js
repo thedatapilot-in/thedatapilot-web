@@ -522,12 +522,12 @@ window.TiltCard = ({ children, className = "" }) => {
     );
 };
 
-window.CylinderCarousel = ({ items, renderItem, height = 400 }) => {
+window.CylinderCarousel = ({ items, renderItem, height = 400, itemWidth = 320 }) => {
     const [currentIndex, setCurrentIndex] = React.useState(0);
     const numItems = items.length;
     if (numItems === 0) return null;
 
-    const cardWidth = 320;
+    const cardWidth = itemWidth;
     const theta = 360 / numItems;
     // R = (w/2) / tan(PI / N). Add padding.
     const radius = Math.max((cardWidth / 2) / Math.tan(Math.PI / numItems) + 40, 250);
