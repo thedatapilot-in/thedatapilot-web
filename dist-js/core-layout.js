@@ -692,6 +692,12 @@ window.CylinderCarousel = ({
   itemWidth = 320
 }) => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [windowWidth, setWindowWidth] = React.useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   if (!items || items.length === 0) return null;
 
   // Force a gentler curve by artificially increasing the number of cylinder faces
@@ -700,10 +706,18 @@ window.CylinderCarousel = ({
     displayItems = [...displayItems, ...items];
   }
   const numItems = displayItems.length;
-  const cardWidth = itemWidth;
+
+  // Responsive Scaling Logic (Fix for Z-Fold Outer and Inner Screens)
+  const safePadding = windowWidth < 640 ? 40 : 80;
+  // On massive screens, we can let the card grow a bit larger up to 1.2x if it wants to, but default to capping at itemWidth to preserve design.
+  // Actually, letting it cap at itemWidth is safest.
+  const actualItemWidth = Math.min(itemWidth, windowWidth - safePadding);
+  const scaleFactor = actualItemWidth / itemWidth;
+  const actualHeight = height * scaleFactor;
+  const cardWidth = actualItemWidth;
   const theta = 360 / numItems;
-  // R = (w/2) / tan(PI / N). Add padding.
-  const radius = Math.max(cardWidth / 2 / Math.tan(Math.PI / numItems) + 60, 250);
+  // Dynamically adjust radius based on actual scaled card width
+  const radius = Math.max(cardWidth / 2 / Math.tan(Math.PI / numItems) + 60 * scaleFactor, 150);
   const next = () => setCurrentIndex(prev => prev + 1);
   const prev = () => setCurrentIndex(prev => prev - 1);
   const touchStartX = React.useRef(null);
@@ -726,7 +740,7 @@ window.CylinderCarousel = ({
   }, /*#__PURE__*/React.createElement("div", {
     className: "relative flex items-center justify-center cursor-grab active:cursor-grabbing",
     style: {
-      height: height + 'px',
+      height: actualHeight + 'px',
       width: cardWidth + 'px',
       transformStyle: 'preserve-3d',
       transition: 'transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)',
