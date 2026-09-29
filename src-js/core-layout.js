@@ -99,7 +99,11 @@ window.loadSiteData();
 
 window.Icon = ({ name, size = 20, className = "" }) => {
     React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [name]);
-    return <i key={name} data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
+    return (
+        <span key={name} className="inline-flex items-center justify-center">
+            <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>
+        </span>
+    );
 };
 
 /**

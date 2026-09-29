@@ -94,15 +94,17 @@ window.Icon = ({
   React.useEffect(() => {
     if (window.lucide) window.lucide.createIcons();
   }, [name]);
-  return /*#__PURE__*/React.createElement("i", {
+  return /*#__PURE__*/React.createElement("span", {
     key: name,
+    className: "inline-flex items-center justify-center"
+  }, /*#__PURE__*/React.createElement("i", {
     "data-lucide": name,
     className: className,
     style: {
       width: size,
       height: size
     }
-  });
+  }));
 };
 
 /**

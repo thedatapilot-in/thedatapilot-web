@@ -139,10 +139,10 @@ const SalaryCalculator = () => {
   return /*#__PURE__*/React.createElement(window.PageLayout, {
     maxWidth: "max-w-7xl"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "fixed bottom-3 right-3 z-30 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm backdrop-blur-md"
+    className: "fixed bottom-4 right-24 z-30 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm backdrop-blur-md"
   }, /*#__PURE__*/React.createElement("span", {
     className: "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
-  }), /*#__PURE__*/React.createElement("span", null, "BUILD v3.2.33")), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("span", null, "BUILD v3.2.39")), /*#__PURE__*/React.createElement("div", {
     className: "grid lg:grid-cols-12 gap-5 lg:gap-6 2xl:gap-8 items-stretch"
   }, /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-7 flex flex-col h-full"
