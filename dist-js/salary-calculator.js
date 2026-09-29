@@ -143,11 +143,11 @@ const SalaryCalculator = () => {
   }, /*#__PURE__*/React.createElement("span", {
     className: "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
   }), /*#__PURE__*/React.createElement("span", null, "BUILD v3.2.32")), /*#__PURE__*/React.createElement("div", {
-    className: "grid lg:grid-cols-12 gap-8 items-stretch"
+    className: "grid lg:grid-cols-12 gap-5 lg:gap-6 2xl:gap-8 items-stretch"
   }, /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-7 flex flex-col h-full"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "theme-card border theme-border rounded-3xl p-6 md:p-8 shadow-xl flex flex-col h-full space-y-6"
+    className: "theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full space-y-4 md:space-y-5 2xl:space-y-6"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
     className: "text-2xl md:text-3xl font-black theme-text-primary tracking-tight"
   }, "Data Analyst Salary & ", /*#__PURE__*/React.createElement("span", {
@@ -164,7 +164,7 @@ const SalaryCalculator = () => {
       setCurrentRole(e.target.value);
       if (e.target.value === "fresher" && currentCTC > 2) setCurrentCTC(0);
     },
-    className: "w-full p-3 pr-10 rounded-xl border theme-border theme-card theme-text-primary text-sm font-semibold appearance-none outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 cursor-pointer transition-all"
+    className: "w-full p-2.5 2xl:p-3 pr-10 rounded-xl border theme-border theme-card theme-text-primary text-sm font-semibold appearance-none outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 cursor-pointer transition-all"
   }, ROLES.map(role => /*#__PURE__*/React.createElement("option", {
     key: role.id,
     value: role.id
@@ -208,19 +208,19 @@ const SalaryCalculator = () => {
     key: item.id,
     type: "button",
     onClick: () => setExperience(item.id),
-    className: `py-2.5 px-2 rounded-lg text-center border text-xs sm:text-sm font-bold transition-all ${experience === item.id ? "border-brand-500 bg-brand-500/10 theme-mid-text ring-1 ring-brand-500/30" : "theme-border theme-text-muted hover:border-brand-300"}`
+    className: `py-2 2xl:py-2.5 px-2 rounded-lg text-center border text-xs sm:text-sm font-bold transition-all ${experience === item.id ? "border-brand-500 bg-brand-500/10 theme-mid-text ring-1 ring-brand-500/30" : "theme-border theme-text-muted hover:border-brand-300"}`
   }, item.label)))), /*#__PURE__*/React.createElement("div", {
     className: "flex-1"
   }, /*#__PURE__*/React.createElement("span", {
     className: "block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2"
   }, "Target Analytics Stack"), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2.5"
+    className: "space-y-2 2xl:space-y-2.5"
   }, STACKS.map(stack => {
     const isActive = targetStack === stack.id;
     return /*#__PURE__*/React.createElement("div", {
       key: stack.id,
       onClick: () => setTargetStack(stack.id),
-      className: `p-3.5 rounded-xl border transition-all cursor-pointer ${isActive ? "border-brand-500 bg-brand-500/10 ring-1 ring-brand-500/30 shadow-sm" : "theme-border hover:border-brand-300"}`
+      className: `p-3 2xl:p-3.5 rounded-xl border transition-all cursor-pointer ${isActive ? "border-brand-500 bg-brand-500/10 ring-1 ring-brand-500/30 shadow-sm" : "theme-border hover:border-brand-300"}`
     }, /*#__PURE__*/React.createElement("div", {
       className: "flex items-center justify-between mb-1"
     }, /*#__PURE__*/React.createElement("span", {
@@ -233,9 +233,9 @@ const SalaryCalculator = () => {
   }))))), /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-5 flex flex-col h-full"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "theme-card border theme-border rounded-3xl p-6 md:p-8 shadow-xl flex flex-col h-full"
+    className: "theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-col items-center text-center pb-4 border-b theme-border mb-4"
+    className: "flex flex-col items-center text-center pb-3 mb-3 2xl:pb-4 border-b theme-border 2xl:mb-4"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-base font-extrabold theme-text-primary mb-2"
   }, "Salary Projection Pipeline"), /*#__PURE__*/React.createElement("span", {
@@ -243,7 +243,7 @@ const SalaryCalculator = () => {
   }, "+", calculation.hikePercent, "% Expected Hike")), /*#__PURE__*/React.createElement("div", {
     className: "flex-1 flex flex-col justify-center space-y-2"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center justify-between p-3.5 rounded-xl border theme-border theme-bg-alt"
+    className: "flex items-center justify-between p-3 2xl:p-3.5 rounded-xl border theme-border theme-bg-alt"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-sm font-bold theme-text-secondary"
   }, "Current Base:"), /*#__PURE__*/React.createElement("span", {
@@ -254,7 +254,7 @@ const SalaryCalculator = () => {
     name: "arrow-down",
     size: 16
   })), /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center justify-between p-3.5 rounded-xl border theme-border theme-bg-alt"
+    className: "flex items-center justify-between p-3 2xl:p-3.5 rounded-xl border theme-border theme-bg-alt"
   }, /*#__PURE__*/React.createElement("span", {
     className: "text-sm font-bold theme-text-primary"
   }, targetStackData.title), /*#__PURE__*/React.createElement("span", {
@@ -265,7 +265,7 @@ const SalaryCalculator = () => {
     name: "arrow-down",
     size: 16
   })), /*#__PURE__*/React.createElement("div", {
-    className: "p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-center space-y-1"
+    className: "p-3 2xl:p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-center space-y-1"
   }, /*#__PURE__*/React.createElement("span", {
     className: "block text-xs font-bold uppercase tracking-wider theme-mid-text"
   }, "Projected Annual Package"), /*#__PURE__*/React.createElement("div", {
@@ -275,17 +275,17 @@ const SalaryCalculator = () => {
   }, "LPA")), /*#__PURE__*/React.createElement("div", {
     className: "text-sm font-bold text-emerald-500"
   }, "Estimated In-Hand: ₹", calculation.monthlyInHand.toLocaleString(), "/mo"))), /*#__PURE__*/React.createElement("div", {
-    className: "mt-4 pt-4 border-t theme-border"
+    className: "mt-3 pt-3 2xl:mt-4 2xl:pt-4 border-t theme-border"
   }, /*#__PURE__*/React.createElement("span", {
     className: "block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2.5 text-center"
   }, "Stack Requirements to Unlock Package"), /*#__PURE__*/React.createElement("div", {
     className: "grid grid-cols-2 gap-2"
   }, targetStackData.skills.map(sk => /*#__PURE__*/React.createElement("span", {
     key: sk,
-    className: "text-center text-[11px] font-semibold px-2 py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border"
+    className: "text-center text-[11px] font-semibold px-2 py-1.5 2xl:py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border"
   }, sk)))), /*#__PURE__*/React.createElement("button", {
     onClick: () => setIsModalOpen(true),
-    className: "w-full theme-btn-gradient text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-4"
+    className: "w-full theme-btn-gradient text-white py-3 2xl:py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-3 2xl:mt-4"
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "zap",
     size: 18

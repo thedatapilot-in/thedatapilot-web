@@ -129,11 +129,11 @@ const SalaryCalculator = () => {
                 <span>BUILD v3.2.32</span>
             </span>
 
-            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+            <div className="grid lg:grid-cols-12 gap-5 lg:gap-6 2xl:gap-8 items-stretch">
 
                 {/* LEFT COLUMN: INPUT STUDIO (7 COLS) */}
                 <div className="lg:col-span-7 flex flex-col h-full">
-                    <div className="theme-card border theme-border rounded-3xl p-6 md:p-8 shadow-xl flex flex-col h-full space-y-6">
+                    <div className="theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full space-y-4 md:space-y-5 2xl:space-y-6">
 
                         {/* TITLE + SUBTITLE INSIDE THE CARD */}
                         <div>
@@ -157,7 +157,7 @@ const SalaryCalculator = () => {
                                         setCurrentRole(e.target.value);
                                         if (e.target.value === "fresher" && currentCTC > 2) setCurrentCTC(0);
                                     }}
-                                    className="w-full p-3 pr-10 rounded-xl border theme-border theme-card theme-text-primary text-sm font-semibold appearance-none outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 cursor-pointer transition-all"
+                                    className="w-full p-2.5 2xl:p-3 pr-10 rounded-xl border theme-border theme-card theme-text-primary text-sm font-semibold appearance-none outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 cursor-pointer transition-all"
                                 >
                                     {ROLES.map(role => (
                                         <option key={role.id} value={role.id}>{role.name}</option>
@@ -211,7 +211,7 @@ const SalaryCalculator = () => {
                                         key={item.id}
                                         type="button"
                                         onClick={() => setExperience(item.id)}
-                                        className={`py-2.5 px-2 rounded-lg text-center border text-xs sm:text-sm font-bold transition-all ${
+                                        className={`py-2 2xl:py-2.5 px-2 rounded-lg text-center border text-xs sm:text-sm font-bold transition-all ${
                                             experience === item.id
                                                 ? "border-brand-500 bg-brand-500/10 theme-mid-text ring-1 ring-brand-500/30"
                                                 : "theme-border theme-text-muted hover:border-brand-300"
@@ -228,14 +228,14 @@ const SalaryCalculator = () => {
                             <span className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2">
                                 Target Analytics Stack
                             </span>
-                            <div className="space-y-2.5">
+                            <div className="space-y-2 2xl:space-y-2.5">
                                 {STACKS.map(stack => {
                                     const isActive = targetStack === stack.id;
                                     return (
                                         <div
                                             key={stack.id}
                                             onClick={() => setTargetStack(stack.id)}
-                                            className={`p-3.5 rounded-xl border transition-all cursor-pointer ${
+                                            className={`p-3 2xl:p-3.5 rounded-xl border transition-all cursor-pointer ${
                                                 isActive
                                                     ? "border-brand-500 bg-brand-500/10 ring-1 ring-brand-500/30 shadow-sm"
                                                     : "theme-border hover:border-brand-300"
@@ -265,9 +265,9 @@ const SalaryCalculator = () => {
 
                 {/* RIGHT COLUMN: SALARY PROJECTION PIPELINE (5 COLS) */}
                 <div className="lg:col-span-5 flex flex-col h-full">
-                    <div className="theme-card border theme-border rounded-3xl p-6 md:p-8 shadow-xl flex flex-col h-full">
+                    <div className="theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full">
 
-                        <div className="flex flex-col items-center text-center pb-4 border-b theme-border mb-4">
+                        <div className="flex flex-col items-center text-center pb-3 mb-3 2xl:pb-4 border-b theme-border 2xl:mb-4">
                             <span className="text-base font-extrabold theme-text-primary mb-2">
                                 Salary Projection Pipeline
                             </span>
@@ -278,7 +278,7 @@ const SalaryCalculator = () => {
 
                         <div className="flex-1 flex flex-col justify-center space-y-2">
                             {/* STEP: CURRENT BASE */}
-                            <div className="flex items-center justify-between p-3.5 rounded-xl border theme-border theme-bg-alt">
+                            <div className="flex items-center justify-between p-3 2xl:p-3.5 rounded-xl border theme-border theme-bg-alt">
                                 <span className="text-sm font-bold theme-text-secondary">Current Base:</span>
                                 <span className="text-base font-extrabold theme-text-primary">
                                     {currentCTC === 0 ? "Fresher (₹0)" : `₹${currentCTC.toFixed(1)} LPA`}
@@ -289,7 +289,7 @@ const SalaryCalculator = () => {
                             </div>
 
                             {/* STEP: TARGET STACK */}
-                            <div className="flex items-center justify-between p-3.5 rounded-xl border theme-border theme-bg-alt">
+                            <div className="flex items-center justify-between p-3 2xl:p-3.5 rounded-xl border theme-border theme-bg-alt">
                                 <span className="text-sm font-bold theme-text-primary">{targetStackData.title}</span>
                                 <span className="text-sm font-extrabold text-emerald-500">+{targetStackData.avgHike}</span>
                             </div>
@@ -298,7 +298,7 @@ const SalaryCalculator = () => {
                             </div>
 
                             {/* OUTPUT: PROJECTED PACKAGE */}
-                            <div className="p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-center space-y-1">
+                            <div className="p-3 2xl:p-4 rounded-xl border-2 border-brand-500 bg-brand-500/10 text-center space-y-1">
                                 <span className="block text-xs font-bold uppercase tracking-wider theme-mid-text">
                                     Projected Annual Package
                                 </span>
@@ -312,13 +312,13 @@ const SalaryCalculator = () => {
                         </div>
 
                         {/* STACK REQUIREMENTS */}
-                        <div className="mt-4 pt-4 border-t theme-border">
+                        <div className="mt-3 pt-3 2xl:mt-4 2xl:pt-4 border-t theme-border">
                             <span className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2.5 text-center">
                                 Stack Requirements to Unlock Package
                             </span>
                             <div className="grid grid-cols-2 gap-2">
                                 {targetStackData.skills.map(sk => (
-                                    <span key={sk} className="text-center text-[11px] font-semibold px-2 py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border">
+                                    <span key={sk} className="text-center text-[11px] font-semibold px-2 py-1.5 2xl:py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border">
                                         {sk}
                                     </span>
                                 ))}
@@ -328,7 +328,7 @@ const SalaryCalculator = () => {
                         {/* CTA */}
                         <button
                             onClick={() => setIsModalOpen(true)}
-                            className="w-full theme-btn-gradient text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-4"
+                            className="w-full theme-btn-gradient text-white py-3 2xl:py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-3 2xl:mt-4"
                         >
                             <Icon name="zap" size={18} />
                             <span>Get 16-Week Transition Roadmap</span>
