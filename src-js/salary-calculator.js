@@ -120,19 +120,6 @@ const SalaryCalculator = () => {
 
     return (
         <window.PageLayout maxWidth="max-w-7xl">
-            {/* Proportional Scaling for Laptops: 
-                By reducing the root font-size, Tailwind's rem-based units (w, p, m, text) 
-                shrink proportionally. This creates enough horizontal margin for the fixed 
-                side promo card without overlapping, and compresses vertical height seamlessly. */}
-            <style>{`
-                @media (min-width: 1024px) and (max-width: 1535px) {
-                    html { font-size: 12.5px; }
-                }
-                @media (max-width: 1023px) {
-                    html { font-size: 14px; }
-                }
-            `}</style>
-
             {/* Build badge — temporary, testing-only, removed before go-live.
                 Fixed position in the empty top padding band (below the
                 Navbar, above where PageLayout's content actually starts),
@@ -441,11 +428,15 @@ const SalaryCalculator = () => {
                 </div>
             )}
 
-            {/* FLOATING MARKETING POPUP */}
+            {/* FLOATING MARKETING POPUP — only shown where there's genuine
+                margin outside the max-w-7xl content container to sit in
+                without overlapping it (roughly >=1600px viewports); width is
+                capped to that actual margin so it can never overlap the
+                calculator, height grows naturally as text wraps narrower. */}
             {sidePromoVisible && (
                 <div
-                    className="hidden lg:block fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500"
-                    style={{ width: "20rem" }}
+                    className="hidden 2xl:block fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500"
+                    style={{ width: "min(20rem, calc((100vw - 80rem) / 2 - 1.5rem))" }}
                 >
                     <div className="theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95">
                         <button
