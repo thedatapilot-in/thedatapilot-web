@@ -1418,7 +1418,7 @@ window.PageLayout = ({
   return /*#__PURE__*/React.createElement("div", {
     className: "min-h-screen theme-bg theme-text-primary font-sans flex flex-col relative"
   }, /*#__PURE__*/React.createElement(window.Navbar, null), /*#__PURE__*/React.createElement("main", {
-    className: `flex-grow ${maxWidth} mx-auto w-full px-6 pt-32 pb-24 flex flex-col gap-8 relative z-10`
+    className: `flex-grow ${maxWidth} mx-auto w-full px-6 pt-24 lg:pt-28 2xl:pt-32 pb-12 lg:pb-16 2xl:pb-24 flex flex-col gap-4 lg:gap-6 2xl:gap-8 relative z-10`
   }, children), /*#__PURE__*/React.createElement(window.Footer, null));
 };
 

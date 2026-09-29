@@ -121,12 +121,10 @@ const SalaryCalculator = () => {
     return (
         <window.PageLayout maxWidth="max-w-7xl">
             {/* Build badge — temporary, testing-only, removed before go-live.
-                Fixed position in the empty top padding band (below the
-                Navbar, above where PageLayout's content actually starts),
-                so it never takes space from or competes with the two cards. */}
-            <span className="fixed top-20 sm:top-24 right-3 z-30 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm">
+                Moved to bottom-right so it never overlaps or wastes top viewport space. */}
+            <span className="fixed bottom-3 right-3 z-30 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-wider bg-brand-500/10 text-brand-500 border border-brand-500/30 shadow-sm backdrop-blur-md">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span>BUILD v3.2.32</span>
+                <span>BUILD v3.2.33</span>
             </span>
 
             <div className="grid lg:grid-cols-12 gap-5 lg:gap-6 2xl:gap-8 items-stretch">
