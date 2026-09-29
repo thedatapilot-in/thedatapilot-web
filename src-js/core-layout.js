@@ -99,7 +99,7 @@ window.loadSiteData();
 
 window.Icon = ({ name, size = 20, className = "" }) => {
     React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); }, [name]);
-    return <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
+    return <i key={name} data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
 };
 
 /**
@@ -286,7 +286,7 @@ window.Navbar = ({ activeProgramId, onProgramChange }) => {
                     <button onClick={() => setIsModalOpen(true)} className="theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight">Join Program</button>
                 </div>
 
-                <button className="lg:hidden p-2 theme-text-secondary outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <button className="lg:hidden p-2 theme-text-primary outline-none active:scale-95 transition-transform" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     <window.Icon name={isMenuOpen ? "x" : "menu"} size={28} />
                 </button>
             </div>

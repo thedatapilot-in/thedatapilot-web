@@ -1498,7 +1498,7 @@ const App = () => {
                 <section id="fees" className="min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-132px)] flex flex-col justify-center py-8 md:py-12 px-6 theme-bg scroll-mt-[80px] md:scroll-mt-[132px]">
                     <div className="w-full max-w-5xl mx-auto text-left mb-4">
                         <window.SectionEyebrow className="text-xs block mb-2">Certification Program</window.SectionEyebrow>
-                        <h2 className="text-3xl font-extrabold theme-text-primary tracking-tight">Program Fees</h2>
+                        <h2 className="text-2xl md:text-3xl font-extrabold theme-text-primary tracking-tight">Program Fees</h2>
                     </div>
                     <div className="w-full max-w-5xl mx-auto theme-card rounded-[3rem] border theme-border overflow-hidden shadow-2xl grid md:grid-cols-2">
                         <div className="p-6 md:p-10 space-y-5 text-left">

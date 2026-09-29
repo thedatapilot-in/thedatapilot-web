@@ -1955,7 +1955,7 @@ const App = () => {
   }, /*#__PURE__*/React.createElement(window.SectionEyebrow, {
     className: "text-xs block mb-2"
   }, "Certification Program"), /*#__PURE__*/React.createElement("h2", {
-    className: "text-3xl font-extrabold theme-text-primary tracking-tight"
+    className: "text-2xl md:text-3xl font-extrabold theme-text-primary tracking-tight"
   }, "Program Fees")), /*#__PURE__*/React.createElement("div", {
     className: "w-full max-w-5xl mx-auto theme-card rounded-[3rem] border theme-border overflow-hidden shadow-2xl grid md:grid-cols-2"
   }, /*#__PURE__*/React.createElement("div", {
