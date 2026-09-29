@@ -317,7 +317,7 @@ window.Navbar = ({
     onClick: () => setIsModalOpen(true),
     className: "theme-btn-gradient text-white px-6 py-2.5 rounded-xl font-bold text-[17px] transition-colors shadow-lg active:scale-95 transition-transform tracking-tight"
   }, "Join Program")), /*#__PURE__*/React.createElement("button", {
-    className: "lg:hidden p-2 theme-text-primary outline-none active:scale-95 transition-transform",
+    className: "lg:hidden p-2 theme-mid-text outline-none active:scale-95 transition-transform",
     onClick: () => setIsMenuOpen(!isMenuOpen)
   }, /*#__PURE__*/React.createElement(window.Icon, {
     name: isMenuOpen ? "x" : "menu",
