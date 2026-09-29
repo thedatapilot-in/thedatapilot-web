@@ -230,7 +230,19 @@ const SalaryCalculator = () => {
     }, "+", stack.avgHike)), /*#__PURE__*/React.createElement("span", {
       className: "text-xs theme-text-muted"
     }, stack.subtitle));
-  }))))), /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "2xl:hidden mt-2 p-3 md:p-4 rounded-xl border border-brand-500/40 bg-brand-500/10 flex items-center justify-between"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 mb-0.5"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-black text-brand-500 uppercase tracking-wider"
+  }, "Live Cohort Batch")), /*#__PURE__*/React.createElement("div", {
+    className: "text-xs md:text-sm font-bold theme-text-primary"
+  }, "Transition to Data Analytics in 16 weeks")), /*#__PURE__*/React.createElement("button", {
+    className: "px-4 py-2 theme-btn-gradient text-white text-xs font-bold rounded-lg shadow-md whitespace-nowrap ml-3 active:scale-95 transition-transform"
+  }, "Learn More")))), /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-5 flex flex-col h-full"
   }, /*#__PURE__*/React.createElement("div", {
     className: "theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full"

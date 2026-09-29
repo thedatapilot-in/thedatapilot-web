@@ -260,6 +260,23 @@ const SalaryCalculator = () => {
                             </div>
                         </div>
 
+                        {/* INLINE MARKETING PROMO (Laptops/Tablets) 
+                            Industry-standard pattern: When side margins are too tight for a floating widget, 
+                            embed the CTA seamlessly inline at the end of the input flow. 
+                            Hidden on 2xl where the floating side card takes over. */}
+                        <div className="2xl:hidden mt-2 p-3 md:p-4 rounded-xl border border-brand-500/40 bg-brand-500/10 flex items-center justify-between">
+                            <div>
+                                <div className="flex items-center gap-1.5 mb-0.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span className="text-[10px] font-black text-brand-500 uppercase tracking-wider">Live Cohort Batch</span>
+                                </div>
+                                <div className="text-xs md:text-sm font-bold theme-text-primary">Transition to Data Analytics in 16 weeks</div>
+                            </div>
+                            <button className="px-4 py-2 theme-btn-gradient text-white text-xs font-bold rounded-lg shadow-md whitespace-nowrap ml-3 active:scale-95 transition-transform">
+                                Learn More
+                            </button>
+                        </div>
+
                     </div>
                 </div>
 
