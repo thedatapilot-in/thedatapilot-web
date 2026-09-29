@@ -131,7 +131,7 @@ const SalaryCalculator = () => {
 
                 {/* LEFT COLUMN: INPUT STUDIO (7 COLS) */}
                 <div className="lg:col-span-7 flex flex-col h-full">
-                    <div className="theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full space-y-4 md:space-y-5 2xl:space-y-6">
+                    <div className="theme-card border theme-border rounded-3xl p-4 md:p-5 2xl:p-8 shadow-xl flex flex-col h-full space-y-3 md:space-y-4 2xl:space-y-6">
 
                         {/* TITLE + SUBTITLE INSIDE THE CARD */}
                         <div>
@@ -223,17 +223,17 @@ const SalaryCalculator = () => {
 
                         {/* 4. TARGET ANALYTICS STACK */}
                         <div className="flex-1">
-                            <span className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2">
+                            <span className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-1.5 2xl:mb-2">
                                 Target Analytics Stack
                             </span>
-                            <div className="space-y-2 2xl:space-y-2.5">
+                            <div className="space-y-1.5 2xl:space-y-2.5">
                                 {STACKS.map(stack => {
                                     const isActive = targetStack === stack.id;
                                     return (
                                         <div
                                             key={stack.id}
                                             onClick={() => setTargetStack(stack.id)}
-                                            className={`p-3 2xl:p-3.5 rounded-xl border transition-all cursor-pointer ${
+                                            className={`p-2.5 2xl:p-3.5 rounded-xl border transition-all cursor-pointer ${
                                                 isActive
                                                     ? "border-brand-500 bg-brand-500/10 ring-1 ring-brand-500/30 shadow-sm"
                                                     : "theme-border hover:border-brand-300"
@@ -258,32 +258,15 @@ const SalaryCalculator = () => {
                             </div>
                         </div>
 
-                        {/* INLINE MARKETING PROMO (Laptops/Tablets) 
-                            Industry-standard pattern: When side margins are too tight for a floating widget, 
-                            embed the CTA seamlessly inline at the end of the input flow. 
-                            Hidden on 2xl where the floating side card takes over. */}
-                        <div className="2xl:hidden mt-2 p-3 md:p-4 rounded-xl border border-brand-500/40 bg-brand-500/10 flex items-center justify-between">
-                            <div>
-                                <div className="flex items-center gap-1.5 mb-0.5">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                    <span className="text-[10px] font-black text-brand-500 uppercase tracking-wider">Live Cohort Batch</span>
-                                </div>
-                                <div className="text-xs md:text-sm font-bold theme-text-primary">Transition to Data Analytics in 16 weeks</div>
-                            </div>
-                            <button className="px-4 py-2 theme-btn-gradient text-white text-xs font-bold rounded-lg shadow-md whitespace-nowrap ml-3 active:scale-95 transition-transform">
-                                Learn More
-                            </button>
-                        </div>
-
                     </div>
                 </div>
 
                 {/* RIGHT COLUMN: SALARY PROJECTION PIPELINE (5 COLS) */}
                 <div className="lg:col-span-5 flex flex-col h-full">
-                    <div className="theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full">
+                    <div className="theme-card border theme-border rounded-3xl p-4 md:p-5 2xl:p-8 shadow-xl flex flex-col h-full">
 
-                        <div className="flex flex-col items-center text-center pb-3 mb-3 2xl:pb-4 border-b theme-border 2xl:mb-4">
-                            <span className="text-base font-extrabold theme-text-primary mb-2">
+                        <div className="flex flex-col items-center text-center pb-2 mb-2 2xl:pb-4 border-b theme-border 2xl:mb-4">
+                            <span className="text-base md:text-lg font-extrabold theme-text-primary mb-1 2xl:mb-2">
                                 Salary Projection Pipeline
                             </span>
                             <span className="text-xs font-extrabold theme-mid-text bg-brand-500/10 px-3 py-1 rounded-full border border-brand-500/30">
@@ -326,14 +309,30 @@ const SalaryCalculator = () => {
                             </div>
                         </div>
 
+                        {/* INLINE MARKETING PROMO (Laptops/Tablets)
+                            Moved from left column to right column to fill the empty whitespace 
+                            and balance the vertical height of both columns seamlessly. */}
+                        <div className="2xl:hidden mt-auto mb-3 p-2.5 rounded-xl border border-brand-500/40 bg-brand-500/10 flex items-center justify-between shadow-sm">
+                            <div>
+                                <div className="flex items-center gap-1.5 mb-0.5">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span className="text-[10px] font-black text-brand-500 uppercase tracking-wider">Live Cohort Batch</span>
+                                </div>
+                                <div className="text-[11px] md:text-xs font-bold theme-text-primary">Transition to Data Analytics in 16 weeks</div>
+                            </div>
+                            <button className="px-3 py-1.5 theme-btn-gradient text-white text-[10px] font-bold rounded-lg shadow-md whitespace-nowrap ml-2 active:scale-95 transition-transform">
+                                Learn More
+                            </button>
+                        </div>
+
                         {/* STACK REQUIREMENTS */}
-                        <div className="mt-3 pt-3 2xl:mt-4 2xl:pt-4 border-t theme-border">
-                            <span className="block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2.5 text-center">
+                        <div className="mt-0 pt-3 2xl:mt-4 2xl:pt-4 border-t theme-border">
+                            <span className="block text-[10px] md:text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2 md:mb-2.5 text-center">
                                 Stack Requirements to Unlock Package
                             </span>
-                            <div className="grid grid-cols-2 gap-2">
+                            <div className="grid grid-cols-2 gap-1.5 md:gap-2">
                                 {targetStackData.skills.map(sk => (
-                                    <span key={sk} className="text-center text-[11px] font-semibold px-2 py-1.5 2xl:py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border">
+                                    <span key={sk} className="text-center text-[10px] md:text-[11px] font-semibold px-2 py-1 2xl:py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border">
                                         {sk}
                                     </span>
                                 ))}

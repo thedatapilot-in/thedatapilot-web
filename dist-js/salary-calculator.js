@@ -147,7 +147,7 @@ const SalaryCalculator = () => {
   }, /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-7 flex flex-col h-full"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full space-y-4 md:space-y-5 2xl:space-y-6"
+    className: "theme-card border theme-border rounded-3xl p-4 md:p-5 2xl:p-8 shadow-xl flex flex-col h-full space-y-3 md:space-y-4 2xl:space-y-6"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
     className: "text-2xl md:text-3xl font-black theme-text-primary tracking-tight"
   }, "Data Analyst Salary & ", /*#__PURE__*/React.createElement("span", {
@@ -212,15 +212,15 @@ const SalaryCalculator = () => {
   }, item.label)))), /*#__PURE__*/React.createElement("div", {
     className: "flex-1"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2"
+    className: "block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-1.5 2xl:mb-2"
   }, "Target Analytics Stack"), /*#__PURE__*/React.createElement("div", {
-    className: "space-y-2 2xl:space-y-2.5"
+    className: "space-y-1.5 2xl:space-y-2.5"
   }, STACKS.map(stack => {
     const isActive = targetStack === stack.id;
     return /*#__PURE__*/React.createElement("div", {
       key: stack.id,
       onClick: () => setTargetStack(stack.id),
-      className: `p-3 2xl:p-3.5 rounded-xl border transition-all cursor-pointer ${isActive ? "border-brand-500 bg-brand-500/10 ring-1 ring-brand-500/30 shadow-sm" : "theme-border hover:border-brand-300"}`
+      className: `p-2.5 2xl:p-3.5 rounded-xl border transition-all cursor-pointer ${isActive ? "border-brand-500 bg-brand-500/10 ring-1 ring-brand-500/30 shadow-sm" : "theme-border hover:border-brand-300"}`
     }, /*#__PURE__*/React.createElement("div", {
       className: "flex items-center justify-between mb-1"
     }, /*#__PURE__*/React.createElement("span", {
@@ -230,26 +230,14 @@ const SalaryCalculator = () => {
     }, "+", stack.avgHike)), /*#__PURE__*/React.createElement("span", {
       className: "text-xs theme-text-muted"
     }, stack.subtitle));
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "2xl:hidden mt-2 p-3 md:p-4 rounded-xl border border-brand-500/40 bg-brand-500/10 flex items-center justify-between"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center gap-1.5 mb-0.5"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-black text-brand-500 uppercase tracking-wider"
-  }, "Live Cohort Batch")), /*#__PURE__*/React.createElement("div", {
-    className: "text-xs md:text-sm font-bold theme-text-primary"
-  }, "Transition to Data Analytics in 16 weeks")), /*#__PURE__*/React.createElement("button", {
-    className: "px-4 py-2 theme-btn-gradient text-white text-xs font-bold rounded-lg shadow-md whitespace-nowrap ml-3 active:scale-95 transition-transform"
-  }, "Learn More")))), /*#__PURE__*/React.createElement("div", {
+  }))))), /*#__PURE__*/React.createElement("div", {
     className: "lg:col-span-5 flex flex-col h-full"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "theme-card border theme-border rounded-3xl p-5 md:p-6 2xl:p-8 shadow-xl flex flex-col h-full"
+    className: "theme-card border theme-border rounded-3xl p-4 md:p-5 2xl:p-8 shadow-xl flex flex-col h-full"
   }, /*#__PURE__*/React.createElement("div", {
-    className: "flex flex-col items-center text-center pb-3 mb-3 2xl:pb-4 border-b theme-border 2xl:mb-4"
+    className: "flex flex-col items-center text-center pb-2 mb-2 2xl:pb-4 border-b theme-border 2xl:mb-4"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "text-base font-extrabold theme-text-primary mb-2"
+    className: "text-base md:text-lg font-extrabold theme-text-primary mb-1 2xl:mb-2"
   }, "Salary Projection Pipeline"), /*#__PURE__*/React.createElement("span", {
     className: "text-xs font-extrabold theme-mid-text bg-brand-500/10 px-3 py-1 rounded-full border border-brand-500/30"
   }, "+", calculation.hikePercent, "% Expected Hike")), /*#__PURE__*/React.createElement("div", {
@@ -287,14 +275,26 @@ const SalaryCalculator = () => {
   }, "LPA")), /*#__PURE__*/React.createElement("div", {
     className: "text-sm font-bold text-emerald-500"
   }, "Estimated In-Hand: ₹", calculation.monthlyInHand.toLocaleString(), "/mo"))), /*#__PURE__*/React.createElement("div", {
-    className: "mt-3 pt-3 2xl:mt-4 2xl:pt-4 border-t theme-border"
+    className: "2xl:hidden mt-auto mb-3 p-2.5 rounded-xl border border-brand-500/40 bg-brand-500/10 flex items-center justify-between shadow-sm"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "flex items-center gap-1.5 mb-0.5"
   }, /*#__PURE__*/React.createElement("span", {
-    className: "block text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2.5 text-center"
+    className: "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "text-[10px] font-black text-brand-500 uppercase tracking-wider"
+  }, "Live Cohort Batch")), /*#__PURE__*/React.createElement("div", {
+    className: "text-[11px] md:text-xs font-bold theme-text-primary"
+  }, "Transition to Data Analytics in 16 weeks")), /*#__PURE__*/React.createElement("button", {
+    className: "px-3 py-1.5 theme-btn-gradient text-white text-[10px] font-bold rounded-lg shadow-md whitespace-nowrap ml-2 active:scale-95 transition-transform"
+  }, "Learn More")), /*#__PURE__*/React.createElement("div", {
+    className: "mt-0 pt-3 2xl:mt-4 2xl:pt-4 border-t theme-border"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "block text-[10px] md:text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2 md:mb-2.5 text-center"
   }, "Stack Requirements to Unlock Package"), /*#__PURE__*/React.createElement("div", {
-    className: "grid grid-cols-2 gap-2"
+    className: "grid grid-cols-2 gap-1.5 md:gap-2"
   }, targetStackData.skills.map(sk => /*#__PURE__*/React.createElement("span", {
     key: sk,
-    className: "text-center text-[11px] font-semibold px-2 py-1.5 2xl:py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border"
+    className: "text-center text-[10px] md:text-[11px] font-semibold px-2 py-1 2xl:py-2 rounded-lg theme-bg-alt theme-text-secondary border theme-border"
   }, sk)))), /*#__PURE__*/React.createElement("button", {
     onClick: () => setIsModalOpen(true),
     className: "w-full theme-btn-gradient text-white py-3 2xl:py-4 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer mt-3 2xl:mt-4"
