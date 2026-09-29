@@ -309,22 +309,6 @@ const SalaryCalculator = () => {
                             </div>
                         </div>
 
-                        {/* INLINE MARKETING PROMO (Laptops/Tablets)
-                            Moved from left column to right column to fill the empty whitespace 
-                            and balance the vertical height of both columns seamlessly. */}
-                        <div className="2xl:hidden mt-auto mb-3 p-2.5 rounded-xl border border-brand-500/40 bg-brand-500/10 flex items-center justify-between shadow-sm">
-                            <div>
-                                <div className="flex items-center gap-1.5 mb-0.5">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                    <span className="text-[10px] font-black text-brand-500 uppercase tracking-wider">Live Cohort Batch</span>
-                                </div>
-                                <div className="text-[11px] md:text-xs font-bold theme-text-primary">Transition to Data Analytics in 16 weeks</div>
-                            </div>
-                            <button className="px-3 py-1.5 theme-btn-gradient text-white text-[10px] font-bold rounded-lg shadow-md whitespace-nowrap ml-2 active:scale-95 transition-transform">
-                                Learn More
-                            </button>
-                        </div>
-
                         {/* STACK REQUIREMENTS */}
                         <div className="mt-0 pt-3 2xl:mt-4 2xl:pt-4 border-t theme-border">
                             <span className="block text-[10px] md:text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2 md:mb-2.5 text-center">
@@ -442,15 +426,11 @@ const SalaryCalculator = () => {
                 </div>
             )}
 
-            {/* FLOATING MARKETING POPUP — only shown where there's genuine
-                margin outside the max-w-7xl content container to sit in
-                without overlapping it (roughly >=1600px viewports); width is
-                capped to that actual margin so it can never overlap the
-                calculator, height grows naturally as text wraps narrower. */}
+            {/* FLOATING MARKETING POPUP */}
             {sidePromoVisible && (
                 <div
-                    className="hidden 2xl:block fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500"
-                    style={{ width: "min(20rem, calc((100vw - 80rem) / 2 - 1.5rem))" }}
+                    className="fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500"
+                    style={{ width: "20rem" }}
                 >
                     <div className="theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95">
                         <button

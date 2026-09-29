@@ -275,18 +275,6 @@ const SalaryCalculator = () => {
   }, "LPA")), /*#__PURE__*/React.createElement("div", {
     className: "text-sm font-bold text-emerald-500"
   }, "Estimated In-Hand: ₹", calculation.monthlyInHand.toLocaleString(), "/mo"))), /*#__PURE__*/React.createElement("div", {
-    className: "2xl:hidden mt-auto mb-3 p-2.5 rounded-xl border border-brand-500/40 bg-brand-500/10 flex items-center justify-between shadow-sm"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "flex items-center gap-1.5 mb-0.5"
-  }, /*#__PURE__*/React.createElement("span", {
-    className: "w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
-  }), /*#__PURE__*/React.createElement("span", {
-    className: "text-[10px] font-black text-brand-500 uppercase tracking-wider"
-  }, "Live Cohort Batch")), /*#__PURE__*/React.createElement("div", {
-    className: "text-[11px] md:text-xs font-bold theme-text-primary"
-  }, "Transition to Data Analytics in 16 weeks")), /*#__PURE__*/React.createElement("button", {
-    className: "px-3 py-1.5 theme-btn-gradient text-white text-[10px] font-bold rounded-lg shadow-md whitespace-nowrap ml-2 active:scale-95 transition-transform"
-  }, "Learn More")), /*#__PURE__*/React.createElement("div", {
     className: "mt-0 pt-3 2xl:mt-4 2xl:pt-4 border-t theme-border"
   }, /*#__PURE__*/React.createElement("span", {
     className: "block text-[10px] md:text-xs font-bold uppercase tracking-wider theme-text-secondary mb-2 md:mb-2.5 text-center"
@@ -391,9 +379,9 @@ const SalaryCalculator = () => {
     },
     className: "px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 theme-text-primary font-bold text-xs uppercase tracking-wider"
   }, "Close Window")))), sidePromoVisible && /*#__PURE__*/React.createElement("div", {
-    className: "hidden 2xl:block fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500",
+    className: "fixed bottom-6 left-6 z-40 p-1 animate-in slide-in-from-bottom-5 duration-500",
     style: {
-      width: "min(20rem, calc((100vw - 80rem) / 2 - 1.5rem))"
+      width: "20rem"
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "theme-card border-2 border-brand-500/50 rounded-3xl p-5 shadow-2xl backdrop-blur-xl relative text-left bg-[#0f172a]/95"
