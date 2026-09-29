@@ -1256,7 +1256,7 @@ window.PageLayout = ({ children, maxWidth = "max-w-4xl" }) => {
     return (
         <div className="min-h-screen theme-bg theme-text-primary font-sans flex flex-col relative">
             <window.Navbar />
-            <main className={`flex-grow ${maxWidth} mx-auto w-full px-6 pt-16 lg:pt-20 2xl:pt-32 pb-8 lg:pb-12 2xl:pb-24 flex flex-col gap-4 lg:gap-6 2xl:gap-8 relative z-10`}>
+            <main className={`flex-grow ${maxWidth} mx-auto w-full px-6 pt-24 lg:pt-28 2xl:pt-32 pb-12 lg:pb-20 2xl:pb-24 flex flex-col gap-4 lg:gap-6 2xl:gap-8 relative z-10`}>
                 {children}
             </main>
             <window.Footer />
