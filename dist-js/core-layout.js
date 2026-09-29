@@ -977,8 +977,7 @@ window.TypewriterText = ({
   }
 
   // Backup: dot grid background
-  // if (document.body) setup();
-  // else document.addEventListener('DOMContentLoaded', setup);
+  if (document.body) setup();else document.addEventListener('DOMContentLoaded', setup);
 })();
 
 // ============================================================
@@ -1334,7 +1333,9 @@ void main() {
     }
     requestAnimationFrame(render);
   }
-  if (document.body) setup();else document.addEventListener('DOMContentLoaded', setup);
+
+  // if (document.body) setup();
+  // else document.addEventListener('DOMContentLoaded', setup);
 })();
 
 // ============================================================
