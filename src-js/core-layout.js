@@ -824,7 +824,7 @@ window.TypewriterText = ({ text }) => {
     function setup() {
         const root = document.createElement('div');
         root.id = 'halftone-bg';
-        root.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:transparent;';
+        root.style.cssText = 'position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:transparent;opacity:0.3;';
         
         const canvas = document.createElement('canvas');
         canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
@@ -1111,7 +1111,7 @@ void main() {
 
             // Extract live theme colors
             const cs = getComputedStyle(document.documentElement);
-            const rawBg = cs.getPropertyValue('--bg-color').trim() || '#0f172a';
+            const rawBg = cs.getPropertyValue('--bg-base').trim() || '#0f172a';
             const rawC1 = cs.getPropertyValue('--brand-500').trim() || '#a468ff';
             const rawC2 = cs.getPropertyValue('--brand-accent').trim() || '#7030d4';
 
